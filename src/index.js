@@ -5,7 +5,7 @@ const extendComponent = (Vue, CurrentTheme, componentName) => {
     const themeSettings = CurrentTheme[componentName];
     const themeDefaultSettings = DefaultTheme[componentName];
 
-    const newSettings = { ...themeDefaultSettings, themeSettings };
+    const newSettings = { ...themeDefaultSettings, ...themeSettings };
 
     let { props } = components[componentName];
 
@@ -42,6 +42,5 @@ const Plugin = {
         });
     }
 };
-``;
 
 export default Plugin;

@@ -15,3 +15,5 @@ export const selfInstall = (Vue, theme = {}, component) => {
         }
     });
 };
+
+export const noop = () => {};

@@ -1,11 +1,13 @@
 import CButton from './CButton';
+import CIcon from './CIcon';
 
 const DefaultTheme = {
-    CButton
+    CButton,
+    CIcon
 };
 
 //
-export { CButton };
+export { CButton, CIcon };
 
 //
 export default DefaultTheme;
