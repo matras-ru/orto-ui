@@ -4,13 +4,13 @@ import { mount } from '@vue/test-utils';
 import CButton from './';
 
 describe('Button', () => {
-    it('it renders the button (Кнопка срендерилась)', () => {
+    it('The button is rendered', () => {
         const wrapper = mount(CButton);
 
         expect(wrapper.is('button')).toBe(true);
     });
 
-    it('disables the button (Кнопка не активна)', () => {
+    it('The button is disabled', () => {
         const wrapper = mount(CButton, {
             propsData: { disabled: true }
         });

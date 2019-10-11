@@ -1,4 +1,4 @@
-import { selfInstall } from '@/utils';
+import { selfInstall, noop } from '@/utils';
 import commonAttributes from '@/mixins/commonAttributes.js';
 
 import ThemeClass from '@/themes/default/CButton';
@@ -9,9 +9,7 @@ const {
     primaryClass,
     secondaryClass,
     tertiaryClass,
-    successClass,
-    dangerClass,
-    warningClass,
+    quaternaryClass,
     disabledClass,
     defaultSizeClass,
     largeSizeClass,
@@ -20,7 +18,7 @@ const {
 
 const validTagNames = ['button', 'a'];
 
-const validVariants = ['primary', 'secondary', 'tertiary', 'danger', 'warning', 'success'];
+const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary'];
 
 const validSizes = ['lg', 'sm'];
 
@@ -41,7 +39,7 @@ const props = {
     },
     type: {
         type: String,
-        default: 'button'
+        default: null
     },
     href: {
         type: String,
@@ -57,25 +55,9 @@ const props = {
         default: null,
         validator: value => value === null || validSizes.indexOf(value) !== -1
     },
-    to: {
-        type: [String, Object],
-        default: undefined
-    },
-    replace: {
-        type: Boolean,
-        default: false
-    },
-    append: {
-        type: Boolean,
-        default: false
-    },
     activeClass: {
         type: String,
         default: 'router-link-active'
-    },
-    exact: {
-        type: Boolean,
-        default: false
     },
     exactActiveClass: {
         type: String,
@@ -95,14 +77,14 @@ const currentClass = props => {
     }
 
     switch (props.size) {
-        case null:
-            classes.push(defaultSizeClass);
-            break;
         case 'sm':
             classes.push(smallSizeClass);
             break;
         case 'lg':
             classes.push(largeSizeClass);
+            break;
+        default:
+            classes.push(defaultSizeClass);
             break;
     }
 
@@ -116,14 +98,8 @@ const currentClass = props => {
         case 'tertiary':
             classes.push(tertiaryClass);
             break;
-        case 'danger':
-            classes.push(dangerClass);
-            break;
-        case 'warning':
-            classes.push(warningClass);
-            break;
-        case 'success':
-            classes.push(successClass);
+        case 'quaternary':
+            classes.push(quaternaryClass);
             break;
         default:
             classes.push(defaultClass);
@@ -183,8 +159,6 @@ const getAttributes = props => {
         type: props.type
     };
 };
-
-const noop = () => {};
 
 export default {
     name: 'Button',
