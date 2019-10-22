@@ -4,8 +4,6 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 
 import CButton from './';
 
-import '@/assets/css/tailwind.css'; // TODO: create a single loading of global styles -> FRONTEND-498
-
 const stories = storiesOf('CButton', module);
 stories.addDecorator(withKnobs);
 
