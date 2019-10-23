@@ -102,7 +102,10 @@ module.exports = {
             inner: 'inset 0 0 0 2px #FFFFFF',
             none: 'none'
         },
-        container: {},
+        container: {
+            center: true,
+            padding: '1rem'
+        },
         cursor: {
             auto: 'auto',
             default: 'default',
@@ -136,8 +139,8 @@ module.exports = {
             '2xs': '0.625rem',
             xs: '0.75rem',
             sm: '0.875rem',
-            base: '1rem',
-            lg: '1.125rem',
+            base: '1rem', // 16px
+            lg: '1.125rem', // 18px
             xl: '1.25rem',
             '2xl': '1.5rem',
             '3xl': '1.875rem',
@@ -198,6 +201,7 @@ module.exports = {
             screen: '100vh'
         },
         maxWidth: {
+            none: 'none',
             xs: '20rem',
             sm: '24rem',
             md: '28rem',

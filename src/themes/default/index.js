@@ -23,5 +23,4 @@ const DefaultTheme = {
 //
 export { CButton, CIcon, CInput, CForm, CFormGroup, CError, CLabel, CCheckbox, CRadio };
 
-//
 export default DefaultTheme;

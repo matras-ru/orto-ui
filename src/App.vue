@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <CIcon name="cart" />
+        <!-- <CIcon name="cart" />
         <CButton size="sm">Button</CButton>
         <CButton>Button</CButton>
         <CButton size="lg">Button</CButton>
