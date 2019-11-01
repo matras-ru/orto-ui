@@ -1,7 +1,7 @@
 const Icon = {
-    baseClass: 'inline-block',
+    baseClass: 'inline-block align-top',
     defaultClass: 'fill-default',
-    defaultSizeClass: 'w-14 h-14',
+    defaultSizeClass: 'w-1-6 h-1-6',
     largeSizeClass: '',
     smallSizeClass: ''
 };

@@ -30,28 +30,36 @@ module.exports = {
                 200: '#c3d0d7',
                 300: '#a6b1b6'
             },
-            danger: 'f1001a'
+            danger: '#f1001a'
         },
         spacing: {
             px: '1px',
             '0': '0',
-            '1': '0.125',
-            '2': '0.25rem',
-            '3': '0.375rem',
-            '4': '0.5rem',
-            '5': '0.625rem',
-            '6': '0.75rem',
-            '7': '0.875rem',
-            '8': '1rem',
-            '9': '1.125rem',
-            '10': '1.25rem',
-            '11': '1.375rem',
-            '12': '1.5rem',
-            '13': '1.625rem',
-            '14': '1.75rem',
-            '15': '1.875rem',
-            '16': '2rem',
-            '17': '2.5rem'
+            '0-1': '0.125',
+            '0-2': '0.25rem',
+            '0-3': '0.375rem',
+            '0-4': '0.5rem',
+            '0-5': '0.625rem',
+            '0-6': '0.75rem',
+            '0-7': '0.875rem',
+            '0-8': '1rem',
+            '1-1': '1.125rem',
+            '1-2': '1.25rem',
+            '1-3': '1.375rem',
+            '1-4': '1.5rem',
+            '1-5': '1.625rem',
+            '1-6': '1.75rem',
+            '1-7': '1.875rem',
+            '1-8': '2rem',
+            '2-1': '2.125rem',
+            '2-2': '2.25rem',
+            '2-3': '2.375rem',
+            '2-4': '2.5rem',
+            '2-5': '2.625rem',
+            '2-6': '2.75rem',
+            '2-7': '2.875rem',
+            '2-8': '3rem',
+            '12-4': '12.5rem'
         },
         backgroundColor: theme => theme('colors'),
         backgroundPosition: {
@@ -124,6 +132,7 @@ module.exports = {
             body: ['Helvetica', 'sans-serif']
         },
         fontSize: {
+            xxs: '0.625rem',
             xs: '0.75rem',
             sm: '0.875rem',
             base: '1rem',
@@ -152,10 +161,11 @@ module.exports = {
             full: '100%',
             screen: '100vh'
         }),
-        inset: {
+        inset: theme => ({
             '0': '0',
-            auto: 'auto'
-        },
+            auto: 'auto',
+            ...theme('spacing')
+        }),
         letterSpacing: {
             tighter: '-0.05em',
             tight: '-0.025em',
