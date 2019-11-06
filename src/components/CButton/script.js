@@ -27,7 +27,7 @@ const props = {
     tagName: {
         type: String,
         default: 'button',
-        validator: value => validTagNames.indexOf(value) !== -1
+        validator: value => validTagNames.includes(value)
     },
     label: {
         type: String,
@@ -48,12 +48,12 @@ const props = {
     variant: {
         type: String,
         default: null,
-        validator: value => value === null || validVariants.indexOf(value) !== -1
+        validator: value => value === null || validVariants.includes(value)
     },
     size: {
         type: String,
         default: null,
-        validator: value => value === null || validSizes.indexOf(value) !== -1
+        validator: value => value === null || validSizes.includes(value)
     },
     activeClass: {
         type: String,

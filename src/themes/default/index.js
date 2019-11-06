@@ -4,6 +4,7 @@ import CInput from './CInput';
 import CForm from './CForm';
 import CFormGroup from './CFormGroup';
 import CError from './CError';
+import CLabel from './CLabel';
 
 const DefaultTheme = {
     CButton,
@@ -11,11 +12,12 @@ const DefaultTheme = {
     CInput,
     CForm,
     CFormGroup,
-    CError
+    CError,
+    CLabel
 };
 
 //
-export { CButton, CIcon, CInput, CForm, CFormGroup, CError };
+export { CButton, CIcon, CInput, CForm, CFormGroup, CError, CLabel };
 
 //
 export default DefaultTheme;

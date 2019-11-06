@@ -30,22 +30,7 @@
 </template>
 
 <script>
-import CButton from '@/components/CButton';
-import CIcon from '@/components/CIcon';
-import CInput from '@/components/CInput';
-import CForm from '@/components/CForm';
-import CFormGroup from '@/components/CFormGroup';
-import CError from '@/components/CError';
-
 export default {
-    name: 'app',
-    components: {
-        CButton,
-        CIcon,
-        CInput,
-        CForm,
-        CFormGroup,
-        CError
-    }
+    name: 'app'
 };
 </script>

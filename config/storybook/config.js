@@ -6,4 +6,6 @@ function loadStories() {
     req.keys().forEach(filename => req(filename));
 }
 
+import '@/assets/css/tailwind.css'; // global tailwind styles
+
 configure(loadStories, module);

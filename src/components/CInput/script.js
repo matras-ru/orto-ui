@@ -24,7 +24,7 @@ export default {
         tagName: {
             type: String,
             default: 'input',
-            validator: value => validTagNames.indexOf(value) !== -1
+            validator: value => validTagNames.includes(value)
         },
         value: {
             type: [String, Number],
@@ -37,12 +37,12 @@ export default {
         size: {
             type: String,
             default: null,
-            validator: value => value === null || validSizes.indexOf(value) !== -1
+            validator: value => value === null || validSizes.includes(value)
         },
         variant: {
             type: String,
             default: null,
-            validator: value => value === null || validVariants.indexOf(value) !== -1
+            validator: value => value === null || validVariants.includes(value)
         },
         label: {
             type: String,
@@ -133,7 +133,7 @@ export default {
 
         return h('div', { class: 'relative inline-block align-top' }, [
             h(this.componentToRender, componentData),
-            h(CLabel, { attrs: { for: this.id } }, this.label)
+            h('CLabel', { attrs: { for: this.id } }, this.label)
         ]);
     }
 };

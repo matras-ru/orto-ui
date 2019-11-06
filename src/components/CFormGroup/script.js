@@ -4,6 +4,8 @@ import ThemeClass from '@/themes/default/CFormGroup';
 
 const { baseClass } = ThemeClass;
 
+const props = {};
+
 export default {
     name: 'FormGroup',
 
@@ -12,6 +14,8 @@ export default {
     install(Vue, theme) {
         selfInstall(Vue, theme, this);
     },
+
+    props,
 
     render(h, { children }) {
         const componentData = {

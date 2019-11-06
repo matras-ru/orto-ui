@@ -4,17 +4,7 @@ import ThemeClass from '@/themes/default/CError';
 
 const { baseClass, defaultClass } = ThemeClass;
 
-const currentClass = props => {
-    let classes = [baseClass];
-
-    switch (props.variant) {
-        default:
-            classes.push(defaultClass);
-            break;
-    }
-
-    return classes;
-};
+const props = {};
 
 export default {
     name: 'Error',
@@ -25,9 +15,11 @@ export default {
         selfInstall(Vue, theme, this);
     },
 
-    render(h, { props, children }) {
+    props,
+
+    render(h, { children }) {
         const componentData = {
-            class: currentClass(props)
+            class: [baseClass, defaultClass]
         };
 
         return h('div', componentData, children);

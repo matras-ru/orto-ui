@@ -13,17 +13,17 @@ const props = {
     name: {
         type: String,
         default: null,
-        validator: value => value === null || validNames.indexOf(value) !== -1
+        validator: value => value === null || validNames.includes(value)
     },
     variant: {
         type: String,
         default: null,
-        validator: value => value === null || validVariants.indexOf(value) !== -1
+        validator: value => value === null || validVariants.includes(value)
     },
     size: {
         type: String,
         default: null,
-        validator: value => value === null || validSizes.indexOf(value) !== -1
+        validator: value => value === null || validSizes.includes(value)
     }
 };
 
