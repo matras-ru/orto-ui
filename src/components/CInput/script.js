@@ -4,7 +4,14 @@ import CLabel from '@/components/CLabel';
 
 import ThemeClass from '@/themes/default/CInput';
 
-const { baseClass, defaultClass, errorClass, defaultSizeClass, largeSizeClass } = ThemeClass;
+const {
+    baseClass,
+    defaultClass,
+    errorClass,
+    defaultSizeClass,
+    largeSizeClass,
+    notEmptyClass
+} = ThemeClass;
 
 const validTagNames = ['input', 'textarea'];
 
@@ -79,8 +86,12 @@ export default {
             return this.tagName;
         },
 
+        isEmpty() {
+            return this.value ? false : true;
+        },
+
         currentClass() {
-            let classes = ['c-input', baseClass];
+            let classes = [baseClass];
 
             switch (this.size) {
                 case 'lg':
@@ -102,6 +113,10 @@ export default {
 
             if (!this.type) {
                 classes.push(largeSizeClass);
+            }
+
+            if (!this.isEmpty) {
+                classes.push(notEmptyClass);
             }
 
             return classes;

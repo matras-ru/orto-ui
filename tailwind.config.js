@@ -35,7 +35,7 @@ module.exports = {
         spacing: {
             px: '1px',
             '0': '0',
-            '0-1': '0.125',
+            '0-1': '0.125rem',
             '0-2': '0.25rem',
             '0-3': '0.375rem',
             '0-4': '0.5rem',
@@ -332,7 +332,25 @@ module.exports = {
             '100': '100ms',
             '250': '250ms',
             '500': '500ms'
-        }
+        },
+        customForms: theme => ({
+            custom: {
+                'input, textarea': {
+                    '&:focus + label': {
+                        fontSize: theme('fontSize.2xs'),
+                        paddingTop: theme('padding.0-1')
+                    }
+                }
+            },
+            'not-empty': {
+                'input, textarea': {
+                    '& + label': {
+                        fontSize: theme('fontSize.2xs'),
+                        paddingTop: theme('padding.0-1')
+                    }
+                }
+            }
+        })
     },
     variants: {
         alignContent: ['responsive'],
@@ -407,6 +425,7 @@ module.exports = {
     corePlugins: {},
     plugins: [
         require('tailwindcss-transitions')(),
+        require('@tailwindcss/custom-forms'),
         function({ addBase, config }) {
             addBase({
                 a: {

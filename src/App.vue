@@ -18,7 +18,7 @@
         <CButton variant="quaternary" size="lg">Button</CButton>
         <CForm action="/" method="POST">
             <CFormGroup>
-                <CInput type="text" id="user_name" label="Name *" name="user_name" />
+                <CInput type="text" id="user_name" label="Name *" name="user_name" value="78" />
                 <CError>Error message</CError>
             </CFormGroup>
             <CFormGroup>
