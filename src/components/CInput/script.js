@@ -148,7 +148,7 @@ export default {
 
         return h('div', { class: 'relative inline-block align-top' }, [
             h(this.componentToRender, componentData),
-            h('CLabel', { attrs: { for: this.id } }, this.label)
+            h('CLabel', { attrs: { for: this.id, variant: 'primary' } }, this.label)
         ]);
     }
 };

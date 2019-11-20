@@ -5,6 +5,8 @@ import CForm from './CForm';
 import CFormGroup from './CFormGroup';
 import CError from './CError';
 import CLabel from './CLabel';
+import CCheckbox from './CCheckbox';
+import CRadio from './CRadio';
 
 const DefaultTheme = {
     CButton,
@@ -13,11 +15,13 @@ const DefaultTheme = {
     CForm,
     CFormGroup,
     CError,
-    CLabel
+    CLabel,
+    CCheckbox,
+    CRadio
 };
 
 //
-export { CButton, CIcon, CInput, CForm, CFormGroup, CError, CLabel };
+export { CButton, CIcon, CInput, CForm, CFormGroup, CError, CLabel, CCheckbox, CRadio };
 
 //
 export default DefaultTheme;

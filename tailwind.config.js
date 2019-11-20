@@ -99,6 +99,7 @@ module.exports = {
         },
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
+            inner: 'inset 0 0 0 2px #FFFFFF',
             none: 'none'
         },
         container: {},
