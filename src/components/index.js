@@ -1,5 +1,4 @@
 import CButton from '@/components/CButton';
-
 import CError from '@/components/CError';
 import CForm from '@/components/CForm';
 import CFormGroup from '@/components/CFormGroup';
@@ -19,6 +18,10 @@ import CTabPanel from '@/components/CTabPanel';
 import CList from '@/components/CList';
 import CListItem from '@/components/CListItem';
 
+import CContainer from '@/components/CContainer';
+import CRow from '@/components/CRow';
+import CCol from '@/components/CCol';
+
 export {
     CButton,
     CError,
@@ -36,5 +39,8 @@ export {
     CTabPanels,
     CTabPanel,
     CList, 
-    CListItem
+    CListItem,
+    CContainer, 
+    CRow, 
+    CCol
 };
