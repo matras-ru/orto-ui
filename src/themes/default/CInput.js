@@ -5,7 +5,8 @@ const Input = {
     defaultSizeClass: 'h-2-8',
     largeSizeClass: 'h-12-4 py-0-6',
     errorClass: 'border-danger text-danger',
-    notEmptyClass: 'form-input-not-empty'
+    notEmptyClass: 'form-input-not-empty',
+    wrapperClass: 'relative inline-block align-top'
 };
 
 export default Input;

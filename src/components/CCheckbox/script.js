@@ -8,7 +8,10 @@ const {
     baseIconClass,
     defaultIconClass,
     checkedIconClass,
-    disabledIconClass
+    disabledIconClass,
+    labelClass,
+    inputClass,
+    wrapperClass
 } = ThemeClass;
 
 export default {
@@ -59,7 +62,7 @@ export default {
 
     computed: {
         currentClass() {
-            let classes = ['flex mb-1-4'];
+            let classes = [labelClass];
 
             if (this.disabled) {
                 classes.push(disabledClass);
@@ -115,9 +118,12 @@ export default {
             autofocus: this.autofocus,
             name: this.name,
             type: 'checkbox',
-            label: this.label,
-            value: this.value,
             disabled: this.disabled
+        };
+
+        const domProps = {
+            checked: this.shouldBeChecked,
+            value: this.value
         };
 
         const on = {
@@ -125,14 +131,15 @@ export default {
         };
 
         const componentData = {
-            class: 'absolute opacity-0 pointer-events-none',
-            attrs: attrs,
+            class: inputClass,
+            attrs,
+            domProps,
             on
         };
 
-        return h('label', { class: this.currentClass }, [
+        return h('label', { class: this.currentClass, attrs: { for: this.id } }, [
             h('input', componentData),
-            h('div', { class: 'flex' }, [
+            h('div', { class: wrapperClass }, [
                 h('span', { class: this.currentIconClass }),
                 h('span', this.label)
             ])

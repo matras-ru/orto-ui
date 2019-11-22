@@ -17,7 +17,10 @@ export default {
             type: Array,
             default: () => []
         },
-        modelValue: {}
+        modelValue: {
+            type: [String, Number, Boolean],
+            default: null
+        }
     },
 
     model: {
@@ -26,7 +29,7 @@ export default {
     },
 
     computed: {
-        values: {
+        value: {
             get() {
                 return this.modelValue;
             },
@@ -37,13 +40,14 @@ export default {
     },
 
     render(h) {
-        let setAttrs = item => {
+        let setProps = item => {
             return {
                 id: item.id,
                 autofocus: this.autofocus,
                 label: item.label,
                 name: item.name,
-                disabled: item.disabled
+                disabled: item.disabled,
+                value: item.value
             };
         };
 
@@ -51,8 +55,15 @@ export default {
             'div',
             this.data.map(item => {
                 return h('CRadio', {
-                    attrs: setAttrs(item),
-                    domProps: { values: this.values }
+                    props: {
+                        modelValue: this.value,
+                        ...setProps(item)
+                    },
+                    on: {
+                        change: val => {
+                            this.value = val;
+                        }
+                    }
                 });
             })
         );

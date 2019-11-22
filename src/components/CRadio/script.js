@@ -8,7 +8,10 @@ const {
     baseIconClass,
     defaultIconClass,
     checkedIconClass,
-    disabledIconClass
+    disabledIconClass,
+    labelClass,
+    inputClass,
+    wrapperClass
 } = ThemeClass;
 
 export default {
@@ -25,20 +28,12 @@ export default {
             default: null
         },
         modelValue: {
-            type: [Array, Boolean],
+            type: [String, Number, Boolean],
             default: null
         },
         value: {
-            type: [String, Number],
+            type: [String, Number, Boolean],
             default: null
-        },
-        trueValue: {
-            type: Boolean,
-            default: true
-        },
-        falseValue: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -55,7 +50,7 @@ export default {
 
     computed: {
         currentClass() {
-            let classes = ['flex mb-1-4'];
+            let classes = [labelClass];
 
             if (this.disabled) {
                 classes.push(disabledClass);
@@ -77,34 +72,13 @@ export default {
             return classes;
         },
         shouldBeChecked() {
-            if (this.modelValue instanceof Array) {
-                return this.modelValue.includes(this.value);
-            }
-
-            return this.modelValue === this.trueValue;
+            return this.modelValue === this.value;
         }
     },
 
     methods: {
         onChange(e) {
-            this.$parent.$children.filter(item => {
-                item.isChecked = false;
-                this.isChecked = e.target.checked;
-            });
-
-            if (this.modelValue instanceof Array) {
-                let newValue = [...this.modelValue];
-
-                if (this.isChecked) {
-                    newValue.push(this.value);
-                } else {
-                    newValue.splice(newValue.indexOf(this.value), 1);
-                }
-
-                this.$emit('change', newValue);
-            } else {
-                this.$emit('change', this.isChecked ? this.trueValue : this.falseValue);
-            }
+            this.$emit('change', e.target.checked ? this.value : null);
         }
     },
 
@@ -114,8 +88,12 @@ export default {
             autofocus: this.autofocus,
             name: this.name,
             type: 'radio',
-            label: this.label,
             disabled: this.disabled
+        };
+
+        const domProps = {
+            checked: this.shouldBeChecked,
+            value: this.value
         };
 
         const on = {
@@ -123,14 +101,15 @@ export default {
         };
 
         const componentData = {
-            class: 'absolute opacity-0 pointer-events-none',
-            attrs: attrs,
+            class: inputClass,
+            attrs,
+            domProps,
             on
         };
 
         return h('label', { class: this.currentClass, attrs: { for: this.id } }, [
             h('input', componentData),
-            h('div', { class: 'flex' }, [
+            h('div', { class: wrapperClass }, [
                 h('span', { class: this.currentIconClass }),
                 h('span', this.label)
             ])

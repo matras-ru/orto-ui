@@ -25,19 +25,34 @@ stories
             },
             disabled: {
                 default: boolean('disabled', false)
+            },
+            value: {
+                default: text('value', 'radio1')
             }
         },
+        data() {
+            return {
+                radioModel: false
+            };
+        },
         template:
-            '<CRadio @onChange="action" :id="id" :autofocus="autofocus" :name="name" :label="label" :disabled="disabled" />',
+            '<CRadio @onChange="action" :id="id" :autofocus="autofocus" :name="name" :label="label" :disabled="disabled" :value="value" v-model="radioModel" />',
         methods: { action: action('change') }
     }))
     .add('Default radio', () => ({
         components: { CRadio },
-        template: '<CRadio @onChanget="action" id="radio2" label="Radio2" name="radio2" />',
+        data() {
+            return {
+                radioModel: false
+            };
+        },
+        template:
+            '<CRadio @onChanget="action" id="radio2" label="Radio2" name="radio2" value="radio2" v-model="radioModel" />',
         methods: { action: action('change') }
     }))
     .add('Disabled radio', () => ({
         components: { CRadio },
-        template: '<CRadio @onChange="action" id="radio3" label="Radio3" name="radio3" disabled />',
+        template:
+            '<CRadio @onChange="action" id="radio3" label="Radio3" name="radio3" value="radio3" disabled />',
         methods: { action: action('change') }
     }));

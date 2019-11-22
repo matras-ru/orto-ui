@@ -17,7 +17,10 @@ export default {
             type: Array,
             default: () => []
         },
-        modelValue: {}
+        modelValue: {
+            type: Array,
+            default: () => []
+        }
     },
 
     model: {
@@ -37,13 +40,13 @@ export default {
     },
 
     render(h) {
-        let setAttrs = item => {
+        let setProps = item => {
             return {
                 id: item.id,
-                autofocus: this.autofocus,
+                autofocus: item.autofocus,
                 label: item.label,
                 name: item.name,
-                value: this.value,
+                value: item.value,
                 disabled: item.disabled
             };
         };
@@ -51,7 +54,17 @@ export default {
         return h(
             'div',
             this.data.map(item => {
-                return h('CCheckbox', { attrs: setAttrs(item), domProps: { values: this.values } });
+                return h('CCheckbox', {
+                    props: {
+                        modelValue: this.values,
+                        ...setProps(item)
+                    },
+                    on: {
+                        change: arr => {
+                            this.values = [...arr];
+                        }
+                    }
+                });
             })
         );
     }
