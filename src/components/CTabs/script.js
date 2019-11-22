@@ -1,6 +1,4 @@
 import { selfInstall } from '@/utils';
-// import ThemeClass from '@/themes/default/CTabs';
-// const { baseClass } = ThemeClass;
 
 /*  TODO:
 MVP готово
@@ -40,13 +38,13 @@ export default {
             const { name } = tab.componentOptions.propsData;
             const isActive = this.value === name;
 
-            //
+            // mixin isAactive props
             tab.componentOptions.propsData = {
                 ...tab.componentOptions.propsData,
                 isActive
             };
 
-            //
+            // mixin listeners
             tab.componentOptions.listeners = {
                 ...tab.componentOptions.listeners,
                 onClick: name => {
@@ -58,15 +56,13 @@ export default {
         });
 
         return h(
-            'CList',
+            // TODO: заменить на List
+            'ul',
             {
                 attrs: {
                     role: 'tablist'
                 },
-                props: {
-                    horizontal: true,
-                    justify: 'between'
-                }
+                staticClass: ['flex flex-wrap justify-between']
             },
             [normalizeTabs]
         );

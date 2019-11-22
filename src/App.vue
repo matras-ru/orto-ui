@@ -1,6 +1,8 @@
 <template>
     <div id="app">
-        <!-- <CIcon name="cart" />
+        <!--  Button -->
+
+        <CIcon name="cart" />
         <CButton size="sm">Button</CButton>
         <CButton>Button</CButton>
         <CButton size="lg">Button</CButton>
@@ -16,6 +18,11 @@
         <CButton variant="quaternary" size="sm">Button</CButton>
         <CButton variant="quaternary">Button</CButton>
         <CButton variant="quaternary" size="lg">Button</CButton>
+
+        <!--   -->
+
+        <!--  Form -->
+
         <CForm action="/" method="POST">
             <CFormGroup>
                 <CInput
@@ -87,6 +94,46 @@
                 />
             </CFormGroup>
         </CForm>
+
+        <!--   -->
+
+        <!--  Tabs -->
+
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <CTabs v-model="exampleModel.tab">
+                <CTab label="Описание" name="description" />
+                <CTab label="Характеристики" name="parameters" />
+                <CTab label="Состав" name="structure" />
+                <CTab label="Отзывы (8)" name="feedback" />
+                <CTab label="Доставка и оплата" name="delivery" />
+            </CTabs>
+        </div>
+        <div class="bg-secondary-100 py-2-5">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div style="padding: 0 30px">
+                    <CTabPanels v-model="exampleModel.tab">
+                        <CTabPanel name="description">
+                            <div>Описание контент</div>
+                        </CTabPanel>
+                        <CTabPanel name="parameters">
+                            <div>Характеристики контент</div>
+                        </CTabPanel>
+                        <CTabPanel name="structure">
+                            <div>Состав контент</div>
+                        </CTabPanel>
+                        <CTabPanel name="feedback">
+                            <div>Отзывы контент</div>
+                        </CTabPanel>
+                        <CTabPanel name="delivery">
+                            <div>Доставка и оплата контент</div>
+                        </CTabPanel>
+                    </CTabPanels>
+                </div>
+            </div>
+        </div>
+
+        <!--   -->
+
         <div class="fixed top-0 right-0 p-2-5 bg-white shadow">
             <pre>{{ exampleModel }}</pre>
         </div>
@@ -99,6 +146,7 @@ export default {
     data() {
         return {
             exampleModel: {
+                tab: 'feedback',
                 checkboxModel: false,
                 checkboxGroupModel: [],
                 radioModel: null,

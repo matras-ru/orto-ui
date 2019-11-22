@@ -26,7 +26,8 @@ export default {
 
     render(h) {
         return h(
-            'CListItem',
+            // TODO: заменить на ListItem
+            'li',
             {
                 attrs: { role: 'presentation' }
             },
@@ -48,7 +49,7 @@ export default {
                             }
                         },
                         staticClass:
-                            'block outline-none select-none font-semibold text-lg uppercase px-16 py-10',
+                            'block outline-none select-none font-semibold text-lg uppercase px-1-7 py-1-5',
                         class: {
                             'text-secondary-200 border-b-4 border-secondary-200': this.isActive
                         }

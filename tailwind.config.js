@@ -102,10 +102,7 @@ module.exports = {
             inner: 'inset 0 0 0 2px #FFFFFF',
             none: 'none'
         },
-        container: {
-            center: true,
-            padding: '1rem'
-        },
+        container: {},
         cursor: {
             auto: 'auto',
             default: 'default',

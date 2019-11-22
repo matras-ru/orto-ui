@@ -13,6 +13,7 @@ export default {
             default: null
         },
 
+        //
         lazy: {
             type: Boolean,
             default: false
@@ -29,7 +30,7 @@ export default {
             const { name } = tabPanel.componentOptions.propsData;
             const isActive = this.value === name;
 
-            //
+            // mixin isAactive props
             tabPanel.componentOptions.propsData = {
                 ...tabPanel.componentOptions.propsData,
                 isActive
