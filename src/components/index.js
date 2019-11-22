@@ -16,6 +16,9 @@ import CTab from '@/components/CTab';
 import CTabPanels from '@/components/CTabPanels';
 import CTabPanel from '@/components/CTabPanel';
 
+import CList from '@/components/CList';
+import CListItem from '@/components/CListItem';
+
 export {
     CButton,
     CError,
@@ -31,5 +34,7 @@ export {
     CTabs,
     CTab,
     CTabPanels,
-    CTabPanel
+    CTabPanel,
+    CList, 
+    CListItem
 };
