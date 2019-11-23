@@ -30,11 +30,19 @@ module.exports = {
                 200: '#c3d0d7',
                 300: '#a6b1b6'
             },
-            danger: '#f1001a'
+            danger: '#f1001a',
+
+            layout: {
+                section: '#fff',
+                container: '#f1f1f1',
+                row: '#87bdd8',
+                col: '#b1cbbb'
+            }
         },
         spacing: {
             px: '1px',
             '0': '0',
+            '-0-3': '-0.375rem',
             '0-1': '0.125rem',
             '0-2': '0.25rem',
             '0-3': '0.375rem',
@@ -100,12 +108,13 @@ module.exports = {
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
             inner: 'inset 0 0 0 2px #FFFFFF',
-            none: 'none'
+            none: 'none',
+            example: '0 15px 30px 0 rgba(166, 177, 182, 0.5)'
         },
-        container: {
-            center: true,
-            padding: '1rem'
-        },
+        container: theme => ({
+            padding: theme('spacing.0-8'),
+            center: true
+        }),
         cursor: {
             auto: 'auto',
             default: 'default',
@@ -168,6 +177,8 @@ module.exports = {
         inset: theme => ({
             '0': '0',
             auto: 'auto',
+            '1/2': '50%',
+            full: '100%',
             ...theme('spacing')
         }),
         letterSpacing: {
@@ -320,6 +331,7 @@ module.exports = {
             default: '0ms',
             '0': '0ms',
             '100': '100ms',
+            '150': '150ms',
             '250': '250ms',
             '500': '500ms'
         },
@@ -338,24 +350,120 @@ module.exports = {
             '250': '250ms',
             '500': '500ms'
         },
-        customForms: theme => ({
-            custom: {
-                'input, textarea': {
-                    '&:focus + label': {
-                        fontSize: theme('fontSize.2xs'),
-                        paddingTop: theme('padding.0-1')
+
+        transform: {
+            none: 'none',
+            'floating-label': 'scale(0.75) translateY(-100%)'
+        },
+        transformOrigin: {
+            tl: 'top left'
+        },
+        translate: {
+            '-1/2': '-50%',
+            '1/2': '50%',
+            full: '100%',
+            '-full': '-100%'
+        },
+        scale: {
+            '75': '0.75'
+        },
+        rotate: {},
+        skew: {},
+        perspective: {},
+        perspectiveOrigin: {},
+
+        customForms: theme => {
+            const labeActivelState = {
+                fontSize: theme('fontSize.2xs'),
+                paddingTop: theme('padding.0-3'),
+                transform: theme('transform.custom'),
+                backgroundColor: theme('colors.white')
+            };
+
+            const labeErrorlState = {
+                color: theme('colors.danger')
+            };
+
+            return {
+                default: {
+                    input: {
+                        borderRadius: undefined,
+                        borderColor: undefined,
+                        backgroundColor: 'transparent',
+                        borderWidth: undefined,
+                        paddingTop: undefined,
+                        paddingRight: undefined,
+                        paddingBottom: undefined,
+                        paddingLeft: undefined,
+                        fontSize: undefined,
+                        lineHeight: undefined,
+
+                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                            color: undefined,
+                            opacity: 0
+                        },
+
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: undefined,
+                            borderColor: undefined,
+
+                            '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                                color: undefined,
+                                opacity: 1
+                            }
+                        }
+                    },
+
+                    select: {
+                        appearance: undefined,
+                        colorAdjust: undefined,
+                        '&::-ms-expand': undefined,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundColor: undefined,
+                        borderColor: undefined,
+                        borderWidth: undefined,
+                        borderRadius: undefined,
+                        paddingTop: undefined,
+                        paddingRight: undefined,
+                        paddingBottom: undefined,
+                        paddingLeft: undefined,
+                        fontSize: undefined,
+                        lineHeight: undefined,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'contain',
+                        iconColor: theme('colors.black.100'),
+                        icon: iconColor =>
+                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${iconColor}"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>`
+                        // borderRadius: theme('borderRadius.lg'),
+                        // boxShadow: theme('boxShadow.default')
+                    },
+
+                    checkbox: {
+                        // width: theme('spacing.6'),
+                        // height: theme('spacing.6')
                     }
                 }
-            },
-            'not-empty': {
-                'input, textarea': {
-                    '& + label': {
-                        fontSize: theme('fontSize.2xs'),
-                        paddingTop: theme('padding.0-1')
-                    }
-                }
-            }
-        })
+
+                // custom: {
+                //     'input, textarea': {
+                //         '&:focus + label': labeActivelState
+                //     }
+                // },
+
+                // 'not-empty': {
+                //     'input, textarea': {
+                //         '& + label': labeActivelState
+                //     }
+                // },
+
+                // 'is-error': {
+                //     'input, textarea': {
+                //         '& + label': labeErrorlState
+                //     }
+                // }
+            };
+        }
     },
     variants: {
         alignContent: ['responsive'],
@@ -425,11 +533,25 @@ module.exports = {
         transitionProperty: [],
         transitionDuration: [],
         transitionTimingFunction: [],
-        transitionDelay: []
+        transitionDelay: [],
+        transform: [''],
+        transformOrigin: [''],
+        translate: [''],
+        scale: [''],
+        rotate: [''],
+        skew: [''],
+        perspective: [''],
+        perspectiveOrigin: [''],
+        transformStyle: [''],
+        backfaceVisibility: [''],
+        transformBox: ['']
     },
     corePlugins: {},
     plugins: [
         require('tailwindcss-transitions')(),
+        require('tailwindcss-transforms')({
+            '3d': false
+        }),
         require('@tailwindcss/custom-forms'),
         function({ addBase, config }) {
             addBase({
@@ -448,7 +570,7 @@ module.exports = {
                     fontSize: config('theme.fontSize.base'),
                     fontWeight: config('theme.fontWeight.bold')
                 },
-                p: { marginTop: 'theme.margin.12' }
+                p: { marginTop: config('theme.margin.1-2') }
             });
         }
     ]

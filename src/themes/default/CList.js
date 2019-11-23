@@ -1,12 +1,9 @@
-// TODO: вынести глобальные унивирсальные классы типо 'betweenClass' ???
+export const base = 'flex flex-wrap';
+export const directionColumn = 'flex-col';
+export const directionHorizontal = 'flex-row';
 
-const List = {
-    baseClass: ['flex', 'flex-wrap'],
-    defaultClass: ['flex-col'],
-    horizontalClass: ['flex-row'],
-    betweenClass: ['justify-between'],
-    startClass: ['justify-start'],
-    endClass: ['justify-end']
+export default {
+    base,
+    directionColumn,
+    directionHorizontal
 };
-
-export default List;

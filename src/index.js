@@ -1,29 +1,132 @@
-import DefaultTheme from '@/themes/default';
-import * as components from '@/components';
+import * as DefaultTheme from '@/themes/default';
+import * as vClickOutside from 'v-click-outside-x';
+import { ConfigPlugin } from '@/config';
+/* COMPONENTS */
 
-const extendComponent = (Vue, CurrentTheme, componentName) => {
-    return Vue.extend({
-        ...components[componentName]
+/* FORM */
+import { CForm } from '@/components/form';
+
+import { CFormPanel } from '@/components/form-panel';
+import { CFormInput } from '@/components/form-input';
+import { CFormSelectCustom } from '@/components/form-select';
+
+import { CRadio, CRadioGroup } from '@/components/radio';
+import { CCheckbox, CCheckboxGroup } from '@/components/checkbox';
+
+/*  COMMON */
+import { CButton } from '@/components/button';
+import { CLink } from '@/components/link';
+import { CTabs, CTab, CTabPanels, CTabPanel } from '@/components/tabs';
+import { CList, CListItem } from '@/components/list';
+import { CDropdown } from '@/components/dropdown';
+
+/*  LAYOUT */
+import { CContainer, CRow, CCol } from '@/components/layout';
+
+const components = {
+    CButton,
+    CLink,
+    CForm,
+    CFormPanel,
+    CFormInput,
+    CFormSelectCustom,
+    CRadio,
+    CRadioGroup,
+    CCheckbox,
+    CCheckboxGroup,
+    CTabs,
+    CTab,
+    CTabPanels,
+    CTabPanel,
+    CList,
+    CListItem,
+    CContainer,
+    CRow,
+    CCol,
+    CDropdown
+};
+
+export const selfInstall = (Vue, theme = {}, component) => {
+    const { props = {}, name } = component;
+    const defaultComponentTheme = { ...(props && props.theme ? props.theme.default() : {}) };
+
+    props.theme = {
+        type: Object,
+        default: () => {
+            return { ...defaultComponentTheme, ...theme };
+        }
+    };
+
+    Vue.component(name, {
+        ...component,
+        ...{
+            props
+        }
     });
 };
 
-const Plugin = {
-    install(Vue, options = {}) {
-        if (this.installed) return;
+const extendComponent = (Vue, CurrentTheme, componentName) => {
+    // TODO: if props is undefined
+    const { props = {} } = components[componentName];
 
-        this.installed = true;
+    const themeDefaultSettings = { ...(props && props.theme ? props.theme.default() : {}) };
+    const themeSettings = CurrentTheme[componentName];
 
-        const CurrentTheme = {
-            ...DefaultTheme,
-            ...(options.theme || {})
-        };
+    props.theme = {
+        type: Object,
+        default: () => {
+            return { ...themeDefaultSettings, ...themeSettings };
+        }
+    };
 
-        const componentsToRegister = options.components || Object.keys(components);
-
-        componentsToRegister.forEach(componentName => {
-            Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
-        });
-    }
+    return Vue.extend({
+        ...components[componentName],
+        ...{
+            props
+        }
+    });
 };
 
-export default Plugin;
+const install = function(Vue, options = {}) {
+    const { theme = {}, config = {}, components: injectComponentList = null } = options;
+
+    const CurrentTheme = {
+        ...DefaultTheme,
+        ...theme
+    };
+
+    const componentsToRegister = injectComponentList || Object.keys(components);
+
+    componentsToRegister.forEach(componentName => {
+        Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
+    });
+
+    Vue.use(vClickOutside);
+
+    ConfigPlugin(config, Vue);
+};
+
+export { CForm };
+export { CFormPanel };
+export { CFormInput };
+export { CFormSelectCustom };
+export { CRadio };
+export { CRadioGroup };
+export { CCheckbox };
+export { CCheckboxGroup };
+export { CButton };
+export { CLink };
+export { CTabs };
+export { CTab };
+export { CTabPanels };
+export { CTabPanel };
+export { CList };
+export { CListItem };
+export { CContainer };
+export { CRow };
+export { CCol };
+export { CDropdown };
+
+export default {
+    install
+};

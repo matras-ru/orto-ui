@@ -1,5 +1,5 @@
-const ListItem = {
-    baseClass: ['inline-block']
-};
+export const base = 'inline-block';
 
-export default ListItem;
+export default {
+    base
+};

@@ -1,4 +1,8 @@
 import { configure } from '@storybook/vue';
+import Vue from 'vue';
+import OrtoUi from '@/index.js';
+
+Vue.use(OrtoUi);
 
 const req = require.context('../../src', true, /.stories.js$/);
 
