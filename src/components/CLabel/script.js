@@ -2,9 +2,16 @@ import { selfInstall } from '@/utils';
 
 import ThemeClass from '@/themes/default/CLabel';
 
-const { baseClass, defaultClass } = ThemeClass;
+const { baseClass, primaryClass } = ThemeClass;
+
+const validVariants = ['primary'];
 
 const props = {
+    variant: {
+        type: String,
+        default: null,
+        validator: value => value === null || validVariants.includes(value)
+    },
     for: {
         type: String,
         default: null
@@ -19,8 +26,8 @@ const currentClass = props => {
     let classes = [baseClass];
 
     switch (props.variant) {
-        default:
-            classes.push(defaultClass);
+        case 'primary':
+            classes.push(primaryClass);
             break;
     }
 

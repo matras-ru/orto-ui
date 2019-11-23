@@ -10,7 +10,8 @@ const {
     errorClass,
     defaultSizeClass,
     largeSizeClass,
-    notEmptyClass
+    notEmptyClass,
+    wrapperClass
 } = ThemeClass;
 
 const validTagNames = ['input', 'textarea'];
@@ -146,9 +147,9 @@ export default {
             on
         };
 
-        return h('div', { class: 'relative inline-block align-top' }, [
+        return h('div', { class: wrapperClass }, [
             h(this.componentToRender, componentData),
-            h('CLabel', { attrs: { for: this.id } }, this.label)
+            h('CLabel', { attrs: { for: this.id, variant: 'primary' } }, this.label)
         ]);
     }
 };
