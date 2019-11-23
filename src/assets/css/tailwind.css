@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+svg {
+    fill: currentColor;
+}
+
+.exmpl-panel {
+    @apply bg-layout-section border border-layout-container p-0-8 rounded shadow-example;
+}
