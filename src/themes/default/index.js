@@ -11,6 +11,9 @@ import CTabs from './CTabs';
 import CTab from './CTab';
 import CList from './CList';
 import CListItem from './CListItem';
+import CContainer from './CContainer';
+import CRow from './CRow';
+import CCol from './CCol';
 
 const DefaultTheme = {
     CButton,
@@ -24,8 +27,11 @@ const DefaultTheme = {
     CRadio,
     CTabs,
     CTab,
-    CList, 
-    CListItem
+    CList,
+    CListItem,
+    CContainer,
+    CRow,
+    CCol
 };
 
 export {
@@ -40,8 +46,11 @@ export {
     CRadio,
     CTabs,
     CTab,
-    CList, 
-    CListItem
+    CList,
+    CListItem,
+    CContainer,
+    CRow,
+    CCol
 };
 
 export default DefaultTheme;
