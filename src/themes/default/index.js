@@ -7,6 +7,8 @@ import CError from './CError';
 import CLabel from './CLabel';
 import CCheckbox from './CCheckbox';
 import CRadio from './CRadio';
+import CTabs from './CTabs';
+import CTab from './CTab';
 
 const DefaultTheme = {
     CButton,
@@ -17,11 +19,23 @@ const DefaultTheme = {
     CError,
     CLabel,
     CCheckbox,
-    CRadio
+    CRadio,
+    CTabs,
+    CTab
 };
 
-//
-export { CButton, CIcon, CInput, CForm, CFormGroup, CError, CLabel, CCheckbox, CRadio };
+export {
+    CButton,
+    CIcon,
+    CInput,
+    CForm,
+    CFormGroup,
+    CError,
+    CLabel,
+    CCheckbox,
+    CRadio,
+    CTabs,
+    CTab
+};
 
-//
 export default DefaultTheme;
