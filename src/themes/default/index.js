@@ -9,6 +9,8 @@ import CCheckbox from './CCheckbox';
 import CRadio from './CRadio';
 import CTabs from './CTabs';
 import CTab from './CTab';
+import CList from './CList';
+import CListItem from './CListItem';
 
 const DefaultTheme = {
     CButton,
@@ -21,7 +23,9 @@ const DefaultTheme = {
     CCheckbox,
     CRadio,
     CTabs,
-    CTab
+    CTab,
+    CList, 
+    CListItem
 };
 
 export {
@@ -35,7 +39,9 @@ export {
     CCheckbox,
     CRadio,
     CTabs,
-    CTab
+    CTab,
+    CList, 
+    CListItem
 };
 
 export default DefaultTheme;
