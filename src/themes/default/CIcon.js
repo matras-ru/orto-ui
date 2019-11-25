@@ -1,9 +1,7 @@
-const Icon = {
-    baseClass: 'inline-block align-top',
-    defaultClass: 'fill-default',
-    defaultSizeClass: 'w-1-6 h-1-6',
-    largeSizeClass: '',
-    smallSizeClass: ''
-};
+export const baseClass = 'inline-block align-top';
+export const defaultClass = 'fill-default';
+export const defaultSizeClass = 'w-1-6 h-1-6';
+export const largeSizeClass = '';
+export const smallSizeClass = '';
 
-export default Icon;
+export default { baseClass, defaultClass, defaultSizeClass, largeSizeClass, smallSizeClass };

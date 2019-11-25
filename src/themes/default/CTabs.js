@@ -1,5 +1,5 @@
-const Tabs = {
-    baseClass: ['outline-none', 'select-none']
-};
+export const baseClass = ['outline-none', 'select-none'];
 
-export default Tabs;
+export default {
+    baseClass
+};

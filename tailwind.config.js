@@ -35,6 +35,7 @@ module.exports = {
         spacing: {
             px: '1px',
             '0': '0',
+            '-0-3': '-0.375rem',
             '0-1': '0.125rem',
             '0-2': '0.25rem',
             '0-3': '0.375rem',
@@ -338,24 +339,53 @@ module.exports = {
             '250': '250ms',
             '500': '500ms'
         },
-        customForms: theme => ({
-            custom: {
-                'input, textarea': {
-                    '&:focus + label': {
-                        fontSize: theme('fontSize.2xs'),
-                        paddingTop: theme('padding.0-1')
+
+        transform: {
+            none: 'none',
+            custom: 'translateY(-50%)'
+        },
+        transformOrigin: {},
+        translate: {
+            'right-up': ['0', '-100%']
+        },
+        scale: {},
+        rotate: {},
+        skew: {},
+        perspective: {},
+        perspectiveOrigin: {},
+
+        customForms: theme => {
+            const labeActivelState = {
+                fontSize: theme('fontSize.2xs'),
+                paddingTop: theme('padding.0-3'),
+                transform: theme('transform.custom'),
+                backgroundColor: theme('colors.white')
+            };
+
+            const labeErrorlState = {
+                color: theme('colors.danger')
+            };
+
+            return {
+                custom: {
+                    'input, textarea': {
+                        '&:focus + label': labeActivelState
+                    }
+                },
+
+                'not-empty': {
+                    'input, textarea': {
+                        '& + label': labeActivelState
+                    }
+                },
+
+                'is-error': {
+                    'input, textarea': {
+                        '& + label': labeErrorlState
                     }
                 }
-            },
-            'not-empty': {
-                'input, textarea': {
-                    '& + label': {
-                        fontSize: theme('fontSize.2xs'),
-                        paddingTop: theme('padding.0-1')
-                    }
-                }
-            }
-        })
+            };
+        }
     },
     variants: {
         alignContent: ['responsive'],
@@ -425,11 +455,25 @@ module.exports = {
         transitionProperty: [],
         transitionDuration: [],
         transitionTimingFunction: [],
-        transitionDelay: []
+        transitionDelay: [],
+        transform: [''],
+        transformOrigin: [''],
+        translate: [''],
+        scale: [''],
+        rotate: [''],
+        skew: [''],
+        perspective: [''],
+        perspectiveOrigin: [''],
+        transformStyle: [''],
+        backfaceVisibility: [''],
+        transformBox: ['']
     },
     corePlugins: {},
     plugins: [
         require('tailwindcss-transitions')(),
+        require('tailwindcss-transforms')({
+            '3d': false
+        }),
         require('@tailwindcss/custom-forms'),
         function({ addBase, config }) {
             addBase({

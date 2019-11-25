@@ -1,6 +1,7 @@
-const Tab = {
-    baseClass: '',
-    defaultClass: ''
-};
+export const baseClass = '';
+export const defaultClass = '';
 
-export default Tab;
+export default {
+    baseClass,
+    defaultClass
+};

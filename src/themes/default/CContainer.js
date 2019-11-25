@@ -1,6 +1,7 @@
-const Container = {
-    baseClass: 'container px-8',
-    fluidClass: 'max-w-none'
-};
+export const baseClass = 'container px-8';
+export const fluidClass = 'max-w-none';
 
-export default Container;
+export default {
+    baseClass,
+    fluidClass
+};

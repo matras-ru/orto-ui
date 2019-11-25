@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46">
+    <g fill="none" fill-rule="evenodd">
+        <circle cx="23" cy="23" r="23" fill="#3DA2E2"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M17.244 20.523a2.5 2.5 0 0 0-2.14 2.814l.816 6a2.5 2.5 0 0 0 2.477 2.163h9.206a2.5 2.5 0 0 0 2.477-2.163l.816-6A2.5 2.5 0 0 0 28.42 20.5H17.58a2.5 2.5 0 0 0-.337.023zM24 10.5a5.5 5.5 0 0 1 5.5 5.5v1.606a5.502 5.502 0 0 1 4.369 6.135l-.817 6a5.5 5.5 0 0 1-5.45 4.759h-9.205a5.5 5.5 0 0 1-5.45-4.759l-.816-6a5.5 5.5 0 0 1 4.368-6.134L16.5 16a5.5 5.5 0 0 1 5.5-5.5h2zm2.5 7V16a2.5 2.5 0 0 0-2.5-2.5h-2a2.5 2.5 0 0 0-2.5 2.5v1.5h7z"/>
+        <text fill="#FFF" font-family="Ubuntu-Bold, Ubuntu" font-size="10" font-weight="bold">
+            <tspan x="19.96" y="29.3">1</tspan>
+        </text>
+    </g>
+</svg>
