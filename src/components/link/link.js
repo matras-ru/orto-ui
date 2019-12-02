@@ -1,7 +1,6 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { selfInstall, noop } from '@/utils';
 import commonAttributes from '@/mixins/commonAttributes.js';
-import { getComponentConfig } from '../../config';
 // import { baseClass } from '@/themes/default/CLink';
 
 const NAME = 'CLink';
@@ -11,7 +10,7 @@ const props = {
 
     variant: {
         type: String,
-        default: () => getComponentConfig(NAME, 'variant')
+        default: 'variant'
     }
 };
 

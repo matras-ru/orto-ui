@@ -1,9 +1,5 @@
 # orto-ui
 
-## Usage
-
-### All components
-
 #### Default theme
 
 ```javascript
@@ -23,6 +19,26 @@ Vue.use(OrtoUi, {
 });
 
 Vue.use(OrtoUi);
+```
+
+#### Custom config
+
+manage default values by props
+
+```javascript
+import OrtoUi from 'orto-ui';
+
+const customConfig = {
+    CButton: {
+        variant: 'tertiary',
+        size: 'sm',
+        tag: 'a'
+    }
+};
+
+Vue.use(OrtoUi, {
+    config: customConfig
+});
 ```
 
 #### Manual components list

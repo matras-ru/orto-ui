@@ -2,10 +2,19 @@ import { selfInstall, noop } from '@/utils';
 import commonAttributes from '@/mixins/commonAttributes.js';
 import defaultTheme from '@/themes/default/CButton';
 
-const NAME = 'CButton';
-const validTagNames = ['button', 'a'];
-const variants = ['primary', 'secondary', 'tertiary', 'quaternary'];
+import { getComponentConfig } from '@/config';
 
+const NAME = 'CButton';
+const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary'];
+const validSizes = ['lg', 'md', 'sm'];
+const validTagNames = ['button', 'a'];
+const validTypes = ['button', 'submit'];
+
+/**
+ * @description
+ * @param {obj} theme
+ * @returns {obj}
+ */
 const createThemeMap = ({
     defaultClass,
     primaryClass,
@@ -46,10 +55,10 @@ const props = {
         default: () => defaultTheme
     },
 
-    tagName: {
+    tag: {
         type: String,
-        default: 'button' // TODO: default value -> global.config
-        // validator: value => validTagNames.includes(value)
+        default: () => getComponentConfig(NAME, 'tag'), // TODO: default value -> global.config
+        validator: value => validTagNames.includes(value)
     },
 
     label: {
@@ -57,14 +66,10 @@ const props = {
         default: null
     },
 
-    value: {
-        type: [String, Number],
-        default: null
-    },
-
     type: {
         type: String,
-        default: null
+        default: () => getComponentConfig(NAME, 'type'), // TODO: default value -> global.config
+        validator: value => validTypes.includes(value)
     },
 
     href: {
@@ -74,14 +79,14 @@ const props = {
 
     variant: {
         type: String,
-        default: null // TODO: default value -> global.config
-        // validator: value => Object.keys(createThemeClass().variants).includes(value)
+        default: () => getComponentConfig(NAME, 'variant'),
+        validator: value => validVariants.includes(value)
     },
 
     size: {
         type: String,
-        default: 'md' // TODO: default value -> global.config
-        // validator: value => Object.keys(sizes).includes(value)
+        default: () => getComponentConfig(NAME, 'size'),
+        validator: value => validSizes.includes(value)
     },
 
     activeClass: {
@@ -102,12 +107,12 @@ const currentClass = ({ disabled, size, variant, theme }) => {
 
     const { sizes, variants } = createThemeMap(theme);
 
+    classes.push(getClass(sizes, size));
+    classes.push(getClass(variants, variant));
+
     if (disabled) {
         classes.push(disabledClass);
     }
-
-    classes.push(getClass(sizes, size));
-    classes.push(getClass(variants, variant));
 
     return classes;
 };
@@ -146,7 +151,6 @@ export default {
             class: currentClass(props),
             attrs: {
                 id: props.id,
-                value: props.value,
                 autofocus: props.autofocus,
                 disabled: props.disabled,
                 name: props.name,
@@ -156,6 +160,6 @@ export default {
             on
         };
 
-        return h('button', componentData, props.label ? props.label : children);
+        return h(props.tag, componentData, props.label ? props.label : children);
     }
 };

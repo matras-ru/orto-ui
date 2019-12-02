@@ -62,6 +62,7 @@
                 <!-- <CButton size="sm">Button</CButton>
                 <CButton>Button</CButton>
                 <CButton size="lg">Button</CButton> -->
+                <CButton>Button</CButton>
                 <CButton variant="secondary" size="sm">Button</CButton>
                 <!-- <CButton variant="primary">Button</CButton>
                 <CButton variant="primary" size="lg">Button</CButton>

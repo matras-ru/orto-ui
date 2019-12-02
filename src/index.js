@@ -1,4 +1,5 @@
 import * as DefaultTheme from '@/themes/default';
+import { ConfigPlugin } from '@/config';
 
 /* COMPONENTS */
 
@@ -82,9 +83,12 @@ const install = function(Vue, options = {}) {
     const componentsToRegister = options.components || Object.keys(components);
 
     componentsToRegister.forEach(componentName => {
-        console.log(componentName);
         Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
     });
+
+    // console.log(Vue.prototype);
+
+    ConfigPlugin(options.config || {}, Vue);
 };
 
 export { CForm };

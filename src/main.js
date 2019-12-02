@@ -8,10 +8,19 @@ import * as CustomTheme from '@/themes/custom/index';
 
 import { CButton } from './index';
 
-// Vue.use(OrtoUi, {
-//  theme: CustomTheme,
-//  components: ['CButton']
-// });
+const customConfig = {
+    CButton: {
+        variant: 'tertiary',
+        size: 'lg',
+        tag: 'button'
+    }
+};
+
+Vue.use(OrtoUi, {
+    theme: CustomTheme,
+    config: customConfig,
+    components: ['CButton']
+});
 
 const btnTheme = {
     baseClass:
@@ -21,7 +30,7 @@ const btnTheme = {
         'bg-white border-secondary-200 text-secondary-200 transition-bg transition-color hover:text-white hover:bg-secondary-200'
 };
 
-Vue.use(CButton, btnTheme);
+// Vue.use(CButton, btnTheme);
 
 Vue.config.productionTip = false;
 
