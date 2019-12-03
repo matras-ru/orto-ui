@@ -8,35 +8,41 @@ feature list:
 - initial state на основании window.location.hash
 */
 
+const NAME = 'CTabs';
+
 export default {
-    name: 'CTabs',
+    name: NAME,
+
+    functional: true,
 
     install(Vue, theme) {
         selfInstall(Vue, theme, this);
     },
 
     props: {
-        value: {
+        modelValue: {
             type: [Number, String],
             default: null
         }
     },
 
     model: {
-        prop: 'value',
+        prop: 'modelValue',
         event: 'change'
     },
 
-    methods: {
-        switchTab(name) {
-            this.$emit('change', name);
-        }
-    },
+    // methods: {
+    //     switchTab(name) {
+    //         this.$emit('change', name);
+    //     }
+    // },
 
-    render(h) {
-        const normalizeTabs = this.$slots.default.map(tab => {
+    render(h, { props, children, listeners }) {
+        const onChange = listeners['change'];
+
+        const normalizeTabs = children.map(tab => {
             const { name } = tab.componentOptions.propsData;
-            const isActive = this.value === name;
+            const isActive = props.modelValue === name;
 
             // mixin isAactive props
             tab.componentOptions.propsData = {
@@ -48,7 +54,7 @@ export default {
             tab.componentOptions.listeners = {
                 ...tab.componentOptions.listeners,
                 onClick: name => {
-                    this.switchTab(name);
+                    onChange(name);
                 }
             };
 

@@ -130,7 +130,7 @@ export default {
 
         return h('div', { class: wrapperClass }, [
             h(this.tag, componentData),
-            h('CFormLabel', { attrs: { for: this.id, variant: 'primary' } }, this.label)
+            h('CFormLabel', { attrs: { for: this.id }, props: { variant: 'primary' } }, this.label)
         ]);
     }
 };

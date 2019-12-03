@@ -59,12 +59,12 @@
 
             <!--  Button -->
             <div>
-                <!-- <CButton size="sm">Button</CButton>
+                <CButton size="sm">Button</CButton>
                 <CButton>Button</CButton>
-                <CButton size="lg">Button</CButton> -->
-                <CButton>Button</CButton>
+                <CButton size="lg">Button</CButton>
+                <CButton disabled>Button</CButton>
                 <CButton variant="secondary" size="sm">Button</CButton>
-                <!-- <CButton variant="primary">Button</CButton>
+                <CButton variant="primary">Button</CButton>
                 <CButton variant="primary" size="lg">Button</CButton>
                 <CButton variant="secondary" size="sm">Button</CButton>
                 <CButton variant="secondary">Button</CButton>
@@ -74,48 +74,10 @@
                 <CButton variant="tertiary" size="lg">Button</CButton>
                 <CButton variant="quaternary" size="sm">Button</CButton>
                 <CButton variant="quaternary">Button</CButton>
-                <CButton variant="quaternary" size="lg">Button</CButton> -->
+                <CButton variant="quaternary" size="lg">Button</CButton>
             </div>
 
-            <!-- 
-           // Form
             <CForm action="/" method="POST">
-                <CFormInput
-                    type="text"
-                    id="user_name"
-                    label="Name *"
-                    name="user_name"
-                    error
-                    v-model="exampleModel.inputModel"
-                />
-                <CFormError>Error message</CFormError>
-
-                <CFormInput
-                    tag="textarea"
-                    id="user_message"
-                    label="Message *"
-                    name="user_message"
-                    v-model="exampleModel.textareaModel"
-                />
-                <CFormError>Error message</CFormError>
-
-                <CFormPanel label="Series 2">
-                    <CCheckbox
-                        id="checkbox1"
-                        label="Default"
-                        name="checkbox1"
-                        value="checkbox1"
-                        v-model="exampleModel.checkboxModel"
-                    />
-                    <CCheckbox
-                        id="checkbox2"
-                        label="Disabled"
-                        name="checkbox2"
-                        value="checkbox2"
-                        disabled
-                    />
-                </CFormPanel>
-
                 <CFormPanel label="Series 3">
                     <CCheckboxGroup
                         :data="[
@@ -136,6 +98,43 @@
                     />
                 </CFormPanel>
 
+                <!-- <CFormInput
+                    type="text"
+                    id="user_name"
+                    label="Name *"
+                    name="user_name"
+                    error
+                    v-model="exampleModel.inputModel"
+                />
+
+                <CFormError>Error message</CFormError> -->
+
+                <!-- <CFormInput
+                    tag="textarea"
+                    id="user_message"
+                    label="Message *"
+                    name="user_message"
+                    v-model="exampleModel.textareaModel"
+                /> -->
+                <!-- <CFormError>Error message</CFormError> -->
+
+                <CFormPanel label="Series 2">
+                    <CCheckbox
+                        id="checkbox1"
+                        label="Default"
+                        name="checkbox1"
+                        value="checkbox1"
+                        v-model="exampleModel.checkboxModel"
+                    />
+                    <CCheckbox
+                        id="checkbox2"
+                        label="Disabled"
+                        name="checkbox2"
+                        value="checkbox2"
+                        disabled
+                    />
+                </CFormPanel>
+
                 <CRadio
                     id="radio1"
                     label="Default"
@@ -152,9 +151,6 @@
                     v-model="exampleModel.radioGroupModel"
                 />
             </CForm>
-
-
-            // Tabs
 
             <CContainer>
                 <CTabs v-model="exampleModel.tab">
@@ -189,7 +185,6 @@
                     </div>
                 </CContainer>
             </div>
-            -->
 
             <div class="fixed top-0 right-0 p-2-5 bg-white shadow">
                 <pre>{{ exampleModel }}</pre>

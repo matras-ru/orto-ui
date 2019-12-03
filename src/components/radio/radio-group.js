@@ -1,25 +1,18 @@
-import { selfInstall } from '@/utils';
-import radioCheckboxGroupMixin from '@/mixins/radio-checkbox-group';
+import { install, radioCheckboxGroup } from '@/mixins';
+import merge from 'lodash.merge';
+
+const NAME = 'CRadioGroup';
+const TYPE = 'radio';
 
 export default {
-    name: 'CRadioGroup',
-
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    mixins: [radioCheckboxGroupMixin],
-
-    props: {
-        modelValue: {
-            type: [String, Number, Boolean],
-            default: null
+    name: NAME,
+    ...install,
+    ...merge(radioCheckboxGroup(TYPE), {
+        props: {
+            modelValue: {
+                type: [String, Number, Boolean],
+                default: null
+            }
         }
-    },
-
-    data() {
-        return {
-            type: 'radio-group'
-        };
-    }
+    })
 };

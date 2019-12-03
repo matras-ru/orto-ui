@@ -1,19 +1,22 @@
-import { selfInstall } from '@/utils';
 import { mergeData } from 'vue-functional-data-merge';
+import { install } from '@/mixins';
 
 import ThemeClass from '@/themes/default/CList';
+import { getComponentConfig } from '@/config';
 
 const { baseClass, defaultClass, horizontalClass, startClass, endClass, betweenClass } = ThemeClass; // TODO: flex-class вынести
+
+const NAME = 'CList';
 
 const props = {
     tag: {
         type: String,
-        default: 'ul'
+        default: () => getComponentConfig(NAME, 'tag')
     },
 
     horizontal: {
         type: Boolean,
-        default: false
+        default: () => getComponentConfig(NAME, 'horizontal')
     },
 
     justify: {
@@ -22,22 +25,22 @@ const props = {
     }
 };
 
-const currentClass = props => {
-    let classes = [...baseClass];
+const currentClass = ({ horizontal, justify }) => {
+    const classes = [baseClass];
 
     // horizontal/vertical
-    classes.push(props.horizontal ? [...horizontalClass] : [...defaultClass]);
+    classes.push(horizontal ? [horizontalClass] : [defaultClass]);
 
     // horizontal align
-    switch (props.justify) {
+    switch (justify) {
         case 'end':
-            classes.push(...endClass);
+            classes.push(endClass);
             break;
         case 'between':
-            classes.push(...betweenClass);
+            classes.push(betweenClass);
             break;
         case 'start':
-            classes.push(...startClass);
+            classes.push(startClass);
             break;
         default:
             break;
@@ -47,13 +50,11 @@ const currentClass = props => {
 };
 
 export default {
-    name: 'List',
+    name: NAME,
 
     functional: true,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
+    ...install,
 
     props,
 

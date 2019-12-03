@@ -1,8 +1,7 @@
-import { selfInstall, noop } from '@/utils';
-import commonAttributes from '@/mixins/commonAttributes.js';
-import defaultTheme from '@/themes/default/CButton';
-
+import { noop, getHashMapValue } from '@/utils';
+import { commonAttributes, install } from '@/mixins';
 import { getComponentConfig } from '@/config';
+import defaultTheme from '@/themes/default/CButton';
 
 const NAME = 'CButton';
 const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary'];
@@ -10,11 +9,6 @@ const validSizes = ['lg', 'md', 'sm'];
 const validTagNames = ['button', 'a'];
 const validTypes = ['button', 'submit'];
 
-/**
- * @description
- * @param {obj} theme
- * @returns {obj}
- */
 const createThemeMap = ({
     defaultClass,
     primaryClass,
@@ -43,10 +37,6 @@ const createThemeMap = ({
     };
 };
 
-const getClass = (themeMap, key) => {
-    return themeMap[key] || themeMap.default;
-};
-
 const props = {
     ...commonAttributes.props,
 
@@ -57,7 +47,7 @@ const props = {
 
     tag: {
         type: String,
-        default: () => getComponentConfig(NAME, 'tag'), // TODO: default value -> global.config
+        default: () => getComponentConfig(NAME, 'tag'),
         validator: value => validTagNames.includes(value)
     },
 
@@ -68,7 +58,7 @@ const props = {
 
     type: {
         type: String,
-        default: () => getComponentConfig(NAME, 'type'), // TODO: default value -> global.config
+        default: () => getComponentConfig(NAME, 'type'),
         validator: value => validTypes.includes(value)
     },
 
@@ -107,8 +97,8 @@ const currentClass = ({ disabled, size, variant, theme }) => {
 
     const { sizes, variants } = createThemeMap(theme);
 
-    classes.push(getClass(sizes, size));
-    classes.push(getClass(variants, variant));
+    classes.push(getHashMapValue(sizes, size));
+    classes.push(getHashMapValue(variants, variant));
 
     if (disabled) {
         classes.push(disabledClass);
@@ -122,9 +112,7 @@ export default {
 
     functional: true,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
+    ...install,
 
     props,
 

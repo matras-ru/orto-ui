@@ -20,3 +20,11 @@ export const selfInstall = (Vue, theme = {}, component) => {
 };
 
 export const noop = () => {};
+
+export const isObject = obj => obj !== null && typeof obj === 'object';
+
+export const hasOwnProperty = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
+
+export const getHashMapValue = (themeMap, key) => {
+    return themeMap[key] || themeMap.default || null;
+};

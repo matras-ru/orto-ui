@@ -30,7 +30,7 @@ describe('Radio', () => {
         expect(input.attributes('name')).toBe('radio1');
     });
 
-    it('The checkbox is disabled', () => {
+    it('The radio is disabled', () => {
         wrapper.setProps({
             disabled: true
         });
@@ -40,28 +40,28 @@ describe('Radio', () => {
         expect(input.attributes('disabled')).toBe('disabled');
     });
 
-    it('The checkbox is checked (string)', () => {
+    it('The radio is checked (string)', () => {
         wrapper.setProps({
-            modelValue: 'checkbox1',
-            value: 'checkbox1'
+            modelValue: 'radio1',
+            value: 'radio1'
         });
 
         expect(wrapper.vm.shouldBeChecked).toBe(true);
     });
 
-    it('The checkbox $emit @change (string)', () => {
+    it('The radio $emit @change (string)', () => {
         wrapper.setProps({
-            modelValue: 'checkbox1',
-            value: 'checkbox1'
+            modelValue: 'radio1',
+            value: 'radio1'
         });
 
         input.setChecked(true);
 
         expect(wrapper.emitted().change).toBeTruthy();
-        expect(wrapper.emitted().change[0][0]).toEqual('checkbox1');
+        expect(wrapper.emitted().change[0][0]).toEqual('radio1');
     });
 
-    it('The checkbox $emit @change (number)', () => {
+    it('The radio $emit @change (number)', () => {
         wrapper.setProps({
             modelValue: 123,
             value: 123
@@ -73,7 +73,7 @@ describe('Radio', () => {
         expect(wrapper.emitted().change[0][0]).toEqual(123);
     });
 
-    it('The checkbox $emit @change (boolean)', () => {
+    it('The radio $emit @change (boolean)', () => {
         wrapper.setProps({
             modelValue: true,
             value: true

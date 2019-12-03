@@ -4,5 +4,19 @@ export default {
         variant: null,
         size: 'md',
         type: 'button'
+    },
+
+    CChecbox: {
+        falseValue: false,
+        trueValue: true
+    },
+
+    CList: {
+        tag: 'ul',
+        horizontal: false
+    },
+
+    CListItem: {
+        tag: 'li'
     }
 };

@@ -25,27 +25,27 @@ import { CList, CListItem } from '@/components/list';
 import { CContainer, CRow, CCol } from '@/components/layout';
 
 const components = {
-    // CForm,
+    CButton,
+    CForm,
     // CFormError,
-    // CFormPanel,
+    CFormPanel,
     // CFormInput,
     // CFormLabel,
-    // CRadio,
-    // CRadioGroup,
-    // CCheckbox,
-    // CCheckboxGroup,
+    CRadio,
+    CRadioGroup,
+    CCheckbox,
+    CCheckboxGroup,
     // CIcon,
-    CButton
     // CLink,
-    // CTabs,
-    // CTab,
-    // CTabPanels,
-    // CTabPanel,
-    // CList,
-    // CListItem,
-    // CContainer,
-    // CRow,
-    // CCol
+    CTabs,
+    CTab,
+    CTabPanels,
+    CTabPanel,
+    CList,
+    CListItem,
+    CContainer,
+    CRow,
+    CCol
 };
 
 const extendComponent = (Vue, CurrentTheme, componentName) => {
@@ -75,20 +75,20 @@ const install = function(Vue, options = {}) {
 
     this.installed = true;
 
+    const { theme = {}, config = {}, components: injectComponentList = null } = options;
+
     const CurrentTheme = {
         ...DefaultTheme,
-        ...(options.theme || {})
+        ...theme
     };
 
-    const componentsToRegister = options.components || Object.keys(components);
+    const componentsToRegister = injectComponentList || Object.keys(components);
 
     componentsToRegister.forEach(componentName => {
         Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
     });
 
-    // console.log(Vue.prototype);
-
-    ConfigPlugin(options.config || {}, Vue);
+    ConfigPlugin(config, Vue);
 };
 
 export { CForm };

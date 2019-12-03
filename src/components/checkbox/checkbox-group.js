@@ -1,14 +1,12 @@
-import { selfInstall } from '@/utils';
-import radioCheckboxGroupMixin from '@/mixins/radio-checkbox-group';
+import { install, radioCheckboxGroup } from '@/mixins';
+import merge from 'lodash.merge';
+
+const NAME = 'CCheckboxGroup';
+const TYPE = 'checkbox';
 
 export default {
-    name: 'CCheckboxGroup',
-
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    mixins: [radioCheckboxGroupMixin],
+    name: NAME,
+    ...install,
 
     props: {
         modelValue: {
@@ -16,10 +14,12 @@ export default {
             default: () => []
         }
     },
-
-    data() {
-        return {
-            type: 'checkbox-group'
-        };
-    }
+    ...merge(radioCheckboxGroup(TYPE), {
+        props: {
+            modelValue: {
+                type: Array,
+                default: () => []
+            }
+        }
+    })
 };

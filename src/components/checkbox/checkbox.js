@@ -1,14 +1,12 @@
-import { selfInstall } from '@/utils';
-import radioCheckboxMixin from '@/mixins/radio-checkbox';
+import { install, radioCheckbox } from '@/mixins';
+import { getComponentConfig } from '@/config';
+
+export const NAME = 'CCheckbox';
 
 export default {
-    name: 'CCheckbox',
+    name: NAME,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    mixins: [radioCheckboxMixin],
+    mixins: [install, radioCheckbox],
 
     props: {
         modelValue: {
@@ -23,12 +21,12 @@ export default {
 
         trueValue: {
             type: [String, Number, Boolean],
-            default: true
+            default: () => getComponentConfig(NAME, 'trueValue')
         },
 
         falseValue: {
             type: [String, Number, Boolean],
-            default: false
+            default: () => getComponentConfig(NAME, 'falseValue')
         }
     },
 
@@ -50,10 +48,12 @@ export default {
 
     methods: {
         onChange(e) {
-            if (this.modelValue instanceof Array) {
-                let newValue = [...this.modelValue];
+            const checked = e.target.checked;
 
-                if (e.target.checked) {
+            if (this.modelValue instanceof Array) {
+                const newValue = [...this.modelValue];
+
+                if (checked) {
                     newValue.push(this.value);
                 } else {
                     newValue.splice(newValue.indexOf(this.value), 1);
@@ -61,7 +61,7 @@ export default {
 
                 this.$emit('change', newValue);
             } else {
-                this.$emit('change', e.target.checked ? this.trueValue : this.falseValue);
+                this.$emit('change', checked ? this.trueValue : this.falseValue);
             }
         }
     }

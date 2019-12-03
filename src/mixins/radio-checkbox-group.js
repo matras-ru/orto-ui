@@ -1,42 +1,49 @@
-export default {
-    props: {
-        data: {
-            type: Array,
-            default: () => []
-        }
-    },
+export default function(type) {
+    const mapComponents = {
+        checkbox: 'CCheckbox',
+        radio: 'CRadio'
+    };
 
-    model: {
-        prop: 'modelValue',
-        event: 'change'
-    },
+    const childComponent = mapComponents[type];
 
-    methods: {
-        setValue(val) {
-            this.$emit('change', val);
-        }
-    },
+    return {
+        functional: true,
 
-    render(h) {
-        const children = this.data.map(({ id, label, name, disabled, value, autofocus }) =>
-            h(this.type === 'checkbox-group' ? 'CCheckbox' : 'CRadio', {
-                props: {
-                    modelValue: this.modelValue,
-                    id,
-                    label,
-                    name,
-                    disabled,
-                    autofocus,
-                    value
-                },
-                on: {
-                    change: val => {
-                        this.setValue(val);
+        props: {
+            data: {
+                type: Array,
+                default: () => []
+            }
+        },
+
+        model: {
+            prop: 'modelValue',
+            event: 'change'
+        },
+
+        render(h, { props, listeners }) {
+            const onChange = listeners['change'];
+
+            const children = props.data.map(({ id, label, name, disabled, value, autofocus }) =>
+                h(childComponent, {
+                    props: {
+                        modelValue: props.modelValue,
+                        id,
+                        label,
+                        name,
+                        disabled,
+                        autofocus,
+                        value
+                    },
+                    on: {
+                        change(val) {
+                            onChange(val);
+                        }
                     }
-                }
-            })
-        );
+                })
+            );
 
-        return h('div', {}, children);
-    }
-};
+            return h('div', {}, children);
+        }
+    };
+}
