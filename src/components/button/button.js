@@ -1,3 +1,4 @@
+import { mergeData } from 'vue-functional-data-merge';
 import { noop, getHashMapValue } from '@/utils';
 import { commonAttributes, install } from '@/mixins';
 import { getComponentConfig } from '@/config';
@@ -116,7 +117,7 @@ export default {
 
     props,
 
-    render(h, { props, listeners, children }) {
+    render(h, { data, props, listeners, children }) {
         const onClick = listeners['onClick'] || noop;
         const onFocus = listeners['onFocus'] || noop;
         const onBlur = listeners['onBlur'] || noop;
@@ -148,6 +149,6 @@ export default {
             on
         };
 
-        return h(props.tag, componentData, props.label ? props.label : children);
+        return h(props.tag, mergeData(data, componentData), props.label ? props.label : children);
     }
 };

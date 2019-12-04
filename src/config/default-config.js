@@ -6,6 +6,11 @@ export default {
         type: 'button'
     },
 
+    CLink: {
+        variant: null,
+        target: '_self'
+    },
+
     CChecbox: {
         falseValue: false,
         trueValue: true

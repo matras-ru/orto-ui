@@ -492,7 +492,7 @@ module.exports = {
                     fontSize: config('theme.fontSize.base'),
                     fontWeight: config('theme.fontWeight.bold')
                 },
-                p: { marginTop: 'theme.margin.12' }
+                p: { marginTop: config('theme.margin.1-2') }
             });
         }
     ]

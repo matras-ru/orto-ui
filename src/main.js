@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
+
 import App from './App.vue';
 import OrtoUi from './index';
 
@@ -28,8 +30,21 @@ Vue.use(OrtoUi);
 
 // Vue.use(CButton, btnTheme);
 
+//
+const routes = [
+    { name: 'index', path: '/', component: () => import('@/pages/Index') },
+    { name: 'test', path: '/test', component: () => import('@/pages/Test') }
+];
+
+const router = new VueRouter({
+    routes,
+    mode: 'history'
+});
+
 Vue.config.productionTip = false;
+Vue.use(VueRouter);
 
 new Vue({
-    render: h => h(App)
+    render: h => h(App),
+    router
 }).$mount('#app');

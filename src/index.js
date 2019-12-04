@@ -36,7 +36,7 @@ const components = {
     CCheckbox,
     CCheckboxGroup,
     // CIcon,
-    // CLink,
+    CLink,
     CTabs,
     CTab,
     CTabPanels,
