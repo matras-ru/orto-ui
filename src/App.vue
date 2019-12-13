@@ -6,7 +6,7 @@
                     <CLink :to="{ name: 'index' }">Router link INDEX</CLink>
                 </div>
                 <div class="px-1-4">
-                    <CLink :to="{ name: 'test' }">Router link TEST</CLink>
+                    <CLink :to="{ name: 'test' }" variant="primary">Router link TEST</CLink>
                 </div>
                 <div class="px-1-4">
                     <CLink href="//google.com" target="_blank">EXTERNAL LINK</CLink>

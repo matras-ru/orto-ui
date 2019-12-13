@@ -1,9 +1,12 @@
 import { getComponentConfig } from '@/config';
 import { commonAttributes, install } from '@/mixins';
+import { getHashMapValue } from '@/utils';
+
 import defaultTheme from '@/themes/default/CLink';
 
 const NAME = 'CLink';
 const ANCHOR_TAG = 'a';
+const validVariants = ['primary'];
 
 const concat = (...args) => Array.prototype.concat.apply([], args);
 const isRouterLink = tag => tag.toString().toLowerCase() !== ANCHOR_TAG;
@@ -23,6 +26,15 @@ const computeRel = ({ target, rel } = {}) => {
     return rel || null;
 };
 
+const createThemeMap = ({ defaultClass, primaryClass }) => {
+    return {
+        variants: {
+            primary: primaryClass,
+            default: defaultClass
+        }
+    };
+};
+
 export default {
     name: NAME,
 
@@ -40,7 +52,8 @@ export default {
 
         variant: {
             type: String,
-            default: () => getComponentConfig(NAME, 'variant')
+            default: () => getComponentConfig(NAME, 'variant'),
+            validator: value => validVariants.includes(value)
         },
 
         label: {
@@ -93,14 +106,15 @@ export default {
         },
 
         computedClass() {
-            const { baseClass, disabledClass, defaultClass } = this.theme;
+            const { baseClass, disabledClass } = this.theme;
             const classes = [baseClass];
 
             if (this.disabled) {
                 classes.push(disabledClass);
             }
 
-            classes.push(defaultClass);
+            const { variants } = createThemeMap(this.theme);
+            classes.push(getHashMapValue(variants, this.variant));
 
             return classes;
         }

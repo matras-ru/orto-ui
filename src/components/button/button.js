@@ -93,10 +93,8 @@ const props = {
 
 const currentClass = ({ disabled, size, variant, theme }) => {
     const { baseClass, disabledClass } = theme;
-
-    const classes = [baseClass];
-
     const { sizes, variants } = createThemeMap(theme);
+    const classes = [baseClass];
 
     classes.push(getHashMapValue(sizes, size));
     classes.push(getHashMapValue(variants, variant));
