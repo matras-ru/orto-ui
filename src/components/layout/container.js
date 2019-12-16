@@ -1,4 +1,5 @@
-import { selfInstall } from '@/utils';
+import { install } from '@/mixins';
+
 import { mergeData } from 'vue-functional-data-merge';
 
 import ThemeClass from '@/themes/default/CContainer';
@@ -30,9 +31,7 @@ export default {
 
     functional: true,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
+    ...install,
 
     props,
 

@@ -35,6 +35,75 @@ const createThemeMap = ({ defaultClass, primaryClass }) => {
     };
 };
 
+//
+export const createProps = () => {
+    return {
+        href: {
+            type: String,
+            default: null
+        },
+
+        target: {
+            type: String,
+            default: () => getComponentConfig(NAME, 'target')
+        },
+
+        rel: {
+            type: String,
+            default: null
+        },
+
+        // router specific props ref: https://router.vuejs.org/api/#router-link
+        to: {
+            type: [String, Object],
+            default: null
+        },
+
+        append: {
+            type: Boolean,
+            default: false
+        },
+
+        event: {
+            type: [String, Array],
+            default: 'click'
+        },
+
+        replace: {
+            type: Boolean,
+            default: false
+        },
+
+        activeClass: {
+            type: String
+            // default: 'router-link-active'
+        },
+
+        routerTag: {
+            type: String,
+            default: 'a'
+        },
+
+        exact: {
+            type: Boolean,
+            default: false
+        },
+
+        exactActiveClass: {
+            type: String
+            // default: 'router-link-exact-active'
+        },
+
+        // nuxt-link specific prop(s)
+        noPrefetch: {
+            type: Boolean,
+            default: false
+        }
+    };
+};
+
+const props = createProps();
+
 export default {
     name: NAME,
 
@@ -44,6 +113,8 @@ export default {
 
     props: {
         ...commonAttributes.props,
+
+        ...props,
 
         theme: {
             type: Object,
@@ -61,30 +132,9 @@ export default {
             default: null
         },
 
-        href: {
-            type: String,
-            default: null
-        },
-
         disabled: {
             type: Boolean,
             default: false
-        },
-
-        target: {
-            type: String,
-            default: () => getComponentConfig(NAME, 'target')
-        },
-
-        rel: {
-            type: String,
-            default: null
-        },
-
-        // router specific props
-        to: {
-            type: [String, Object],
-            default: null
         }
     },
 

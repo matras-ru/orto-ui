@@ -30,17 +30,6 @@ describe('Button', () => {
         );
     });
 
-    // it('The link is rendered', () => {
-    //     wrapper.setProps({
-    //         href: '/foo/bar'
-    //     });
-
-    //     expect(wrapper.is('a')).toBe(true);
-    //     expect(wrapper.attributes('href')).toBeDefined();
-    //     expect(wrapper.attributes('href')).toBe('/foo/bar');
-    //     expect(wrapper.attributes('type')).not.toBeDefined();
-    // });
-
     it('Applies variant class', () => {
         const wrapper = mount(CButton, {
             context: {
@@ -111,5 +100,23 @@ describe('Button', () => {
         expect(called).toBe(0);
         wrapper.trigger('click');
         expect(called).toBe(0);
+    });
+
+    it('Button as link', () => {
+        const wrapper = mount(CButton, {
+            context: {
+                props: {
+                    href: '//google.com',
+                    target: '_blank'
+                }
+            }
+        });
+
+        expect(wrapper.is('a')).toBe(true);
+        expect(wrapper.attributes('href')).toBeDefined();
+        expect(wrapper.attributes('href')).toBe('//google.com');
+        expect(wrapper.attributes('target')).toBeDefined();
+        expect(wrapper.attributes('target')).toBe('_blank');
+        expect(wrapper.attributes('type')).not.toBeDefined();
     });
 });

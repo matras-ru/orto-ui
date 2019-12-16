@@ -3,12 +3,25 @@ import { noop, getHashMapValue } from '@/utils';
 import { commonAttributes, install } from '@/mixins';
 import { getComponentConfig } from '@/config';
 import defaultTheme from '@/themes/default/CButton';
+import { default as CLink, createProps as creatLinkProps } from '@/components/link/link';
 
 const NAME = 'CButton';
 const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary'];
 const validSizes = ['lg', 'md', 'sm'];
 const validTagNames = ['button', 'a'];
 const validTypes = ['button', 'submit'];
+
+//
+const pluckProps = (keysToPluck, objToPluck) => {
+    return Object.keys(keysToPluck).reduce((output, prop) => {
+        output[prop] = objToPluck[prop];
+        return output;
+    }, {});
+};
+
+const linkProps = creatLinkProps();
+const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
+const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
 
 const createThemeMap = ({
     defaultClass,
@@ -41,6 +54,8 @@ const createThemeMap = ({
 const props = {
     ...commonAttributes.props,
 
+    ...linkProps,
+
     theme: {
         type: Object,
         default: () => defaultTheme
@@ -63,11 +78,6 @@ const props = {
         validator: value => validTypes.includes(value)
     },
 
-    href: {
-        type: String,
-        default: null
-    },
-
     variant: {
         type: String,
         default: () => getComponentConfig(NAME, 'variant'),
@@ -78,16 +88,6 @@ const props = {
         type: String,
         default: () => getComponentConfig(NAME, 'size'),
         validator: value => validSizes.includes(value)
-    },
-
-    activeClass: {
-        type: String,
-        default: 'router-link-active'
-    },
-
-    exactActiveClass: {
-        type: String,
-        default: 'router-link-exact-active'
     }
 };
 
@@ -106,6 +106,17 @@ const currentClass = ({ disabled, size, variant, theme }) => {
     return classes;
 };
 
+const computeAttrs = (props, data) => {
+    const link = isLink(props);
+    const role = data?.attrs?.role;
+
+    return {
+        type: !link ? props.type : null,
+        disabled: props.disabled,
+        role: role
+    };
+};
+
 export default {
     name: NAME,
 
@@ -116,37 +127,32 @@ export default {
     props,
 
     render(h, { data, props, listeners, children }) {
+        const link = isLink(props);
+
         const onClick = listeners['onClick'] || noop;
-        const onFocus = listeners['onFocus'] || noop;
-        const onBlur = listeners['onBlur'] || noop;
 
         const on = {
             click(e) {
-                onClick(e);
-            },
-
-            focus(e) {
-                onFocus(e);
-            },
-
-            blur(e) {
-                onBlur(e);
+                if (props.disabled) {
+                    evt.stopPropagation();
+                    evt.preventDefault();
+                } else {
+                    onClick(e);
+                }
             }
         };
 
         const componentData = {
             class: currentClass(props),
-            attrs: {
-                id: props.id,
-                autofocus: props.autofocus,
-                disabled: props.disabled,
-                name: props.name,
-                href: props.href,
-                type: props.type
-            },
+            props: computeLinkProps(props),
+            attrs: computeAttrs(props, data),
             on
         };
 
-        return h(props.tag, mergeData(data, componentData), props.label ? props.label : children);
+        return h(
+            link ? CLink : props.tag,
+            mergeData(data, componentData),
+            props.label ? props.label : children
+        );
     }
 };

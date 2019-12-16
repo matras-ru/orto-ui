@@ -6,5 +6,6 @@ module.exports = {
                 useBuiltIns: false
             }
         ]
-    ]
+    ],
+    plugins: ['@babel/plugin-proposal-optional-chaining']
 };

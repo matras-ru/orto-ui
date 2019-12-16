@@ -33,7 +33,8 @@ Vue.use(OrtoUi);
 //
 const routes = [
     { name: 'index', path: '/', component: () => import('@/pages/Index') },
-    { name: 'test', path: '/test', component: () => import('@/pages/Test') }
+    { name: 'test', path: '/test', component: () => import('@/pages/Test') },
+    { name: 'layout', path: '/layout', component: () => import('@/pages/Layout') }
 ];
 
 const router = new VueRouter({

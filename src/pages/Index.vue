@@ -1,5 +1,11 @@
 <template>
     <div>
+        <!-- Layout -->
+        <CContainer>basic</CContainer>
+        <CContainer fluid>fluid</CContainer>
+
+        <!-- Layout -->
+
         <!-- Icon -->
 
         <!-- <div>
@@ -48,7 +54,6 @@
 
         <!--  Button -->
         <div>
-            <CButton size="sm">Button</CButton>
             <CButton>Button</CButton>
             <CButton size="lg">Button</CButton>
             <CButton disabled>Button</CButton>
@@ -64,6 +69,8 @@
             <CButton variant="quaternary" size="sm">Button</CButton>
             <CButton variant="quaternary">Button</CButton>
             <CButton variant="quaternary" size="lg">Button</CButton>
+            <CButton size="sm" :to="{ name: 'test' }">Button Router-Link </CButton>
+            <CButton size="sm" href="//google.com" target="_blank">Button Link </CButton>
         </div>
 
         <CForm action="/" method="POST">

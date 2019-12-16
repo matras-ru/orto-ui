@@ -21,6 +21,8 @@ import { CLink } from '@/components/link';
 import { CTabs, CTab, CTabPanels, CTabPanel } from '@/components/tabs';
 import { CList, CListItem } from '@/components/list';
 
+// import { Dropdown } from '@/components/dropdown';
+
 /*  LAYOUT */
 import { CContainer, CRow, CCol } from '@/components/layout';
 
@@ -46,12 +48,16 @@ const components = {
     CContainer,
     CRow,
     CCol
+
+    //
+    // Dropdown
 };
 
 const extendComponent = (Vue, CurrentTheme, componentName) => {
     const themeDefaultSettings = DefaultTheme[componentName];
     const themeSettings = CurrentTheme[componentName];
 
+    // TODO: if props is undefined
     const { props } = components[componentName];
 
     const prop = {
@@ -112,6 +118,7 @@ export { CListItem };
 export { CContainer };
 export { CRow };
 export { CCol };
+// export { Dropdown };
 
 export default {
     install

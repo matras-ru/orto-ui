@@ -15,6 +15,13 @@
                     <CLink href="//google.com" target="_blank" disabled>DISABLED LINK</CLink>
                 </div>
             </div>
+
+            <div class="flex -mx-1-4 mb-1-5">
+                <div class="px-1-4">
+                    <CLink :to="{ name: 'layout' }">LAYOUT</CLink>
+                </div>
+            </div>
+
             <router-view> </router-view>
         </main>
     </div>
