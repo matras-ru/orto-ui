@@ -1,20 +1,22 @@
-import { selfInstall } from '@/utils';
 import { mergeData } from 'vue-functional-data-merge';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '@root/tailwind.config.js';
+// import resolveConfig from 'tailwindcss/resolveConfig';
+import { install } from '@/mixins';
+// import tailwindConfig from '@root/tailwind.config.js';
 
-import { baseClass, defaultClass } from '@/themes/default/CCol';
+// import defaultTheme from '@/themes/default/CCol';
 
-const fullConfig = resolveConfig(tailwindConfig);
-const breakpoints = fullConfig.theme.screens;
+const NAME = 'CCol';
 
-const TOTAL_COLS = 12;
-const MINIMUM_COL = 1;
+// const fullConfig = resolveConfig(tailwindConfig);
+// const breakpoints = fullConfig.theme.screens;
 
-const Num = () => ({
-    type: Number,
-    default: null
-});
+// const TOTAL_COLS = 12;
+// const MINIMUM_COL = 1;
+
+// const Num = () => ({
+//     type: Number,
+//     default: null
+// });
 
 // FIXME: Сделать автогенерацию props/responsive - class
 //
@@ -36,34 +38,48 @@ const Num = () => ({
 // console.log(breakpointProps);
 // console.log(test);
 
-const breakpointsProps = Object.keys(breakpoints).reduce((prop, breakpoint) => {
-    const orderProp = `order-${breakpoint}`;
+// const breakpointsProps = Object.keys(breakpoints).reduce((prop, breakpoint) => {
+//     const orderProp = `order-${breakpoint}`;
 
-    prop[breakpoint] = Num();
-    prop[orderProp] = Num();
+//     prop[breakpoint] = Num();
+//     prop[orderProp] = Num();
 
-    return prop;
-}, {});
+//     return prop;
+// }, {});
 
-const generateProps = () => {
-    return {
-        cols: {
-            type: Number,
-            default: null,
-            validator: value => {
-                return value <= TOTAL_COLS && value > MINIMUM_COL;
-            }
-        },
-        order: {
-            type: Number,
-            default: null
-        },
-        // add dynamic generated props
-        ...breakpointsProps
-    };
+const props = {
+    // cols: {
+    //     type: Number,
+    //     default: null,
+    //     validator: value => {
+    //         return value <= TOTAL_COLS && value > MINIMUM_COL;
+    //     }
+    // },
+    // order: {
+    //     type: Number,
+    //     default: null
+    // }
 };
 
-const limit = col => (col !== TOTAL_COLS ? `${col}/${TOTAL_COLS}` : 'full');
+// const generateProps = () => {
+//     return {
+//         cols: {
+//             type: Number,
+//             default: null,
+//             validator: value => {
+//                 return value <= TOTAL_COLS && value > MINIMUM_COL;
+//             }
+//         },
+//         order: {
+//             type: Number,
+//             default: null
+//         }
+//         // add dynamic generated props
+//         // ...breakpointsProps
+//     };
+// };
+
+// const limit = col => (col !== TOTAL_COLS ? `${col}/${TOTAL_COLS}` : 'full');
 
 // Compute a breakpoint class name
 // const computeBreakpointClass = (type, breakpoint, val) => {
@@ -89,13 +105,14 @@ const limit = col => (col !== TOTAL_COLS ? `${col}/${TOTAL_COLS}` : 'full');
 // };
 
 const currentClass = props => {
-    const classList = [baseClass];
+    // const { baseClass, defaultClass } = defaultTheme;
+    const classList = [];
+    // const classList = [baseClass];
 
-    //
-    classList.push(props.cols ? `w-${limit(props.cols)}` : [...defaultClass]);
-
-    //
-    classList.push(props.order ? `order-${props.order}` : null);
+    // //
+    // classList.push(props.cols ? `w-${limit(props.cols)}` : defaultClass);
+    // //
+    // classList.push(props.order ? `order-${props.order}` : null);
 
     // Адаптивность
 
@@ -117,40 +134,43 @@ const currentClass = props => {
 
     // FIXME: Процедурщина, переписать
 
-    classList.push(props.orderSm ? `sm:order-${props.orderSm}` : null);
-    classList.push(props.orderMd ? `md:order-${props.orderMd}` : null);
-    classList.push(props.orderLg ? `lg:order-${props.orderLg}` : null);
-    classList.push(props.orderXl ? `xl:order-${props.orderXl}` : null);
+    // classList.push(props.orderSm ? `sm:order-${props.orderSm}` : null);
+    // classList.push(props.orderMd ? `md:order-${props.orderMd}` : null);
+    // classList.push(props.orderLg ? `lg:order-${props.orderLg}` : null);
+    // classList.push(props.orderXl ? `xl:order-${props.orderXl}` : null);
 
-    classList.push(props.sm ? `sm:w-${limit(props.sm)}` : null);
-    classList.push(props.md ? `md:w-${limit(props.md)}` : null);
-    classList.push(props.lg ? `lg:w-${limit(props.lg)}` : null);
-    classList.push(props.xl ? `xl:w-${limit(props.xl)}` : null);
+    // classList.push(props.sm ? `sm:w-${limit(props.sm)}` : null);
+    // classList.push(props.md ? `md:w-${limit(props.md)}` : null);
+    // classList.push(props.lg ? `lg:w-${limit(props.lg)}` : null);
+    // classList.push(props.xl ? `xl:w-${limit(props.xl)}` : null);
 
     return classList;
 };
 
 export default {
-    name: 'CCol',
-
+    name: NAME,
     functional: true,
+    ...install,
+    props,
+    // get props() {
+    //     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
+    //     delete this.props;
+    //     // eslint-disable-next-line no-return-assign
+    //     return (this.props = generateProps());
+    // },
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    get props() {
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
-        delete this.props;
-        // eslint-disable-next-line no-return-assign
-        return (this.props = generateProps());
-    },
-
-    render(h, { props, data, children }) {
+    render(h, { data, props, children }) {
+        console.log(data.staticClass);
         const componentData = {
             class: currentClass(props)
         };
 
-        return h('div', mergeData(data, componentData), children);
+        return h(
+            'div',
+            {
+                staticClass: 'wwffw'
+            },
+            children
+        );
     }
 };

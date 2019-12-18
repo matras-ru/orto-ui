@@ -1,20 +1,54 @@
-import { selfInstall } from '@/utils';
 import { mergeData } from 'vue-functional-data-merge';
+import { install } from '@/mixins';
+import { getHashMapValue } from '@/utils';
+import { getComponentConfig } from '@/config';
 
-import {
-    baseClass,
-    smallSizeGuttersNormalizeClass,
-    mediumGuttersNormalizeClass,
-    smallSizeGuttersClass,
-    mediumGuttersClass
-} from '@/themes/default/CRow';
+import defaultTheme from '@/themes/default/CRow';
 
-const VALID_GUTTERS = ['none', 'md', 'sm'];
+const NAME = 'CRow';
+const VALID_GUTTERS = ['none', 'xs', 'sm', 'md', 'lg'];
 const VALID_DIRECTION = ['row', 'column'];
 const VALID_ALIGN = ['start', 'center', 'end'];
 const VALID_JUSTIFY = ['start', 'center', 'between', 'end'];
 
+const createThemeMap = ({
+    lgGuttersNormalizeClass,
+    lgGuttersClass,
+    mdGuttersNormalizeClass,
+    mdGuttersClass,
+    smGuttersNormalizeClass,
+    smGuttersClass,
+    noneGuttersNormalizeClass,
+    noneGuttersClass
+}) => {
+    return {
+        gutters: {
+            lg: {
+                row: lgGuttersNormalizeClass,
+                col: lgGuttersClass
+            },
+            md: {
+                row: mdGuttersNormalizeClass,
+                col: mdGuttersClass
+            },
+            sm: {
+                row: smGuttersNormalizeClass,
+                col: smGuttersClass
+            },
+            none: {
+                row: noneGuttersNormalizeClass,
+                col: noneGuttersClass
+            }
+        }
+    };
+};
+
 const props = {
+    theme: {
+        type: Object,
+        default: () => defaultTheme
+    },
+
     justify: {
         type: String,
         default: null,
@@ -29,35 +63,28 @@ const props = {
 
     direction: {
         type: String,
-        default: 'row',
+        default: () => getComponentConfig(NAME, 'direction'),
         validator: value => VALID_DIRECTION.includes(value)
     },
 
     gutters: {
         type: String,
-        default: 'md',
+        default: () => getComponentConfig(NAME, 'gutters'),
         validator: value => VALID_GUTTERS.includes(value)
     }
 };
 
-const currentClass = ({ gutters }) => {
-    const rowClasses = [...baseClass];
+const currentClass = ({ gutters: gutter, theme }) => {
+    const { baseClass } = theme;
+
+    const rowClasses = [baseClass];
     const colClasses = [];
 
-    // negative margin div.-mx-4/8/none + positive padding for children cols
-    switch (gutters) {
-        case 'none':
-            break;
-        case 'sm':
-            rowClasses.push(...smallSizeGuttersNormalizeClass);
-            colClasses.push(...smallSizeGuttersClass);
-            break;
-        case 'md':
-        default:
-            rowClasses.push(...mediumGuttersNormalizeClass);
-            colClasses.push(...mediumGuttersClass);
-            break;
-    }
+    const { gutters } = createThemeMap(theme);
+    const { row: rowGuttersClass, col: colGuttersClass } = getHashMapValue(gutters, gutter);
+
+    rowClasses.push(rowGuttersClass);
+    colClasses.push(colGuttersClass);
 
     return {
         rowClasses,
@@ -66,16 +93,10 @@ const currentClass = ({ gutters }) => {
 };
 
 export default {
-    name: 'CRow',
-
+    name: NAME,
     functional: true,
-
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
+    ...install,
     props,
-
     render(h, { props, data, children = [] }) {
         const { rowClasses, colClasses } = currentClass(props);
 
@@ -84,7 +105,7 @@ export default {
         };
 
         const computedChildren = children.map(item => {
-            item.data.staticClass = colClasses.join(' '); // add gutters for Cols
+            item.data.staticClass = `${item.data.staticClass} ${colClasses.join(' ')}`; // add gutters for Cols
             return item;
         });
 

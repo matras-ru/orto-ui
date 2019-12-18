@@ -12,7 +12,9 @@ module.exports = {
         '^@root/(.*)$': '<rootDir>/$1'
     },
     snapshotSerializers: ['jest-serializer-vue'],
-    testMatch: ['**/*.specs.(js)'],
+    // testMatch: ['**/*.spec.(js)'],
+    testMatch: ['**/components/layout/*.spec.(js)'],
+
     testURL: 'http://localhost/',
     watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname']
 };

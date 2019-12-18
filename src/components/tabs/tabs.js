@@ -31,12 +31,6 @@ export default {
         event: 'change'
     },
 
-    // methods: {
-    //     switchTab(name) {
-    //         this.$emit('change', name);
-    //     }
-    // },
-
     render(h, { props, children, listeners }) {
         const onChange = listeners['change'];
 

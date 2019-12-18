@@ -11,7 +11,7 @@ const validSizes = ['lg', 'md', 'sm'];
 const validTagNames = ['button', 'a'];
 const validTypes = ['button', 'submit'];
 
-//
+// Button as Link helpers start
 const pluckProps = (keysToPluck, objToPluck) => {
     return Object.keys(keysToPluck).reduce((output, prop) => {
         output[prop] = objToPluck[prop];
@@ -22,6 +22,7 @@ const pluckProps = (keysToPluck, objToPluck) => {
 const linkProps = creatLinkProps();
 const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
 const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
+// end
 
 const createThemeMap = ({
     defaultClass,

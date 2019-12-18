@@ -1,23 +1,38 @@
-export const baseClass = ['flex', 'flex-wrap'];
-export const mediumGuttersNormalizeClass = ['-mx-8'];
-export const mediumGuttersClass = ['px-8'];
+export const baseClass = 'flex flex-wrap';
 //
-export const smallSizeGuttersNormalizeClass = ['-mx-4'];
-export const smallSizeGuttersClass = ['px-4'];
+export const lgGuttersNormalizeClass = '-mx-1-4';
+export const lgGuttersClass = 'px-1-4';
 //
-export const betweenClass = ['justify-between'];
-export const startClass = ['justify-start'];
-export const endClass = ['justify-end'];
+export const mdGuttersNormalizeClass = '-mx-0-8';
+export const mdGuttersClass = 'px-0-8';
+//
+export const smGuttersNormalizeClass = '-mx-0-4';
+export const smGuttersClass = 'px-0-4';
+//
+export const noneGuttersNormalizeClass = '';
+export const noneGuttersClass = '';
+//
+export const betweenClass = 'justify-between';
+export const startClass = 'justify-start';
+export const endClass = 'justify-end';
 //
 export const alignClass = '';
 // ...
 
 export default {
     baseClass,
-    mediumGuttersNormalizeClass,
-    mediumGuttersClass,
-    smallSizeGuttersNormalizeClass,
-    smallSizeGuttersClass,
+    //
+    lgGuttersNormalizeClass,
+    mdGuttersNormalizeClass,
+    smGuttersNormalizeClass,
+    noneGuttersNormalizeClass,
+
+    //
+    smGuttersClass,
+    mdGuttersClass,
+    lgGuttersClass,
+    noneGuttersClass,
+    //
     betweenClass,
     startClass,
     endClass,

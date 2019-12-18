@@ -23,5 +23,10 @@ export default {
 
     CListItem: {
         tag: 'li'
+    },
+
+    CRow: {
+        direction: 'row',
+        gutters: 'md'
     }
 };

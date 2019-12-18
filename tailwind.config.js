@@ -30,7 +30,14 @@ module.exports = {
                 200: '#c3d0d7',
                 300: '#a6b1b6'
             },
-            danger: '#f1001a'
+            danger: '#f1001a',
+
+            layout: {
+                section: '#fff',
+                container: '#f1f1f1',
+                row: '#87bdd8',
+                col: '#b1cbbb'
+            }
         },
         spacing: {
             px: '1px',
@@ -101,12 +108,13 @@ module.exports = {
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
             inner: 'inset 0 0 0 2px #FFFFFF',
-            none: 'none'
+            none: 'none',
+            example: '0 4px 4px rgba(0, 0, 0, .1)'
         },
-        container: {
-            center: true,
-            padding: '1rem'
-        },
+        container: theme => ({
+            padding: theme('spacing.0-8'),
+            center: true
+        }),
         cursor: {
             auto: 'auto',
             default: 'default',
