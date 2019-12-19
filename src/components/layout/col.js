@@ -1,22 +1,16 @@
 import { mergeData } from 'vue-functional-data-merge';
-// import resolveConfig from 'tailwindcss/resolveConfig';
 import { install } from '@/mixins';
-// import tailwindConfig from '@root/tailwind.config.js';
-
-// import defaultTheme from '@/themes/default/CCol';
-
+import { getComponentConfig } from '@/config';
+import defaultTheme from '@/themes/default/CCol';
 const NAME = 'CCol';
 
-// const fullConfig = resolveConfig(tailwindConfig);
-// const breakpoints = fullConfig.theme.screens;
+const TOTAL_COLS = 12;
+const MINIMUM_COL = 1;
 
-// const TOTAL_COLS = 12;
-// const MINIMUM_COL = 1;
-
-// const Num = () => ({
-//     type: Number,
-//     default: null
-// });
+const NumProp = () => ({
+    type: Number,
+    default: null
+});
 
 // FIXME: Сделать автогенерацию props/responsive - class
 //
@@ -38,80 +32,76 @@ const NAME = 'CCol';
 // console.log(breakpointProps);
 // console.log(test);
 
-// const breakpointsProps = Object.keys(breakpoints).reduce((prop, breakpoint) => {
-//     const orderProp = `order-${breakpoint}`;
+const generateProps = () => {
+    const breakpoints = getComponentConfig('common', 'screens');
 
-//     prop[breakpoint] = Num();
-//     prop[orderProp] = Num();
+    const breakpointCols = breakpoints.reduce((prop, breakpoint) => {
+        prop[breakpoint] = NumProp();
+        return prop;
+    }, Object.create(null));
 
-//     return prop;
-// }, {});
+    const breakpointOrder = breakpoints.reduce((prop, breakpoint) => {
+        prop[`order-${breakpoint}`] = NumProp();
+        return prop;
+    }, Object.create(null));
 
-const props = {
-    // cols: {
-    //     type: Number,
-    //     default: null,
-    //     validator: value => {
-    //         return value <= TOTAL_COLS && value > MINIMUM_COL;
-    //     }
-    // },
-    // order: {
-    //     type: Number,
-    //     default: null
-    // }
+    return {
+        theme: {
+            type: Object,
+            default: () => defaultTheme
+        },
+
+        cols: {
+            type: Number,
+            default: null,
+            validator: value => {
+                return value <= TOTAL_COLS && value > MINIMUM_COL;
+            }
+        },
+
+        ...breakpointCols,
+
+        order: {
+            type: Number,
+            default: null
+        },
+
+        ...breakpointOrder
+    };
 };
 
-// const generateProps = () => {
-//     return {
-//         cols: {
-//             type: Number,
-//             default: null,
-//             validator: value => {
-//                 return value <= TOTAL_COLS && value > MINIMUM_COL;
-//             }
-//         },
-//         order: {
-//             type: Number,
-//             default: null
-//         }
-//         // add dynamic generated props
-//         // ...breakpointsProps
-//     };
-// };
+const limit = col => (col !== TOTAL_COLS ? `${col}/${TOTAL_COLS}` : 'full');
 
-// const limit = col => (col !== TOTAL_COLS ? `${col}/${TOTAL_COLS}` : 'full');
+const computeBreakpointClass = (type, breakpoint, val) => {
+    // let className = type;
 
-// Compute a breakpoint class name
-// const computeBreakpointClass = (type, breakpoint, val) => {
-//     let className = type;
+    // if (!val || val === false) {
+    //     return undefined;
+    // }
 
-//     if (!val || val === false) {
-//         return undefined;
-//     }
+    // if (breakpoint) {
+    //     className += `-${breakpoint}`;
+    // }
+    // // Handling the boolean style prop when accepting [Boolean, String, Number]
+    // // means Vue will not convert <b-col sm></b-col> to sm: true for us.
+    // // Since the default is false, an empty string indicates the prop's presence.
+    // if (type === 'col' && (val === '' || val === true)) {
+    //     // .col-md
+    //     return className.toLowerCase();
+    // }
+    // // .order-md-6
+    // className += `-${val}`;
+    // return '' className.toLowerCase();
+    return '';
+};
 
-//     if (breakpoint) {
-//         className += `-${breakpoint}`;
-//     }
-//     // Handling the boolean style prop when accepting [Boolean, String, Number]
-//     // means Vue will not convert <b-col sm></b-col> to sm: true for us.
-//     // Since the default is false, an empty string indicates the prop's presence.
-//     if (type === 'col' && (val === '' || val === true)) {
-//         // .col-md
-//         return className.toLowerCase();
-//     }
-//     // .order-md-6
-//     className += `-${val}`;
-//     return className.toLowerCase();
-// };
+const currentClass = ({ theme, cols }) => {
+    const { baseClass, defaultClass } = theme;
+    const classList = [baseClass];
 
-const currentClass = props => {
-    // const { baseClass, defaultClass } = defaultTheme;
-    const classList = [];
-    // const classList = [baseClass];
+    //
+    classList.push(cols ? `w-${limit(cols)}` : defaultClass);
 
-    // //
-    // classList.push(props.cols ? `w-${limit(props.cols)}` : defaultClass);
-    // //
     // classList.push(props.order ? `order-${props.order}` : null);
 
     // Адаптивность
@@ -151,26 +141,14 @@ export default {
     name: NAME,
     functional: true,
     ...install,
-    props,
-    // get props() {
-    //     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
-    //     delete this.props;
-    //     // eslint-disable-next-line no-return-assign
-    //     return (this.props = generateProps());
-    // },
+    get props() {
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
+        delete this.props;
+        // eslint-disable-next-line no-return-assign
+        return (this.props = generateProps());
+    },
 
     render(h, { data, props, children }) {
-        console.log(data.staticClass);
-        const componentData = {
-            class: currentClass(props)
-        };
-
-        return h(
-            'div',
-            {
-                staticClass: 'wwffw'
-            },
-            children
-        );
+        return h('div', mergeData(data, { class: currentClass(props) }), children);
     }
 };

@@ -1,5 +1,8 @@
 export const baseClass = 'flex flex-wrap';
 //
+export const xlGuttersNormalizeClass = '-mx-1-8';
+export const xlGuttersClass = 'px-1-8';
+//
 export const lgGuttersNormalizeClass = '-mx-1-4';
 export const lgGuttersClass = 'px-1-4';
 //
@@ -22,15 +25,17 @@ export const alignClass = '';
 export default {
     baseClass,
     //
+    xlGuttersNormalizeClass,
     lgGuttersNormalizeClass,
     mdGuttersNormalizeClass,
     smGuttersNormalizeClass,
     noneGuttersNormalizeClass,
 
     //
-    smGuttersClass,
+    xlGuttersClass,
     mdGuttersClass,
     lgGuttersClass,
+    smGuttersClass,
     noneGuttersClass,
     //
     betweenClass,

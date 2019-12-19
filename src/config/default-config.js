@@ -1,4 +1,8 @@
 export default {
+    common: {
+        screens: ['sm', 'md', 'lg', 'xl']
+    },
+
     CButton: {
         tag: 'button',
         variant: null,
@@ -28,5 +32,7 @@ export default {
     CRow: {
         direction: 'row',
         gutters: 'md'
-    }
+    },
+
+    CCol: {}
 };

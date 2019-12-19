@@ -18,12 +18,13 @@
 
 ### Props
 
-| Name        | Type     | Default | Description                      |
-| ----------- | -------- | ------- | -------------------------------- |
-| `justify`   | `String` |         |                                  |
-| `align`     | `String` |         |                                  |
-| `direction` | `String` | `row`   |                                  |
-| `gutters`   | `String` | `md`    | Possible: `none, xs, sm, md, lg` |
+| Name                   | Type     | Default | Description                      |
+| ---------------------- | -------- | ------- | -------------------------------- |
+| `justify`              | `String` |         |                                  |
+| `align`                | `String` |         |                                  |
+| `direction`            | `String` | `row`   |                                  |
+| `gutters`              | `String` | `md`    | Possible: `none, xs, sm, md, lg` |
+| `gutters${breakpoint}` | `String` |         | Possible: see `gutters`          |
 
 ### Slots
 
@@ -35,9 +36,13 @@
 
 ### Props
 
-| Name      | Type     | Default | Description |
-| --------- | -------- | ------- | ----------- |
-| `justify` | `String` |         |             |
+| Name                 | Type     | Default                 | Description |
+| -------------------- | -------- | ----------------------- | ----------- |
+| `cols`               | `Number` |                         |             |
+| `${breakpoint}`      | `Number` | Possible: see `gutters` |             |
+| `order`              | `Number` |                         |             |
+| `order${breakpoint}` | `Number` |                         |             |
+| `align`              | `String` |                         | align-self  |
 
 ### Slots
 

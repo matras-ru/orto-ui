@@ -28,3 +28,9 @@ export const hasOwnProperty = (obj, prop) => Object.prototype.hasOwnProperty.cal
 export const getHashMapValue = (themeMap, key) => {
     return themeMap[key] || themeMap.default || null;
 };
+
+export const upperFirst = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const suffixPropName = (suffix, str) => {
+    return str + (suffix ? upperFirst(suffix) : '');
+};

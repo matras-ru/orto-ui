@@ -86,9 +86,6 @@ export const ConfigPlugin = (config = {}, Vue) => {
     Vue.prototype[PROP_NAME].setConfig(config);
 };
 
-// Method to grab a config value for a particular component
 export const getComponentConfig = (cmpName, key = null) => {
-    // Return the particular config value for key for if specified,
-    // otherwise we return the full config (or an empty object if not found)
     return key ? getConfigValue(`${cmpName}.${key}`) : getConfigValue(cmpName) || {};
 };

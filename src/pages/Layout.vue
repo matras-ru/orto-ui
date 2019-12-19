@@ -10,7 +10,7 @@
             </div>
         </section>
 
-        <section class="mb-1-5 ">
+        <section class="mb-1-5">
             <h2 class="mb-1-2">Gutters</h2>
 
             <div class="mb-0-8 ">
@@ -49,8 +49,14 @@
                 <h3 class="mb-1-2">none</h3>
                 <div class="exmpl-panel">
                     <CContainer>
-                        <CRow gutters="none" class="wfwfwf">
-                            <CCol class="wfwfwf">
+                        <CRow
+                            gutters="none"
+                            gutters-sm="sm"
+                            gutters-md="md"
+                            gutters-lg="lg"
+                            gutters-xl="xl"
+                        >
+                            <CCol>
                                 <div class="bg-layout-col p-0-4">Colwww</div>
                             </CCol>
                             <CCol>
@@ -61,6 +67,26 @@
                 </div>
             </div>
         </section>
+
+        <!-- <section class="mb-1-5">
+            <h2 class="mb-1-2">Responsive</h2>
+
+            <div class="mb-0-8 ">
+                <h3 class="mb-1-2">Test</h3>
+                <div class="exmpl-panel">
+                    <CContainer>
+                        <CRow>
+                            <CCol>
+                                <div class="bg-layout-col p-0-4">Col</div>
+                            </CCol>
+                            <CCol>
+                                <div class="bg-layout-col p-0-4">Col</div>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+                </div>
+            </div>
+        </section> -->
 
         <!-- Layout -->
     </div>
