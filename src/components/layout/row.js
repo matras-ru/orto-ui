@@ -7,13 +7,19 @@ import defaultTheme from '@/themes/default/CRow';
 
 const NAME = 'CRow';
 const VALID_GUTTERS = ['none', 'sm', 'md', 'lg', 'xl'];
-const VALID_DIRECTION = ['row', 'column'];
-const VALID_ALIGN = ['start', 'center', 'end'];
-const VALID_JUSTIFY = ['start', 'center', 'between', 'end'];
 const GUTTERS_PROP_NAME = 'gutters';
+const COLS_PROP_NAME = 'cols';
+
+const getBreakpoint = (key, name) => key.replace(name, '').toLowerCase();
+const wPrefix = 'w-';
 
 const stringProp = () => ({
     type: String,
+    default: null
+});
+
+const numProp = () => ({
+    type: Number,
     default: null
 });
 
@@ -70,8 +76,14 @@ const generateProps = () => {
         return prop;
     }, Object.create(null));
 
+    const breakpointCols = breakpoints.reduce((prop, breakpoint) => {
+        prop[breakpoint] = numProp();
+        return prop;
+    }, Object.create(null));
+
     breakpointPropMap = Object.assign(Object.create(null), {
-        gutters: Object.keys(breakpointGutters)
+        gutters: Object.keys(breakpointGutters),
+        cols: Object.keys(breakpointCols)
     });
 
     return {
@@ -80,23 +92,12 @@ const generateProps = () => {
             default: () => defaultTheme
         },
 
-        justify: {
-            type: String,
-            default: null,
-            validator: value => VALID_JUSTIFY.includes(value)
+        [COLS_PROP_NAME]: {
+            type: Number,
+            default: () => getComponentConfig(NAME, COLS_PROP_NAME)
         },
 
-        align: {
-            type: String,
-            default: null,
-            validator: value => VALID_ALIGN.includes(value)
-        },
-
-        direction: {
-            type: String,
-            default: () => getComponentConfig(NAME, 'direction'),
-            validator: value => VALID_DIRECTION.includes(value)
-        },
+        ...breakpointCols,
 
         [GUTTERS_PROP_NAME]: {
             type: String,
@@ -108,20 +109,40 @@ const generateProps = () => {
     };
 };
 
-// Compute a breakpoint class name
-const computeBreakpointClass = (map, type, breakpoint, val) => {
-    const rowClasses = [];
+//
+const currentClass = props => {
+    const { gutters: gutter, theme } = props;
+    const { baseClass } = theme;
+    const { gutters } = createThemeMap(theme);
+
+    const rowClasses = [baseClass];
     const colClasses = [];
 
-    if (!val) {
-        return undefined;
+    const { row: rowGuttersClass, col: colGuttersClass } = getHashMapValue(gutters, gutter);
+
+    if (rowGuttersClass && colGuttersClass) {
+        rowClasses.push(rowGuttersClass);
+        colClasses.push(colGuttersClass);
     }
 
-    if (breakpoint) {
-        const { row: rowGuttersBreakpointClass, col: colGuttersClass } = getHashMapValue(map, val);
-        rowClasses.push(`${breakpoint}:${rowGuttersBreakpointClass}`);
-        colClasses.push(`${breakpoint}:${colGuttersClass}`);
-    }
+    // breakpoints gutters
+    breakpointPropMap.GUTTERS_PROP_NAME.forEach(key => {
+        if (!props[key]) return undefined;
+
+        const breakpoint = getBreakpoint(key, 'gutters');
+
+        if (breakpoint) {
+            const {
+                row: rowGuttersBreakpointClass,
+                col: colGuttersBreakpointClass
+            } = getHashMapValue(gutters, props[key]);
+
+            if (rowGuttersBreakpointClass && colGuttersBreakpointClass) {
+                rowClasses.push(`${breakpoint}:${rowGuttersBreakpointClass}`);
+                colClasses.push(`${breakpoint}:${colGuttersBreakpointClass}`);
+            }
+        }
+    });
 
     return {
         rowClasses,
@@ -129,57 +150,36 @@ const computeBreakpointClass = (map, type, breakpoint, val) => {
     };
 };
 
-const currentClass = props => {
-    const { gutters: gutter, theme } = props;
-    const { baseClass } = theme;
+const createColBreakpointClass = ({ props, cols, colsLimit }) => {
+    if (!cols) return undefined;
 
-    const rowClasses = [baseClass];
-    const colClasses = [];
+    const classes = [];
 
-    const { gutters } = createThemeMap(theme);
-    const { row: rowGuttersClass, col: colGuttersClass } = getHashMapValue(gutters, gutter);
+    if (cols.default) {
+        if (cols.default < colsLimit) {
+            classes.push(`${wPrefix}${cols.default}/${colsLimit}`);
+        }
 
-    if (rowGuttersClass) rowClasses.push(rowGuttersClass);
-    if (colGuttersClass) colClasses.push(colGuttersClass);
-
-    //
-    for (const type in breakpointPropMap) {
-        // gutters
-        const keys = breakpointPropMap[type];
-
-        keys.forEach(key => {
-            console.log(props[key]);
-            if (!props[key]) return;
-
-            const breakpoint = key.replace(`${type}`, '').toLowerCase();
-
-            if (breakpoint) {
-                console.log(getHashMapValue(type, props[key]));
-
-                // const { row: rowGuttersBreakpointClass, col: colGuttersClass } = getHashMapValue(
-                //     type,
-                //     props[key]
-                // );
-                // rowClasses.push(`${breakpoint}:${rowGuttersBreakpointClass}`);
-                // colClasses.push(`${breakpoint}:${colGuttersClass}`);
-            }
-
-            // const c = computeBreakpointClass(gutters, type, breakpoint, props[key]);
-
-            // if (c) {
-            //     const { rowClasses: rowBreakpointsClass, colClasses: colBreakpointsClass } = c;
-
-            //     rowClasses.push(rowBreakpointsClass);
-            //     colClasses.push(colBreakpointsClass);
-
-            // }
-        });
+        if (cols.default === colsLimit) {
+            classes.push(`${wPrefix}full`);
+        }
     }
 
-    return {
-        rowClasses,
-        colClasses
-    };
+    breakpointPropMap.COLS_PROP_NAME.forEach(breakpoint => {
+        const propsValue = props[breakpoint] || colsLimit;
+
+        if (cols[breakpoint]) {
+            if (cols[breakpoint] < propsValue) {
+                classes.push(`${breakpoint}:${wPrefix}${cols[breakpoint]}/${propsValue}`);
+            }
+
+            if (cols[breakpoint] === propsValue) {
+                classes.push(`${breakpoint}:${wPrefix}full`);
+            }
+        }
+    });
+
+    return classes;
 };
 
 export default {
@@ -194,21 +194,29 @@ export default {
     },
     render(h, { props, data, children = [] }) {
         const { rowClasses, colClasses } = currentClass(props);
-        const componentData = {
-            class: rowClasses
-        };
 
         const computedChildren = children.map(item => {
-            const { staticClass = null } = item.data;
-            const guttersColClass = staticClass
-                ? `${staticClass} ${colClasses.join(' ')}`
-                : `${colClasses.join(' ')}`;
+            const { cols = null } = item.data;
 
-            item.data = { ...item.data, ...{ staticClass: guttersColClass } };
+            const colBreakpointClass = createColBreakpointClass({
+                props,
+                cols,
+                colsLimit: props.cols
+            });
+
+            item.data = mergeData(item.data, {
+                class: [...colClasses, ...colBreakpointClass]
+            });
 
             return item;
         });
 
-        return h('div', mergeData(data, componentData), computedChildren);
+        return h(
+            'div',
+            mergeData(data, {
+                class: rowClasses
+            }),
+            computedChildren
+        );
     }
 };

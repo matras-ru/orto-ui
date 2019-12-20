@@ -31,7 +31,8 @@ export default {
 
     CRow: {
         direction: 'row',
-        gutters: 'md'
+        gutters: 'md',
+        cols: 12
     },
 
     CCol: {}

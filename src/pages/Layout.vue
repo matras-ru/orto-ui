@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- Layout -->
         <section class="mb-1-5">
             <h2 class="mb-1-2">Container</h2>
             <div class="exmpl-panel">
@@ -49,15 +48,9 @@
                 <h3 class="mb-1-2">none</h3>
                 <div class="exmpl-panel">
                     <CContainer>
-                        <CRow
-                            gutters="none"
-                            gutters-sm="sm"
-                            gutters-md="md"
-                            gutters-lg="lg"
-                            gutters-xl="xl"
-                        >
+                        <CRow gutters="none">
                             <CCol>
-                                <div class="bg-layout-col p-0-4">Colwww</div>
+                                <div class="bg-layout-col p-0-4">Col</div>
                             </CCol>
                             <CCol>
                                 <div class="bg-layout-col p-0-4">Col</div>
@@ -68,27 +61,64 @@
             </div>
         </section>
 
-        <!-- <section class="mb-1-5">
+        <section class="mb-1-5">
             <h2 class="mb-1-2">Responsive</h2>
 
-            <div class="mb-0-8 ">
-                <h3 class="mb-1-2">Test</h3>
+            <div class="mb-0-8">
+                <h3 class="mb-1-2"></h3>
                 <div class="exmpl-panel">
                     <CContainer>
-                        <CRow>
-                            <CCol>
-                                <div class="bg-layout-col p-0-4">Col</div>
+                        <CRow class="mb-1-4">
+                            <CCol :cols="6">
+                                <div class="bg-layout-col p-0-4">6</div>
                             </CCol>
-                            <CCol>
-                                <div class="bg-layout-col p-0-4">Col</div>
+                            <CCol :cols="6">
+                                <div class="bg-layout-col p-0-4">6</div>
+                            </CCol>
+                        </CRow>
+
+                        <CRow class="mb-1-4">
+                            <CCol :cols="3">
+                                <div class="bg-layout-col p-0-4">3</div>
+                            </CCol>
+                            <CCol :cols="3">
+                                <div class="bg-layout-col p-0-4">3</div>
+                            </CCol>
+                            <CCol :cols="3">
+                                <div class="bg-layout-col p-0-4">3</div>
+                            </CCol>
+                            <CCol :cols="3">
+                                <div class="bg-layout-col p-0-4">3</div>
+                            </CCol>
+                        </CRow>
+
+                        <CRow :cols="1" :md="5">
+                            <CCol class="mb-0-8" :cols="1" :md="1">
+                                <div class="bg-layout-col p-0-4">1</div>
+                            </CCol>
+                            <CCol class="mb-0-8" :cols="1" :md="1">
+                                <div class="bg-layout-col p-0-4">1</div>
+                            </CCol>
+                            <CCol class="mb-0-8" :cols="1" :md="1">
+                                <div class="bg-layout-col p-0-4">1</div>
+                            </CCol>
+                            <CCol class="mb-0-8" :cols="1" :md="1">
+                                <div class="bg-layout-col p-0-4">1</div>
+                            </CCol>
+                            <CCol class="mb-0-8" :cols="1" :md="1">
+                                <div class="bg-layout-col p-0-4">1</div>
+                            </CCol>
+                        </CRow>
+
+                        <CRow>
+                            <CCol class="mb-0-8" :cols="2" :md="1">
+                                <div class="bg-layout-col p-0-4">1</div>
                             </CCol>
                         </CRow>
                     </CContainer>
                 </div>
             </div>
-        </section> -->
-
-        <!-- Layout -->
+        </section>
     </div>
 </template>
 
