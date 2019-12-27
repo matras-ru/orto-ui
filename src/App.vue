@@ -18,7 +18,11 @@
 
             <div class="flex -mx-1-4 mb-1-5">
                 <div class="px-1-4">
-                    <CLink :to="{ name: 'layout' }">LAYOUT</CLink>
+                    <CLink :to="{ name: 'layout' }">Layout</CLink>
+                </div>
+
+                <div class="px-1-4">
+                    <CLink :to="{ name: 'tabs' }">Tabs</CLink>
                 </div>
             </div>
 

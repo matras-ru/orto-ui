@@ -1,12 +1,13 @@
-import { selfInstall } from '@/utils';
+import { install } from '@/mixins';
+import { mergeData } from 'vue-functional-data-merge';
+
+const NAME = 'CTab';
 
 export default {
-    name: 'CTab',
-
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
+    name: NAME,
+    functional: true,
+    inheritAttrs: false,
+    ...install,
     props: {
         label: {
             type: String,
@@ -24,38 +25,47 @@ export default {
         }
     },
 
-    render(h) {
-        return h(
-            'CListItem',
-            {
-                attrs: { role: 'presentation' }
-            },
-            [
-                // TODO: Заменить на LINK
-                h(
-                    'a',
-                    {
-                        attrs: {
-                            href: `#${this.name}`,
-                            id: `tab-${this.name}`,
-                            role: 'tab',
-                            tabindex: this.isActive ? null : '-1',
-                            'aria-selected': this.isActive ? 'true' : 'false'
-                        },
-                        on: {
-                            click: () => {
-                                this.$emit('onClick', this.name);
-                            }
-                        },
-                        staticClass:
-                            'block outline-none select-none font-semibold text-lg uppercase px-1-7 py-1-5',
-                        class: {
-                            'text-secondary-200 border-b-4 border-secondary-200': this.isActive
-                        }
+    render(h, context) {
+        const { data, props, children } = context;
+        const { name, label, isActive } = props;
+
+        console.log('context', context);
+        // console.log('data1', props);
+
+        const componentData = {
+            attrs: { role: 'presentation' },
+            name
+        };
+
+        return h('CListItem', mergeData(data, componentData), [
+            // TODO: Заменить на LINK
+            h(
+                'CLink',
+                {
+                    props: {
+                        href: `#${name}`,
+                        id: `tab-${name}`,
+                        tabindex: isActive ? null : '-1'
                     },
-                    this.label
-                )
-            ]
-        );
+
+                    attrs: {
+                        role: 'tab',
+                        'aria-selected': isActive ? 'true' : 'false',
+                        tabindex: isActive ? null : '-1'
+                    }
+                    // on: {
+                    //     click: () => {
+                    //         this.$emit('onClick', this.name);
+                    //     }
+                    // }
+                    // staticClass:
+                    //     'outline-none select-none font-semibold text-lg uppercase px-1-7 py-1-5',
+                    // class: {
+                    //     'text-secondary-200 border-b-4 border-secondary-200': this.isActive
+                    // }
+                },
+                label ? label : children
+            )
+        ]);
     }
 };

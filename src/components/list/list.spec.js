@@ -2,23 +2,26 @@
 import { mount } from '@vue/test-utils';
 import CList from './list';
 
-const BASE_CLASS = ['flex', 'flex-wrap'];
-const DEFAULT_CLASS = ['flex-col'];
-const HORIZONTAL_CLASS = ['flex-row'];
+const baaseClass = 'flex flex-wrap';
+const defaultCLass = 'flex-col';
+const horizontalClass = 'flex-row';
+const betweenClass = 'justify-between';
 
 describe('CList', () => {
-    it('default empty CList is functional component and rendered. Should have  tag ul by default', () => {
+    it('default empty CList is functional component and rendered. Should have tag ul by default', () => {
         const wrapper = mount(CList);
         expect(wrapper.isFunctionalComponent).toBe(true);
         expect(wrapper.is('ul')).toBe(true);
         expect(wrapper.classes().length).toBe(3);
-        expect(wrapper.classes()).toEqual([...BASE_CLASS, ...DEFAULT_CLASS]);
+        expect(wrapper.classes().sort()).toEqual(`${baaseClass} ${defaultCLass}`.split(' ').sort());
     });
 
     it('html tag equal div when prop tag = div', () => {
         const wrapper = mount(CList, {
-            propsData: {
-                tag: 'div'
+            context: {
+                props: {
+                    tag: 'div'
+                }
             }
         });
 
@@ -27,13 +30,32 @@ describe('CList', () => {
 
     it('horizontal mode when prop horizontal = true', () => {
         const wrapper = mount(CList, {
-            propsData: {
-                horizontal: true
+            context: {
+                props: {
+                    horizontal: true
+                }
             }
         });
 
         expect(wrapper.classes().length).toBe(3);
-        expect(wrapper.classes()).toEqual([...BASE_CLASS, ...HORIZONTAL_CLASS]);
+        expect(wrapper.classes().sort()).toEqual(
+            `${baaseClass} ${horizontalClass}`.split(' ').sort()
+        );
+    });
+
+    it('between horizontal align', () => {
+        const wrapper = mount(CList, {
+            context: {
+                props: {
+                    justify: 'between'
+                }
+            }
+        });
+
+        expect(wrapper.classes().length).toBe(4);
+        expect(wrapper.classes().sort()).toEqual(
+            `${baaseClass} ${defaultCLass} ${betweenClass}`.split(' ').sort()
+        );
     });
 
     it('custom attributes', () => {

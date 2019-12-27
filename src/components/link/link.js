@@ -35,7 +35,6 @@ const createThemeMap = ({ defaultClass, primaryClass }) => {
     };
 };
 
-//
 export const createProps = () => {
     return {
         href: {
@@ -75,8 +74,8 @@ export const createProps = () => {
         },
 
         activeClass: {
-            type: String
-            // default: 'router-link-active'
+            type: String,
+            default: 'router-link-active'
         },
 
         routerTag: {
@@ -90,8 +89,8 @@ export const createProps = () => {
         },
 
         exactActiveClass: {
-            type: String
-            // default: 'router-link-exact-active'
+            type: String,
+            default: 'router-link-exact-active'
         },
 
         // nuxt-link specific prop(s)
@@ -102,19 +101,13 @@ export const createProps = () => {
     };
 };
 
-const props = createProps();
-
 export default {
     name: NAME,
-
     inheritAttrs: false,
-
     ...install,
-
     props: {
         ...commonAttributes.props,
-
-        ...props,
+        ...createProps(),
 
         theme: {
             type: Object,
@@ -127,14 +120,14 @@ export default {
             validator: value => validVariants.includes(value)
         },
 
+        border: {
+            type: Boolean,
+            default: false
+        },
+
         label: {
             type: String,
             default: null
-        },
-
-        disabled: {
-            type: Boolean,
-            default: false
         }
     },
 
@@ -210,11 +203,7 @@ export default {
                 ...this.$attrs,
                 rel: this.computeRel,
                 target: this.target,
-                tabindex: this.disabled
-                    ? '-1'
-                    : Boolean(this.$attrs.tabindex)
-                    ? null
-                    : this.$attrs.tabindex,
+                tabindex: this.disabled ? '-1' : this.$attrs.tabindex ? this.$attrs.tabindex : null,
                 'aria-disabled': this.disabled ? 'true' : null
             },
 

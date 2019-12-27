@@ -22,7 +22,6 @@ const pluckProps = (keysToPluck, objToPluck) => {
 const linkProps = creatLinkProps();
 const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
 const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
-// end
 
 const createThemeMap = ({
     defaultClass,
@@ -107,26 +106,20 @@ const currentClass = ({ disabled, size, variant, theme }) => {
     return classes;
 };
 
-const computeAttrs = (props, data) => {
+const computeAttrs = props => {
     const link = isLink(props);
-    const role = data?.attrs?.role;
 
     return {
         type: !link ? props.type : null,
-        disabled: props.disabled,
-        role: role
+        disabled: props.disabled
     };
 };
 
 export default {
     name: NAME,
-
     functional: true,
-
     ...install,
-
     props,
-
     render(h, { data, props, listeners, children }) {
         const link = isLink(props);
 
@@ -135,8 +128,8 @@ export default {
         const on = {
             click(e) {
                 if (props.disabled) {
-                    evt.stopPropagation();
-                    evt.preventDefault();
+                    e.stopPropagation();
+                    e.preventDefault();
                 } else {
                     onClick(e);
                 }
@@ -146,7 +139,7 @@ export default {
         const componentData = {
             class: currentClass(props),
             props: computeLinkProps(props),
-            attrs: computeAttrs(props, data),
+            attrs: computeAttrs(props),
             on
         };
 

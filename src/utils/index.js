@@ -34,3 +34,13 @@ export const upperFirst = str => str.charAt(0).toUpperCase() + str.slice(1);
 export const suffixPropName = (suffix, str) => {
     return str + (suffix ? upperFirst(suffix) : '');
 };
+
+export const numProp = () => ({
+    type: Number,
+    default: null
+});
+
+export const stringProp = () => ({
+    type: String,
+    default: null
+});

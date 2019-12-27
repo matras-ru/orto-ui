@@ -72,3 +72,13 @@ const btnTheme = {
 
 Vue.use(CButton, btnTheme);
 ```
+
+## Roadmap
+
+| Component | MVP | Doc | Unit |
+| --------- | --- | --- | ---- |
+| `button`  | +   | -   | +    |
+| `link`    | +   | -   | +    |
+| `layout`  | +   | -   | +    |
+| `list`    | +   | -   | +    |
+| `tabs`    | -   | -   | -    |

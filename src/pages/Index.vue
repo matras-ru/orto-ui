@@ -1,13 +1,6 @@
 <template>
     <div>
-        <!-- Layout -->
-        <CContainer>basic</CContainer>
-        <CContainer fluid>fluid</CContainer>
-
-        <!-- Layout -->
-
         <!-- Icon -->
-
         <!-- <div>
             <div>
                 <CIcon name="share" class="text-primary-100" />
@@ -148,40 +141,6 @@
             />
         </CForm>
 
-        <CContainer>
-            <CTabs v-model="exampleModel.tab">
-                <CTab label="Описание" name="description" />
-                <CTab label="Характеристики" name="parameters" />
-                <CTab label="Состав" name="structure" />
-                <CTab label="Отзывы (8)" name="feedback" />
-                <CTab label="Доставка и оплата" name="delivery" />
-            </CTabs>
-        </CContainer>
-
-        <div class="bg-secondary-100 py-2-5">
-            <CContainer>
-                <div style="padding: 0 30px">
-                    <CTabPanels v-model="exampleModel.tab">
-                        <CTabPanel name="description">
-                            <div>Описание контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="parameters">
-                            <div>Характеристики контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="structure">
-                            <div>Состав контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="feedback">
-                            <div>Отзывы контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="delivery">
-                            <div>Доставка и оплата контент</div>
-                        </CTabPanel>
-                    </CTabPanels>
-                </div>
-            </CContainer>
-        </div>
-
         <div class="fixed top-0 right-0 p-2-5 bg-white shadow">
             <pre>{{ exampleModel }}</pre>
         </div>
@@ -194,7 +153,6 @@ export default {
     data() {
         return {
             exampleModel: {
-                tab: 'feedback',
                 checkboxModel: false,
                 checkboxGroupModel: [],
                 radioModel: null,

@@ -1,24 +1,12 @@
-import { selfInstall } from '@/utils';
-
-/*  TODO:
-MVP готово
-
-feature list:
-- управление с клавиатуры
-- initial state на основании window.location.hash
-*/
+import { install } from '@/mixins';
+import { mergeData } from 'vue-functional-data-merge';
 
 const NAME = 'CTabs';
 
 export default {
     name: NAME,
-
     functional: true,
-
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
+    ...install,
     props: {
         modelValue: {
             type: [Number, String],
@@ -35,22 +23,29 @@ export default {
         const onChange = listeners['change'];
 
         const normalizeTabs = children.map(tab => {
-            const { name } = tab.componentOptions.propsData;
+            const { name } = tab.data;
             const isActive = props.modelValue === name;
-
             // mixin isAactive props
-            tab.componentOptions.propsData = {
-                ...tab.componentOptions.propsData,
-                isActive
-            };
+            // tab.componentOptions.propsData = {
+            //     ...tab.componentOptions.propsData,
+            //     isActive
+            // };
 
-            // mixin listeners
-            tab.componentOptions.listeners = {
-                ...tab.componentOptions.listeners,
-                onClick: name => {
-                    onChange(name);
+            // // mixin listeners
+            // tab.componentOptions.listeners = {
+            //     ...tab.componentOptions.listeners,
+            //     onClick: name => {
+            //         onChange(name);
+            //     }
+            // };
+
+            tab.data = mergeData(tab.data, {
+                ddddd: {
+                    isActive
                 }
-            };
+            });
+
+            // console.log(tab.data);
 
             return tab;
         });
@@ -66,7 +61,7 @@ export default {
                     justify: 'between'
                 }
             },
-            [normalizeTabs]
+            [...normalizeTabs]
         );
     }
 };

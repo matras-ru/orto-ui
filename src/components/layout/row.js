@@ -1,6 +1,6 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { install } from '@/mixins';
-import { getHashMapValue, upperFirst, suffixPropName } from '@/utils';
+import { getHashMapValue, numProp, stringProp, suffixPropName } from '@/utils';
 import { getComponentConfig } from '@/config';
 
 import defaultTheme from '@/themes/default/CRow';
@@ -12,16 +12,6 @@ const COLS_PROP_NAME = 'cols';
 
 const getBreakpoint = (key, name) => key.replace(name, '').toLowerCase();
 const wPrefix = 'w-';
-
-const stringProp = () => ({
-    type: String,
-    default: null
-});
-
-const numProp = () => ({
-    type: Number,
-    default: null
-});
 
 const createThemeMap = ({
     xlGuttersNormalizeClass,
@@ -126,7 +116,7 @@ const currentClass = props => {
     }
 
     // breakpoints gutters
-    breakpointPropMap.GUTTERS_PROP_NAME.forEach(key => {
+    breakpointPropMap[GUTTERS_PROP_NAME].forEach(key => {
         if (!props[key]) return undefined;
 
         const breakpoint = getBreakpoint(key, 'gutters');
@@ -165,7 +155,7 @@ const createColBreakpointClass = ({ props, cols, colsLimit }) => {
         }
     }
 
-    breakpointPropMap.COLS_PROP_NAME.forEach(breakpoint => {
+    breakpointPropMap[COLS_PROP_NAME].forEach(breakpoint => {
         const propsValue = props[breakpoint] || colsLimit;
 
         if (cols[breakpoint]) {
@@ -195,8 +185,8 @@ export default {
     render(h, { props, data, children = [] }) {
         const { rowClasses, colClasses } = currentClass(props);
 
-        const computedChildren = children.map(item => {
-            const { cols = null } = item.data;
+        const computedChildren = children.map(col => {
+            const { cols = null } = col.data;
 
             const colBreakpointClass = createColBreakpointClass({
                 props,
@@ -204,11 +194,11 @@ export default {
                 colsLimit: props.cols
             });
 
-            item.data = mergeData(item.data, {
+            col.data = mergeData(col.data, {
                 class: [...colClasses, ...colBreakpointClass]
             });
 
-            return item;
+            return col;
         });
 
         return h(

@@ -1,14 +1,16 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { install } from '@/mixins';
-
-import ThemeClass from '@/themes/default/CList';
 import { getComponentConfig } from '@/config';
-
-const { baseClass, defaultClass, horizontalClass, startClass, endClass, betweenClass } = ThemeClass; // TODO: flex-class вынести
+import defaultTheme from '@/themes/default/CList';
 
 const NAME = 'CList';
 
 const props = {
+    theme: {
+        type: Object,
+        default: () => defaultTheme
+    },
+
     tag: {
         type: String,
         default: () => getComponentConfig(NAME, 'tag')
@@ -25,11 +27,13 @@ const props = {
     }
 };
 
-const currentClass = ({ horizontal, justify }) => {
+const currentClass = ({ horizontal, justify, theme }) => {
+    const { baseClass, defaultClass, horizontalClass, startClass, endClass, betweenClass } = theme; // TODO: flex-class extend
+
     const classes = [baseClass];
 
     // horizontal/vertical
-    classes.push(horizontal ? [horizontalClass] : [defaultClass]);
+    classes.push(horizontal ? horizontalClass : defaultClass);
 
     // horizontal align
     switch (justify) {
@@ -51,13 +55,9 @@ const currentClass = ({ horizontal, justify }) => {
 
 export default {
     name: NAME,
-
     functional: true,
-
     ...install,
-
     props,
-
     render(h, { props, data, children }) {
         const componentData = {
             class: currentClass(props)

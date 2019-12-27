@@ -1,20 +1,17 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { install } from '@/mixins';
 import { getComponentConfig } from '@/config';
+import { numProp } from '@/utils';
+
 import defaultTheme from '@/themes/default/CCol';
 
 const NAME = 'CCol';
-
-const NumProp = () => ({
-    type: Number,
-    default: null
-});
 
 const breakpoints = getComponentConfig('common', 'screens');
 
 const generateProps = () => {
     const breakpointCols = breakpoints.reduce((prop, breakpoint) => {
-        prop[breakpoint] = NumProp();
+        prop[breakpoint] = numProp();
         return prop;
     }, Object.create(null));
 
