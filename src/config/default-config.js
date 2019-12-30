@@ -1,6 +1,7 @@
 export default {
     common: {
-        screens: ['sm', 'md', 'lg', 'xl']
+        screens: ['sm', 'md', 'lg', 'xl'],
+        validJustifyContent: ['start', 'end', 'between', 'center']
     },
 
     CButton: {
@@ -35,5 +36,10 @@ export default {
         cols: 12
     },
 
-    CCol: {}
+    CCol: {},
+
+    CTabs: {
+        vertical: false,
+        justify: 'start'
+    }
 };

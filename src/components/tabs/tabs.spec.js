@@ -1,13 +1,10 @@
 /* eslint-env jest */
-import { mount } from '@vue/test-utils';
-import { config } from '@vue/test-utils';
+import { mount, config } from '@vue/test-utils';
 
 import CTab from './tab';
 import { CListItem } from '@/components/list';
 
 config.stubs['CListItem'] = CListItem;
-
-// TODO: more tests
 
 describe('CTab', () => {
     it('default empty CTab rendered', () => {

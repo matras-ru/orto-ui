@@ -6,7 +6,6 @@ export { default as CForm } from './CForm';
 export { default as CFormError } from './CFormError';
 export { default as CFormLabel } from './CFormLabel';
 export { default as CRadioCheckbox } from './CRadioCheckbox';
-export { default as CTabs } from './CTabs';
 export { default as CTab } from './CTab';
 export { default as CList } from './CList';
 export { default as CListItem } from './CListItem';

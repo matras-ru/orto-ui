@@ -1,5 +1,5 @@
 import { getComponentConfig } from '@/config';
-import { commonAttributes, install } from '@/mixins';
+import { install } from '@/mixins';
 import { getHashMapValue } from '@/utils';
 
 import defaultTheme from '@/themes/default/CLink';
@@ -106,7 +106,6 @@ export default {
     inheritAttrs: false,
     ...install,
     props: {
-        ...commonAttributes.props,
         ...createProps(),
 
         theme: {
@@ -128,6 +127,11 @@ export default {
         label: {
             type: String,
             default: null
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
 

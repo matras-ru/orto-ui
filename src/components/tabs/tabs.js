@@ -1,5 +1,5 @@
 import { install } from '@/mixins';
-import { mergeData } from 'vue-functional-data-merge';
+import { getComponentConfig } from '@/config';
 
 const NAME = 'CTabs';
 
@@ -11,6 +11,17 @@ export default {
         modelValue: {
             type: [Number, String],
             default: null
+        },
+
+        vertical: {
+            type: Boolean,
+            default: () => getComponentConfig(NAME, 'vertical')
+        },
+
+        justify: {
+            type: String,
+            default: () => getComponentConfig(NAME, 'justify'),
+            validator: value => getComponentConfig('common', 'validJustifyContent').includes(value)
         }
     },
 
@@ -20,32 +31,23 @@ export default {
     },
 
     render(h, { props, children, listeners }) {
+        const { vertical, justify } = props;
         const onChange = listeners['change'];
-
         const normalizeTabs = children.map(tab => {
-            const { name } = tab.data;
+            const { name } = tab.componentOptions.propsData;
             const isActive = props.modelValue === name;
+
             // mixin isAactive props
-            // tab.componentOptions.propsData = {
-            //     ...tab.componentOptions.propsData,
-            //     isActive
-            // };
+            tab.componentOptions.propsData = {
+                ...tab.componentOptions.propsData,
+                isActive
+            };
 
-            // // mixin listeners
-            // tab.componentOptions.listeners = {
-            //     ...tab.componentOptions.listeners,
-            //     onClick: name => {
-            //         onChange(name);
-            //     }
-            // };
-
-            tab.data = mergeData(tab.data, {
-                ddddd: {
-                    isActive
-                }
-            });
-
-            // console.log(tab.data);
+            // mixin listeners
+            tab.componentOptions.listeners = {
+                ...tab.componentOptions.listeners,
+                onClick: name => onChange(name)
+            };
 
             return tab;
         });
@@ -57,8 +59,8 @@ export default {
                     role: 'tablist'
                 },
                 props: {
-                    horizontal: true,
-                    justify: 'between'
+                    horizontal: !vertical,
+                    justify
                 }
             },
             [...normalizeTabs]

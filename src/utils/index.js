@@ -1,3 +1,5 @@
+import { centerClass, betweenClass, startClass, endClass } from '@/themes/default/common';
+
 export const selfInstall = (Vue, theme = {}, component) => {
     const { props } = component;
 
@@ -44,3 +46,14 @@ export const stringProp = () => ({
     type: String,
     default: null
 });
+
+export const justifyClaassUtil = justify => {
+    const justifyMap = {
+        start: startClass,
+        end: endClass,
+        center: centerClass,
+        between: betweenClass
+    };
+
+    return justifyMap[justify];
+};

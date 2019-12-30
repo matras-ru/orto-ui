@@ -1,7 +1,7 @@
 <template>
     <div>
         <CContainer>
-            <CTabs v-model="exampleModel.tab">
+            <CTabs v-model="exampleModel.tab" justify="center">
                 <CTab label="Описание" name="description" />
                 <CTab label="Характеристики" name="parameters" />
                 <CTab label="Состав" name="structure" />
@@ -10,9 +10,9 @@
             </CTabs>
         </CContainer>
 
-        <div class="bg-secondary-100 py-2-5">
+        <!-- <div class="bg-secondary-100 py-2-5">
             <CContainer>
-                <div style="padding: 0 30px">
+                <div class="px-1-5">
                     <CTabPanels v-model="exampleModel.tab">
                         <CTabPanel name="description">
                             <div>Описание контент</div>
@@ -32,7 +32,7 @@
                     </CTabPanels>
                 </div>
             </CContainer>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
     data() {
         return {
             exampleModel: {
-                tab: 'feedback'
+                tab: 'parameters'
             }
         };
     }

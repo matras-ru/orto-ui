@@ -1,9 +1,12 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { install } from '@/mixins';
+import { justifyClaassUtil } from '@/utils';
 import { getComponentConfig } from '@/config';
 import defaultTheme from '@/themes/default/CList';
 
 const NAME = 'CList';
+
+console.log();
 
 const props = {
     theme: {
@@ -23,12 +26,13 @@ const props = {
 
     justify: {
         type: String,
-        default: null
+        default: null,
+        validator: value => getComponentConfig('common', 'validJustifyContent').includes(value)
     }
 };
 
 const currentClass = ({ horizontal, justify, theme }) => {
-    const { baseClass, defaultClass, horizontalClass, startClass, endClass, betweenClass } = theme; // TODO: flex-class extend
+    const { baseClass, defaultClass, horizontalClass } = theme;
 
     const classes = [baseClass];
 
@@ -36,19 +40,7 @@ const currentClass = ({ horizontal, justify, theme }) => {
     classes.push(horizontal ? horizontalClass : defaultClass);
 
     // horizontal align
-    switch (justify) {
-        case 'end':
-            classes.push(endClass);
-            break;
-        case 'between':
-            classes.push(betweenClass);
-            break;
-        case 'start':
-            classes.push(startClass);
-            break;
-        default:
-            break;
-    }
+    classes.push(justifyClaassUtil(justify));
 
     return classes;
 };

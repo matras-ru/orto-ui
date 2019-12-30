@@ -5,6 +5,8 @@
 | Name         | Type            | Default | Description |
 | ------------ | --------------- | ------- | ----------- |
 | `modelValue` | `Number|String` | `null`  | `v-model`   |
+| `vertical`   | `Boolean`       | `false` | `false`     |
+| `justify`    | `String`        | `start` |             |
 
 ## Slots
 

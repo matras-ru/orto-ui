@@ -1,14 +1,18 @@
 import { install } from '@/mixins';
-import { mergeData } from 'vue-functional-data-merge';
+import defaultTheme from '@/themes/default/CTab';
 
 const NAME = 'CTab';
 
 export default {
     name: NAME,
-    functional: true,
     inheritAttrs: false,
     ...install,
     props: {
+        theme: {
+            type: Object,
+            default: () => defaultTheme
+        },
+
         label: {
             type: String,
             default: null
@@ -25,46 +29,31 @@ export default {
         }
     },
 
-    render(h, context) {
-        const { data, props, children } = context;
-        const { name, label, isActive } = props;
+    render(h) {
+        const { activeClass, baseClass, defaultClass } = this.theme;
 
-        console.log('context', context);
-        // console.log('data1', props);
-
-        const componentData = {
-            attrs: { role: 'presentation' },
-            name
-        };
-
-        return h('CListItem', mergeData(data, componentData), [
-            // TODO: Заменить на LINK
+        return h('CListItem', { attrs: { role: 'presentation' } }, [
             h(
                 'CLink',
                 {
                     props: {
-                        href: `#${name}`,
-                        id: `tab-${name}`,
-                        tabindex: isActive ? null : '-1'
+                        href: `#${this.name}`
                     },
-
                     attrs: {
                         role: 'tab',
-                        'aria-selected': isActive ? 'true' : 'false',
-                        tabindex: isActive ? null : '-1'
-                    }
-                    // on: {
-                    //     click: () => {
-                    //         this.$emit('onClick', this.name);
-                    //     }
-                    // }
-                    // staticClass:
-                    //     'outline-none select-none font-semibold text-lg uppercase px-1-7 py-1-5',
-                    // class: {
-                    //     'text-secondary-200 border-b-4 border-secondary-200': this.isActive
-                    // }
+                        'aria-selected': this.isActive ? 'true' : 'false',
+                        tabindex: this.isActive ? null : '-1',
+                        id: `tab-${this.name}`
+                    },
+                    on: {
+                        click: () => {
+                            this.$emit('onClick', this.name);
+                        }
+                    },
+                    staticClass: baseClass,
+                    class: [defaultClass, this.isActive ? activeClass : null]
                 },
-                label ? label : children
+                this.label ? this.label : this.$slots.default
             )
         ]);
     }
