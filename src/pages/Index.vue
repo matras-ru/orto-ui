@@ -67,26 +67,6 @@
         </div>
 
         <CForm action="/" method="POST">
-            <CFormPanel label="Series 3">
-                <CCheckboxGroup
-                    :data="[
-                        {
-                            id: 'checkbox3',
-                            label: 'Checkbox3',
-                            name: 'checkbox3',
-                            value: 'checkbox3'
-                        },
-                        {
-                            id: 'checkbox4',
-                            label: 'Checkbox2',
-                            name: 'checkbox4',
-                            value: 'checkbox4'
-                        }
-                    ]"
-                    v-model="exampleModel.checkboxGroupModel"
-                />
-            </CFormPanel>
-
             <!-- <CFormInput
                     type="text"
                     id="user_name"
@@ -107,7 +87,7 @@
                 /> -->
             <!-- <CFormError>Error message</CFormError> -->
 
-            <CFormPanel label="Series 2">
+            <CFormPanel label="Checkbox">
                 <CCheckbox
                     id="checkbox1"
                     label="Default"
@@ -124,6 +104,27 @@
                 />
             </CFormPanel>
 
+            <CFormPanel label="Checkbox Group">
+                <CCheckboxGroup
+                    :data="[
+                        {
+                            id: 'checkbox3',
+                            label: 'Checkbox3',
+                            name: 'checkbox3',
+                            value: 'checkbox3'
+                        },
+                        {
+                            id: 'checkbox4',
+                            label: 'Checkbox2',
+                            name: 'checkbox4',
+                            value: 'checkbox4'
+                        }
+                    ]"
+                    v-model="exampleModel.checkboxGroupModel"
+                />
+            </CFormPanel>
+
+            <!-- 
             <CRadio
                 id="radio1"
                 label="Default"
@@ -138,7 +139,7 @@
                     { id: 'radio4', label: 'Radio2', name: 'radio', value: 'radio4' }
                 ]"
                 v-model="exampleModel.radioGroupModel"
-            />
+            /> -->
         </CForm>
 
         <div class="fixed top-0 right-0 p-2-5 bg-white shadow">

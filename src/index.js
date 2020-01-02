@@ -55,18 +55,19 @@ const components = {
 
 const extendComponent = (Vue, CurrentTheme, componentName) => {
     const themeDefaultSettings = DefaultTheme[componentName];
+
+    console.log(DefaultTheme, componentName, themeDefaultSettings);
     const themeSettings = CurrentTheme[componentName];
 
     // TODO: if props is undefined
     const { props } = components[componentName];
 
-    const prop = {
+    props.theme = {
+        type: Object,
         default: () => {
             return { ...themeDefaultSettings, ...themeSettings };
         }
     };
-
-    props.theme = prop;
 
     return Vue.extend({
         ...components[componentName],

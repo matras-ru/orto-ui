@@ -70,49 +70,43 @@
                     <CContainer>
                         <CRow class="mb-1-4">
                             <CCol :cols="6">
-                                <div class="bg-layout-col p-0-4">6</div>
+                                <div class="bg-layout-col p-0-4">6/12</div>
                             </CCol>
                             <CCol :cols="6">
-                                <div class="bg-layout-col p-0-4">6</div>
+                                <div class="bg-layout-col p-0-4">6/12</div>
                             </CCol>
                         </CRow>
 
                         <CRow class="mb-1-4">
                             <CCol :cols="3">
-                                <div class="bg-layout-col p-0-4">3</div>
+                                <div class="bg-layout-col p-0-4">3/12</div>
                             </CCol>
                             <CCol :cols="3">
-                                <div class="bg-layout-col p-0-4">3</div>
+                                <div class="bg-layout-col p-0-4">3/12</div>
                             </CCol>
                             <CCol :cols="3">
-                                <div class="bg-layout-col p-0-4">3</div>
+                                <div class="bg-layout-col p-0-4">3/12</div>
                             </CCol>
                             <CCol :cols="3">
-                                <div class="bg-layout-col p-0-4">3</div>
+                                <div class="bg-layout-col p-0-4">3/12</div>
                             </CCol>
                         </CRow>
 
-                        <CRow :cols="1" :md="5">
+                        <CRow :cols="2" :md="5">
                             <CCol class="mb-0-8" :cols="1" :md="1">
-                                <div class="bg-layout-col p-0-4">1</div>
+                                <div class="bg-layout-col p-0-4">1/2 md-1/5</div>
                             </CCol>
                             <CCol class="mb-0-8" :cols="1" :md="1">
-                                <div class="bg-layout-col p-0-4">1</div>
+                                <div class="bg-layout-col p-0-4">1/2 md-1/5</div>
                             </CCol>
                             <CCol class="mb-0-8" :cols="1" :md="1">
-                                <div class="bg-layout-col p-0-4">1</div>
+                                <div class="bg-layout-col p-0-4">1/2 md-1/5</div>
                             </CCol>
                             <CCol class="mb-0-8" :cols="1" :md="1">
-                                <div class="bg-layout-col p-0-4">1</div>
+                                <div class="bg-layout-col p-0-4">1/2 md-1/5</div>
                             </CCol>
                             <CCol class="mb-0-8" :cols="1" :md="1">
-                                <div class="bg-layout-col p-0-4">1</div>
-                            </CCol>
-                        </CRow>
-
-                        <CRow>
-                            <CCol class="mb-0-8" :cols="2" :md="1">
-                                <div class="bg-layout-col p-0-4">1</div>
+                                <div class="bg-layout-col p-0-4">1/2 md-1/5</div>
                             </CCol>
                         </CRow>
                     </CContainer>

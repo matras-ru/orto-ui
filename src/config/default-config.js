@@ -16,7 +16,7 @@ export default {
         target: '_self'
     },
 
-    CChecbox: {
+    CCheckbox: {
         falseValue: false,
         trueValue: true
     },
@@ -41,5 +41,13 @@ export default {
     CTabs: {
         vertical: false,
         justify: 'start'
+    },
+
+    CTabPanels: {
+        lazy: false
+    },
+
+    CTabPanel: {
+        tag: 'section'
     }
 };

@@ -3,8 +3,6 @@ import { install } from '@/mixins';
 import { getHashMapValue, numProp, stringProp, suffixPropName } from '@/utils';
 import { getComponentConfig } from '@/config';
 
-import defaultTheme from '@/themes/default/CRow';
-
 const NAME = 'CRow';
 const VALID_GUTTERS = ['none', 'sm', 'md', 'lg', 'xl'];
 const GUTTERS_PROP_NAME = 'gutters';
@@ -77,11 +75,6 @@ const generateProps = () => {
     });
 
     return {
-        theme: {
-            type: Object,
-            default: () => defaultTheme
-        },
-
         [COLS_PROP_NAME]: {
             type: Number,
             default: () => getComponentConfig(NAME, COLS_PROP_NAME)
@@ -174,14 +167,18 @@ const createColBreakpointClass = ({ props, cols, colsLimit }) => {
 
 export default {
     name: NAME,
+
     functional: true,
+
     ...install,
+
     get props() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
         delete this.props;
         // eslint-disable-next-line no-return-assign
         return (this.props = generateProps());
     },
+
     render(h, { props, data, children = [] }) {
         const { rowClasses, colClasses } = currentClass(props);
 

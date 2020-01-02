@@ -3,8 +3,6 @@ import { install } from '@/mixins';
 import { getComponentConfig } from '@/config';
 import { numProp } from '@/utils';
 
-import defaultTheme from '@/themes/default/CCol';
-
 const NAME = 'CCol';
 
 const breakpoints = getComponentConfig('common', 'screens');
@@ -16,11 +14,6 @@ const generateProps = () => {
     }, Object.create(null));
 
     return {
-        theme: {
-            type: Object,
-            default: () => defaultTheme
-        },
-
         cols: {
             type: Number,
             default: null
@@ -32,8 +25,11 @@ const generateProps = () => {
 
 export default {
     name: NAME,
+
     functional: true,
+
     ...install,
+
     get props() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
         delete this.props;

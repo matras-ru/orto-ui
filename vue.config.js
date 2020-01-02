@@ -7,6 +7,12 @@ module.exports = {
         }
     },
 
+    pluginOptions: {
+        storybook: {
+            allowedPlugins: ['define']
+        }
+    },
+
     chainWebpack: config => {
         config.resolve.alias.set('@root', path.resolve(''));
 

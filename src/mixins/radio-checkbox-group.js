@@ -1,13 +1,17 @@
+import { install } from '@/mixins';
+
 export default function(type) {
     const mapComponents = {
         checkbox: 'CCheckbox',
         radio: 'CRadio'
     };
 
-    const childComponent = mapComponents[type];
+    const ChildComponent = mapComponents[type];
 
     return {
         functional: true,
+
+        ...install,
 
         props: {
             data: {
@@ -22,28 +26,23 @@ export default function(type) {
         },
 
         render(h, { props, listeners }) {
-            const onChange = listeners['change'];
-
-            const children = props.data.map(({ id, label, name, disabled, value, autofocus }) =>
-                h(childComponent, {
+            const children = props.data.map(({ id, label, name, disabled, value }) =>
+                h(ChildComponent, {
                     props: {
                         modelValue: props.modelValue,
                         id,
                         label,
                         name,
                         disabled,
-                        autofocus,
                         value
                     },
                     on: {
-                        change(val) {
-                            onChange(val);
-                        }
+                        change: val => listeners['change'](val)
                     }
                 })
             );
 
-            return h('div', {}, children);
+            return h('div', children);
         }
     };
 }

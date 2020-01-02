@@ -1,29 +1,25 @@
-import commonAttributes from '@/mixins/commonAttributes.js';
-
-import {
-    inputClass,
-    wrapperClass,
-    disabledClass,
-    defaultIconClass,
-    baseIconCheckboxClass,
-    baseIconRadioClass,
-    checkedIconClass,
-    disabledIconClass,
-    labelClass
-} from '@/themes/default/CRadioCheckbox';
-
 export default {
-    props: {
-        ...commonAttributes.props,
+    inheritAttrs: false,
 
+    props: {
         label: {
             type: String,
             default: null
         },
 
-        hint: {
+        name: {
             type: String,
             default: null
+        },
+
+        id: {
+            type: String,
+            default: null
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -32,35 +28,25 @@ export default {
         event: 'change'
     },
 
-    computed: {
-        currentClass() {
-            const classes = [labelClass];
-
-            if (this.disabled) {
-                classes.push(disabledClass);
-            }
-
-            return classes;
-        },
-
-        currentIconClass() {
-            const classes = [this.type === 'checkbox' ? baseIconCheckboxClass : baseIconRadioClass];
-
-            if (this.disabled) {
-                classes.push(disabledIconClass);
-            } else if (this.shouldBeChecked) {
-                classes.push(checkedIconClass);
-            } else {
-                classes.push(defaultIconClass);
-            }
-
-            return classes;
-        }
-    },
-
     render(h) {
+        const {
+            labelBase,
+            labelDefault,
+            labelDisable,
+
+            iconBaseCheckbox,
+            iconBaseRadio,
+            iconDefault,
+            iconChecked,
+            iconDisable,
+
+            inputDefault,
+
+            wrapperDefault
+        } = this.theme;
+
         const inputData = {
-            staticClass: inputClass,
+            staticClass: inputDefault,
             attrs: {
                 id: this.id,
                 autofocus: this.autofocus,
@@ -77,12 +63,43 @@ export default {
             }
         };
 
-        return h('label', { class: this.currentClass, attrs: { for: this.id } }, [
-            h('input', inputData),
-            h('div', { class: wrapperClass }, [
-                h('span', { class: this.currentIconClass }),
-                h('span', this.label)
-            ])
-        ]);
+        const computeClasses = () => {
+            const labelClasses = [labelBase];
+            const iconClasses = [this.type === 'checkbox' ? iconBaseCheckbox : iconBaseRadio];
+
+            if (this.disabled) {
+                labelClasses.push(labelDisable);
+                iconClasses.push(iconDisable);
+            } else {
+                labelClasses.push(labelDefault);
+            }
+
+            if (this.shouldBeChecked) {
+                iconClasses.push(iconChecked);
+            } else {
+                iconClasses.push(iconDefault);
+            }
+
+            return {
+                labelClasses,
+                iconClasses
+            };
+        };
+
+        const { labelClasses, iconClasses } = computeClasses();
+
+        return h(
+            'div',
+            {
+                class: wrapperDefault
+            },
+            [
+                h('label', { class: labelClasses, attrs: { for: this.id } }, [
+                    h('input', inputData),
+                    h('span', { class: iconClasses }),
+                    h('span', this.label)
+                ])
+            ]
+        );
     }
 };

@@ -1,43 +1,48 @@
-import { selfInstall } from '@/utils';
+import { mergeData } from 'vue-functional-data-merge';
+import { install } from '@/mixins';
+import { getComponentConfig } from '@/config';
+
+const NAME = 'CTabPanels';
 
 export default {
-    name: 'CTabPanels',
+    name: NAME,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
+    functional: true,
+
+    ...install,
 
     props: {
-        value: {
+        modelValue: {
             type: [String, Number],
             default: null
         },
 
+        // v-if/show
         lazy: {
             type: Boolean,
-            default: false
+            default: () => getComponentConfig(NAME, 'lazy')
         }
     },
 
     model: {
-        prop: 'value',
+        prop: 'modelValue',
         event: 'change'
     },
 
-    render(h) {
-        const normalizeTabPanels = this.$slots.default.map(tabPanel => {
-            const { name } = tabPanel.componentOptions.propsData;
-            const isActive = this.value === name;
+    render(h, { data, props, children = [] }) {
+        const normalizeTabPanels = children.map(tabPanel => {
+            const { name } = tabPanel.data;
+            const isActive = props.modelValue === name;
 
-            // mixin isAactive props
-            tabPanel.componentOptions.propsData = {
-                ...tabPanel.componentOptions.propsData,
-                isActive
-            };
+            tabPanel.data = mergeData(tabPanel.data, {
+                attrs: {
+                    hidden: !isActive
+                }
+            });
 
-            return this.lazy ? (isActive ? tabPanel : null) : tabPanel;
+            return props.lazy ? (isActive ? tabPanel : null) : tabPanel;
         });
 
-        return h('div', {}, [normalizeTabPanels]);
+        return h('div', mergeData(data, {}), [...normalizeTabPanels]);
     }
 };

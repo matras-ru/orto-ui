@@ -10,29 +10,27 @@
             </CTabs>
         </CContainer>
 
-        <!-- <div class="bg-secondary-100 py-2-5">
+        <div class="bg-secondary-100 py-2-5">
             <CContainer>
-                <div class="px-1-5">
-                    <CTabPanels v-model="exampleModel.tab">
-                        <CTabPanel name="description">
-                            <div>Описание контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="parameters">
-                            <div>Характеристики контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="structure">
-                            <div>Состав контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="feedback">
-                            <div>Отзывы контент</div>
-                        </CTabPanel>
-                        <CTabPanel name="delivery">
-                            <div>Доставка и оплата контент</div>
-                        </CTabPanel>
-                    </CTabPanels>
-                </div>
+                <CTabPanels v-model="exampleModel.tab" class="px-1-5">
+                    <CTabPanel name="description">
+                        <div>Описание контент</div>
+                    </CTabPanel>
+                    <CTabPanel name="parameters">
+                        <div>Характеристики контент</div>
+                    </CTabPanel>
+                    <CTabPanel name="structure">
+                        <div>Состав контент</div>
+                    </CTabPanel>
+                    <CTabPanel name="feedback">
+                        <div>Отзывы контент</div>
+                    </CTabPanel>
+                    <CTabPanel name="delivery">
+                        <div>Доставка и оплата контент</div>
+                    </CTabPanel>
+                </CTabPanels>
             </CContainer>
-        </div> -->
+        </div>
     </div>
 </template>
 

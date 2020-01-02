@@ -2,7 +2,6 @@ import { mergeData } from 'vue-functional-data-merge';
 import { noop, getHashMapValue } from '@/utils';
 import { commonAttributes, install } from '@/mixins';
 import { getComponentConfig } from '@/config';
-import defaultTheme from '@/themes/default/CButton';
 import { default as CLink, createProps as creatLinkProps } from '@/components/link/link';
 
 const NAME = 'CButton';
@@ -11,7 +10,7 @@ const validSizes = ['lg', 'md', 'sm'];
 const validTagNames = ['button', 'a'];
 const validTypes = ['button', 'submit'];
 
-// Button as Link helpers start
+// Button as Link helpers
 const pluckProps = (keysToPluck, objToPluck) => {
     return Object.keys(keysToPluck).reduce((output, prop) => {
         output[prop] = objToPluck[prop];
@@ -55,11 +54,6 @@ const props = {
     ...commonAttributes.props,
 
     ...linkProps,
-
-    theme: {
-        type: Object,
-        default: () => defaultTheme
-    },
 
     tag: {
         type: String,
@@ -117,9 +111,13 @@ const computeAttrs = props => {
 
 export default {
     name: NAME,
+
     functional: true,
+
     ...install,
+
     props,
+
     render(h, { data, props, listeners, children }) {
         const link = isLink(props);
 

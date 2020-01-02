@@ -1,12 +1,16 @@
 import { install } from '@/mixins';
+import { noop } from '@/utils';
 import { getComponentConfig } from '@/config';
 
 const NAME = 'CTabs';
 
 export default {
     name: NAME,
+
     functional: true,
+
     ...install,
+
     props: {
         modelValue: {
             type: [Number, String],
@@ -27,15 +31,16 @@ export default {
 
     model: {
         prop: 'modelValue',
-        event: 'change'
+        event: 'onChange'
     },
 
-    render(h, { props, children, listeners }) {
+    render(h, { props, children = [], listeners }) {
         const { vertical, justify } = props;
-        const onChange = listeners['change'];
+
         const normalizeTabs = children.map(tab => {
             const { name } = tab.componentOptions.propsData;
             const isActive = props.modelValue === name;
+            const onChange = listeners['onChange'] || noop;
 
             // mixin isAactive props
             tab.componentOptions.propsData = {

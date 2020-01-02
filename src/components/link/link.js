@@ -2,8 +2,6 @@ import { getComponentConfig } from '@/config';
 import { install } from '@/mixins';
 import { getHashMapValue } from '@/utils';
 
-import defaultTheme from '@/themes/default/CLink';
-
 const NAME = 'CLink';
 const ANCHOR_TAG = 'a';
 const validVariants = ['primary'];
@@ -107,11 +105,6 @@ export default {
     ...install,
     props: {
         ...createProps(),
-
-        theme: {
-            type: Object,
-            default: () => defaultTheme
-        },
 
         variant: {
             type: String,

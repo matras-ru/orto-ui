@@ -1,16 +1,11 @@
-import { selfInstall } from '@/utils';
-import radioCheckboxMixin from '@/mixins/radio-checkbox';
+import { install, radioCheckbox } from '@/mixins';
 
 export const NAME = 'CRadio';
 
 export default {
     name: NAME,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    mixins: [radioCheckboxMixin],
+    mixins: [install, radioCheckbox],
 
     props: {
         modelValue: {

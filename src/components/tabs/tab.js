@@ -1,18 +1,15 @@
 import { install } from '@/mixins';
-import defaultTheme from '@/themes/default/CTab';
 
 const NAME = 'CTab';
 
 export default {
     name: NAME,
-    inheritAttrs: false,
-    ...install,
-    props: {
-        theme: {
-            type: Object,
-            default: () => defaultTheme
-        },
 
+    inheritAttrs: false,
+
+    ...install,
+
+    props: {
         label: {
             type: String,
             default: null
@@ -46,9 +43,7 @@ export default {
                         id: `tab-${this.name}`
                     },
                     on: {
-                        click: () => {
-                            this.$emit('onClick', this.name);
-                        }
+                        click: () => this.$emit('onClick', this.name)
                     },
                     staticClass: baseClass,
                     class: [defaultClass, this.isActive ? activeClass : null]

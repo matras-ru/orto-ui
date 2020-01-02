@@ -2,18 +2,10 @@ import { mergeData } from 'vue-functional-data-merge';
 import { install } from '@/mixins';
 import { justifyClaassUtil } from '@/utils';
 import { getComponentConfig } from '@/config';
-import defaultTheme from '@/themes/default/CList';
 
 const NAME = 'CList';
 
-console.log();
-
 const props = {
-    theme: {
-        type: Object,
-        default: () => defaultTheme
-    },
-
     tag: {
         type: String,
         default: () => getComponentConfig(NAME, 'tag')

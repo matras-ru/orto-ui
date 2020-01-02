@@ -1,38 +1,38 @@
-import { selfInstall } from '@/utils';
+import { mergeData } from 'vue-functional-data-merge';
+import { getComponentConfig } from '@/config';
+import { install } from '@/mixins';
+
+const NAME = 'CTabPanel';
 
 export default {
-    name: 'CTabPanel',
+    name: NAME,
 
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
+    functional: true,
+
+    ...install,
 
     props: {
+        tag: {
+            type: String,
+            default: () => getComponentConfig(NAME, 'tag')
+        },
+
         name: {
             type: String,
             default: null
-        },
-
-        isActive: {
-            type: Boolean,
-            default: false
         }
     },
 
-    render(h) {
-        return h(
-            'section',
-            {
-                staticClass: 'outline-none select-none',
-                attrs: {
-                    role: 'tabpanel',
-                    id: this.name,
-                    'aria-labelledby': `tab-${this.name}`,
-                    tabindex: '-1',
-                    hidden: !this.isActive
-                }
-            },
-            [this.$slots.default]
-        );
+    render(h, { data, props, children }) {
+        const componentData = {
+            name: props.name,
+            attrs: {
+                role: 'tabpanel',
+                id: props.name,
+                'aria-labelledby': `tab-${props.name}`,
+                tabindex: '-1'
+            }
+        };
+        return h(props.tag, mergeData(data, componentData), [children]);
     }
 };

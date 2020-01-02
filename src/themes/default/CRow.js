@@ -1,5 +1,5 @@
 export const baseClass = 'flex flex-wrap';
-//
+
 export const xlGuttersNormalizeClass = '-mx-1-8';
 export const xlGuttersClass = 'px-1-8';
 
@@ -17,7 +17,7 @@ export const noneGuttersClass = '';
 
 export default {
     baseClass,
-    //
+
     xlGuttersNormalizeClass,
     xlGuttersClass,
 

@@ -81,4 +81,4 @@ Vue.use(CButton, btnTheme);
 | `link`    | +   | -   | +    |
 | `layout`  | +   | -   | +    |
 | `list`    | +   | -   | +    |
-| `tabs`    | -   | -   | -    |
+| `tabs`    | +   | -   | +    |
