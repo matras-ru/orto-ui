@@ -1,8 +1,10 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { noop, getHashMapValue } from '@/utils';
-import { commonAttributes, install } from '@/mixins';
+import { selfInstall } from '@/';
+
 import { getComponentConfig } from '@/config';
 import { default as CLink, createProps as creatLinkProps } from '@/components/link/link';
+import DefaultTheme from '@/themes/default/CButton';
 
 const NAME = 'CButton';
 const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary'];
@@ -23,37 +25,45 @@ const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
 const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
 
 const createThemeMap = ({
-    defaultClass,
-    primaryClass,
-    secondaryClass,
-    tertiaryClass,
-    quaternaryClass,
-    largeSizeClass,
-    smallSizeClass,
-    defaultSizeClass
+    variantDefault,
+    variantPrimary,
+    variantSecondary,
+    variantTertiary,
+    variantQuaternary,
+    sizeLg,
+    sizeSm,
+    sizeMd
 }) => {
     return {
         variants: {
-            primary: primaryClass,
-            secondary: secondaryClass,
-            tertiary: tertiaryClass,
-            quaternary: quaternaryClass,
-            default: defaultClass
+            primary: variantPrimary,
+            secondary: variantSecondary,
+            tertiary: variantTertiary,
+            quaternary: variantQuaternary,
+            default: variantDefault
         },
 
         sizes: {
-            lg: largeSizeClass,
-            md: defaultSizeClass,
-            sm: smallSizeClass,
-            default: defaultSizeClass
+            lg: sizeLg,
+            md: sizeMd,
+            sm: sizeSm,
+            default: sizeMd
         }
     };
 };
 
 const props = {
-    ...commonAttributes.props,
-
     ...linkProps,
+
+    theme: {
+        type: Object,
+        default: () => DefaultTheme
+    },
+
+    disabled: {
+        type: Boolean,
+        default: false
+    },
 
     tag: {
         type: String,
@@ -82,19 +92,28 @@ const props = {
         type: String,
         default: () => getComponentConfig(NAME, 'size'),
         validator: value => validSizes.includes(value)
+    },
+
+    block: {
+        type: Boolean,
+        default: false
     }
 };
 
-const currentClass = ({ disabled, size, variant, theme }) => {
-    const { baseClass, disabledClass } = theme;
+const currentClass = ({ disabled, size, variant, block, theme }) => {
+    const { base, stateDisable, displayBlock } = theme;
     const { sizes, variants } = createThemeMap(theme);
-    const classes = [baseClass];
+    const classes = [base];
 
     classes.push(getHashMapValue(sizes, size));
     classes.push(getHashMapValue(variants, variant));
 
     if (disabled) {
-        classes.push(disabledClass);
+        classes.push(stateDisable);
+    }
+
+    if (block) {
+        classes.push(displayBlock);
     }
 
     return classes;
@@ -114,7 +133,9 @@ export default {
 
     functional: true,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     props,
 
@@ -128,9 +149,10 @@ export default {
                 if (props.disabled) {
                     e.stopPropagation();
                     e.preventDefault();
-                } else {
-                    onClick(e);
+                    return;
                 }
+
+                onClick(e);
             }
         };
 

@@ -1,7 +1,13 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
+import DefaultTheme from '@/themes/default/CContainer';
 
 const props = {
+    theme: {
+        type: Object,
+        default: () => DefaultTheme
+    },
+
     fluid: {
         type: Boolean,
         default: false
@@ -9,10 +15,10 @@ const props = {
 };
 
 const currentClass = ({ fluid, theme }) => {
-    const { baseClass, fluidClass } = theme;
-    const classes = [baseClass];
+    const { base, modeFluid } = theme;
+    const classes = [base];
 
-    if (fluid) classes.push(fluidClass);
+    if (fluid) classes.push(modeFluid);
 
     return classes;
 };
@@ -22,7 +28,9 @@ export default {
 
     functional: true,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     props,
 

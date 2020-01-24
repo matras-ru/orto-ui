@@ -1,105 +1,181 @@
-export default {
-    inheritAttrs: false,
+import { selfInstall } from '@/';
+import DefaultTheme from '@/themes/default/CRadioCheckbox';
 
-    props: {
-        label: {
-            type: String,
-            default: null
-        },
-
-        name: {
-            type: String,
-            default: null
-        },
-
-        id: {
-            type: String,
-            default: null
-        },
-
-        disabled: {
-            type: Boolean,
-            default: false
+const computeIsChecked = ({ type, modelValue, value, trueValue }) => {
+    if (type === 'checkbox') {
+        if (modelValue instanceof Array) {
+            return modelValue.includes(value);
         }
-    },
 
-    model: {
-        prop: 'modelValue',
-        event: 'change'
-    },
-
-    render(h) {
-        const {
-            labelBase,
-            labelDefault,
-            labelDisable,
-
-            iconBaseCheckbox,
-            iconBaseRadio,
-            iconDefault,
-            iconChecked,
-            iconDisable,
-
-            inputDefault,
-
-            wrapperDefault
-        } = this.theme;
-
-        const inputData = {
-            staticClass: inputDefault,
-            attrs: {
-                id: this.id,
-                autofocus: this.autofocus,
-                name: this.name,
-                type: this.type,
-                disabled: this.disabled
-            },
-            domProps: {
-                checked: this.shouldBeChecked,
-                value: this.value
-            },
-            on: {
-                change: this.onChange
-            }
-        };
-
-        const computeClasses = () => {
-            const labelClasses = [labelBase];
-            const iconClasses = [this.type === 'checkbox' ? iconBaseCheckbox : iconBaseRadio];
-
-            if (this.disabled) {
-                labelClasses.push(labelDisable);
-                iconClasses.push(iconDisable);
-            } else {
-                labelClasses.push(labelDefault);
-            }
-
-            if (this.shouldBeChecked) {
-                iconClasses.push(iconChecked);
-            } else {
-                iconClasses.push(iconDefault);
-            }
-
-            return {
-                labelClasses,
-                iconClasses
-            };
-        };
-
-        const { labelClasses, iconClasses } = computeClasses();
-
-        return h(
-            'div',
-            {
-                class: wrapperDefault
-            },
-            [
-                h('label', { class: labelClasses, attrs: { for: this.id } }, [
-                    h('input', inputData),
-                    h('span', { class: iconClasses }),
-                    h('span', this.label)
-                ])
-            ]
-        );
+        return modelValue === trueValue;
     }
+
+    return modelValue === value;
 };
+
+const computeClasses = (type, { disabled, theme, isChecked }) => {
+    const {
+        labelBase,
+        labelStateDefault,
+        labelStateDisabled,
+        iconRadioBase,
+        iconCheckboxBase,
+        iconStateDefault,
+        iconStateChecked,
+        iconStateDisabled,
+        wrapperBase,
+        inputBase
+    } = theme;
+
+    const labelClasses = [labelBase];
+    const iconClasses = [type === 'checkbox' ? iconCheckboxBase : iconRadioBase];
+
+    if (disabled) {
+        labelClasses.push(labelStateDisabled);
+        iconClasses.push(iconStateDisabled);
+    } else {
+        labelClasses.push(labelStateDefault);
+
+        if (isChecked) {
+            iconClasses.push(iconStateChecked);
+        } else {
+            iconClasses.push(iconStateDefault);
+        }
+    }
+
+    return {
+        labelClasses,
+        iconClasses,
+        wrapperBase,
+        inputBase
+    };
+};
+
+export default function(type) {
+    //
+    return {
+        install(Vue, theme) {
+            selfInstall(Vue, theme, this);
+        },
+
+        inheritAttrs: false,
+
+        functional: true,
+
+        model: {
+            prop: 'modelValue',
+            event: 'change'
+        },
+
+        props: {
+            theme: {
+                type: Object,
+                default: () => DefaultTheme
+            },
+
+            label: {
+                type: String,
+                default: null
+            },
+
+            name: {
+                type: String,
+                default: null
+            },
+
+            value: {
+                type: [String, Number],
+                default: null
+            },
+
+            id: {
+                type: String,
+                default: null // TODO: random uuid?
+            },
+
+            disabled: {
+                type: Boolean,
+                default: false
+            }
+        },
+
+        render(h, { props, listeners }) {
+            const {
+                name,
+                label,
+                id,
+                disabled,
+                theme,
+                value,
+                modelValue,
+                trueValue,
+                falseValue
+            } = props;
+
+            const isChecked = computeIsChecked({ type, modelValue, value, trueValue });
+
+            const { labelClasses, iconClasses, inputBase, wrapperBase } = computeClasses(type, {
+                theme,
+                disabled,
+                isChecked
+            });
+
+            const inputData = {
+                staticClass: inputBase,
+                attrs: {
+                    id,
+                    name,
+                    type,
+                    disabled
+                },
+                domProps: {
+                    checked: isChecked,
+                    value
+                },
+                on: {
+                    change: e => {
+                        const checked = e.target.checked;
+
+                        if (type === 'checkbox') {
+                            if (modelValue instanceof Array) {
+                                const newValue = [...modelValue];
+
+                                if (checked) {
+                                    newValue.push(value);
+                                } else {
+                                    newValue.splice(newValue.indexOf(value), 1);
+                                }
+
+                                listeners['change'](newValue);
+
+                                return;
+                            }
+
+                            listeners['change'](checked ? trueValue : falseValue);
+
+                            return;
+                        }
+
+                        if (checked) {
+                            listeners['change'](value);
+                        }
+                    }
+                }
+            };
+
+            return h(
+                'div',
+                {
+                    class: wrapperBase
+                },
+                [
+                    h('label', { class: labelClasses, attrs: { for: id } }, [
+                        h('input', inputData),
+                        h('span', { class: iconClasses }),
+                        label
+                    ])
+                ]
+            );
+        }
+    };
+}

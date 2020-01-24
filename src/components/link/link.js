@@ -1,6 +1,7 @@
 import { getComponentConfig } from '@/config';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 import { getHashMapValue } from '@/utils';
+import DefaultTheme from '@/themes/default/CLink';
 
 const NAME = 'CLink';
 const ANCHOR_TAG = 'a';
@@ -24,11 +25,11 @@ const computeRel = ({ target, rel } = {}) => {
     return rel || null;
 };
 
-const createThemeMap = ({ defaultClass, primaryClass }) => {
+const createThemeMap = ({ variantDefault, variantPrimary }) => {
     return {
         variants: {
-            primary: primaryClass,
-            default: defaultClass
+            primary: variantPrimary,
+            default: variantDefault
         }
     };
 };
@@ -101,10 +102,20 @@ export const createProps = () => {
 
 export default {
     name: NAME,
+
     inheritAttrs: false,
-    ...install,
+
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
     props: {
         ...createProps(),
+
+        theme: {
+            type: Object,
+            default: () => DefaultTheme
+        },
 
         variant: {
             type: String,
@@ -143,20 +154,6 @@ export default {
 
         computedProps() {
             return this.isRouterLink ? { ...this.$props, tag: this.routerTag } : {};
-        },
-
-        computedClass() {
-            const { baseClass, disabledClass } = this.theme;
-            const classes = [baseClass];
-
-            if (this.disabled) {
-                classes.push(disabledClass);
-            }
-
-            const { variants } = createThemeMap(this.theme);
-            classes.push(getHashMapValue(variants, this.variant));
-
-            return classes;
         }
     },
 
@@ -193,8 +190,22 @@ export default {
     },
 
     render(h) {
+        const computedClass = () => {
+            const { base, stateDisable } = this.theme;
+            const classes = [base];
+
+            if (this.disabled) {
+                classes.push(stateDisable);
+            }
+
+            const { variants } = createThemeMap(this.theme);
+            classes.push(getHashMapValue(variants, this.variant));
+
+            return classes;
+        };
+
         const componentData = {
-            class: this.computedClass,
+            class: computedClass(),
             props: this.computedProps,
             attrs: {
                 ...this.$attrs,

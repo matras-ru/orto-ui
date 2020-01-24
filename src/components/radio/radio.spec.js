@@ -1,87 +1,135 @@
 /* eslint-env jest */
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import CRadio from './radio';
 
 describe('Radio', () => {
-    let wrapper;
-    let input;
-
-    beforeEach(() => {
-        wrapper = mount(CRadio);
-        input = wrapper.find('input');
-    });
-
-    afterEach(() => {
-        input = null;
-        wrapper.destroy();
-    });
-
-    it('The radio is rendered', () => {
-        wrapper.setProps({
-            id: 'radio1',
-            name: 'radio1'
+    it('is rendered', () => {
+        const wrapper = mount(CRadio, {
+            context: {
+                props: {
+                    id: 'radio1',
+                    name: 'radio1',
+                    value: 'radio1',
+                    label: 'default'
+                }
+            }
         });
-        expect(wrapper.is('label')).toBe(true);
+
+        const input = wrapper.find('input');
+        const label = wrapper.find('label');
+        const icon = wrapper.find('span');
+
         expect(input.attributes('id')).toBeDefined();
         expect(input.attributes('id')).toBe('radio1');
         expect(input.attributes('type')).toBeDefined();
         expect(input.attributes('type')).toBe('radio');
         expect(input.attributes('name')).toBeDefined();
         expect(input.attributes('name')).toBe('radio1');
+
+        expect(input.attributes('name')).toBe('radio1');
+
+        expect(label.attributes('for')).toBe('radio1');
+        expect(wrapper.text()).toBe('default');
+
+        expect(wrapper.classes().sort()).toEqual('flex flex-wrap mb-0-7'.split(' ').sort());
+        expect(input.classes().sort()).toEqual('absolute opacity-0 invisible'.split(' ').sort());
+        expect(label.classes().sort()).toEqual('inline-flex cursor-pointer'.split(' ').sort());
+        expect(icon.classes().sort()).toEqual(
+            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-full border-black-200 bg-white'
+                .split(' ')
+                .sort()
+        );
     });
 
-    it('The radio is disabled', () => {
-        wrapper.setProps({
-            disabled: true
+    it('is disabled', () => {
+        const wrapper = mount(CRadio, {
+            context: {
+                props: {
+                    id: 'radio1',
+                    name: 'radio1',
+                    value: 'radio1',
+                    disabled: true
+                }
+            }
         });
 
-        expect(wrapper.is('label')).toBe(true);
+        const input = wrapper.find('input');
+        const label = wrapper.find('label');
+        const icon = wrapper.find('span');
+
         expect(input.attributes('disabled')).toBeDefined();
         expect(input.attributes('disabled')).toBe('disabled');
+
+        expect(label.classes().sort()).toEqual('inline-flex cursor-not-allowed'.split(' ').sort());
+        expect(icon.classes().sort()).toEqual(
+            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-full border-tertiary-200 bg-white'
+                .split(' ')
+                .sort()
+        );
     });
 
-    it('The radio is checked (string)', () => {
-        wrapper.setProps({
-            modelValue: 'radio1',
-            value: 'radio1'
+    it('is checked', () => {
+        const wrapper = mount(CRadio, {
+            context: {
+                props: {
+                    id: 'radio1',
+                    name: 'radio1',
+                    value: 'radio1',
+                    modelValue: 'radio1'
+                }
+            }
         });
 
-        expect(wrapper.vm.shouldBeChecked).toBe(true);
+        const label = wrapper.find('label');
+        const icon = wrapper.find('span');
+        expect(label.classes().sort()).toEqual('inline-flex cursor-pointer'.split(' ').sort());
+        expect(icon.classes().sort()).toEqual(
+            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-full border-black-200 bg-secondary-200 shadow-inner'
+                .split(' ')
+                .sort()
+        );
     });
 
-    it('The radio $emit @change (string)', () => {
-        wrapper.setProps({
-            modelValue: 'radio1',
-            value: 'radio1'
+    it('v-model', () => {
+        const localVue = new createLocalVue();
+
+        const App = localVue.extend({
+            data() {
+                return {
+                    model: null
+                };
+            },
+
+            render(h) {
+                return h(CRadio, {
+                    props: {
+                        id: 'radio1',
+                        name: 'radio1',
+                        value: 'radio1',
+                        modelValue: this.model
+                    },
+                    on: {
+                        change: val => {
+                            this.model = val;
+                        }
+                    }
+                });
+            }
         });
 
-        input.setChecked(true);
-
-        expect(wrapper.emitted().change).toBeTruthy();
-        expect(wrapper.emitted().change[0][0]).toEqual('radio1');
-    });
-
-    it('The radio $emit @change (number)', () => {
-        wrapper.setProps({
-            modelValue: 123,
-            value: 123
+        const wrapper = mount(App, {
+            localVue: localVue
         });
 
-        input.setChecked(true);
+        const input = wrapper.find('input');
 
-        expect(wrapper.emitted().change).toBeTruthy();
-        expect(wrapper.emitted().change[0][0]).toEqual(123);
-    });
+        expect(wrapper.vm.model).toEqual(null);
 
-    it('The radio $emit @change (boolean)', () => {
-        wrapper.setProps({
-            modelValue: true,
-            value: true
-        });
+        input.element.selected = true;
+        input.trigger('click');
 
-        input.setChecked(true);
+        expect(wrapper.vm.model).toEqual('radio1');
 
-        expect(wrapper.emitted().change).toBeTruthy();
-        expect(wrapper.emitted().change[0][0]).toEqual(true);
+        wrapper.destroy();
     });
 });

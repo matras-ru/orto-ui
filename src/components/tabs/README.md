@@ -42,6 +42,14 @@
 | --------- | ----------- |
 | `onClick` |             |
 
+## Classes
+
+| Name           | Default                                              |
+| -------------- | ---------------------------------------------------- |
+| `base`         | `outline-none select-none`                           |
+| `stateDefault` | `font-semibold text-lg uppercase px-1-5 py-0-7`      |
+| `stateActive`  | `text-secondary-200 border-b-4 border-secondary-200` |
+
 # Tab Panels
 
 ## Props

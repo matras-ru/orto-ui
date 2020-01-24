@@ -1,7 +1,7 @@
 <template>
     <div>
         <CContainer>
-            <CTabs v-model="exampleModel.tab" justify="center">
+            <CTabs v-model="exampleModel.tab" justify="between">
                 <CTab label="Описание" name="description" />
                 <CTab label="Характеристики" name="parameters" />
                 <CTab label="Состав" name="structure" />

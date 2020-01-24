@@ -24,6 +24,10 @@
                 <div class="px-1-4">
                     <CLink :to="{ name: 'tabs' }">Tabs</CLink>
                 </div>
+
+                <div class="px-1-4">
+                    <CLink :to="{ name: 'form' }">Form</CLink>
+                </div>
             </div>
 
             <router-view> </router-view>

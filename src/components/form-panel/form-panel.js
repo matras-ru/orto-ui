@@ -1,13 +1,20 @@
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 
 const NAME = 'CFormPanel';
 
 export default {
     name: NAME,
 
-    mixins: [install],
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     props: {
+        theme: {
+            type: Object,
+            default: () => {}
+        },
+
         label: {
             type: String,
             default: null

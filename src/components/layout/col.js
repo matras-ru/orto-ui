@@ -1,7 +1,8 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 import { getComponentConfig } from '@/config';
 import { numProp } from '@/utils';
+import DefaultTheme from '@/themes/default/CCol';
 
 const NAME = 'CCol';
 
@@ -14,6 +15,11 @@ const generateProps = () => {
     }, Object.create(null));
 
     return {
+        theme: {
+            type: Object,
+            default: () => DefaultTheme
+        },
+
         cols: {
             type: Number,
             default: null
@@ -28,7 +34,9 @@ export default {
 
     functional: true,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     get props() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
@@ -38,10 +46,10 @@ export default {
     },
 
     render(h, { data, props, children }) {
-        const { baseClass } = props.theme;
+        const { base } = props.theme;
 
         const componentData = {
-            staticClass: baseClass,
+            staticClass: base,
             cols: {
                 default: props.cols,
                 ...breakpoints.reduce((output, item) => {

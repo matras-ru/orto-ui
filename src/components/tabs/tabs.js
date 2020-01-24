@@ -1,6 +1,6 @@
-import { install } from '@/mixins';
 import { noop } from '@/utils';
 import { getComponentConfig } from '@/config';
+import { selfInstall } from '@/';
 
 const NAME = 'CTabs';
 
@@ -9,9 +9,16 @@ export default {
 
     functional: true,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     props: {
+        theme: {
+            type: Object,
+            default: () => {}
+        },
+
         modelValue: {
             type: [Number, String],
             default: null
@@ -64,7 +71,7 @@ export default {
                     role: 'tablist'
                 },
                 props: {
-                    horizontal: !vertical,
+                    direction: vertical ? 'vertical' : 'horizontal',
                     justify
                 }
             },

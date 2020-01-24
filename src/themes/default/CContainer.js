@@ -1,7 +1,7 @@
-export const baseClass = 'container';
-export const fluidClass = 'max-w-none';
+export const base = 'container';
+export const modeFluid = 'max-w-none';
 
 export default {
-    baseClass,
-    fluidClass
+    base,
+    modeFluid
 };

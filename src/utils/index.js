@@ -1,25 +1,4 @@
-import { centerClass, betweenClass, startClass, endClass } from '@/themes/default/common';
-
-export const selfInstall = (Vue, theme = {}, component) => {
-    const { props } = component;
-
-    const defaultComponentTheme = { ...props.theme.default() };
-
-    const prop = {
-        default: () => {
-            return { ...defaultComponentTheme, ...theme };
-        }
-    };
-
-    props.theme = prop;
-
-    Vue.component(component.name, {
-        ...component,
-        ...{
-            props
-        }
-    });
-};
+import { justifyCenter, justifyBetween, justifyStart, justifyEnd } from '@/themes/default/common';
 
 export const noop = () => {};
 
@@ -49,11 +28,11 @@ export const stringProp = () => ({
 
 export const justifyClaassUtil = justify => {
     const justifyMap = {
-        start: startClass,
-        end: endClass,
-        center: centerClass,
-        between: betweenClass
+        start: justifyStart,
+        end: justifyEnd,
+        center: justifyCenter,
+        between: justifyBetween
     };
 
-    return justifyMap[justify];
+    return justifyMap[justify] || null;
 };

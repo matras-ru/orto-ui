@@ -1,9 +1,9 @@
-export const baseClass = 'flex flex-wrap';
-export const defaultClass = 'flex-col';
-export const horizontalClass = 'flex-row';
+export const base = 'flex flex-wrap';
+export const directionColumn = 'flex-col';
+export const directionHorizontal = 'flex-row';
 
 export default {
-    baseClass,
-    defaultClass,
-    horizontalClass
+    base,
+    directionColumn,
+    directionHorizontal
 };

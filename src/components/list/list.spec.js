@@ -28,11 +28,11 @@ describe('CList', () => {
         expect(wrapper.is('div')).toBe(true);
     });
 
-    it('horizontal mode when prop horizontal = true', () => {
+    it('horizontal mode', () => {
         const wrapper = mount(CList, {
             context: {
                 props: {
-                    horizontal: true
+                    direction: 'horizontal'
                 }
             }
         });

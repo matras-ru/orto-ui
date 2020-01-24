@@ -1,19 +1,28 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 import { justifyClaassUtil } from '@/utils';
 import { getComponentConfig } from '@/config';
+import DefaultTheme from '@/themes/default/CList';
+
+const validDirection = ['vertical', 'horizontal'];
 
 const NAME = 'CList';
 
 const props = {
+    theme: {
+        type: Object,
+        default: () => DefaultTheme
+    },
+
     tag: {
         type: String,
         default: () => getComponentConfig(NAME, 'tag')
     },
 
-    horizontal: {
-        type: Boolean,
-        default: () => getComponentConfig(NAME, 'horizontal')
+    direction: {
+        type: String,
+        default: () => getComponentConfig(NAME, 'direction'),
+        validator: value => validDirection.includes(value)
     },
 
     justify: {
@@ -23,13 +32,18 @@ const props = {
     }
 };
 
-const currentClass = ({ horizontal, justify, theme }) => {
-    const { baseClass, defaultClass, horizontalClass } = theme;
+const currentClass = ({ direction, justify, theme }) => {
+    const { base, directionColumn, directionHorizontal } = theme;
 
-    const classes = [baseClass];
+    const classMap = {
+        vertical: directionColumn,
+        horizontal: directionHorizontal
+    };
+
+    const classes = [base];
 
     // horizontal/vertical
-    classes.push(horizontal ? horizontalClass : defaultClass);
+    classes.push(classMap[direction]);
 
     // horizontal align
     classes.push(justifyClaassUtil(justify));
@@ -39,9 +53,15 @@ const currentClass = ({ horizontal, justify, theme }) => {
 
 export default {
     name: NAME,
+
     functional: true,
-    ...install,
+
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
     props,
+
     render(h, { props, data, children }) {
         const componentData = {
             class: currentClass(props)

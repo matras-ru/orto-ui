@@ -1,7 +1,8 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 import { getHashMapValue, numProp, stringProp, suffixPropName } from '@/utils';
 import { getComponentConfig } from '@/config';
+import DefaultTheme from '@/themes/default/CRow';
 
 const NAME = 'CRow';
 const VALID_GUTTERS = ['none', 'sm', 'md', 'lg', 'xl'];
@@ -12,42 +13,38 @@ const getBreakpoint = (key, name) => key.replace(name, '').toLowerCase();
 const wPrefix = 'w-';
 
 const createThemeMap = ({
-    xlGuttersNormalizeClass,
-    xlGuttersClass,
-    lgGuttersNormalizeClass,
-    lgGuttersClass,
-    mdGuttersNormalizeClass,
-    mdGuttersClass,
-    smGuttersNormalizeClass,
-    smGuttersClass,
-    noneGuttersNormalizeClass,
-    noneGuttersClass
+    guttersNormalizeXl,
+    guttersXl,
+    guttersNormalizeLg,
+    guttersLg,
+    guttersNormalizeMd,
+    guttersMd,
+    guttersNormalizeSm,
+    guttersSm,
+    guttersNormalizeNone,
+    guttersNone
 }) => {
     return {
         gutters: {
             xl: {
-                row: xlGuttersNormalizeClass,
-                col: xlGuttersClass
+                row: guttersNormalizeXl,
+                col: guttersXl
             },
             lg: {
-                row: lgGuttersNormalizeClass,
-                col: lgGuttersClass
+                row: guttersNormalizeLg,
+                col: guttersLg
             },
             md: {
-                row: mdGuttersNormalizeClass,
-                col: mdGuttersClass
+                row: guttersNormalizeMd,
+                col: guttersMd
             },
             sm: {
-                row: smGuttersNormalizeClass,
-                col: smGuttersClass
+                row: guttersNormalizeSm,
+                col: guttersSm
             },
             none: {
-                row: noneGuttersNormalizeClass,
-                col: noneGuttersClass
-            },
-            default: {
-                row: mdGuttersNormalizeClass,
-                col: mdGuttersClass
+                row: guttersNormalizeNone,
+                col: guttersNone
             }
         }
     };
@@ -75,6 +72,11 @@ const generateProps = () => {
     });
 
     return {
+        theme: {
+            type: Object,
+            default: () => DefaultTheme
+        },
+
         [COLS_PROP_NAME]: {
             type: Number,
             default: () => getComponentConfig(NAME, COLS_PROP_NAME)
@@ -95,10 +97,10 @@ const generateProps = () => {
 //
 const currentClass = props => {
     const { gutters: gutter, theme } = props;
-    const { baseClass } = theme;
+    const { base } = theme;
     const { gutters } = createThemeMap(theme);
 
-    const rowClasses = [baseClass];
+    const rowClasses = [base];
     const colClasses = [];
 
     const { row: rowGuttersClass, col: colGuttersClass } = getHashMapValue(gutters, gutter);
@@ -170,7 +172,9 @@ export default {
 
     functional: true,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     get props() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters

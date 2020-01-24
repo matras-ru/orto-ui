@@ -1,5 +1,5 @@
-export const baseClass = 'max-w-full';
+export const base = 'max-w-full';
 
 export default {
-    baseClass
+    base
 };

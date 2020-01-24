@@ -1,4 +1,5 @@
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
+import DefaultTheme from '@/themes/default/CTab';
 
 const NAME = 'CTab';
 
@@ -7,9 +8,16 @@ export default {
 
     inheritAttrs: false,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     props: {
+        theme: {
+            type: Object,
+            default: () => DefaultTheme
+        },
+
         label: {
             type: String,
             default: null
@@ -27,7 +35,7 @@ export default {
     },
 
     render(h) {
-        const { activeClass, baseClass, defaultClass } = this.theme;
+        const { base, stateDefault, stateActive } = this.theme;
 
         return h('CListItem', { attrs: { role: 'presentation' } }, [
             h(
@@ -45,8 +53,8 @@ export default {
                     on: {
                         click: () => this.$emit('onClick', this.name)
                     },
-                    staticClass: baseClass,
-                    class: [defaultClass, this.isActive ? activeClass : null]
+                    staticClass: base,
+                    class: [stateDefault, this.isActive ? stateActive : null]
                 },
                 this.label ? this.label : this.$slots.default
             )

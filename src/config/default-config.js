@@ -23,7 +23,7 @@ export default {
 
     CList: {
         tag: 'ul',
-        horizontal: false
+        direction: 'vertical'
     },
 
     CListItem: {

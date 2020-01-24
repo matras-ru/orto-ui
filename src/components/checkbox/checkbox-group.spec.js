@@ -1,47 +1,87 @@
 /* eslint-env jest */
-import { mount } from '@vue/test-utils';
+import { mount, config, createLocalVue } from '@vue/test-utils';
+
 import CCheckboxGroup from './checkbox-group';
 import CCheckbox from './checkbox';
 
-describe('Checkbox group', () => {
-    let wrapper;
+config.stubs['CCheckbox'] = CCheckbox;
 
-    beforeEach(() => {
-        wrapper = mount(CCheckboxGroup, {
-            stub: {
-                CCheckbox
+describe('Checkbox group', () => {
+    it('is rendered & not empty', () => {
+        const wrapper = mount(CCheckboxGroup, {
+            context: {
+                props: {
+                    modelValue: [],
+                    data: [
+                        {
+                            id: 'chkb1',
+                            label: 'chkb1',
+                            name: 'chkb1',
+                            value: 'chkb1'
+                        },
+                        {
+                            id: 'chkb2',
+                            label: 'chkb2',
+                            name: 'chkb2',
+                            value: 'chkb2'
+                        }
+                    ]
+                }
             }
         });
+
+        expect(wrapper.contains(CCheckbox)).toBe(true);
+        expect(wrapper.findAll(CCheckbox).length).toBe(2);
     });
 
-    afterEach(() => {
-        wrapper.destroy();
-    });
+    it('v-model', () => {
+        const localVue = new createLocalVue();
 
-    it('The checkbox group is empty renrered', () => {
-        expect(wrapper.is('div')).toBe(true);
-    });
+        const App = localVue.extend({
+            data() {
+                return {
+                    model: []
+                };
+            },
 
-    it('The checkbox group not empty', () => {
-        wrapper.setProps({
-            modelValue: [],
-            data: [
-                {
-                    id: 'checkbox3',
-                    label: 'Checkbox3',
-                    name: 'checkbox3',
-                    value: 'checkbox3'
-                },
-                {
-                    id: 'checkbox4',
-                    label: 'Checkbox2',
-                    name: 'checkbox4',
-                    value: 'checkbox4'
-                }
-            ]
+            render(h) {
+                return h(CCheckboxGroup, {
+                    props: {
+                        data: [
+                            {
+                                id: 'chkb1',
+                                label: 'chkb1',
+                                name: 'chkb1',
+                                value: 'chkb1'
+                            },
+                            {
+                                id: 'chkb2',
+                                label: 'chkb2',
+                                name: 'chkb2',
+                                value: 'chkb2'
+                            }
+                        ],
+                        modelValue: this.model
+                    },
+                    on: {
+                        change: val => {
+                            this.model = val;
+                        }
+                    }
+                });
+            }
         });
 
-        expect(wrapper.contains('CCheckbox')).toBe(true);
-        expect(wrapper.findAll('CCheckbox').length).toBe(2);
+        const wrapper = mount(App, {
+            localVue: localVue
+        });
+
+        const input = wrapper.find('input');
+
+        expect(wrapper.vm.model).toEqual([]);
+        input.setChecked();
+        expect(wrapper.vm.model).toEqual(['chkb1']);
+
+        wrapper.destroy();
     });
 });

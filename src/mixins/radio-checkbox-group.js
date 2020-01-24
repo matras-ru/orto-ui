@@ -1,4 +1,5 @@
-import { install } from '@/mixins';
+// TODO: add limit...
+import { selfInstall } from '@/';
 
 export default function(type) {
     const mapComponents = {
@@ -9,11 +10,18 @@ export default function(type) {
     const ChildComponent = mapComponents[type];
 
     return {
+        install(Vue, theme) {
+            selfInstall(Vue, theme, this);
+        },
+
         functional: true,
 
-        ...install,
-
         props: {
+            theme: {
+                type: Object,
+                default: () => {}
+            },
+
             data: {
                 type: Array,
                 default: () => []

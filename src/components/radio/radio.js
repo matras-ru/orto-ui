@@ -1,41 +1,25 @@
-import { install, radioCheckbox } from '@/mixins';
+import merge from 'lodash.merge';
+import radioCheckbox from '@/mixins/radio-checkbox';
 
 export const NAME = 'CRadio';
+const TYPE = 'radio';
+
+const props = {
+    modelValue: {
+        type: [String, Number, Boolean],
+        default: null
+    },
+
+    value: {
+        type: [String, Number, Boolean],
+        default: null
+    }
+};
 
 export default {
     name: NAME,
 
-    mixins: [install, radioCheckbox],
-
-    props: {
-        modelValue: {
-            type: [String, Number, Boolean],
-            default: null
-        },
-
-        value: {
-            type: [String, Number, Boolean],
-            default: null
-        }
-    },
-
-    data() {
-        return {
-            type: 'radio'
-        };
-    },
-
-    computed: {
-        shouldBeChecked() {
-            return this.modelValue === this.value;
-        }
-    },
-
-    methods: {
-        onChange(e) {
-            if (e.target.checked) {
-                this.$emit('change', this.value);
-            }
-        }
-    }
+    ...merge(radioCheckbox(TYPE), {
+        props
+    })
 };

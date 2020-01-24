@@ -1,6 +1,6 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { getComponentConfig } from '@/config';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 
 const NAME = 'CTabPanel';
 
@@ -9,9 +9,16 @@ export default {
 
     functional: true,
 
-    ...install,
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
     props: {
+        theme: {
+            type: Object,
+            default: () => {}
+        },
+
         tag: {
             type: String,
             default: () => getComponentConfig(NAME, 'tag')

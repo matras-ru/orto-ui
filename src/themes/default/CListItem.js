@@ -1,5 +1,5 @@
-export const baseClass = 'inline-block';
+export const base = 'inline-block';
 
 export default {
-    baseClass
+    base
 };

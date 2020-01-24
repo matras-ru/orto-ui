@@ -2,16 +2,24 @@
 
 ## Props
 
-| Name         | Type       | Default | Description |
-| ------------ | ---------- | ------- | ----------- |
-| `tag`        | `String`   | `ul`    |             |
-| `horizontal` | `Booleaan` | `false` |             |
+| Name        | Type     | Default    | Description                      |
+| ----------- | -------- | ---------- | -------------------------------- |
+| `tag`       | `String` | `ul`       |                                  |
+| `direction` | `String` | `vertical` | Possible: `vertical, horizonral` |
 
 ## Slots
 
 | Name      | Description |
 | --------- | ----------- |
 | `default` |             |
+
+## Classes
+
+| Name                  | Default          |
+| --------------------- | ---------------- |
+| `base`                | `flex flex-wrap` |
+| `directionColumn`     | `flex-col`       |
+| `directionHorizontal` | `flex-row`       |
 
 # ListItem
 
@@ -26,3 +34,9 @@
 | Name      | Description |
 | --------- | ----------- |
 | `default` |             |
+
+## Classes
+
+| Name   | Default        |
+| ------ | -------------- |
+| `base` | `inline-block` |

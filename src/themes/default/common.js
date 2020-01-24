@@ -1,4 +1,4 @@
-export const centerClass = 'justify-center';
-export const betweenClass = 'justify-between';
-export const startClass = 'justify-start';
-export const endClass = 'justify-end';
+export const justifyCenter = 'justify-center';
+export const justifyBetween = 'justify-between';
+export const justifyStart = 'justify-start';
+export const justifyEnd = 'justify-end';

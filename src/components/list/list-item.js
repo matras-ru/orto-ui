@@ -1,10 +1,16 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { install } from '@/mixins';
+import { selfInstall } from '@/';
 import { getComponentConfig } from '@/config';
+import DefaultTheme from '@/themes/default/CListItem';
 
 const NAME = 'CListItem';
 
 const props = {
+    theme: {
+        type: Object,
+        default: () => DefaultTheme
+    },
+
     tag: {
         type: String,
         default: () => getComponentConfig(NAME, 'tag')
@@ -13,14 +19,20 @@ const props = {
 
 export default {
     name: NAME,
+
     functional: true,
-    ...install,
+
+    install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
     props,
+
     render(h, { props, data, children }) {
-        const { baseClass } = props.theme;
+        const { base } = props.theme;
 
         const componentData = {
-            staticClass: baseClass
+            staticClass: base
         };
 
         return h(props.tag, mergeData(data, componentData), children);

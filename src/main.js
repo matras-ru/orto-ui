@@ -9,6 +9,11 @@ import '@/assets/css/tailwind.css';
 // import * as CustomTheme from '@/themes/custom/index';
 
 // import { CButton } from './index';
+// import { CCheckbox } from './index';
+// import { CCheckboxGroup } from './index';
+// import { CFormPanel } from './index';
+// import { CRadio } from './index';
+// import { CRadioGroup } from './index';
 
 // const customConfig = {
 //     CButton: {
@@ -28,11 +33,16 @@ Vue.use(OrtoUi);
 //         'bg-white border-secondary-200 text-secondary-200 transition-bg transition-color hover:text-white hover:bg-secondary-200'
 // };
 
-// Vue.use(CButton, btnTheme);
+// Vue.use(CCheckbox, {});
+// Vue.use(CRadio, {});
+// Vue.use(CRadioGroup, {});
+// Vue.use(CCheckboxGroup, {});
+// Vue.use(CFormPanel, {});
 
 //
 const routes = [
     { name: 'index', path: '/', component: () => import('@/pages/Index') },
+    { name: 'form', path: '/form', component: () => import('@/pages/Form') },
     { name: 'test', path: '/test', component: () => import('@/pages/Test') },
     { name: 'layout', path: '/layout', component: () => import('@/pages/Layout') },
     { name: 'tabs', path: '/tabs', component: () => import('@/pages/Tabs') }
