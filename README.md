@@ -79,9 +79,9 @@ Vue.use(CButton, btnTheme);
 | --- | ------------------------------- | --- | --- | ---- | ------ | --------- | ------------- |
 | 1   | `button`                        | +   | +   | +    | -      | -         | -             |
 | 2   | `link`                          | +   | +   | +    | -      | -         | -             |
-| 3   | `container|row|col`             | +   | +   | +    | -      | -         | -             |
-| 4   | `list|list-item`                | +   | +   | +    | -      | -         | -             |
-| 5   | `tabs|tab|tab-panels|tab-panel` | +   | +   | +-   | -      | -         | -             |
-| 6   | `checkbox|checkbox-group`       | +   | +   | +    | -      | -         | -             |
-| 7   | `radio|radio-group`             | +   | +   | +    | -      | -         | -             |
+| 3   | `container row col`             | +   | +   | +    | -      | -         | -             |
+| 4   | `list list-item`                | +   | +   | +    | -      | -         | -             |
+| 5   | `tabs tab tab-panels tab-panel` | +   | +   | +-   | -      | -         | -             |
+| 6   | `checkbox checkbox-group`       | +   | +   | +    | -      | -         | -             |
+| 7   | `radio radio-group`             | +   | +   | +    | -      | -         | -             |
 | 8   | `form-panel`                    | +   | -   | +-   | -      | -         | -             |
