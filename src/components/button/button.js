@@ -3,7 +3,8 @@ import { noop, getHashMapValue } from '@/utils';
 import { selfInstall } from '@/';
 
 import { getComponentConfig } from '@/config';
-import { default as CLink, createProps as creatLinkProps } from '@/components/link/link';
+import { createProps as createLinkProps } from '@/components/link/link.js';
+import { CLink } from '@/components/link';
 import DefaultTheme from '@/themes/default/CButton';
 
 const NAME = 'CButton';
@@ -20,7 +21,7 @@ const pluckProps = (keysToPluck, objToPluck) => {
     }, {});
 };
 
-const linkProps = creatLinkProps();
+const linkProps = createLinkProps();
 const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
 const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
 

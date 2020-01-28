@@ -1,16 +1,17 @@
 /* eslint-env jest */
-
 import { mount } from '@vue/test-utils';
 import CForm from './form';
+const baseClass = 'mb-1-4';
 
 describe('Form', () => {
-    it('The form is rendered', async () => {
+    it('is rendered', async () => {
         const wrapper = mount(CForm);
 
         expect(wrapper.is('form')).toBe(true);
+        expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
     });
 
-    it('Renders default slot content', async () => {
+    it('default slot', async () => {
         const wrapper = mount(CForm, {
             slots: {
                 default: 'foobar'

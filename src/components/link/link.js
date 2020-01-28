@@ -34,7 +34,7 @@ const createThemeMap = ({ variantDefault, variantPrimary }) => {
     };
 };
 
-export const createProps = () => {
+export function createProps() {
     return {
         href: {
             type: String,
@@ -98,7 +98,7 @@ export const createProps = () => {
             default: false
         }
     };
-};
+}
 
 export default {
     name: NAME,

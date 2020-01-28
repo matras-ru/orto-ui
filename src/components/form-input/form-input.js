@@ -1,136 +1,81 @@
-import { selfInstall } from '@/utils';
-import commonAttributes from '@/mixins/commonAttributes.js';
-
-import {
-    baseClass,
-    defaultClass,
-    errorClass,
-    defaultSizeClass,
-    largeSizeClass,
-    notEmptyClass,
-    wrapperClass
-} from '@/themes/default/CFormInput';
+import { selfInstall } from '@/';
+import CFormField from '@/mixins/form-field';
+import DefaultTheme from '@/themes/default/CFormInput';
 
 const validTagNames = ['input', 'textarea'];
+const validTypes = ['text', 'password', 'email', 'number', 'url', 'tel', 'search', 'date'];
 
-const validSizes = ['lg', 'md'];
+// const validSizes = ['lg', 'md'];
+
+const NAME = 'CFormInput';
 
 export default {
-    name: 'Input',
+    name: NAME,
 
     install(Vue, theme) {
         selfInstall(Vue, theme, this);
     },
 
-    props: {
-        ...commonAttributes.props,
+    mixins: [CFormField],
 
+    props: {
         tag: {
             type: String,
             default: 'input',
             validator: value => validTagNames.includes(value)
         },
 
-        value: {
-            type: [String, Number],
-            default: null
-        },
-
         type: {
             type: String,
-            default: null
+            default: 'text',
+            validator: value => validTypes.includes(value)
         },
 
-        size: {
-            type: String,
-            default: 'md',
-            validator: value => validSizes.includes(value)
-        },
-
-        error: {
+        readonly: {
             type: Boolean,
             default: false
         },
 
-        label: {
-            type: String,
-            default: null
-        },
-
-        hint: {
-            type: String,
-            default: null
+        theme: {
+            type: Object,
+            default: () => DefaultTheme
         }
+    },
+
+    model: {
+        prop: 'modelValue',
+        event: 'input'
     },
 
     methods: {
-        onInput(e) {
-            this.$emit('input', e.target.value);
+        onUpdate({ e, type }) {
+            const value = e.target.value;
+            this.$emit(type, value);
         },
 
-        onFocus() {
-            this.$emit('focus');
-        },
-
-        onBlur() {
-            this.$emit('blur');
+        getControl(h) {
+            return h(this.tag, {
+                attrs: {
+                    type: this.type,
+                    placeholder: this.placeholder,
+                    readonly: this.readonly
+                },
+                domProps: {
+                    value: this.modelValue
+                },
+                staticClass: this.theme.base,
+                class: [{ 'cursor-pointer': this.readonly }],
+                on: {
+                    ...this.$listeners,
+                    focus: () => {
+                        if (this.readonly) return;
+                        this.focused = true;
+                    },
+                    blur: () => (this.focused = false),
+                    input: e => this.onUpdate({ e, type: 'input' }),
+                    change: e => this.onUpdate({ e, type: 'change' })
+                }
+            });
         }
-    },
-
-    computed: {
-        isEmpty() {
-            return this.value ? false : true;
-        },
-
-        currentClass() {
-            const classes = [baseClass];
-
-            switch (this.size) {
-                case 'lg':
-                    classes.push(largeSizeClass);
-                    break;
-                case 'md':
-                default:
-                    classes.push(defaultSizeClass);
-                    break;
-            }
-
-            classes.push(this.error ? errorClass : defaultClass);
-
-            if (this.tag === 'textarea') {
-                classes.push(largeSizeClass);
-            }
-
-            if (!this.isEmpty) {
-                classes.push(notEmptyClass);
-            }
-
-            return classes;
-        }
-    },
-
-    render(h) {
-        const componentData = {
-            class: this.currentClass,
-            attrs: {
-                id: this.id,
-                autofocus: this.autofocus,
-                name: this.name,
-                type: this.type
-            },
-            domProps: {
-                value: this.value
-            },
-            on: {
-                input: this.onInput,
-                focus: this.onFocus,
-                blur: this.onBlur
-            }
-        };
-
-        return h('div', { class: wrapperClass }, [
-            h(this.tag, componentData),
-            h('CFormLabel', { attrs: { for: this.id }, props: { variant: 'primary' } }, this.label)
-        ]);
     }
 };

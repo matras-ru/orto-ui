@@ -28,11 +28,6 @@ export default {
         collapsed: {
             type: Boolean,
             default: false
-        },
-
-        info: {
-            type: String,
-            default: null
         }
     },
 
@@ -60,46 +55,11 @@ export default {
                       {
                           staticClass: 'text-2xl font-semibold mb-1-1'
                       },
-                      [
-                          h(
-                              'div',
-                              {
-                                  staticClass: ''
-                                  //   on: {
-                                  //       click: this.collapsible ? this.toggle : noop
-                                  //   }
-                              },
-                              [
-                                  //   this.collapsible
-                                  //       ? h('Icon', {
-                                  //             props: {
-                                  //                 size: '2xs',
-                                  //                 icon: this.open ? iconMinus : iconPlus
-                                  //             }
-                                  //         })
-                                  //       : null,
-
-                                  h(
-                                      'div',
-                                      {
-                                          staticClass: ''
-                                      },
-
-                                      this.label
-                                  )
-                              ]
-                          )
-
-                          //   this.info
-                          //       ? h('InfoPopover', {
-                          //             props: { html: this.info }
-                          //         })
-                          //       : null
-                      ]
+                      [h('div', this.label)]
                   )
                 : null,
 
-            this.open ? h('main', {}, [this.$slots.default]) : null
+            this.open ? h('main', [this.$slots.default]) : null
         ]);
     }
 };

@@ -5,9 +5,8 @@ import VueRouter from 'vue-router';
 import CLink from './link';
 
 const baseClass = 'inline-block no-underline';
-const defaultClass = 'text-black-100 font-semibold border-b-2 border-black-100';
 const disabledClass = 'opacity-75 cursor-not-allowed';
-const primaryClass = 'text-secondary-200 font-semibold border-b-2 border-secondary-200';
+const primaryClass = 'text-secondary-200 border-b-2 border-secondary-200';
 
 describe('Link', () => {
     it('default', () => {
@@ -18,7 +17,7 @@ describe('Link', () => {
         expect(wrapper.attributes('target')).toBeDefined();
         expect(wrapper.attributes('target')).toBe('_self');
 
-        expect(wrapper.classes().sort()).toEqual(`${baseClass} ${defaultClass}`.split(' ').sort());
+        expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
     });
 
     it('custom attrs: href & target', () => {
@@ -68,9 +67,7 @@ describe('Link', () => {
         expect(wrapper.attributes('aria-disabled')).toBeDefined();
         expect(wrapper.attributes('aria-disabled')).toBe('true');
 
-        expect(wrapper.classes().sort()).toEqual(
-            `${baseClass} ${defaultClass} ${disabledClass}`.split(' ').sort()
-        );
+        expect(wrapper.classes().sort()).toEqual(`${baseClass} ${disabledClass}`.split(' ').sort());
     });
 
     it('variant: primary', () => {
@@ -153,7 +150,7 @@ describe('click event', () => {
     it('"clicked::link" on $root', async () => {
         const App = localVue.extend({
             render(h) {
-                return h('div', {}, [h(CLink, { props: { href: '/foo' } }, 'test-link')]);
+                return h(CLink, { props: { href: '/foo' } }, 'test-link');
             }
         });
 
@@ -163,7 +160,7 @@ describe('click event', () => {
         });
 
         wrapper.vm.$root.$on('clicked::link', spy);
-        wrapper.find('a').trigger('click');
+        wrapper.trigger('click');
         expect(spy).toHaveBeenCalled();
 
         wrapper.destroy();
@@ -172,9 +169,7 @@ describe('click event', () => {
     it('NOT "clicked::link" on $root is disabled', async () => {
         const App = localVue.extend({
             render(h) {
-                return h('div', {}, [
-                    h(CLink, { props: { href: '/foo', disabled: true } }, 'link-link')
-                ]);
+                return h(CLink, { props: { href: '/foo', disabled: true } }, 'link-link');
             }
         });
 
@@ -186,7 +181,7 @@ describe('click event', () => {
         expect(wrapper.isVueInstance()).toBe(true);
 
         wrapper.vm.$root.$on('clicked::link', spy);
-        wrapper.find('a').trigger('click');
+        wrapper.trigger('click');
         expect(spy).not.toHaveBeenCalled();
 
         wrapper.destroy();
@@ -210,7 +205,7 @@ describe('Router Link', () => {
             router,
             components: { CLink },
             render(h) {
-                return h('section', {}, [
+                return h('section', [
                     h('CLink', { props: { to: '/about' } }, 'to-name-about'), // router-link
                     h('CLink', { props: { to: { path: '/about' } } }, 'to-path-about'), // router-link
                     h('CLink', { props: { href: '/about' } }, 'href-about'), // regular link

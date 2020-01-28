@@ -109,7 +109,7 @@ module.exports = {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
             inner: 'inset 0 0 0 2px #FFFFFF',
             none: 'none',
-            example: '0 4px 4px rgba(0, 0, 0, .1)'
+            example: '0 15px 30px 0 rgba(166, 177, 182, 0.5)'
         },
         container: theme => ({
             padding: theme('spacing.0-8'),
@@ -177,6 +177,8 @@ module.exports = {
         inset: theme => ({
             '0': '0',
             auto: 'auto',
+            '1/2': '50%',
+            full: '100%',
             ...theme('spacing')
         }),
         letterSpacing: {
@@ -329,6 +331,7 @@ module.exports = {
             default: '0ms',
             '0': '0ms',
             '100': '100ms',
+            '150': '150ms',
             '250': '250ms',
             '500': '500ms'
         },
@@ -350,13 +353,20 @@ module.exports = {
 
         transform: {
             none: 'none',
-            custom: 'translateY(-50%)'
+            'floating-label': 'scale(0.75) translateY(-200%)'
         },
-        transformOrigin: {},
+        transformOrigin: {
+            tl: 'top left'
+        },
         translate: {
-            'right-up': ['0', '-100%']
+            '-1/2': '-50%',
+            '1/2': '50%',
+            full: '100%',
+            '-full': '-100%'
         },
-        scale: {},
+        scale: {
+            '75': '0.75'
+        },
         rotate: {},
         skew: {},
         perspective: {},
@@ -375,23 +385,83 @@ module.exports = {
             };
 
             return {
-                custom: {
-                    'input, textarea': {
-                        '&:focus + label': labeActivelState
-                    }
-                },
+                default: {
+                    input: {
+                        borderRadius: undefined,
+                        borderColor: undefined,
+                        backgroundColor: 'transparent',
+                        borderWidth: undefined,
+                        paddingTop: undefined,
+                        paddingRight: undefined,
+                        paddingBottom: undefined,
+                        paddingLeft: undefined,
+                        fontSize: undefined,
+                        lineHeight: undefined,
 
-                'not-empty': {
-                    'input, textarea': {
-                        '& + label': labeActivelState
-                    }
-                },
+                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                            color: undefined,
+                            opacity: 0
+                        },
 
-                'is-error': {
-                    'input, textarea': {
-                        '& + label': labeErrorlState
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: undefined,
+                            borderColor: undefined,
+
+                            '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                                color: undefined,
+                                opacity: 1
+                            }
+                        }
+                    },
+
+                    select: {
+                        appearance: undefined,
+                        colorAdjust: undefined,
+                        '&::-ms-expand': undefined,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundColor: undefined,
+                        borderColor: undefined,
+                        borderWidth: undefined,
+                        borderRadius: undefined,
+                        paddingTop: undefined,
+                        paddingRight: undefined,
+                        paddingBottom: undefined,
+                        paddingLeft: undefined,
+                        fontSize: undefined,
+                        lineHeight: undefined,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'contain',
+                        iconColor: theme('colors.black.100'),
+                        icon: iconColor =>
+                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${iconColor}"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>`
+                        // borderRadius: theme('borderRadius.lg'),
+                        // boxShadow: theme('boxShadow.default')
+                    },
+
+                    checkbox: {
+                        // width: theme('spacing.6'),
+                        // height: theme('spacing.6')
                     }
                 }
+
+                // custom: {
+                //     'input, textarea': {
+                //         '&:focus + label': labeActivelState
+                //     }
+                // },
+
+                // 'not-empty': {
+                //     'input, textarea': {
+                //         '& + label': labeActivelState
+                //     }
+                // },
+
+                // 'is-error': {
+                //     'input, textarea': {
+                //         '& + label': labeErrorlState
+                //     }
+                // }
             };
         }
     },

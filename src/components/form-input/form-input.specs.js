@@ -1,6 +1,5 @@
 /* eslint-env jest */
-import { mount } from '@vue/test-utils';
-import { config } from '@vue/test-utils';
+import { mount, config } from '@vue/test-utils';
 
 import CFormInput from './form-input';
 import { CFormLabel } from '@/components/form-label';

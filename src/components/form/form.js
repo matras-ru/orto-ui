@@ -1,43 +1,34 @@
-import { selfInstall } from '@/utils';
-import { baseClass } from '@/themes/default/CForm';
+import { mergeData } from 'vue-functional-data-merge';
+import { selfInstall } from '@/';
+import DefaultTheme from '@/themes/default/CForm';
+
+const NAME = 'CForm';
+
+const props = {
+    theme: {
+        type: Object,
+        default: () => DefaultTheme
+    }
+};
 
 export default {
-    name: 'Form',
+    name: NAME,
+
+    functional: true,
 
     install(Vue, theme) {
         selfInstall(Vue, theme, this);
     },
 
-    props: {
-        action: {
-            type: String,
-            default: null
-        },
+    props,
 
-        method: {
-            type: String,
-            default: null
-        }
-    },
+    render(h, { props, data, children }) {
+        const { base } = props.theme;
 
-    methods: {
-        onSubmit() {
-            this.$emit('submit');
-        }
-    },
-
-    render(h) {
         const componentData = {
-            staticClass: baseClass,
-            attrs: {
-                action: this.action,
-                method: this.method
-            },
-            on: {
-                submit: this.onSubmit
-            }
+            staticClass: base
         };
 
-        return h('form', componentData, this.$slots.default);
+        return h('form', mergeData(data, componentData), children);
     }
 };

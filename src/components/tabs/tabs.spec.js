@@ -12,7 +12,7 @@ config.stubs['CList'] = CList;
 config.stubs['CListItem'] = CListItem;
 config.stubs['CLink'] = CLink;
 
-const defaultTabLinkClasses =
+const baseTabLinkClasses =
     'outline-none select-none inline-block no-underline font-semibold text-lg uppercase px-1-5 py-0-7';
 const activeTabLinkClasses = 'text-secondary-200 border-b-4 border-secondary-200';
 
@@ -49,54 +49,53 @@ describe('CTabs', () => {
         expect(wrapper.findAll(CTab).length).toBe(3);
     });
 
-    // TODO: check
-    // it('tab link style: default, active', () => {
-    //     const App = Vue.extend({
-    //         data() {
-    //             return {
-    //                 tabsModel: 'tab-2'
-    //             };
-    //         },
-    //         render(h) {
-    //             return h(
-    //                 CTabs,
-    //                 {
-    //                     props: {
-    //                         modelValue: this.tabsModel
-    //                     }
-    //                 },
-    //                 [
-    //                     h(CTab, { props: { name: 'tab-1' }, ref: 'tab-1' }, 'tab 1'),
-    //                     h(CTab, { props: { name: 'tab-2' }, ref: 'tab-2' }, 'tab 2')
-    //                 ]
-    //             );
-    //         }
-    //     });
+    it('tab link style: default, active', () => {
+        const App = Vue.extend({
+            data() {
+                return {
+                    tabsModel: 'tab-2'
+                };
+            },
+            render(h) {
+                return h(
+                    CTabs,
+                    {
+                        props: {
+                            modelValue: this.tabsModel
+                        }
+                    },
+                    [
+                        h(CTab, { props: { name: 'tab-1' }, ref: 'tab-1' }, 'tab 1'),
+                        h(CTab, { props: { name: 'tab-2' }, ref: 'tab-2' }, 'tab 2')
+                    ]
+                );
+            }
+        });
 
-    //     const wrapper = mount(App);
+        const wrapper = mount(App);
 
-    //     const tab1 = wrapper.find({ ref: 'tab-1' }); // default tab
-    //     const tab2 = wrapper.find({ ref: 'tab-2' }); // active tab
+        const tab1 = wrapper.find({ ref: 'tab-1' }); // default tab
+        const tab2 = wrapper.find({ ref: 'tab-2' }); // active tab
 
-    //     expect(wrapper).toBeDefined();
-    //     expect(wrapper.findAll(CTab).length).toBe(2);
+        expect(wrapper).toBeDefined();
+        expect(wrapper.findAll(CTab).length).toBe(2);
 
-    //     expect(
-    //         tab1
-    //             .find('a')
-    //             .classes()
-    //             .sort()
-    //     ).toEqual(`${defaultTabLinkClasses}`.split(' ').sort());
+        expect(
+            tab1
+                .find('a')
+                .classes()
+                .sort()
+        ).toEqual(`${baseTabLinkClasses}`.split(' ').sort());
 
-    //     expect(
-    //         tab2
-    //             .find('a')
-    //             .classes()
-    //             .sort()
-    //     ).toEqual(`${defaultTabLinkClasses} ${activeTabLinkClasses}`.split(' ').sort());
+        expect(
+            tab2
+                .find('a')
+                .classes()
+                .sort()
+        ).toEqual(`${baseTabLinkClasses} ${activeTabLinkClasses}`.split(' ').sort());
 
-    //     wrapper.destroy();
-    // });
+        wrapper.destroy();
+    });
 
     it('change tab', () => {
         const App = Vue.extend({

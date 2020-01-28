@@ -13,7 +13,7 @@ module.exports = {
     },
     snapshotSerializers: ['jest-serializer-vue'],
     // testMatch: ['**/*.spec.(js)'],
-    testMatch: ['**/components/tabs/*.spec.(js)'],
+    testMatch: ['**/components/form/*.spec.(js)'],
 
     testURL: 'http://localhost/',
     watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname']

@@ -3,12 +3,13 @@ import { mount } from '@vue/test-utils';
 import CFormGroup from './form-panel';
 
 describe('Form panel', () => {
-    it('The form group is rendered', async () => {
+    it('is rendered', () => {
         const wrapper = mount(CFormGroup);
 
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.is('section')).toBe(true);
     });
-    it('Renders default slot content', async () => {
+
+    it('default slot', () => {
         const wrapper = mount(CFormGroup, {
             slots: {
                 default: 'foobar'

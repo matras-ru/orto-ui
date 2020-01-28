@@ -1,43 +1,38 @@
-// import * as DefaultTheme from '@/themes/default';
+import * as DefaultTheme from '@/themes/default';
 import { ConfigPlugin } from '@/config';
-const DefaultTheme = {};
 /* COMPONENTS */
 
 /* FORM */
-// import { CForm } from '@/components/form';
-// import { CFormError } from '@/components/form-error';
+import { CForm } from '@/components/form';
+
 import { CFormPanel } from '@/components/form-panel';
-// import { CFormInput } from '@/components/form-input';
-// import { CFormLabel } from '@/components/form-label';
+import { CFormInput } from '@/components/form-input';
+import { CFormTest } from '@/components/form-test';
 
 import { CRadio, CRadioGroup } from '@/components/radio';
 import { CCheckbox, CCheckboxGroup } from '@/components/checkbox';
 
 /*  COMMON */
-// import { CIcon } from '@/components/icon';
 import { CButton } from '@/components/button';
 import { CLink } from '@/components/link';
 import { CTabs, CTab, CTabPanels, CTabPanel } from '@/components/tabs';
 import { CList, CListItem } from '@/components/list';
-
-// import { Dropdown } from '@/components/dropdown';
+import { CDropdown } from '@/components/dropdown';
 
 /*  LAYOUT */
 import { CContainer, CRow, CCol } from '@/components/layout';
 
 const components = {
     CButton,
-    // CForm,
-    // CFormError,
+    CLink,
+    CForm,
     CFormPanel,
-    // CFormInput,
-    // CFormLabel,
+    CFormInput,
+    CFormTest,
     CRadio,
     CRadioGroup,
     CCheckbox,
     CCheckboxGroup,
-    // CIcon,
-    CLink,
     CTabs,
     CTab,
     CTabPanels,
@@ -46,14 +41,13 @@ const components = {
     CListItem,
     CContainer,
     CRow,
-    CCol
-
-    // Dropdown
+    CCol,
+    CDropdown
 };
 
 export const selfInstall = (Vue, theme = {}, component) => {
-    const { props, name } = component;
-    const defaultComponentTheme = { ...props.theme.default() };
+    const { props = {}, name } = component;
+    const defaultComponentTheme = { ...(props?.theme?.default() ? props.theme.default() : {}) };
 
     props.theme = {
         type: Object,
@@ -72,8 +66,8 @@ export const selfInstall = (Vue, theme = {}, component) => {
 
 const extendComponent = (Vue, CurrentTheme, componentName) => {
     // TODO: if props is undefined
-    const { props } = components[componentName];
-    const themeDefaultSettings = { ...props.theme.default() };
+    const { props = {} } = components[componentName];
+    const themeDefaultSettings = { ...(props?.theme?.default() ? props.theme.default() : {}) };
     const themeSettings = CurrentTheme[componentName];
 
     props.theme = {
@@ -108,16 +102,14 @@ const install = function(Vue, options = {}) {
     ConfigPlugin(config, Vue);
 };
 
-// export { CForm };
-// export { CFormError };
+export { CForm };
 export { CFormPanel };
-// export { CFormInput };
-// export { CFormLabel };
+export { CFormInput };
+export { CFormTest };
 export { CRadio };
 export { CRadioGroup };
 export { CCheckbox };
 export { CCheckboxGroup };
-// export { CIcon };
 export { CButton };
 export { CLink };
 export { CTabs };
@@ -129,7 +121,7 @@ export { CListItem };
 export { CContainer };
 export { CRow };
 export { CCol };
-// export { Dropdown };
+export { CDropdown };
 
 export default {
     install

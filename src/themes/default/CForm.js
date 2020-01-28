@@ -1,5 +1,5 @@
-export const baseClass = 'mb-1-4';
+export const base = 'mb-1-4';
 
 export default {
-    baseClass
+    base
 };
