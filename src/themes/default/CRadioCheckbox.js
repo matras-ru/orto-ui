@@ -10,6 +10,7 @@ export const iconCheckboxBase = 'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm';
 export const iconStateDefault = 'border-black-200 bg-white';
 export const iconStateChecked = 'border-black-200 bg-secondary-200 shadow-inner';
 export const iconStateDisabled = 'border-tertiary-200 bg-white';
+export const iconStateError = 'border-danger bg-white';
 
 export const inputBase = 'absolute opacity-0 invisible';
 
@@ -22,6 +23,7 @@ export default {
     iconStateDefault,
     iconStateChecked,
     iconStateDisabled,
+    iconStateError,
     inputBase,
     wrapperBase
 };

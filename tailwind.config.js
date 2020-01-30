@@ -353,7 +353,7 @@ module.exports = {
 
         transform: {
             none: 'none',
-            'floating-label': 'scale(0.75) translateY(-200%)'
+            'floating-label': 'scale(0.75) translateY(-100%)'
         },
         transformOrigin: {
             tl: 'top left'

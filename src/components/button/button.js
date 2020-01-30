@@ -8,7 +8,7 @@ import { CLink } from '@/components/link';
 import DefaultTheme from '@/themes/default/CButton';
 
 const NAME = 'CButton';
-const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary'];
+const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 const validSizes = ['lg', 'md', 'sm'];
 const validTagNames = ['button', 'a'];
 const validTypes = ['button', 'submit'];
@@ -26,11 +26,11 @@ const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
 const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
 
 const createThemeMap = ({
-    variantDefault,
     variantPrimary,
     variantSecondary,
     variantTertiary,
     variantQuaternary,
+    variantQuinary,
     sizeLg,
     sizeSm,
     sizeMd
@@ -41,14 +41,13 @@ const createThemeMap = ({
             secondary: variantSecondary,
             tertiary: variantTertiary,
             quaternary: variantQuaternary,
-            default: variantDefault
+            quinary: variantQuinary
         },
 
         sizes: {
             lg: sizeLg,
             md: sizeMd,
-            sm: sizeSm,
-            default: sizeMd
+            sm: sizeSm
         }
     };
 };

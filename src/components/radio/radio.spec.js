@@ -68,6 +68,27 @@ describe('Radio', () => {
         );
     });
 
+    it('is error', () => {
+        const wrapper = mount(CRadio, {
+            context: {
+                props: {
+                    id: 'radio1',
+                    name: 'radio1',
+                    value: 'radio1',
+                    error: true
+                }
+            }
+        });
+
+        const icon = wrapper.find('span');
+
+        expect(icon.classes().sort()).toEqual(
+            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-full border-danger bg-white'
+                .split(' ')
+                .sort()
+        );
+    });
+
     it('is checked', () => {
         const wrapper = mount(CRadio, {
             context: {

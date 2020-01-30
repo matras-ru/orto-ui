@@ -13,7 +13,7 @@ const computeIsChecked = ({ type, modelValue, value, trueValue }) => {
     return modelValue === value;
 };
 
-const computeClasses = (type, { disabled, theme, isChecked }) => {
+const computeClasses = (type, { disabled, error, theme, isChecked }) => {
     const {
         labelBase,
         labelStateDefault,
@@ -23,6 +23,7 @@ const computeClasses = (type, { disabled, theme, isChecked }) => {
         iconStateDefault,
         iconStateChecked,
         iconStateDisabled,
+        iconStateError,
         wrapperBase,
         inputBase
     } = theme;
@@ -33,6 +34,8 @@ const computeClasses = (type, { disabled, theme, isChecked }) => {
     if (disabled) {
         labelClasses.push(labelStateDisabled);
         iconClasses.push(iconStateDisabled);
+    } else if (error) {
+        iconClasses.push(iconStateError);
     } else {
         labelClasses.push(labelStateDefault);
 
@@ -93,6 +96,11 @@ export default function(type) {
                 default: null // TODO: random uuid?
             },
 
+            error: {
+                type: Boolean,
+                default: false
+            },
+
             disabled: {
                 type: Boolean,
                 default: false
@@ -106,6 +114,7 @@ export default function(type) {
                 id,
                 disabled,
                 theme,
+                error,
                 value,
                 modelValue,
                 trueValue,
@@ -116,6 +125,7 @@ export default function(type) {
 
             const { labelClasses, iconClasses, inputBase, wrapperBase } = computeClasses(type, {
                 theme,
+                error,
                 disabled,
                 isChecked
             });

@@ -6,6 +6,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
+import analyze from 'rollup-plugin-analyzer';
+import visualizer from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
 
@@ -49,7 +51,9 @@ const external = [
     'tailwindcss',
     'tailwindcss/resolveConfig',
     'tailwindcss-transitions',
-    '@tailwindcss/custom-forms'
+    '@tailwindcss/custom-forms',
+    'v-click-outside-x',
+    'vue'
     // list external dependencies, exactly the way it is written in the import statement.
     // eg. 'jquery'
 ];
@@ -57,6 +61,11 @@ const external = [
 // UMD/IIFE shared settings: output.globals
 // Refer to https://rollupjs.org/guide/en#output-globals for details
 const globals = {
+    'v-click-outside-x': 'vClickOutside',
+    vue: 'Vue',
+    'vue-functional-data-merge': 'vueFunctionalDataMerge',
+    'lodash.merge': 'merge'
+
     // Provide global variable names to replace your external imports
     // eg. jquery: '$'
 };
@@ -102,7 +111,9 @@ if (!argv.format || argv.format === 'cjs') {
                     optimizeSSR: true
                 }
             }),
-            ...baseConfig.plugins.postVue
+            ...baseConfig.plugins.postVue,
+            analyze({ summaryOnly: true }),
+            visualizer({ open: true })
         ]
     };
     buildFormats.push(umdConfig);

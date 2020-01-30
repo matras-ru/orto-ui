@@ -20,7 +20,7 @@ const fullWidthClass = 'w-full';
 const defaultCols = 12;
 
 describe('CRow', () => {
-    it('default empty CRow is the functional component and rendered', () => {
+    it('default', () => {
         const wrapper = mount(CRow);
         expect(wrapper.isFunctionalComponent).toBe(true);
         expect(wrapper.is('div')).toBe(true);
@@ -32,7 +32,7 @@ describe('CRow', () => {
     });
 });
 
-describe('CRow - gutters', () => {
+describe('gutters', () => {
     const localVue = new createLocalVue();
 
     it('add CCol gutter class', () => {

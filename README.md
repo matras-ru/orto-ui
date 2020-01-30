@@ -86,3 +86,6 @@ Vue.use(CButton, btnTheme);
 | 7   | `radio radio-group`             | +   | +   | +    | -      | -         | -             |
 | 8   | `form-panel`                    | +   | -   | +    | -      | -         | -             |
 | 9   | `form`                          | +   | +   | +    | -      | -         | -             |
+| 10  | `form-input`                    | +   | -   | +    | -      | -         | -             |
+| 11  | `dropdown`                      | +   | +   | +    | -      | -         | -             |
+| 12  | `form-custom-select`            | +   | +   | +    | -      | -         | -             |

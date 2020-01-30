@@ -1,4 +1,5 @@
 import * as DefaultTheme from '@/themes/default';
+import * as vClickOutside from 'v-click-outside-x';
 import { ConfigPlugin } from '@/config';
 /* COMPONENTS */
 
@@ -7,7 +8,7 @@ import { CForm } from '@/components/form';
 
 import { CFormPanel } from '@/components/form-panel';
 import { CFormInput } from '@/components/form-input';
-import { CFormTest } from '@/components/form-test';
+import { CFormSelectCustom } from '@/components/form-select';
 
 import { CRadio, CRadioGroup } from '@/components/radio';
 import { CCheckbox, CCheckboxGroup } from '@/components/checkbox';
@@ -28,7 +29,7 @@ const components = {
     CForm,
     CFormPanel,
     CFormInput,
-    CFormTest,
+    CFormSelectCustom,
     CRadio,
     CRadioGroup,
     CCheckbox,
@@ -47,7 +48,7 @@ const components = {
 
 export const selfInstall = (Vue, theme = {}, component) => {
     const { props = {}, name } = component;
-    const defaultComponentTheme = { ...(props?.theme?.default() ? props.theme.default() : {}) };
+    const defaultComponentTheme = { ...(props && props.theme ? props.theme.default() : {}) };
 
     props.theme = {
         type: Object,
@@ -67,7 +68,8 @@ export const selfInstall = (Vue, theme = {}, component) => {
 const extendComponent = (Vue, CurrentTheme, componentName) => {
     // TODO: if props is undefined
     const { props = {} } = components[componentName];
-    const themeDefaultSettings = { ...(props?.theme?.default() ? props.theme.default() : {}) };
+
+    const themeDefaultSettings = { ...(props && props.theme ? props.theme.default() : {}) };
     const themeSettings = CurrentTheme[componentName];
 
     props.theme = {
@@ -99,13 +101,15 @@ const install = function(Vue, options = {}) {
         Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
     });
 
+    Vue.use(vClickOutside);
+
     ConfigPlugin(config, Vue);
 };
 
 export { CForm };
 export { CFormPanel };
 export { CFormInput };
-export { CFormTest };
+export { CFormSelectCustom };
 export { CRadio };
 export { CRadioGroup };
 export { CCheckbox };

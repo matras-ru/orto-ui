@@ -42,7 +42,8 @@ export default {
                 'CLink',
                 {
                     props: {
-                        href: `#${this.name}`
+                        href: `#${this.name}`,
+                        variant: 'secondary'
                     },
                     attrs: {
                         role: 'tab',

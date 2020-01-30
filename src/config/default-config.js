@@ -6,13 +6,13 @@ export default {
 
     CButton: {
         tag: 'button',
-        variant: null,
+        variant: 'primary',
         size: 'md',
         type: 'button'
     },
 
     CLink: {
-        variant: null,
+        variant: 'primary',
         target: '_self'
     },
 
@@ -49,5 +49,19 @@ export default {
 
     CTabPanel: {
         tag: 'section'
+    },
+
+    CDropdown: {
+        variant: 'primary'
+    },
+
+    CFormInput: {
+        rows: 6
+    },
+
+    CFormSelectCustom: {
+        optionValue: 'value',
+        optionLabel: 'label',
+        dropdownVariant: 'secondary'
     }
 };

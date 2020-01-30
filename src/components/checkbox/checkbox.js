@@ -19,6 +19,11 @@ const props = {
     falseValue: {
         type: [String, Number, Boolean],
         default: () => getComponentConfig(NAME, 'falseValue')
+    },
+
+    error: {
+        type: Boolean,
+        default: false
     }
 };
 

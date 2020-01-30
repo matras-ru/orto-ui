@@ -6,7 +6,7 @@ const baseClass = 'container';
 const fluidClass = 'max-w-none';
 
 describe('CContainer', () => {
-    it('default empty CContainer is the functional component and rendered', () => {
+    it('default', () => {
         const wrapper = mount(CContainer);
 
         expect(wrapper.isFunctionalComponent).toBe(true);
@@ -16,7 +16,7 @@ describe('CContainer', () => {
         expect(wrapper.text()).toEqual('');
     });
 
-    it('CContainer - fluid', () => {
+    it('fluid', () => {
         const wrapper = mount(CContainer, {
             context: {
                 props: {

@@ -6,7 +6,7 @@ import CLink from './link';
 
 const baseClass = 'inline-block no-underline';
 const disabledClass = 'opacity-75 cursor-not-allowed';
-const primaryClass = 'text-secondary-200 border-b-2 border-secondary-200';
+const primaryClass = 'text-secondary-200 hover:text-black-200 border-b-2';
 
 describe('Link', () => {
     it('default', () => {
@@ -17,7 +17,7 @@ describe('Link', () => {
         expect(wrapper.attributes('target')).toBeDefined();
         expect(wrapper.attributes('target')).toBe('_self');
 
-        expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
+        expect(wrapper.classes().sort()).toEqual(`${baseClass} ${primaryClass}`.split(' ').sort());
     });
 
     it('custom attrs: href & target', () => {
@@ -67,7 +67,9 @@ describe('Link', () => {
         expect(wrapper.attributes('aria-disabled')).toBeDefined();
         expect(wrapper.attributes('aria-disabled')).toBe('true');
 
-        expect(wrapper.classes().sort()).toEqual(`${baseClass} ${disabledClass}`.split(' ').sort());
+        expect(wrapper.classes().sort()).toEqual(
+            `${baseClass} ${primaryClass} ${disabledClass}`.split(' ').sort()
+        );
     });
 
     it('variant: primary', () => {
@@ -156,7 +158,7 @@ describe('click event', () => {
 
         const spy = jest.fn();
         const wrapper = mount(App, {
-            localVue: localVue
+            localVue
         });
 
         wrapper.vm.$root.$on('clicked::link', spy);
@@ -175,7 +177,7 @@ describe('click event', () => {
 
         const spy = jest.fn();
         const wrapper = mount(App, {
-            localVue: localVue
+            localVue
         });
 
         expect(wrapper.isVueInstance()).toBe(true);
@@ -215,7 +217,7 @@ describe('Router Link', () => {
         });
 
         const wrapper = mount(App, {
-            localVue: localVue,
+            localVue,
             attachToDocument: true
         });
 

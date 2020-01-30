@@ -5,7 +5,7 @@ import DefaultTheme from '@/themes/default/CLink';
 
 const NAME = 'CLink';
 const ANCHOR_TAG = 'a';
-const validVariants = ['primary'];
+const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 
 const concat = (...args) => Array.prototype.concat.apply([], args);
 const isRouterLink = tag => tag.toString().toLowerCase() !== ANCHOR_TAG;
@@ -25,11 +25,20 @@ const computeRel = ({ target, rel } = {}) => {
     return rel || null;
 };
 
-const createThemeMap = ({ variantDefault, variantPrimary }) => {
+const createThemeMap = ({
+    variantPrimary,
+    variantSecondary,
+    variantTertiary,
+    variantQuaternary,
+    variantQuinary
+}) => {
     return {
         variants: {
             primary: variantPrimary,
-            default: variantDefault
+            secondary: variantSecondary,
+            tertiary: variantTertiary,
+            quaternary: variantQuaternary,
+            quinary: variantQuinary
         }
     };
 };

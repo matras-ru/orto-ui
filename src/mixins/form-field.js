@@ -7,11 +7,21 @@ export default {
 
     props: {
         modelValue: {
-            type: String,
+            type: [String, Number],
             default: null
         },
 
         label: {
+            type: String,
+            default: null
+        },
+
+        name: {
+            type: String,
+            default: null
+        },
+
+        id: {
             type: String,
             default: null
         },
@@ -21,9 +31,19 @@ export default {
             default: null
         },
 
+        hint: {
+            type: String,
+            default: null
+        },
+
         error: {
             type: Boolean,
             default: false
+        },
+
+        errorMessage: {
+            type: String,
+            default: null
         }
     },
 
@@ -52,7 +72,6 @@ export default {
                 labelBase,
                 labelStateDefault,
                 labelStateError,
-                labelPositionDefault,
                 labelPositionFloat,
                 prependBase,
                 appendBase
@@ -65,38 +84,51 @@ export default {
             const prependWrapClasses = [prependBase];
             const appendWrapClasses = [appendBase];
 
-            // попробовать сделать коллекцию:
-
-            // error
-            // - empty
-            // - not-empty
-            // - focused
-
-            // default
-            // - empty
-            // - not-empty
-            // - focused
-
-            if (this.error) {
+            const isError = () => {
                 innerWrapClasses.push(innerWrapStateError);
                 labelClasses.push(labelStateError);
+            };
 
-                if (this.modelValue || this.focused) {
-                    labelClasses.push(labelPositionFloat);
-                } else {
-                    labelClasses.push(labelPositionDefault);
-                }
-            }
+            const isErrorAndNotEmptyOrFocused = () => {
+                labelClasses.push(labelPositionFloat);
+            };
 
-            if (this.focused) {
+            const isFocused = () => {
                 innerWrapClasses.push(innerWrapStateFocused);
                 labelClasses.push(labelPositionFloat);
-            } else if (this.modelValue) {
+                labelClasses.push(labelStateDefault);
+            };
+
+            const isNotEmpty = () => {
                 labelClasses.push(labelPositionFloat);
-            } else {
+                labelClasses.push(labelStateDefault);
+                innerWrapClasses.push(innerWrapStateDefault);
+            };
+
+            const isDefault = () => {
                 innerWrapClasses.push(innerWrapStateDefault);
                 labelClasses.push(labelStateDefault);
-                labelClasses.push(labelPositionDefault);
+            };
+
+            level1: if (this.error) {
+                isError();
+
+                if (this.modelValue || this.focused) {
+                    isErrorAndNotEmptyOrFocused();
+                    break level1;
+                }
+            } else {
+                if (this.focused) {
+                    isFocused();
+                    break level1;
+                }
+
+                if (this.modelValue) {
+                    isNotEmpty();
+                    break level1;
+                }
+
+                isDefault();
             }
 
             return {
@@ -112,11 +144,7 @@ export default {
         return h(
             'label', // outer wrap
             {
-                staticClass: outerWrapClasses,
-                on: {
-                    // ...this.$listeners
-                    // click: e => this.$emit('onClick')
-                }
+                staticClass: outerWrapClasses
             },
             [
                 h(
@@ -131,7 +159,7 @@ export default {
                                   { staticClass: prependWrapClasses },
                                   this.$scopedSlots.prepend()
                               )
-                            : null, // aappend
+                            : null, // append
                         h(
                             'div', // control wrap
                             {
