@@ -1,6 +1,5 @@
-const Col = {
-    baseClass: [],
-    defaultClass: ['flex-1', 'max-w-full']
-};
+export const base = 'max-w-full';
 
-export default Col;
+export default {
+    base
+};
