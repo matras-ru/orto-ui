@@ -191,7 +191,7 @@ export default {
         const { rowClasses, colClasses } = currentClass(props);
 
         const computedChildren = children.map(col => {
-            if (!col?.data) return;
+            if (!col.data) return;
 
             const { cols = null } = col.data;
 

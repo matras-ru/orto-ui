@@ -2601,6 +2601,10 @@ var createColBreakpointClass = function (ref) {
             if (cols[breakpoint] === propsValue) {
                 classes.push((breakpoint + ":" + wPrefix + "full"));
             }
+        } else {
+            if (props[breakpoint] && cols.default) {
+                classes.push((breakpoint + ":" + wPrefix + (cols.default) + "/" + propsValue));
+            }
         }
     });
 
@@ -2633,6 +2637,8 @@ var CRow = {
         var colClasses = ref$1.colClasses;
 
         var computedChildren = children.map(function (col) {
+            if (!col.data) { return; }
+
             var ref = col.data;
             var cols = ref.cols; if ( cols === void 0 ) cols = null;
 
