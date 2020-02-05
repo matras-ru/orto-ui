@@ -161,6 +161,10 @@ const createColBreakpointClass = ({ props, cols, colsLimit }) => {
             if (cols[breakpoint] === propsValue) {
                 classes.push(`${breakpoint}:${wPrefix}full`);
             }
+        } else {
+            if (props[breakpoint] && cols.default) {
+                classes.push(`${breakpoint}:${wPrefix}${cols.default}/${propsValue}`);
+            }
         }
     });
 
@@ -187,6 +191,8 @@ export default {
         const { rowClasses, colClasses } = currentClass(props);
 
         const computedChildren = children.map(col => {
+            if (!col?.data) return;
+
             const { cols = null } = col.data;
 
             const colBreakpointClass = createColBreakpointClass({

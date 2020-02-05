@@ -11,7 +11,6 @@ const baseClass = 'flex flex-wrap';
 const mdGuttersNormalizeClass = '-mx-0-8';
 const smGuttersNormalizeClass = '-mx-0-4';
 
-const colDefaultClass = 'flex-1';
 const colBaseClass = 'max-w-full';
 const mdGuttersClass = 'px-0-8';
 const smGuttersClass = 'px-0-4';
@@ -100,8 +99,12 @@ describe('gutters', () => {
 
         wrapper.destroy();
     });
+});
 
-    it('responsive cols - basic', () => {
+describe('cols', () => {
+    const localVue = new createLocalVue();
+
+    it('basic', () => {
         const App = localVue.extend({
             render(h) {
                 return h('div', {}, [
@@ -154,7 +157,7 @@ describe('gutters', () => {
         wrapper.destroy();
     });
 
-    it('responsive cols - default colsLimit', () => {
+    it('default colsLimit', () => {
         const App = localVue.extend({
             render(h) {
                 return h('div', {}, [
@@ -203,7 +206,7 @@ describe('gutters', () => {
         wrapper.destroy();
     });
 
-    it('responsive cols - custom cols', () => {
+    it('custom cols', () => {
         const App = localVue.extend({
             render(h) {
                 return h('div', {}, [
@@ -251,6 +254,61 @@ describe('gutters', () => {
                 .sort()
         );
         expect(Col.classes().length).toBe(4);
+
+        wrapper.destroy();
+    });
+
+    it('same breaakpoints CCol props', () => {
+        /* CRow(:cols="3" :sm="4" :md="5")
+        CCol(:cols="1")
+        eq:
+        div(class="...") - row
+        div(class="... w-1/3 sm:w-1/4 md:w-1/5") - col
+    */
+
+        const App = localVue.extend({
+            render(h) {
+                return h('div', {}, [
+                    h(
+                        CRow,
+                        {
+                            ref: 'row-test',
+                            props: {
+                                cols: 3,
+                                sm: 4,
+                                md: 5
+                            }
+                        },
+                        [
+                            h(
+                                CCol,
+                                {
+                                    ref: 'col-test',
+                                    props: {
+                                        cols: 1
+                                    }
+                                },
+                                'Col'
+                            )
+                        ]
+                    )
+                ]);
+            }
+        });
+
+        const wrapper = mount(App, {
+            localVue
+        });
+
+        const Col = wrapper.find({ ref: 'col-test' });
+
+        expect(Col.classes().sort()).toEqual(
+            `${colBaseClass} ${mdGuttersClass} w-1/3 ${smBreakpoint}:w-1/4 ${mdBreakpoint}:w-1/5`
+                .split(' ')
+                .sort()
+        );
+
+        expect(Col.classes().length).toBe(5);
 
         wrapper.destroy();
     });
