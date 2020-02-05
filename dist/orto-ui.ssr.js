@@ -231,8 +231,7 @@ var justifyClaassUtil = function (justify) {
     CButton: {
         tag: 'button',
         variant: 'primary',
-        size: 'md',
-        type: 'button'
+        size: 'md'
     },
 
     CLink: {
@@ -1578,7 +1577,7 @@ var CLink = {
 var validVariants$1 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 var validSizes = ['lg', 'md', 'sm'];
 var validTagNames = ['button', 'a'];
-var validTypes$1 = ['button', 'submit'];
+var validTypes$1 = ['submit', 'reset'];
 
 // Button as Link helpers
 var pluckProps = function (keysToPluck, objToPluck) {
@@ -1644,7 +1643,7 @@ var props$3 = Object.assign({}, linkProps,
 
     type: {
         type: String,
-        default: function () { return getComponentConfig(NAME$a, 'type'); },
+        default: null,
         validator: function (value) { return validTypes$1.includes(value); }
     },
 
