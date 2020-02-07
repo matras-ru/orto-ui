@@ -419,6 +419,10 @@ var CForm = {
 
         return h('form', vueFunctionalDataMerge.mergeData(data, componentData), children);
     }
+};var headerBase = 'text-2xl font-semibold mb-1-1';
+
+var DefaultTheme$c = {
+    headerBase: headerBase
 };var NAME$1 = 'CFormPanel';
 
 var CFormPanel = {
@@ -431,7 +435,7 @@ var CFormPanel = {
     props: {
         theme: {
             type: Object,
-            default: function () {}
+            default: function () { return DefaultTheme$c; }
         },
 
         label: {
@@ -467,12 +471,15 @@ var CFormPanel = {
     },
 
     render: function render(h) {
-        return h('section', {}, [
+        var ref = this.theme;
+        var headerBase = ref.headerBase;
+
+        return h('section', [
             this.label
                 ? h(
                       'header',
                       {
-                          staticClass: 'text-2xl font-semibold mb-1-1'
+                          staticClass: headerBase
                       },
                       [h('div', this.label)]
                   )
@@ -627,7 +634,7 @@ var CFormField$1 = {
         return h(
             'label', // outer wrap
             {
-                staticClass: outerWrapClasses
+                class: outerWrapClasses
             },
             [
                 h(
@@ -637,16 +644,12 @@ var CFormField$1 = {
                     },
                     [
                         this.$scopedSlots.prepend
-                            ? h(
-                                  'div',
-                                  { staticClass: prependWrapClasses },
-                                  this.$scopedSlots.prepend()
-                              )
+                            ? h('div', { class: prependWrapClasses }, this.$scopedSlots.prepend())
                             : null, // append
                         h(
                             'div', // control wrap
                             {
-                                staticClass: controlWrapClasses
+                                class: controlWrapClasses
                             },
                             [
                                 this.getControl !== void 0 // control slot
@@ -662,11 +665,7 @@ var CFormField$1 = {
                             ]
                         ),
                         this.$scopedSlots.append
-                            ? h(
-                                  'div',
-                                  { staticClass: appendWrapClasses },
-                                  this.$scopedSlots.append()
-                              )
+                            ? h('div', { class: appendWrapClasses }, this.$scopedSlots.append())
                             : null // prepend
                     ]
                 )
@@ -817,7 +816,7 @@ var optionBase = 'cursor-pointer py-0-4 px-0-8';
 var optionStateDefault = 'bg-white hover:bg-tertiary-100';
 var optionStateActive = 'bg-tertiary-100';
 
-var DefaultTheme$c = {
+var DefaultTheme$d = {
     inputBase: inputBase$1,
     inputIcon: inputIcon,
     optionBase: optionBase,
@@ -862,7 +861,7 @@ var CFormSelectCustom = {
 
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$c; }
+            default: function () { return DefaultTheme$d; }
         },
 
         label: {
@@ -2121,7 +2120,7 @@ var dropdownBase = 'absolute z-10 top-full right-0 left-0 mt-0-4 bg-white overfl
 var dropdownVariantPrimary = 'shadow-example rounded';
 var dropdownVariantSecondary = 'shadow-example rounded-lg';
 
-var DefaultTheme$d = {
+var DefaultTheme$e = {
     wrapperBase: wrapperBase$1,
     dropdownBase: dropdownBase,
     dropdownVariantPrimary: dropdownVariantPrimary,
@@ -2136,7 +2135,7 @@ var CDropdown = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$d; }
+            default: function () { return DefaultTheme$e; }
         },
 
         variant: {

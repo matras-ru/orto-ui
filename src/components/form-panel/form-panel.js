@@ -1,4 +1,5 @@
 import { selfInstall } from '@/';
+import DefaultTheme from '@/themes/default/CFormPanel';
 
 const NAME = 'CFormPanel';
 
@@ -12,7 +13,7 @@ export default {
     props: {
         theme: {
             type: Object,
-            default: () => {}
+            default: () => DefaultTheme
         },
 
         label: {
@@ -48,12 +49,14 @@ export default {
     },
 
     render(h) {
-        return h('section', {}, [
+        const { headerBase } = this.theme;
+
+        return h('section', [
             this.label
                 ? h(
                       'header',
                       {
-                          staticClass: 'text-2xl font-semibold mb-1-1'
+                          staticClass: headerBase
                       },
                       [h('div', this.label)]
                   )
