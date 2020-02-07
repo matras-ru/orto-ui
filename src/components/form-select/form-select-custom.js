@@ -70,7 +70,7 @@ export default {
         event: 'change'
     },
 
-    render(h, { listeners, props }) {
+    render(h, { listeners, props, scopedSlots }) {
         const { data: options, theme, modelValue, label, optionLabel, optionValue, error } = props;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
@@ -102,7 +102,11 @@ export default {
                             readonly: true,
                             error,
                             label,
-                            modelValue: selectedOption ? selectedOption[optionLabel] : null
+                            modelValue: selectedOption
+                                ? scopedSlots.selected
+                                    ? scopedSlots.selected(selectedOption)[0].text
+                                    : selectedOption[optionLabel]
+                                : null
                         },
                         ref: 'holder',
                         staticClass: inputBase,
@@ -136,7 +140,7 @@ export default {
                                         }
                                     }
                                 },
-                                label
+                                scopedSlots.default ? scopedSlots.default(option) : label
                             );
                         })
                     ]);

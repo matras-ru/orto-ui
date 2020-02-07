@@ -17,6 +17,12 @@
 | -------- | ----------- |
 | `change` |             |
 
+## Slots
+
+| Name      | Description |
+| --------- | ----------- |
+| `default` | option      |
+
 ## Classes
 
 | Name                 | Default                          |

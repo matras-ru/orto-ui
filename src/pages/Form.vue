@@ -40,11 +40,11 @@
                             data: [
                                 {
                                     id: 1,
-                                    name: '200 x 250 — 15 080 р.'
+                                    name: '100 x 100 — 5 550 р.'
                                 },
                                 {
                                     id: 2,
-                                    name: '100 x 100 — 5 550 р.'
+                                    name: '100 x 100 — 15 080 р.'
                                 }
                             ],
                             label: 'Выберите размер',
@@ -54,6 +54,38 @@
                         }"
                         v-model="exampleModel.selectModel"
                     />
+                </CFormPanel>
+
+                <CFormPanel label="Slot">
+                    <CFormSelectCustom
+                        v-bind="{
+                            data: [
+                                {
+                                    id: 1,
+                                    price: 15080,
+                                    width: 200,
+                                    height: 250
+                                },
+                                {
+                                    id: 2,
+                                    price: 5550,
+                                    width: 100,
+                                    height: 100
+                                }
+                            ],
+                            label: 'Выберите размер',
+                            optionValue: 'id',
+                            error: $v.exampleModel.selectModel.$error
+                        }"
+                        v-model="exampleModel.selectModel"
+                    >
+                        <template #selected="{ price, width, height }">
+                            {{ width }} x {{ height }} — {{ price }} р.
+                        </template>
+                        <template #default="{ price, width, height }">
+                            {{ width }} x {{ height }} — {{ price }} р.
+                        </template>
+                    </CFormSelectCustom>
                 </CFormPanel>
 
                 <CFormPanel label="Default">

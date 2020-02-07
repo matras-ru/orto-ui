@@ -1,5 +1,5 @@
 export const base =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3 mb-1-4';
+    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3';
 
 export const variantPrimary = 'bg-white border-primary-100 transition-shadow hover:shadow';
 export const variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';

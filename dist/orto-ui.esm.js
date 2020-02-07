@@ -4,7 +4,7 @@ import { mergeData } from 'vue-functional-data-merge';
 import merge from 'lodash.merge';
 
 var base =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3 mb-1-4';
+    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3';
 
 var variantPrimary = 'bg-white border-primary-100 transition-shadow hover:shadow';
 var variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
@@ -964,6 +964,7 @@ var CFormSelectCustom = {
     render: function render(h, ref) {
         var listeners = ref.listeners;
         var props = ref.props;
+        var scopedSlots = ref.scopedSlots;
 
         var options = props.data;
         var theme = props.theme;
@@ -1007,7 +1008,11 @@ var CFormSelectCustom = {
                             readonly: true,
                             error: error,
                             label: label,
-                            modelValue: selectedOption ? selectedOption[optionLabel] : null
+                            modelValue: selectedOption
+                                ? scopedSlots.selected
+                                    ? scopedSlots.selected(selectedOption)[0].text
+                                    : selectedOption[optionLabel]
+                                : null
                         },
                         ref: 'holder',
                         staticClass: inputBase,
@@ -1046,7 +1051,7 @@ var CFormSelectCustom = {
                                         }
                                     }
                                 },
-                                label
+                                scopedSlots.default ? scopedSlots.default(option) : label
                             );
                         })
                     ]);
@@ -1539,6 +1544,11 @@ var CLink = {
             default: function () { return DefaultTheme$1; }
         },
 
+        button: {
+            type: Boolean,
+            default: false
+        },
+
         variant: {
             type: String,
             default: function () { return getComponentConfig(NAME$9, 'variant'); },
@@ -1616,6 +1626,8 @@ var CLink = {
         var this$1 = this;
 
         var computedClass = function () {
+            if (this$1.button) { return; }
+
             var ref = this$1.theme;
             var base = ref.base;
             var stateDisable = ref.stateDisable;
@@ -1670,7 +1682,7 @@ var pluckProps = function (keysToPluck, objToPluck) {
 
 var linkProps = createProps();
 var isLink = function (props) { return Boolean(props.href || props.to || props.tag === 'a'); };
-var computeLinkProps = function (props) { return (isLink(props) ? pluckProps(linkProps, props) : null); };
+var computeLinkProps = function (props) { return isLink(props) ? Object.assign({}, pluckProps(linkProps, props), {button: true}) : {}; };
 
 var createThemeMap$1 = function (ref) {
     var variantPrimary = ref.variantPrimary;
@@ -2288,7 +2300,7 @@ var CDropdown = {
         return h(
             'div', // wrapper
             {
-                staticClass: wrapperClasses,
+                class: wrapperClasses,
                 directives: [
                     {
                         name: 'click-outside',
