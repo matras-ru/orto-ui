@@ -23,7 +23,8 @@ const pluckProps = (keysToPluck, objToPluck) => {
 
 const linkProps = createLinkProps();
 const isLink = props => Boolean(props.href || props.to || props.tag === 'a');
-const computeLinkProps = props => (isLink(props) ? pluckProps(linkProps, props) : null);
+const computeLinkProps = props =>
+    isLink(props) ? { ...pluckProps(linkProps, props), button: true } : {};
 
 const createThemeMap = ({
     variantPrimary,

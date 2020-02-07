@@ -76,7 +76,7 @@ export default {
         return h(
             'div', // wrapper
             {
-                staticClass: wrapperClasses,
+                class: wrapperClasses,
                 directives: [
                     {
                         name: 'click-outside',

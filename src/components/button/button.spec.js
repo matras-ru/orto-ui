@@ -3,11 +3,14 @@ import { mount } from '@vue/test-utils';
 import CButton from './button';
 
 const baseClass =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3 mb-1-4';
+    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3';
 const defaultClass = 'bg-white border-primary-100 transition-shadow hover:shadow';
 const secondaryClass = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
 const disabledClass = 'cursor-not-allowed opacity-75';
 const defaultSizeClass = 'text-base px-1-5 py-0-4 leading-snug';
+
+const baseLinkClass = 'inline-block no-underline';
+const variantPrimaryLink = 'text-secondary-200 hover:text-black-200 border-b-2';
 
 describe('Button', () => {
     it('The button is rendered', () => {
@@ -97,7 +100,7 @@ describe('Button', () => {
         expect(called).toBe(0);
     });
 
-    it('Button as link', () => {
+    it('Button as link - missing link classes', () => {
         const wrapper = mount(CButton, {
             context: {
                 props: {
@@ -108,10 +111,9 @@ describe('Button', () => {
         });
 
         expect(wrapper.is('a')).toBe(true);
-        expect(wrapper.attributes('href')).toBeDefined();
-        expect(wrapper.attributes('href')).toBe('//google.com');
-        expect(wrapper.attributes('target')).toBeDefined();
-        expect(wrapper.attributes('target')).toBe('_blank');
-        expect(wrapper.attributes('type')).not.toBeDefined();
+        expect(wrapper.classes('no-underline')).toBe(false);
+        expect(wrapper.classes('text-secondary-200')).toBe(false);
+        expect(wrapper.classes('hover:text-black-200')).toBe(false);
+        expect(wrapper.classes('border-b-2')).toBe(false);
     });
 });

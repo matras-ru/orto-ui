@@ -126,6 +126,11 @@ export default {
             default: () => DefaultTheme
         },
 
+        button: {
+            type: Boolean,
+            default: false
+        },
+
         variant: {
             type: String,
             default: () => getComponentConfig(NAME, 'variant'),
@@ -200,6 +205,8 @@ export default {
 
     render(h) {
         const computedClass = () => {
+            if (this.button) return;
+
             const { base, stateDisable } = this.theme;
             const classes = [base];
 
