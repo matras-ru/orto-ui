@@ -144,7 +144,7 @@ export default {
         return h(
             'label', // outer wrap
             {
-                staticClass: outerWrapClasses
+                class: outerWrapClasses
             },
             [
                 h(
@@ -154,16 +154,12 @@ export default {
                     },
                     [
                         this.$scopedSlots.prepend
-                            ? h(
-                                  'div',
-                                  { staticClass: prependWrapClasses },
-                                  this.$scopedSlots.prepend()
-                              )
+                            ? h('div', { class: prependWrapClasses }, this.$scopedSlots.prepend())
                             : null, // append
                         h(
                             'div', // control wrap
                             {
-                                staticClass: controlWrapClasses
+                                class: controlWrapClasses
                             },
                             [
                                 this.getControl !== void 0 // control slot
@@ -179,11 +175,7 @@ export default {
                             ]
                         ),
                         this.$scopedSlots.append
-                            ? h(
-                                  'div',
-                                  { staticClass: appendWrapClasses },
-                                  this.$scopedSlots.append()
-                              )
+                            ? h('div', { class: appendWrapClasses }, this.$scopedSlots.append())
                             : null // prepend
                     ]
                 )

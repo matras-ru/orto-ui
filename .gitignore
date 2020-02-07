@@ -2,6 +2,7 @@
 node_modules
 /dist
 storybook-static
+stats.html
 
 # local env files
 .env.local
