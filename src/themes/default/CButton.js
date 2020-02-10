@@ -1,14 +1,14 @@
 export const base =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3';
+    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3';
 
-export const variantPrimary = 'bg-white border-primary-100 transition-shadow hover:shadow';
+export const variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
 export const variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
 export const variantTertiary =
-    'bg-white border-secondary-200 text-secondary-200 transition-bg transition-color hover:text-white hover:bg-secondary-200';
+    'border-secondary-200 text-secondary-200 transition-colors hover:text-white hover:bg-secondary-200';
 export const variantQuaternary =
-    'bg-white border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100';
+    'border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100';
 export const variantQuinary =
-    'bg-white border-black-100 transition-bg transition-color hover:text-white hover:bg-black-100';
+    'border-black-100 transition-colors hover:text-white hover:bg-black-100';
 
 export const stateDisable = 'cursor-not-allowed opacity-75';
 

@@ -3,14 +3,11 @@ import { mount } from '@vue/test-utils';
 import CButton from './button';
 
 const baseClass =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3';
-const defaultClass = 'bg-white border-primary-100 transition-shadow hover:shadow';
+    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3';
+const defaultClass = 'border-primary-100 transition-shadow hover:shadow';
 const secondaryClass = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
 const disabledClass = 'cursor-not-allowed opacity-75';
 const defaultSizeClass = 'text-base px-1-5 py-0-4 leading-snug';
-
-const baseLinkClass = 'inline-block no-underline';
-const variantPrimaryLink = 'text-secondary-200 hover:text-black-200 border-b-2';
 
 describe('Button', () => {
     it('The button is rendered', () => {
