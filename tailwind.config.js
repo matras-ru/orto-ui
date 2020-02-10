@@ -315,75 +315,100 @@ module.exports = {
             '40': '40',
             '50': '50'
         },
+        // .transition-{property}
         transitionProperty: {
-            default: 'none',
             none: 'none',
             all: 'all',
-            color: 'color',
-            bg: 'background-color',
+            default:
+                'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+            colors: 'background-color, border-color, color, fill, stroke',
             border: 'border-color',
-            colors: ['color', 'background-color', 'border-color'],
+            bg: 'background-color',
             opacity: 'opacity',
             shadow: 'box-shadow',
             transform: 'transform'
         },
+        // .duration-{duration}
         transitionDuration: {
             default: '0ms',
-            '0': '0ms',
+            '75': '75ms',
             '100': '100ms',
             '150': '150ms',
             '250': '250ms',
-            '500': '500ms'
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+            '1000': '1000ms'
         },
+        // .ease-{timingFunction}
         transitionTimingFunction: {
-            default: 'ease',
             linear: 'linear',
-            ease: 'ease',
-            'ease-in': 'ease-in',
-            'ease-out': 'ease-out',
-            'ease-in-out': 'ease-in-out'
+            in: 'cubic-bezier(0.4, 0, 1, 1)',
+            out: 'cubic-bezier(0, 0, 0.2, 1)',
+            'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)'
         },
-        transitionDelay: {
-            default: '0ms',
-            '0': '0ms',
-            '100': '100ms',
-            '250': '250ms',
-            '500': '500ms'
-        },
-
-        transform: {
-            none: 'none',
-            'floating-label': 'scale(0.75) translateY(-100%)'
-        },
+        // .origin-{origin}
         transformOrigin: {
-            tl: 'top left'
+            center: 'center',
+            top: 'top',
+            'top-right': 'top right',
+            right: 'right',
+            'bottom-right': 'bottom right',
+            bottom: 'bottom',
+            'bottom-left': 'bottom left',
+            left: 'left',
+            'top-left': 'top left'
         },
-        translate: {
+        // .translate-x-{distance}
+        // .translate-y-{distance}
+        // .-translate-x-{distance}
+        // .-translate-y-{distance}
+        translate: (theme, { negative }) => ({
+            ...theme('spacing'),
+            ...negative(theme('spacing')),
+            '-full': '-100%',
             '-1/2': '-50%',
             '1/2': '50%',
-            full: '100%',
-            '-full': '-100%'
-        },
+            full: '100%'
+        }),
+        // .scale-{scale}
+        // .scale-x-{scale}
+        // .scale-y-{scale}
         scale: {
-            '75': '0.75'
+            '0': '0',
+            '50': '.5',
+            '75': '.75',
+            '90': '.9',
+            '95': '.95',
+            '100': '1',
+            '105': '1.05',
+            '110': '1.1',
+            '125': '1.25',
+            '150': '1.5'
         },
-        rotate: {},
-        skew: {},
-        perspective: {},
-        perspectiveOrigin: {},
+        // .rotate-{angle}
+        rotate: {
+            '-180': '-180deg',
+            '-90': '-90deg',
+            '-45': '-45deg',
+            '0': '0',
+            '45': '45deg',
+            '90': '90deg',
+            '180': '180deg'
+        },
+        // .skew-x-{amount}
+        // .skew-y-{amount}
+        skew: {
+            '-12': '-12deg',
+            '-6': '-6deg',
+            '-3': '-3deg',
+            '0': '0',
+            '3': '3deg',
+            '6': '6deg',
+            '12': '12deg'
+        },
 
         customForms: theme => {
-            const labeActivelState = {
-                fontSize: theme('fontSize.2xs'),
-                paddingTop: theme('padding.0-3'),
-                transform: theme('transform.custom'),
-                backgroundColor: theme('colors.white')
-            };
-
-            const labeErrorlState = {
-                color: theme('colors.danger')
-            };
-
             return {
                 default: {
                     input: {
@@ -435,33 +460,10 @@ module.exports = {
                         iconColor: theme('colors.black.100'),
                         icon: iconColor =>
                             `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${iconColor}"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>`
-                        // borderRadius: theme('borderRadius.lg'),
-                        // boxShadow: theme('boxShadow.default')
                     },
 
-                    checkbox: {
-                        // width: theme('spacing.6'),
-                        // height: theme('spacing.6')
-                    }
+                    checkbox: {}
                 }
-
-                // custom: {
-                //     'input, textarea': {
-                //         '&:focus + label': labeActivelState
-                //     }
-                // },
-
-                // 'not-empty': {
-                //     'input, textarea': {
-                //         '& + label': labeActivelState
-                //     }
-                // },
-
-                // 'is-error': {
-                //     'input, textarea': {
-                //         '& + label': labeErrorlState
-                //     }
-                // }
             };
         }
     },
@@ -530,28 +532,18 @@ module.exports = {
         width: ['responsive'],
         wordBreak: ['responsive'],
         zIndex: ['responsive'],
-        transitionProperty: [],
-        transitionDuration: [],
-        transitionTimingFunction: [],
-        transitionDelay: [],
+        transitionProperty: [''],
+        transitionDuration: [''],
+        transitionTimingFunction: [''],
         transform: [''],
         transformOrigin: [''],
-        translate: [''],
+        translate: ['responsive'],
         scale: [''],
         rotate: [''],
-        skew: [''],
-        perspective: [''],
-        perspectiveOrigin: [''],
-        transformStyle: [''],
-        backfaceVisibility: [''],
-        transformBox: ['']
+        skew: ['']
     },
     corePlugins: {},
     plugins: [
-        require('tailwindcss-transitions')(),
-        require('tailwindcss-transforms')({
-            '3d': false
-        }),
         require('@tailwindcss/custom-forms'),
         function({ addBase, config }) {
             addBase({

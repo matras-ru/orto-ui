@@ -112,7 +112,9 @@ describe('Input states', () => {
 
     it('empty', () => {
         expect(innerWrapper.classes('border-black-200')).toBe(true);
-        expect(label.classes('transform-floating-label')).toBe(false);
+        expect(label.classes()).not.toContain('transform');
+        expect(label.classes()).not.toContain('-translate-y-full');
+        expect(label.classes()).not.toContain('scale-75');
     });
 
     it('not empty', async () => {
@@ -120,7 +122,9 @@ describe('Input states', () => {
         await wrapper.vm.$nextTick();
 
         expect(innerWrapper.classes('border-black-200')).toBe(true);
-        expect(label.classes('transform-floating-label')).toBe(true);
+        expect(label.classes()).toContain('transform');
+        expect(label.classes()).toContain('-translate-y-full');
+        expect(label.classes()).toContain('scale-75');
     });
 
     it('error', async () => {
@@ -137,7 +141,9 @@ describe('Input states', () => {
         await wrapper.vm.$nextTick();
 
         expect(innerWrapper.classes('border-primary-100')).toBe(true);
-        expect(label.classes('transform-floating-label')).toBe(true);
+        expect(label.classes()).toContain('transform');
+        expect(label.classes()).toContain('-translate-y-full');
+        expect(label.classes()).toContain('scale-75');
     });
 });
 

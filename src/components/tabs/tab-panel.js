@@ -1,6 +1,7 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { getComponentConfig } from '@/config';
 import { selfInstall } from '@/';
+import DefaultTheme from '@/themes/default/CTabPanel';
 
 const NAME = 'CTabPanel';
 
@@ -16,7 +17,7 @@ export default {
     props: {
         theme: {
             type: Object,
-            default: () => {}
+            default: () => DefaultTheme
         },
 
         tag: {
@@ -31,14 +32,16 @@ export default {
     },
 
     render(h, { data, props, children }) {
+        const { base } = props.theme;
+
         const componentData = {
             name: props.name,
             attrs: {
                 role: 'tabpanel',
                 id: props.name,
-                'aria-labelledby': `tab-${props.name}`,
-                tabindex: '-1'
-            }
+                'aria-labelledby': `tab-${props.name}`
+            },
+            staticClass: base
         };
         return h(props.tag, mergeData(data, componentData), [children]);
     }

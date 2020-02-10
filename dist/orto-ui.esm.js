@@ -4,16 +4,16 @@ import { mergeData } from 'vue-functional-data-merge';
 import merge from 'lodash.merge';
 
 var base =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 transition-250 transition-ease-in-out border-3';
+    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3';
 
-var variantPrimary = 'bg-white border-primary-100 transition-shadow hover:shadow';
+var variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
 var variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
 var variantTertiary =
-    'bg-white border-secondary-200 text-secondary-200 transition-bg transition-color hover:text-white hover:bg-secondary-200';
+    'border-secondary-200 text-secondary-200 transition-colors hover:text-white hover:bg-secondary-200';
 var variantQuaternary =
-    'bg-white border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100';
+    'border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100';
 var variantQuinary =
-    'bg-white border-black-100 transition-bg transition-color hover:text-white hover:bg-black-100';
+    'border-black-100 transition-colors hover:text-white hover:bg-black-100';
 
 var stateDisable = 'cursor-not-allowed opacity-75';
 
@@ -63,17 +63,16 @@ var DefaultTheme$1 = {
 var outerWrapBase = 'block mb-1-4 px-0-4';
 
 var innerWrapBase =
-    'flex items-center border-2 rounded-lg -mx-0-4 px-0-8 transition-border transition-150 transition-ease';
+    'flex items-center border-2 rounded-lg -mx-0-4 px-0-8 transition-border duration-150';
 var innerWrapStateDefault = 'border-black-200';
 var innerWrapStateFocused = 'border-primary-100';
 var innerWrapStateError = 'border-danger';
 
 var labelBase =
-    'absolute left-0 max-w-full truncate pointer-events-none bg-white px-0-4 uppercase transform-tl transition-transform transition-ease transition-150 top-0-5 leading-snug';
-var labelPositionFloat = 'transform-floating-label';
+    'absolute left-0 max-w-full truncate pointer-events-none bg-white px-0-4 uppercase origin-top-left transition-transform ease-in duration-150 top-0-5 leading-snug';
+var labelPositionFloat = 'transform -translate-y-full scale-75';
 var labelStateDefault = 'text-tertiary-300';
 var labelStateError = 'text-danger';
-
 var controlWrapBase = 'flex-auto relative';
 var prependBase = 'pr-0-4';
 var appendBase = 'pl-0-4';
@@ -2048,6 +2047,12 @@ var CTabPanels = {
     }
 };
 
+var base$a = '';
+
+var DefaultTheme$e = {
+    base: base$a
+};
+
 var NAME$e = 'CTabPanel';
 
 var CTabPanel = {
@@ -2062,7 +2067,7 @@ var CTabPanel = {
     props: {
         theme: {
             type: Object,
-            default: function () {}
+            default: function () { return DefaultTheme$e; }
         },
 
         tag: {
@@ -2081,14 +2086,17 @@ var CTabPanel = {
         var props = ref.props;
         var children = ref.children;
 
+        var ref$1 = props.theme;
+        var base = ref$1.base;
+
         var componentData = {
             name: props.name,
             attrs: {
                 role: 'tabpanel',
                 id: props.name,
-                'aria-labelledby': ("tab-" + (props.name)),
-                tabindex: '-1'
-            }
+                'aria-labelledby': ("tab-" + (props.name))
+            },
+            staticClass: base
         };
         return h(props.tag, mergeData(data, componentData), [children]);
     }
@@ -2217,7 +2225,7 @@ var dropdownBase = 'absolute z-10 top-full right-0 left-0 mt-0-4 bg-white overfl
 var dropdownVariantPrimary = 'shadow-example rounded';
 var dropdownVariantSecondary = 'shadow-example rounded-lg';
 
-var DefaultTheme$e = {
+var DefaultTheme$f = {
     wrapperBase: wrapperBase$1,
     dropdownBase: dropdownBase,
     dropdownVariantPrimary: dropdownVariantPrimary,
@@ -2234,7 +2242,7 @@ var CDropdown = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$e; }
+            default: function () { return DefaultTheme$f; }
         },
 
         variant: {

@@ -33,8 +33,5 @@ describe('CTabPanels', () => {
 
         expect(panel.attributes('id')).toBeDefined;
         expect(panel.attributes('aria-labelledby')).toBeDefined;
-
-        expect(panel.attributes('tabindex')).toBeDefined;
-        expect(panel.attributes('tabindex')).toBe('-1');
     });
 });
