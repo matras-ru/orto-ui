@@ -2221,7 +2221,7 @@ var CListItem = {
 };
 
 var wrapperBase$1 = 'relative';
-var dropdownBase = 'absolute z-10 top-full right-0 left-0 mt-0-4 bg-white overflow-hidden';
+var dropdownBase = 'absolute z-10 top-full left-0 mt-0-4 bg-white overflow-hidden';
 var dropdownVariantPrimary = 'shadow-example rounded';
 var dropdownVariantSecondary = 'shadow-example rounded-lg';
 
@@ -2324,7 +2324,8 @@ var CDropdown = {
                           // TODO: спорное решение передавать функцию в качестве props, не совсем vue way, скорее реакт. Пока оставим так
                           toggle: this.toggle,
                           open: this.open,
-                          close: this.close
+                          close: this.close,
+                          isShow: this.isShow
                       })
                     : null,
 
@@ -2339,7 +2340,8 @@ var CDropdown = {
                               ? this.$scopedSlots.dropdown({
                                     toggle: this.toggle,
                                     open: this.open,
-                                    close: this.close
+                                    close: this.close,
+                                    isShow: this.isShow
                                 })
                               : null
                       )

@@ -27,6 +27,9 @@
             <CButton size="sm" :to="{ name: 'test' }">Button Router-Link </CButton>
             <CButton size="sm" href="//google.com" target="_blank">Button Link </CButton>
         </div>
+        <!--  Link -->
+        <CLink variant="primary">Ссылка</CLink>
+        <CLink variant="secondary">Ссылка</CLink>
     </div>
 </template>
 
