@@ -32,7 +32,7 @@ describe('Dropdown basic', () => {
 
         expect(dropdown.is('div')).toBe(true);
         expect(dropdown.classes().sort()).toEqual(
-            'absolute z-10 top-full left-0 mt-0-4 bg-white overflow-hidden shadow-example rounded'
+            'absolute z-10 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden shadow-example rounded'
                 .split(' ')
                 .sort()
         );

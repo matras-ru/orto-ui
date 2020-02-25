@@ -4,18 +4,21 @@ import { getHashMapValue } from '@/utils';
 import DefaultTheme from '@/themes/default/CLink';
 
 const NAME = 'CLink';
-const ANCHOR_TAG = 'a';
+const LINK_TAG = 'a';
+const SPAN_TAG = 'span';
 const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 
 const concat = (...args) => Array.prototype.concat.apply([], args);
-const isRouterLink = tag => tag.toString().toLowerCase() !== ANCHOR_TAG;
+const isRouterLink = tag => ![LINK_TAG, SPAN_TAG].includes(tag.toString().toLowerCase());
 
-const computeTag = ({ to, disabled } = {}, instance) => {
+const computeTag = ({ to, disabled, href }, instance) => {
     return instance.$router && to && !disabled
         ? instance.$nuxt
             ? 'nuxt-link'
             : 'router-link'
-        : ANCHOR_TAG;
+        : href
+        ? LINK_TAG
+        : SPAN_TAG;
 };
 
 const computeRel = ({ target, rel } = {}) => {
@@ -155,7 +158,7 @@ export default {
 
     computed: {
         computedTag() {
-            return computeTag({ to: this.to, disabled: this.disabled }, this);
+            return computeTag({ to: this.to, disabled: this.disabled, href: this.href }, this);
         },
 
         isRouterLink() {
@@ -225,8 +228,6 @@ export default {
             props: this.computedProps,
             attrs: {
                 ...this.$attrs,
-                rel: this.computeRel,
-                target: this.target,
                 tabindex: this.disabled ? '-1' : this.$attrs.tabindex ? this.$attrs.tabindex : null,
                 'aria-disabled': this.disabled ? 'true' : null
             },
@@ -239,8 +240,12 @@ export default {
 
         if (this.href) {
             componentData.attrs.href = this.href;
+            componentData.attrs.target = this.target;
+            componentData.attrs.rel = this.computeRel;
         } else {
-            delete componentData.props.href;
+            delete componentData.attrs.href;
+            delete componentData.attrs.target;
+            delete componentData.attrs.rel;
         }
 
         return h(this.computedTag, componentData, this.label ? this.label : this.$slots.default);

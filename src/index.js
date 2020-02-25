@@ -19,12 +19,14 @@ import { CLink } from '@/components/link';
 import { CTabs, CTab, CTabPanels, CTabPanel } from '@/components/tabs';
 import { CList, CListItem } from '@/components/list';
 import { CDropdown } from '@/components/dropdown';
+import { CBadge } from '@/components/badge';
 
 /*  LAYOUT */
 import { CContainer, CRow, CCol } from '@/components/layout';
 
 const components = {
     CButton,
+    CBadge,
     CLink,
     CForm,
     CFormPanel,

@@ -28,13 +28,35 @@
             <CButton size="sm" href="//google.com" target="_blank">Button Link </CButton>
         </div>
         <!--  Link -->
-        <CLink variant="primary">Ссылка</CLink>
+        <CLink variant="primary" @click="test">Ссылка</CLink>
+        <br />
         <CLink variant="secondary">Ссылка</CLink>
+        <br />
+        <CLink variant="tertiary">Ссылка</CLink>
+        <br />
+        <CLink variant="quaternary">Ссылка</CLink>
+        <br />
+        <CLink variant="quinary">Подробнее</CLink>
+        <br /><br />
+        <!--  Badge -->
+        <CBadge>-20%</CBadge>
+        <br />
+        <br />
+        <CBadge variant="secondary">ХИТ</CBadge>
+        <br />
+        <br />
+        <CBadge variant="tertiary">-20%</CBadge>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Index'
+    name: 'Index',
+
+    methods: {
+        test() {
+            alert('wfwf');
+        }
+    }
 };
 </script>

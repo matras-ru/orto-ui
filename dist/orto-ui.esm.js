@@ -41,14 +41,14 @@ var DefaultTheme = {
     displayBlock: displayBlock
 };
 
-var base$1 = 'inline no-underline';
+var base$1 = 'no-underline cursor-pointer';
 var stateDisable$1 = 'opacity-75 cursor-not-allowed';
 
 var variantPrimary$1 = 'text-secondary-200 hover:text-black-200 border-b-2';
 var variantSecondary$1 = '';
-var variantTertiary$1 = '';
-var variantQuaternary$1 = '';
-var variantQuinary$1 = '';
+var variantTertiary$1 = 'hover:text-secondary-200 border-b';
+var variantQuaternary$1 = 'text-tertiary-300 hover:text-black-200';
+var variantQuinary$1 = 'border-b-2 border-dotted';
 
 var DefaultTheme$1 = {
     base: base$1,
@@ -60,7 +60,8 @@ var DefaultTheme$1 = {
     variantQuinary: variantQuinary$1
 };
 
-var outerWrapBase = 'block mb-1-4 px-0-4';
+var outerWrapBase = 'block px-0-4';
+var outerWrapSpace = 'mb-1-4';
 
 var innerWrapBase =
     'flex items-center border-2 rounded-lg -mx-0-4 px-0-8 transition-border duration-150';
@@ -69,16 +70,19 @@ var innerWrapStateFocused = 'border-primary-100';
 var innerWrapStateError = 'border-danger';
 
 var labelBase =
-    'absolute left-0 max-w-full truncate pointer-events-none bg-white px-0-4 uppercase origin-top-left transition-transform ease-in duration-150 top-0-5 leading-snug';
+    'absolute left-0 max-w-full truncate pointer-events-none px-0-4 uppercase origin-top-left transition-transform ease-in duration-150 top-0-5 leading-snug';
 var labelPositionFloat = 'transform -translate-y-full scale-75';
 var labelStateDefault = 'text-tertiary-300';
 var labelStateError = 'text-danger';
+var labelBgPrimary = 'bg-white';
+
 var controlWrapBase = 'flex-auto relative';
 var prependBase = 'pr-0-4';
 var appendBase = 'pl-0-4';
 
 var CFormField = {
     outerWrapBase: outerWrapBase,
+    outerWrapSpace: outerWrapSpace,
     innerWrapBase: innerWrapBase,
 
     innerWrapStateDefault: innerWrapStateDefault,
@@ -91,19 +95,30 @@ var CFormField = {
     labelPositionFloat: labelPositionFloat,
     labelStateDefault: labelStateDefault,
     labelStateError: labelStateError,
+    labelBgPrimary: labelBgPrimary,
 
     prependBase: prependBase,
     appendBase: appendBase
 };
 
+var controlWrap = 'relative';
 var base$2 = 'w-full form-input py-0-5';
 var stateReadonly = 'cursor-pointer';
 var typeTextarea = 'resize-none';
 
+var apperanceWrap = 'absolute top-0 right-0 flex flex-col h-full py-0-3';
+var apperanceBase =
+    'inline-flex items-center justify-center h-1/2 cursor-pointer select-none';
+var apperanceStateDisable = 'opacity-50 pointer-events-none';
+
 var DefaultTheme$2 = Object.assign({}, CFormField,
-    {base: base$2,
+    {controlWrap: controlWrap,
+    base: base$2,
     stateReadonly: stateReadonly,
-    typeTextarea: typeTextarea});
+    typeTextarea: typeTextarea,
+    apperanceWrap: apperanceWrap,
+    apperanceBase: apperanceBase,
+    apperanceStateDisable: apperanceStateDisable});
 
 var base$3 = 'mb-1-4';
 
@@ -141,7 +156,8 @@ var DefaultTheme$4 = {
     wrapperBase: wrapperBase
 };
 
-var base$4 = 'outline-none select-none font-semibold text-lg uppercase px-1-5 py-0-7';
+var base$4 =
+    'outline-none select-none font-semibold text-lg uppercase inline-block px-1-5 py-0-7';
 var stateDefault = '';
 var stateActive = 'text-secondary-200 border-b-4 border-secondary-200';
 
@@ -282,6 +298,10 @@ var DEFAULTS = {
         tag: 'button',
         variant: 'primary',
         size: 'md'
+    },
+
+    CBadge: {
+        variant: 'primary'
     },
 
     CLink: {
@@ -566,6 +586,11 @@ var CFormField$1 = {
             default: null
         },
 
+        inline: {
+            type: Boolean,
+            default: false
+        },
+
         name: {
             type: String,
             default: null
@@ -594,6 +619,11 @@ var CFormField$1 = {
         errorMessage: {
             type: String,
             default: null
+        },
+
+        labelBgColor: {
+            type: String,
+            default: null
         }
     },
 
@@ -609,6 +639,7 @@ var CFormField$1 = {
         var ref = (function () {
             var ref = this$1.theme;
             var outerWrapBase = ref.outerWrapBase;
+            var outerWrapSpace = ref.outerWrapSpace;
             var innerWrapBase = ref.innerWrapBase;
             var innerWrapStateDefault = ref.innerWrapStateDefault;
             var innerWrapStateFocused = ref.innerWrapStateFocused;
@@ -618,6 +649,7 @@ var CFormField$1 = {
             var labelStateDefault = ref.labelStateDefault;
             var labelStateError = ref.labelStateError;
             var labelPositionFloat = ref.labelPositionFloat;
+            var labelBgPrimary = ref.labelBgPrimary;
             var prependBase = ref.prependBase;
             var appendBase = ref.appendBase;
 
@@ -627,6 +659,16 @@ var CFormField$1 = {
             var labelClasses = [labelBase];
             var prependWrapClasses = [prependBase];
             var appendWrapClasses = [appendBase];
+
+            if (!this$1.inline) {
+                outerWrapClasses.push(outerWrapSpace);
+            }
+
+            if (!this$1.labelBgColor) {
+                labelClasses.push(labelBgPrimary);
+            } else {
+                labelClasses.push(this$1.labelBgColor);
+            }
 
             var isError = function () {
                 innerWrapClasses.push(innerWrapStateError);
@@ -715,13 +757,17 @@ var CFormField$1 = {
                                 this.getControl !== void 0 // control slot
                                     ? this.getControl(h)
                                     : this.$slots.default,
-                                h(
-                                    'div', // label
-                                    {
-                                        class: labelClasses
-                                    },
-                                    this.label
-                                )
+
+                                this.label
+                                    ? h(
+                                          'div', // label
+                                          {
+                                              class: labelClasses,
+                                              ref: 'label'
+                                          },
+                                          this.label
+                                      )
+                                    : null
                             ]
                         ),
                         this.$scopedSlots.append
@@ -799,12 +845,42 @@ var CFormInput = {
         event: 'input'
     },
 
+    computed: {
+        isNumeric: function isNumeric() {
+            return this.type === 'number';
+        }
+    },
+
     methods: {
+        decrease: function decrease() {
+            var numericValue = this.numericProcess(this.modelValue);
+
+            if (isNaN(numericValue)) {
+                numericValue = 1;
+            }
+
+            if (numericValue <= this.min) { return; }
+
+            this.update({ type: 'input', value: numericValue - 1 });
+        },
+
+        increase: function increase() {
+            var numericValue = this.numericProcess(this.modelValue);
+
+            if (isNaN(numericValue)) {
+                numericValue = 1;
+            }
+
+            if (numericValue === this.max) { return; }
+
+            this.update({ type: 'input', value: numericValue + 1 });
+        },
+
         numericProcess: function numericProcess(value) {
             /*
-            1 - если поле пустое, cброс значения -> null
-            2 - ограничения по сторонам
-            3 - защита от отрицательных значений
+            1 - empty -> null
+            2 - min/max
+            3 - negative
             */
             var num = parseFloat(value);
             var localValue = isNaN(num) ? value : num;
@@ -827,49 +903,126 @@ var CFormInput = {
             var type = ref.type;
 
             var value = e.target.value;
-            this.$emit(type, value);
+
+            if (this.isNumeric) {
+                var numericValue = this.numericProcess(value);
+                this.update({ type: type, value: numericValue });
+            } else {
+                this.update({ type: type, value: value });
+            }
+        },
+
+        update: function update(ref) {
+            var type = ref.type;
+            var value = ref.value;
+
+            this.$emit(type === 'input' ? 'input' : 'change', value);
         },
 
         getControl: function getControl(h) {
             var this$1 = this;
-
-            var isTextArea = this.type === 'textarea';
 
             //
             var ref = this.theme;
             var base = ref.base;
             var stateReadonly = ref.stateReadonly;
             var typeTextarea = ref.typeTextarea;
+            var controlWrap = ref.controlWrap;
+            var apperanceWrap = ref.apperanceWrap;
+            var apperanceBase = ref.apperanceBase;
+            var apperanceStateDisable = ref.apperanceStateDisable;
+
+            var isTextArea = this.type === 'textarea';
+
             var inputClasses = [base];
-            if (isTextArea) { inputClasses.push(typeTextarea); }
+
+            if (this.isTextArea) { inputClasses.push(typeTextarea); }
+
             if (this.readonly) { inputClasses.push(stateReadonly); }
 
-            return h(isTextArea ? 'textarea' : 'input', {
-                attrs: Object.assign({}, {name: this.name,
-                    id: this.id,
-                    type: !isTextArea ? this.type : null,
-                    rows: isTextArea ? this.rows : null},
-                    (['number', 'date'].includes(this.type)
-                        ? {
-                              min: this.min,
-                              max: this.max
-                          }
-                        : null),
-                    {placeholder: this.placeholder,
-                    readonly: this.readonly}),
-                domProps: {
-                    value: this.modelValue
+            return h(
+                'div',
+                {
+                    staticClass: controlWrap
                 },
-                class: inputClasses,
-                on: Object.assign({}, this.$listeners,
-                    {focus: function () {
-                        if (this$1.readonly) { return; }
-                        this$1.focused = true;
-                    },
-                    blur: function () { return (this$1.focused = false); },
-                    input: function (e) { return this$1.onUpdate({ e: e, type: 'input' }); },
-                    change: function (e) { return this$1.onUpdate({ e: e, type: 'change' }); }})
-            });
+                [
+                    h(isTextArea ? 'textarea' : 'input', {
+                        attrs: Object.assign({}, {name: this.name,
+                            id: this.id,
+                            type: !isTextArea ? this.type : null,
+                            rows: isTextArea ? this.rows : null},
+                            (['number', 'date'].includes(this.type)
+                                ? {
+                                      min: this.min,
+                                      max: this.max
+                                  }
+                                : null),
+                            {placeholder: this.placeholder,
+                            readonly: this.readonly}),
+
+                        domProps: {
+                            value: this.modelValue
+                        },
+
+                        class: inputClasses,
+
+                        on: Object.assign({}, this.$listeners,
+
+                            {focus: function () {
+                                if (this$1.readonly) { return; }
+                                this$1.focused = true;
+                            },
+
+                            blur: function () { return (this$1.focused = false); },
+
+                            input: function (e) { return this$1.onUpdate({ e: e, type: 'input' }); },
+
+                            change: function (e) { return this$1.onUpdate({ e: e, type: 'change' }); }})
+                    }),
+
+                    // custom number apperance
+                    this.isNumeric
+                        ? h(
+                              'div',
+                              {
+                                  staticClass: apperanceWrap
+                              },
+                              [
+                                  h(
+                                      'span',
+                                      {
+                                          staticClass: apperanceBase,
+                                          class: [
+                                              this.modelValue === this.max
+                                                  ? apperanceStateDisable
+                                                  : null
+                                          ],
+                                          on: {
+                                              click: this.increase
+                                          }
+                                      },
+                                      this.$slots.up
+                                  ),
+                                  h(
+                                      'span',
+                                      {
+                                          staticClass: apperanceBase,
+                                          class: [
+                                              this.modelValue <= this.min
+                                                  ? apperanceStateDisable
+                                                  : null
+                                          ],
+                                          on: {
+                                              click: this.decrease
+                                          }
+                                      },
+                                      this.$slots.down
+                                  )
+                              ]
+                          )
+                        : null
+                ]
+            );
         }
     }
 };
@@ -1410,7 +1563,8 @@ var CCheckboxGroup = Object.assign({}, {name: NAME$8},
     }));
 
 var NAME$9 = 'CLink';
-var ANCHOR_TAG = 'a';
+var LINK_TAG = 'a';
+var SPAN_TAG = 'span';
 var validVariants = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 
 var concat = function () {
@@ -1419,18 +1573,20 @@ var concat = function () {
 
     return Array.prototype.concat.apply([], args);
 };
-var isRouterLink = function (tag) { return tag.toString().toLowerCase() !== ANCHOR_TAG; };
+var isRouterLink = function (tag) { return ![LINK_TAG, SPAN_TAG].includes(tag.toString().toLowerCase()); };
 
 var computeTag = function (ref, instance) {
-    if ( ref === void 0 ) ref = {};
     var to = ref.to;
     var disabled = ref.disabled;
+    var href = ref.href;
 
     return instance.$router && to && !disabled
         ? instance.$nuxt
             ? 'nuxt-link'
             : 'router-link'
-        : ANCHOR_TAG;
+        : href
+        ? LINK_TAG
+        : SPAN_TAG;
 };
 
 var computeRel = function (ref) {
@@ -1572,7 +1728,7 @@ var CLink = {
 
     computed: {
         computedTag: function computedTag() {
-            return computeTag({ to: this.to, disabled: this.disabled }, this);
+            return computeTag({ to: this.to, disabled: this.disabled, href: this.href }, this);
         },
 
         isRouterLink: function isRouterLink$1() {
@@ -1648,9 +1804,7 @@ var CLink = {
             class: computedClass(),
             props: this.computedProps,
             attrs: Object.assign({}, this.$attrs,
-                {rel: this.computeRel,
-                target: this.target,
-                tabindex: this.disabled ? '-1' : this.$attrs.tabindex ? this.$attrs.tabindex : null,
+                {tabindex: this.disabled ? '-1' : this.$attrs.tabindex ? this.$attrs.tabindex : null,
                 'aria-disabled': this.disabled ? 'true' : null})
         };
         componentData[this.isRouterLink ? 'nativeOn' : 'on'] = Object.assign({}, this.$listeners,
@@ -1658,8 +1812,12 @@ var CLink = {
 
         if (this.href) {
             componentData.attrs.href = this.href;
+            componentData.attrs.target = this.target;
+            componentData.attrs.rel = this.computeRel;
         } else {
-            delete componentData.props.href;
+            delete componentData.attrs.href;
+            delete componentData.attrs.target;
+            delete componentData.attrs.rel;
         }
 
         return h(this.computedTag, componentData, this.label ? this.label : this.$slots.default);
@@ -1979,7 +2137,10 @@ var CTab = {
                         id: ("tab-" + (this.name))
                     },
                     on: {
-                        click: function () { return this$1.$emit('onClick', this$1.name); }
+                        click: function (e) {
+                            e.preventDefault();
+                            return this$1.$emit('onClick', this$1.name);
+                        }
                     },
                     staticClass: base,
                     class: [stateDefault, this.isActive ? stateActive : null]
@@ -2221,7 +2382,8 @@ var CListItem = {
 };
 
 var wrapperBase$1 = 'relative';
-var dropdownBase = 'absolute z-10 top-full left-0 mt-0-4 bg-white overflow-hidden';
+var dropdownBase =
+    'absolute z-10 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden';
 var dropdownVariantPrimary = 'shadow-example rounded';
 var dropdownVariantSecondary = 'shadow-example rounded-lg';
 
@@ -2351,7 +2513,105 @@ var CDropdown = {
     }
 };
 
+var base$b = 'rounded-lg font-bold px-0-6 py-0-2 inline-block border-2 leading-snug';
+
+var variantPrimary$2 = 'bg-primary-100 border-primary-100 text-white';
+var variantSecondary$2 = 'border-secondary-200 text-secondary-200';
+var variantTertiary$2 = 'text-danger border-danger';
+var variantQuaternary$2 = '';
+var variantQuinary$2 = '';
+
+var DefaultTheme$g = {
+    base: base$b,
+
+    variantPrimary: variantPrimary$2,
+    variantSecondary: variantSecondary$2,
+    variantTertiary: variantTertiary$2,
+    variantQuaternary: variantQuaternary$2,
+    variantQuinary: variantQuinary$2
+};
+
+var NAME$i = 'CBadge';
+var validVariants$3 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
+
+var createThemeMap$2 = function (ref) {
+    var variantPrimary = ref.variantPrimary;
+    var variantSecondary = ref.variantSecondary;
+    var variantTertiary = ref.variantTertiary;
+    var variantQuaternary = ref.variantQuaternary;
+    var variantQuinary = ref.variantQuinary;
+
+    return {
+        variants: {
+            primary: variantPrimary,
+            secondary: variantSecondary,
+            tertiary: variantTertiary,
+            quaternary: variantQuaternary,
+            quinary: variantQuinary
+        }
+    };
+};
+
 var props$6 = {
+    theme: {
+        type: Object,
+        default: function () { return DefaultTheme$g; }
+    },
+
+    label: {
+        type: String,
+        default: null
+    },
+
+    variant: {
+        type: String,
+        default: function () { return getComponentConfig(NAME$i, 'variant'); },
+        validator: function (value) { return validVariants$3.includes(value); }
+    }
+};
+
+var currentClass$2 = function (ref) {
+    var disabled = ref.disabled;
+    var size = ref.size;
+    var variant = ref.variant;
+    var block = ref.block;
+    var theme = ref.theme;
+
+    var base = theme.base;
+    var ref$1 = createThemeMap$2(theme);
+    var variants = ref$1.variants;
+    var classes = [base];
+
+    classes.push(getHashMapValue(variants, variant));
+
+    return classes;
+};
+
+var CBadge = {
+    name: NAME$i,
+
+    functional: true,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    props: props$6,
+
+    render: function render(h, ref) {
+        var data = ref.data;
+        var props = ref.props;
+        var children = ref.children;
+
+        var componentData = {
+            class: currentClass$2(props)
+        };
+
+        return h('div', mergeData(data, componentData), props.label ? props.label : children);
+    }
+};
+
+var props$7 = {
     theme: {
         type: Object,
         default: function () { return DefaultTheme$8; }
@@ -2363,7 +2623,7 @@ var props$6 = {
     }
 };
 
-var currentClass$2 = function (ref) {
+var currentClass$3 = function (ref) {
     var fluid = ref.fluid;
     var theme = ref.theme;
 
@@ -2385,7 +2645,7 @@ var CContainer = {
         selfInstall(Vue, theme, this);
     },
 
-    props: props$6,
+    props: props$7,
 
     render: function render(h, ref) {
         var props = ref.props;
@@ -2393,14 +2653,14 @@ var CContainer = {
         var children = ref.children;
 
         var componentData = {
-            class: currentClass$2(props)
+            class: currentClass$3(props)
         };
 
         return h('div', mergeData(data, componentData), children);
     }
 };
 
-var NAME$i = 'CCol';
+var NAME$j = 'CCol';
 
 var breakpoints = getComponentConfig('common', 'screens');
 
@@ -2424,7 +2684,7 @@ var generateProps = function () {
 };
 
 var CCol = {
-    name: NAME$i,
+    name: NAME$j,
 
     functional: true,
 
@@ -2460,7 +2720,7 @@ var CCol = {
     }
 };
 
-var NAME$j = 'CRow';
+var NAME$k = 'CRow';
 var VALID_GUTTERS = ['none', 'sm', 'md', 'lg', 'xl'];
 var GUTTERS_PROP_NAME = 'gutters';
 var COLS_PROP_NAME = 'cols';
@@ -2468,7 +2728,7 @@ var COLS_PROP_NAME = 'cols';
 var getBreakpoint = function (key, name) { return key.replace(name, '').toLowerCase(); };
 var wPrefix = 'w-';
 
-var createThemeMap$2 = function (ref) {
+var createThemeMap$3 = function (ref) {
     var guttersNormalizeXl = ref.guttersNormalizeXl;
     var guttersXl = ref.guttersXl;
     var guttersNormalizeLg = ref.guttersNormalizeLg;
@@ -2536,14 +2796,14 @@ var generateProps$1 = function () {
         }
     }, obj[COLS_PROP_NAME] = {
             type: Number,
-            default: function () { return getComponentConfig(NAME$j, COLS_PROP_NAME); }
+            default: function () { return getComponentConfig(NAME$k, COLS_PROP_NAME); }
         }, obj ),
 
         breakpointCols,
 
         ( obj$1 = {}, obj$1[GUTTERS_PROP_NAME] = {
             type: String,
-            default: function () { return getComponentConfig(NAME$j, 'gutters'); },
+            default: function () { return getComponentConfig(NAME$k, 'gutters'); },
             validator: function (value) { return VALID_GUTTERS.includes(value); }
         }, obj$1 ),
 
@@ -2551,11 +2811,11 @@ var generateProps$1 = function () {
 };
 
 //
-var currentClass$3 = function (props) {
+var currentClass$4 = function (props) {
     var gutter = props.gutters;
     var theme = props.theme;
     var base = theme.base;
-    var ref = createThemeMap$2(theme);
+    var ref = createThemeMap$3(theme);
     var gutters = ref.gutters;
 
     var rowClasses = [base];
@@ -2635,7 +2895,7 @@ var createColBreakpointClass = function (ref) {
 };
 
 var CRow = {
-    name: NAME$j,
+    name: NAME$k,
 
     functional: true,
 
@@ -2655,7 +2915,7 @@ var CRow = {
         var data = ref.data;
         var children = ref.children; if ( children === void 0 ) children = [];
 
-        var ref$1 = currentClass$3(props);
+        var ref$1 = currentClass$4(props);
         var rowClasses = ref$1.rowClasses;
         var colClasses = ref$1.colClasses;
 
@@ -2690,6 +2950,7 @@ var CRow = {
 
 var components = {
     CButton: CButton,
+    CBadge: CBadge,
     CLink: CLink,
     CForm: CForm,
     CFormPanel: CFormPanel,
