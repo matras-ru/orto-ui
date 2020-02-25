@@ -18,8 +18,8 @@
                 </div>
 
                 <CDropdown>
-                    <template #holder="{ toggle }">
-                        <CLink variant="primary" @click="toggle">Серия Эконом</CLink>
+                    <template #holder="{ toggle, isShow }">
+                        <CLink variant="primary" @click="toggle">Серия Эконом {{ isShow }} </CLink>
                     </template>
                     <template #dropdown="{ toggle }">
                         <CList>

@@ -91,7 +91,8 @@ export default {
                           // TODO: спорное решение передавать функцию в качестве props, не совсем vue way, скорее реакт. Пока оставим так
                           toggle: this.toggle,
                           open: this.open,
-                          close: this.close
+                          close: this.close,
+                          isShow: this.isShow
                       })
                     : null,
 
@@ -106,7 +107,8 @@ export default {
                               ? this.$scopedSlots.dropdown({
                                     toggle: this.toggle,
                                     open: this.open,
-                                    close: this.close
+                                    close: this.close,
+                                    isShow: this.isShow
                                 })
                               : null
                       )
