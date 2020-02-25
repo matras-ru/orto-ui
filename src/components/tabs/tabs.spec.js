@@ -13,7 +13,7 @@ config.stubs['CListItem'] = CListItem;
 config.stubs['CLink'] = CLink;
 
 const baseTabLinkClasses =
-    'outline-none select-none inline-block no-underline font-semibold text-lg uppercase px-1-5 py-0-7';
+    'outline-none select-none inline no-underline font-semibold text-lg uppercase px-1-5 py-0-7';
 const activeTabLinkClasses = 'text-secondary-200 border-b-4 border-secondary-200';
 
 describe('CTabs', () => {

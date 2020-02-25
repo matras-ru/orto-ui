@@ -41,7 +41,7 @@ var DefaultTheme = {
     displayBlock: displayBlock
 };
 
-var base$1 = 'inline-block no-underline';
+var base$1 = 'inline no-underline';
 var stateDisable$1 = 'opacity-75 cursor-not-allowed';
 
 var variantPrimary$1 = 'text-secondary-200 hover:text-black-200 border-b-2';
