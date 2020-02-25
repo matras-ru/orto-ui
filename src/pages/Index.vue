@@ -42,7 +42,11 @@
         <CBadge>-20%</CBadge>
         <br />
         <br />
-        <CBadge variant="secondary">ХИТ</CBadge>
+        <h1 class="text-4xl">
+            Lorem ipsum dolor sit amet <br />
+            adipisicing elit. Laboriosam, minus.
+            <CBadge variant="secondary" class="text-base">ХИТ</CBadge>
+        </h1>
         <br />
         <br />
         <CBadge variant="tertiary">-20%</CBadge>

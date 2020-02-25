@@ -2410,7 +2410,8 @@ var CDropdown = {
             ]
         );
     }
-};var base$b = 'rounded-lg font-bold px-0-6 py-0-2 inline-block border-2 leading-snug';
+};var base$b =
+    'rounded-lg font-bold px-0-6 py-0-3 inline-block border-2 leading-none align-middle';
 
 var variantPrimary$2 = 'bg-primary-100 border-primary-100 text-white';
 var variantSecondary$2 = 'border-secondary-200 text-secondary-200';
@@ -2502,7 +2503,7 @@ var CBadge = {
             class: currentClass$2(props)
         };
 
-        return h('div', vueFunctionalDataMerge.mergeData(data, componentData), props.label ? props.label : children);
+        return h('span', vueFunctionalDataMerge.mergeData(data, componentData), props.label ? props.label : children);
     }
 };var props$7 = {
     theme: {

@@ -70,6 +70,6 @@ export default {
             class: currentClass(props)
         };
 
-        return h('div', mergeData(data, componentData), props.label ? props.label : children);
+        return h('span', mergeData(data, componentData), props.label ? props.label : children);
     }
 };
