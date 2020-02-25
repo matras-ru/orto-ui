@@ -10,10 +10,13 @@
                     <CFormPanel label="Number">
                         <CFormInput
                             type="number"
-                            min="0"
-                            max="1000"
+                            :min="0"
+                            :max="1000"
                             v-model="exampleModel.inputNumberModel"
-                        />
+                        >
+                            <template #up>♠</template>
+                            <template #down>♥</template>
+                        </CFormInput>
                     </CFormPanel>
                 </div>
 
@@ -88,15 +91,18 @@
                     </CFormSelectCustom>
                 </CFormPanel>
 
-                <CFormPanel label="Default">
-                    <CFormInput
-                        label="Адрес доставки *"
-                        placeholder="Ул.Пушкина д.Колотушкина"
-                        v-model="exampleModel.inputModel"
-                        :error="$v.exampleModel.inputModel.$error"
-                    >
-                    </CFormInput>
-                </CFormPanel>
+                <div class="bg-secondary-100 p-1-6">
+                    <CFormPanel label="Default">
+                        <CFormInput
+                            label="Адрес доставки *"
+                            placeholder="Ул.Пушкина д.Колотушкина"
+                            v-model="exampleModel.inputModel"
+                            labelBgColor="bg-secondary-100"
+                            :error="$v.exampleModel.inputModel.$error"
+                        >
+                        </CFormInput>
+                    </CFormPanel>
+                </div>
 
                 <CFormPanel label="prepend/append">
                     <CFormInput

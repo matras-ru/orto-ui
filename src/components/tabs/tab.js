@@ -52,7 +52,10 @@ export default {
                         id: `tab-${this.name}`
                     },
                     on: {
-                        click: () => this.$emit('onClick', this.name)
+                        click: e => {
+                            e.preventDefault();
+                            return this.$emit('onClick', this.name);
+                        }
                     },
                     staticClass: base,
                     class: [stateDefault, this.isActive ? stateActive : null]

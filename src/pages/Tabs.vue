@@ -1,7 +1,7 @@
 <template>
     <div>
         <CContainer>
-            <CTabs v-model="exampleModel.tab" justify="between">
+            <CTabs v-model="activeTab" justify="between">
                 <CTab label="Описание" name="description" />
                 <CTab label="Характеристики" name="parameters" />
                 <CTab label="Состав" name="structure" />
@@ -12,7 +12,7 @@
 
         <div class="bg-secondary-100 py-2-5">
             <CContainer>
-                <CTabPanels v-model="exampleModel.tab" class="px-1-5">
+                <CTabPanels v-model="activeTab" class="px-1-5">
                     <CTabPanel name="description">
                         <div>Описание контент</div>
                     </CTabPanel>
@@ -37,12 +37,17 @@
 <script>
 export default {
     name: 'Index',
-    data() {
-        return {
-            exampleModel: {
-                tab: 'parameters'
+
+    computed: {
+        activeTab: {
+            get() {
+                return this.$route.hash ? this.$route.hash.replace('#', '') : 'description';
+            },
+
+            set(val) {
+                this.$router.push({ hash: val });
             }
-        };
+        }
     }
 };
 </script>

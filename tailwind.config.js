@@ -11,6 +11,7 @@ module.exports = {
         },
         colors: {
             transparent: 'transparent',
+            inherit: 'inherit',
 
             black: {
                 100: '#292929',
@@ -172,6 +173,7 @@ module.exports = {
             auto: 'auto',
             ...theme('spacing'),
             full: '100%',
+            '1/2': '50%',
             screen: '100vh'
         }),
         inset: theme => ({
@@ -412,6 +414,7 @@ module.exports = {
             return {
                 default: {
                     input: {
+                        appearance: 'none',
                         borderRadius: undefined,
                         borderColor: undefined,
                         backgroundColor: 'transparent',
@@ -422,6 +425,12 @@ module.exports = {
                         paddingLeft: undefined,
                         fontSize: undefined,
                         lineHeight: undefined,
+
+                        '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+                            '-webkit-appearance': 'none'
+                        },
+
+                        '-moz-appearance': 'textfield',
 
                         '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
                             color: undefined,

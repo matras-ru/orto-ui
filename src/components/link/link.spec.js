@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 
 import CLink from './link';
 
-const baseClass = 'inline no-underline';
+const baseClass = 'no-underline cursor-pointer';
 const disabledClass = 'opacity-75 cursor-not-allowed';
 const primaryClass = 'text-secondary-200 hover:text-black-200 border-b-2';
 
@@ -12,10 +12,9 @@ describe('Link', () => {
     it('default', () => {
         const wrapper = mount(CLink);
 
-        expect(wrapper.is('a')).toBe(true);
+        expect(wrapper.is('span')).toBe(true);
         expect(wrapper.attributes('href')).not.toBeDefined();
-        expect(wrapper.attributes('target')).toBeDefined();
-        expect(wrapper.attributes('target')).toBe('_self');
+        expect(wrapper.attributes('target')).not.toBeDefined();
 
         expect(wrapper.classes().sort()).toEqual(`${baseClass} ${primaryClass}`.split(' ').sort());
     });
@@ -97,10 +96,10 @@ describe('click event', () => {
                 }
             }
         });
-        expect(wrapper.is('a')).toBe(true);
+        expect(wrapper.is('span')).toBe(true);
         expect(called).toBe(0);
         expect(evt).toEqual(null);
-        wrapper.find('a').trigger('click');
+        wrapper.find('span').trigger('click');
         expect(called).toBe(1);
         expect(evt).toBeInstanceOf(MouseEvent);
 
@@ -115,10 +114,10 @@ describe('click event', () => {
                 click: [spy1, spy2]
             }
         });
-        expect(wrapper.is('a')).toBe(true);
+        expect(wrapper.is('span')).toBe(true);
         expect(spy1).not.toHaveBeenCalled();
         expect(spy2).not.toHaveBeenCalled();
-        wrapper.find('a').trigger('click');
+        wrapper.find('span').trigger('click');
         expect(spy1).toHaveBeenCalled();
         expect(spy2).toHaveBeenCalled();
 
@@ -139,10 +138,10 @@ describe('click event', () => {
                 }
             }
         });
-        expect(wrapper.is('a')).toBe(true);
+        expect(wrapper.is('span')).toBe(true);
         expect(called).toBe(0);
         expect(evt).toEqual(null);
-        wrapper.find('a').trigger('click');
+        wrapper.find('span').trigger('click');
         expect(called).toBe(0);
         expect(evt).toEqual(null);
 

@@ -89,3 +89,4 @@ Vue.use(CButton, btnTheme);
 | 10  | `form-input`                    | +   | -   | +    | -      | -         | -             |
 | 11  | `dropdown`                      | +   | +   | +    | -      | -         | -             |
 | 12  | `form-custom-select`            | +   | +   | +    | -      | -         | -             |
+| 13  | `badge`                         | +   | +   | +    | -      | -         | -             |

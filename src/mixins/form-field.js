@@ -16,6 +16,11 @@ export default {
             default: null
         },
 
+        inline: {
+            type: Boolean,
+            default: false
+        },
+
         name: {
             type: String,
             default: null
@@ -44,6 +49,11 @@ export default {
         errorMessage: {
             type: String,
             default: null
+        },
+
+        labelBgColor: {
+            type: String,
+            default: null
         }
     },
 
@@ -64,6 +74,7 @@ export default {
         } = (() => {
             const {
                 outerWrapBase,
+                outerWrapSpace,
                 innerWrapBase,
                 innerWrapStateDefault,
                 innerWrapStateFocused,
@@ -73,6 +84,7 @@ export default {
                 labelStateDefault,
                 labelStateError,
                 labelPositionFloat,
+                labelBgPrimary,
                 prependBase,
                 appendBase
             } = this.theme;
@@ -83,6 +95,16 @@ export default {
             const labelClasses = [labelBase];
             const prependWrapClasses = [prependBase];
             const appendWrapClasses = [appendBase];
+
+            if (!this.inline) {
+                outerWrapClasses.push(outerWrapSpace);
+            }
+
+            if (!this.labelBgColor) {
+                labelClasses.push(labelBgPrimary);
+            } else {
+                labelClasses.push(this.labelBgColor);
+            }
 
             const isError = () => {
                 innerWrapClasses.push(innerWrapStateError);
@@ -165,13 +187,17 @@ export default {
                                 this.getControl !== void 0 // control slot
                                     ? this.getControl(h)
                                     : this.$slots.default,
-                                h(
-                                    'div', // label
-                                    {
-                                        class: labelClasses
-                                    },
-                                    this.label
-                                )
+
+                                this.label
+                                    ? h(
+                                          'div', // label
+                                          {
+                                              class: labelClasses,
+                                              ref: 'label'
+                                          },
+                                          this.label
+                                      )
+                                    : null
                             ]
                         ),
                         this.$scopedSlots.append

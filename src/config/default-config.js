@@ -10,6 +10,10 @@ export default {
         size: 'md'
     },
 
+    CBadge: {
+        variant: 'primary'
+    },
+
     CLink: {
         variant: 'primary',
         target: '_self'
