@@ -4,7 +4,7 @@ import { mergeData } from 'vue-functional-data-merge';
 import merge from 'lodash.merge';
 
 var base =
-    'inline-block align-top rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3';
+    'inline-flex items-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
 var variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
 var variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
@@ -42,16 +42,22 @@ var DefaultTheme = {
 };
 
 var base$1 = 'no-underline cursor-pointer';
+var inlineType = 'inline';
+var inlineBlockType = 'inline-block';
+
 var stateDisable$1 = 'opacity-75 cursor-not-allowed';
 
 var variantPrimary$1 = 'text-secondary-200 hover:text-black-200 border-b-2';
 var variantSecondary$1 = '';
 var variantTertiary$1 = 'hover:text-secondary-200 border-b';
 var variantQuaternary$1 = 'text-tertiary-300 hover:text-black-200';
-var variantQuinary$1 = 'border-b-2 border-dotted';
+var variantQuinary$1 =
+    'border-b border-dashed hover:text-tertiary-300 hover:border-tertiary-300';
 
 var DefaultTheme$1 = {
     base: base$1,
+    inlineType: inlineType,
+    inlineBlockType: inlineBlockType,
     stateDisable: stateDisable$1,
     variantPrimary: variantPrimary$1,
     variantSecondary: variantSecondary$1,
@@ -61,7 +67,7 @@ var DefaultTheme$1 = {
 };
 
 var outerWrapBase = 'block px-0-4';
-var outerWrapSpace = 'mb-1-4';
+var outerWrapSpace = 'mb-0-8';
 
 var innerWrapBase =
     'flex items-center border-2 rounded-lg -mx-0-4 px-0-8 transition-border duration-150';
@@ -156,8 +162,7 @@ var DefaultTheme$4 = {
     wrapperBase: wrapperBase
 };
 
-var base$4 =
-    'outline-none select-none font-semibold text-lg uppercase inline-block px-1-5 py-0-7';
+var base$4 = 'outline-none select-none font-semibold text-lg uppercase px-1-5 py-0-7';
 var stateDefault = '';
 var stateActive = 'text-secondary-200 border-b-4 border-secondary-200';
 
@@ -1711,7 +1716,7 @@ var CLink = {
             validator: function (value) { return validVariants.includes(value); }
         },
 
-        border: {
+        inline: {
             type: Boolean,
             default: false
         },
@@ -1787,7 +1792,11 @@ var CLink = {
             var ref = this$1.theme;
             var base = ref.base;
             var stateDisable = ref.stateDisable;
+            var inlineType = ref.inlineType;
+            var inlineBlockType = ref.inlineBlockType;
             var classes = [base];
+
+            classes.push(this$1.inline ? inlineType : inlineBlockType);
 
             if (this$1.disabled) {
                 classes.push(stateDisable);

@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 
 import CLink from './link';
 
-const baseClass = 'no-underline cursor-pointer';
+const baseClass = 'no-underline cursor-pointer inline-block';
 const disabledClass = 'opacity-75 cursor-not-allowed';
 const primaryClass = 'text-secondary-200 hover:text-black-200 border-b-2';
 

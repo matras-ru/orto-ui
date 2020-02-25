@@ -1,5 +1,5 @@
 export const outerWrapBase = 'block px-0-4';
-export const outerWrapSpace = 'mb-1-4';
+export const outerWrapSpace = 'mb-0-8';
 
 export const innerWrapBase =
     'flex items-center border-2 rounded-lg -mx-0-4 px-0-8 transition-border duration-150';

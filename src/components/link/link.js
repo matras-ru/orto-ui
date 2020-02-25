@@ -140,7 +140,7 @@ export default {
             validator: value => validVariants.includes(value)
         },
 
-        border: {
+        inline: {
             type: Boolean,
             default: false
         },
@@ -210,8 +210,10 @@ export default {
         const computedClass = () => {
             if (this.button) return;
 
-            const { base, stateDisable } = this.theme;
+            const { base, stateDisable, inlineType, inlineBlockType } = this.theme;
             const classes = [base];
+
+            classes.push(this.inline ? inlineType : inlineBlockType);
 
             if (this.disabled) {
                 classes.push(stateDisable);

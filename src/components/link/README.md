@@ -6,6 +6,7 @@
 | ---------------------- | --------- | ------- | ----------------------------------------- |
 | `variant`              | `String`  | `null`  | Possible: `primary`                       |
 | `label`                | `String`  |         |                                           |
+| `inline`               | `Boolean` |         |                                           |
 | `href`                 | `String`  |         |                                           |
 | `disabled`             | `Boolean` |         |                                           |
 | `target`               | `String`  | `_self` |                                           |
