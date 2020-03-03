@@ -35,7 +35,7 @@ export default {
 
     CRow: {
         direction: 'row',
-        gutters: 'md',
+        gutters: 'lg',
         cols: 12
     },
 
@@ -55,7 +55,8 @@ export default {
     },
 
     CDropdown: {
-        variant: 'primary'
+        variant: 'primary',
+        placement: 'left'
     },
 
     CFormInput: {

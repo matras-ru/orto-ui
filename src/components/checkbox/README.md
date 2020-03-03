@@ -37,14 +37,12 @@
 
 ## Classes - CRadioCheckbox.js
 
-| Name                 | Default                                          |
-| -------------------- | ------------------------------------------------ |
-| `wrapperBase`        | `flex flex-wrap mb-0-7`                          |
-| `labelBase`          | `inline-flex`                                    |
-| `inputBase`          | `absolute opacity-0 invisible`                   |
-| `labelStateDefault`  | `cursor-pointer`                                 |
-| `labelStateDisabled` | `cursor-not-allowed`                             |
-| `iconCheckboxBase`   | `w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm`  |
-| `iconStateDefault`   | `border-black-200 bg-white`                      |
-| `iconStateChecked`   | `border-black-200 bg-secondary-200 shadow-inner` |
-| `iconStateDisabled`  | `border-tertiary-200 bg-white`                   |
+| Name                 | Default                       |
+| -------------------- | ----------------------------- |
+| `wrapperBase`        | `flex flex-wrap mb-0-5`       |
+| `labelBase`          | `flex flex-wrap items-center` |
+| `inputBase`          | `mr-0-5`                      |
+| `inputCheckboxBase`  | `form-checkbox`               |
+| `labelStateDefault`  | `cursor-pointer`              |
+| `labelStateError`    | `cursor-pointer`              |
+| `labelStateDisabled` | `cursor-not-allowed`          |

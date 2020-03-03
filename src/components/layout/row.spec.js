@@ -8,12 +8,14 @@ const smBreakpoint = 'sm';
 const mdBreakpoint = 'md';
 
 const baseClass = 'flex flex-wrap';
-const mdGuttersNormalizeClass = '-mx-0-8';
-const smGuttersNormalizeClass = '-mx-0-4';
+const lgGuttersNormalizeClass = '-mx-0-8';
+const mdGuttersNormalizeClass = '-mx-0-4';
+const smGuttersNormalizeClass = '-mx-0-2';
 
 const colBaseClass = 'max-w-full';
-const mdGuttersClass = 'px-0-8';
-const smGuttersClass = 'px-0-4';
+const lgGuttersClass = 'px-0-8';
+const mdGuttersClass = 'px-0-4';
+const smGuttersClass = 'px-0-2';
 
 const fullWidthClass = 'w-full';
 const defaultCols = 12;
@@ -21,11 +23,13 @@ const defaultCols = 12;
 describe('CRow', () => {
     it('default', () => {
         const wrapper = mount(CRow);
+
         expect(wrapper.isFunctionalComponent).toBe(true);
         expect(wrapper.is('div')).toBe(true);
         expect(wrapper.classes().sort()).toEqual(
-            `${baseClass} ${mdGuttersNormalizeClass}`.split(' ').sort()
+            `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
         );
+
         expect(wrapper.classes().length).toBe(3);
         expect(wrapper.text()).toEqual('');
     });
@@ -51,11 +55,11 @@ describe('gutters', () => {
         const Col = wrapper.find({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
-            `${baseClass} ${mdGuttersNormalizeClass}`.split(' ').sort()
+            `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
         );
         expect(Row.classes().length).toBe(3);
 
-        expect(Col.classes().sort()).toEqual(`${colBaseClass} ${mdGuttersClass}`.split(' ').sort());
+        expect(Col.classes().sort()).toEqual(`${colBaseClass} ${lgGuttersClass}`.split(' ').sort());
         expect(Col.classes().length).toBe(2);
 
         wrapper.destroy();
@@ -71,7 +75,7 @@ describe('gutters', () => {
                             ref: 'row-test',
                             props: {
                                 gutters: 'none',
-                                guttersSm: 'sm'
+                                guttersSm: 'md'
                             }
                         },
                         [h(CCol, { ref: 'col-test' }, 'Col')]
@@ -88,12 +92,12 @@ describe('gutters', () => {
         const Col = wrapper.find({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
-            `${baseClass} ${smBreakpoint}:${smGuttersNormalizeClass}`.split(' ').sort()
+            `${baseClass} ${smBreakpoint}:${mdGuttersNormalizeClass}`.split(' ').sort()
         );
         expect(Row.classes().length).toBe(3);
 
         expect(Col.classes().sort()).toEqual(
-            `${colBaseClass} ${smBreakpoint}:${smGuttersClass}`.split(' ').sort()
+            `${colBaseClass} ${smBreakpoint}:${mdGuttersClass}`.split(' ').sort()
         );
         expect(Col.classes().length).toBe(2);
 
@@ -143,12 +147,12 @@ describe('cols', () => {
         const Col = wrapper.find({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
-            `${baseClass} ${mdGuttersNormalizeClass}`.split(' ').sort()
+            `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
         );
         expect(Row.classes().length).toBe(3);
 
         expect(Col.classes().sort()).toEqual(
-            `${colBaseClass} ${mdGuttersClass} ${fullWidthClass} ${mdBreakpoint}:w-1/5`
+            `${colBaseClass} ${lgGuttersClass} ${fullWidthClass} ${mdBreakpoint}:w-1/5`
                 .split(' ')
                 .sort()
         );
@@ -192,12 +196,12 @@ describe('cols', () => {
         const Col = wrapper.find({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
-            `${baseClass} ${mdGuttersNormalizeClass}`.split(' ').sort()
+            `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
         );
         expect(Row.classes().length).toBe(3);
 
         expect(Col.classes().sort()).toEqual(
-            `${colBaseClass} ${mdGuttersClass} w-2/${defaultCols} ${mdBreakpoint}:w-3/${defaultCols}`
+            `${colBaseClass} ${lgGuttersClass} w-2/${defaultCols} ${mdBreakpoint}:w-3/${defaultCols}`
                 .split(' ')
                 .sort()
         );
@@ -244,12 +248,12 @@ describe('cols', () => {
         const Col = wrapper.find({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
-            `${baseClass} ${mdGuttersNormalizeClass}`.split(' ').sort()
+            `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
         );
         expect(Row.classes().length).toBe(3);
 
         expect(Col.classes().sort()).toEqual(
-            `${colBaseClass} ${mdGuttersClass} ${fullWidthClass} ${mdBreakpoint}:w-1/5`
+            `${colBaseClass} ${lgGuttersClass} ${fullWidthClass} ${mdBreakpoint}:w-1/5`
                 .split(' ')
                 .sort()
         );
@@ -303,12 +307,55 @@ describe('cols', () => {
         const Col = wrapper.find({ ref: 'col-test' });
 
         expect(Col.classes().sort()).toEqual(
-            `${colBaseClass} ${mdGuttersClass} w-1/3 ${smBreakpoint}:w-1/4 ${mdBreakpoint}:w-1/5`
+            `${colBaseClass} ${lgGuttersClass} w-1/3 ${smBreakpoint}:w-1/4 ${mdBreakpoint}:w-1/5`
                 .split(' ')
                 .sort()
         );
 
         expect(Col.classes().length).toBe(5);
+
+        wrapper.destroy();
+    });
+
+    it('responsive cols offset', () => {
+        /* CRow
+        CCol(:offsetLg="3")
+        eq:
+        div(class="...") - row
+        div(class="... lg:ml-3/12") - col
+        */
+        const App = localVue.extend({
+            render(h) {
+                return h('div', {}, [
+                    h(
+                        CRow,
+                        {
+                            ref: 'row-test'
+                        },
+                        [
+                            h(
+                                CCol,
+                                {
+                                    ref: 'col-test',
+                                    props: {
+                                        offsetLg: 3
+                                    }
+                                },
+                                'Col'
+                            )
+                        ]
+                    )
+                ]);
+            }
+        });
+
+        const wrapper = mount(App, {
+            localVue
+        });
+
+        const Col = wrapper.find({ ref: 'col-test' });
+
+        expect(Col.classes()).toContain('lg:ml-3/12');
 
         wrapper.destroy();
     });

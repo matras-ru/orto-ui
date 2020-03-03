@@ -62,6 +62,22 @@
         </section>
 
         <section class="mb-1-5">
+            <h2 class="mb-1-2">Offset</h2>
+
+            <div class="mb-0-8 ">
+                <div class="exmpl-panel">
+                    <CContainer>
+                        <CRow>
+                            <CCol :offsetLg="3" :md="3">
+                                <div class="bg-layout-col p-0-4">Col offset 3</div>
+                            </CCol>
+                        </CRow>
+                    </CContainer>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-1-5">
             <h2 class="mb-1-2">Responsive</h2>
 
             <div class="mb-0-8">

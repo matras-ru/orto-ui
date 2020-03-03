@@ -32,10 +32,33 @@ describe('Dropdown basic', () => {
 
         expect(dropdown.is('div')).toBe(true);
         expect(dropdown.classes().sort()).toEqual(
-            'absolute z-10 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden shadow-example rounded'
+            'absolute z-50 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden shadow-example rounded'
                 .split(' ')
                 .sort()
         );
+    });
+
+    it('placement', () => {
+        const wrapper = mount(CDropdown, {
+            localVue,
+
+            propsData: {
+                placement: 'right'
+            },
+
+            data() {
+                return {
+                    isShow: true
+                };
+            }
+        });
+
+        expect(wrapper.vm.placement).toBe('right');
+        const dropdown = wrapper.find({ ref: 'dropdown' });
+
+        expect(dropdown.is('div')).toBe(true);
+        expect(dropdown.classes()).not.toContain('left-0');
+        expect(dropdown.classes()).toContain('right-0');
     });
 });
 

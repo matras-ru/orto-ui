@@ -46,6 +46,7 @@ describe('Input types', () => {
         expect(textarea.attributes('id')).toBe('foo');
         expect(textarea.attributes('name')).toBeDefined();
         expect(textarea.attributes('name')).toBe('foo');
+        expect(textarea.classes()).toContain('resize-none');
 
         wrapper.destroy();
     });
@@ -118,6 +119,14 @@ describe('Input states', () => {
         expect(label.classes()).not.toContain('transform');
         expect(label.classes()).not.toContain('-translate-y-full');
         expect(label.classes()).not.toContain('scale-75');
+    });
+
+    it('empty label (show placeholder)', async () => {
+        wrapper.setProps({ placeholder: 'label' });
+        await wrapper.vm.$nextTick();
+
+        const input = wrapper.find('input');
+        expect(input.classes()).toContain('form-input-not-label');
     });
 
     it('not empty', async () => {

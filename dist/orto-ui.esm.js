@@ -70,23 +70,33 @@ var outerWrapBase = 'block px-0-4';
 var outerWrapSpace = 'mb-0-8';
 
 var innerWrapBase =
-    'flex items-center border-2 rounded-lg -mx-0-4 px-0-8 transition-border duration-150';
+    'flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150';
 var innerWrapStateDefault = 'border-black-200';
 var innerWrapStateFocused = 'border-primary-100';
 var innerWrapStateError = 'border-danger';
+var innerWrapsizeSm = 'pl-0-5 pr-0-1';
+var innerWrapsizeMd = 'px-0-8';
 
 var labelBase =
-    'absolute left-0 max-w-full truncate pointer-events-none px-0-4 uppercase origin-top-left transition-transform ease-in duration-150 top-0-5 leading-snug';
+    'absolute left-0 max-w-full truncate pointer-events-none uppercase origin-top-left transition-transform ease-in duration-150 leading-snug';
 var labelPositionFloat = 'transform -translate-y-full scale-75';
 var labelStateDefault = 'text-tertiary-300';
 var labelStateError = 'text-danger';
 var labelBgPrimary = 'bg-white';
+var labelSizeSm = 'px-0-2 top-0-3 text-sm';
+var labelSizeMd = 'px-0-4 top-0-5';
 
 var controlWrapBase = 'flex-auto relative';
-var prependBase = 'pr-0-4';
-var appendBase = 'pl-0-4';
+var controlWrapSizeMd = 'py-0-5';
+var controlWrapSizeSm = ' py-0-3';
 
-var CFormField = {
+var prependSizeMd = 'pr-0-4';
+var prependSizeSm = 'pr-0-2';
+
+var appendSizeMd = 'pl-0-4';
+var appendSizeSm = 'pl-0-2';
+
+var DefaultTheme$2 = {
     outerWrapBase: outerWrapBase,
     outerWrapSpace: outerWrapSpace,
     innerWrapBase: innerWrapBase,
@@ -94,8 +104,12 @@ var CFormField = {
     innerWrapStateDefault: innerWrapStateDefault,
     innerWrapStateFocused: innerWrapStateFocused,
     innerWrapStateError: innerWrapStateError,
+    innerWrapsizeSm: innerWrapsizeSm,
+    innerWrapsizeMd: innerWrapsizeMd,
 
     controlWrapBase: controlWrapBase,
+    controlWrapSizeMd: controlWrapSizeMd,
+    controlWrapSizeSm: controlWrapSizeSm,
 
     labelBase: labelBase,
     labelPositionFloat: labelPositionFloat,
@@ -103,118 +117,139 @@ var CFormField = {
     labelStateError: labelStateError,
     labelBgPrimary: labelBgPrimary,
 
-    prependBase: prependBase,
-    appendBase: appendBase
+    prependSizeSm: prependSizeSm,
+    prependSizeMd: prependSizeMd,
+
+    appendSizeSm: appendSizeSm,
+    appendSizeMd: appendSizeMd,
+
+    labelSizeSm: labelSizeSm,
+    labelSizeMd: labelSizeMd
 };
 
 var controlWrap = 'relative';
-var base$2 = 'w-full form-input py-0-5';
+var base$2 = 'w-full form-input';
 var stateReadonly = 'cursor-pointer';
+var stateNotLabel = 'form-input-not-label';
 var typeTextarea = 'resize-none';
 
-var apperanceWrap = 'absolute top-0 right-0 flex flex-col h-full py-0-3';
-var apperanceBase =
+var apperanceNumberWrap = 'absolute top-0 right-0 flex flex-col h-full';
+var apperanceNumberBase =
     'inline-flex items-center justify-center h-1/2 cursor-pointer select-none';
-var apperanceStateDisable = 'opacity-50 pointer-events-none';
+var apperanceNumberStateDisable = 'opacity-50 pointer-events-none';
 
-var DefaultTheme$2 = Object.assign({}, CFormField,
+var sizeSmBase = '';
+var sizeMdBase = '';
+
+var DefaultTheme$3 = Object.assign({}, DefaultTheme$2,
     {controlWrap: controlWrap,
     base: base$2,
     stateReadonly: stateReadonly,
+    stateNotLabel: stateNotLabel,
     typeTextarea: typeTextarea,
-    apperanceWrap: apperanceWrap,
-    apperanceBase: apperanceBase,
-    apperanceStateDisable: apperanceStateDisable});
+    apperanceNumberWrap: apperanceNumberWrap,
+    apperanceNumberBase: apperanceNumberBase,
+    apperanceNumberStateDisable: apperanceNumberStateDisable,
+    sizeSmBase: sizeSmBase,
+    sizeMdBase: sizeMdBase});
 
 var base$3 = 'mb-1-4';
 
-var DefaultTheme$3 = {
+var DefaultTheme$4 = {
     base: base$3
 };
 
-var wrapperBase = 'flex flex-wrap mb-0-7';
+var wrapperBase = 'flex flex-wrap mb-0-4';
 
-var labelBase$1 = 'inline-flex';
+var labelBase$1 = 'relative pl-1-4';
 var labelStateDefault$1 = 'cursor-pointer';
-var labelStateDisabled = 'cursor-not-allowed';
+var labelStateDisabled = 'cursor-not-allowed opacity-50';
+var labelStateError$1 = 'cursor-pointer';
 
-var iconRadioBase = 'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-full';
-var iconCheckboxBase = 'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm';
+var inputBase = 'absolute top-0-2 left-0 w-0-8 h-0-8';
 
-var iconStateDefault = 'border-black-200 bg-white';
-var iconStateChecked = 'border-black-200 bg-secondary-200 shadow-inner';
-var iconStateDisabled = 'border-tertiary-200 bg-white';
-var iconStateError = 'border-danger bg-white';
+var inputCheckboxBase = 'form-checkbox';
+var inputCheckboxStateError = 'form-checkbox-is-error';
 
-var inputBase = 'absolute opacity-0 invisible';
+var inputRadioBase = 'form-radio';
+var inputRadioStateError = 'form-radio-is-error';
 
-var DefaultTheme$4 = {
+var DefaultTheme$5 = {
+    wrapperBase: wrapperBase,
+
     labelBase: labelBase$1,
     labelStateDefault: labelStateDefault$1,
     labelStateDisabled: labelStateDisabled,
-    iconRadioBase: iconRadioBase,
-    iconCheckboxBase: iconCheckboxBase,
-    iconStateDefault: iconStateDefault,
-    iconStateChecked: iconStateChecked,
-    iconStateDisabled: iconStateDisabled,
-    iconStateError: iconStateError,
+    labelStateError: labelStateError$1,
+
     inputBase: inputBase,
-    wrapperBase: wrapperBase
+
+    inputCheckboxBase: inputCheckboxBase,
+    inputCheckboxStateError: inputCheckboxStateError,
+
+    inputRadioBase: inputRadioBase,
+    inputRadioStateError: inputRadioStateError
 };
 
 var base$4 = 'outline-none select-none font-semibold text-lg uppercase px-1-5 py-0-7';
 var stateDefault = '';
 var stateActive = 'text-secondary-200 border-b-4 border-secondary-200';
 
-var DefaultTheme$5 = {
+var DefaultTheme$6 = {
     base: base$4,
     stateDefault: stateDefault,
     stateActive: stateActive
 };
 
-var base$5 = 'flex flex-wrap';
+var base$5 = '';
+
+var DefaultTheme$7 = {
+    base: base$5
+};
+
+var base$6 = 'flex flex-wrap';
 var directionColumn = 'flex-col';
 var directionHorizontal = 'flex-row';
 
-var DefaultTheme$6 = {
-    base: base$5,
+var DefaultTheme$8 = {
+    base: base$6,
     directionColumn: directionColumn,
     directionHorizontal: directionHorizontal
 };
 
-var base$6 = 'inline-block';
+var base$7 = 'inline-block';
 
-var DefaultTheme$7 = {
-    base: base$6
+var DefaultTheme$9 = {
+    base: base$7
 };
 
-var base$7 = 'container';
+var base$8 = 'container';
 var modeFluid = 'max-w-none';
 
-var DefaultTheme$8 = {
-    base: base$7,
+var DefaultTheme$a = {
+    base: base$8,
     modeFluid: modeFluid
 };
 
-var base$8 = 'flex flex-wrap';
+var base$9 = 'flex flex-wrap';
 
-var guttersNormalizeXl = '-mx-1-8';
-var guttersXl = 'px-1-8';
+var guttersNormalizeXl = '-mx-1-2';
+var guttersXl = 'px-1-2';
 
-var guttersNormalizeLg = '-mx-1-4';
-var guttersLg = 'px-1-4';
+var guttersNormalizeLg = '-mx-0-8';
+var guttersLg = 'px-0-8';
 
-var guttersNormalizeMd = '-mx-0-8';
-var guttersMd = 'px-0-8';
+var guttersNormalizeMd = '-mx-0-4';
+var guttersMd = 'px-0-4';
 
-var guttersNormalizeSm = '-mx-0-4';
-var guttersSm = 'px-0-4';
+var guttersNormalizeSm = '-mx-0-2';
+var guttersSm = 'px-0-2';
 
 var guttersNormalizeNone = '';
 var guttersNone = '';
 
-var DefaultTheme$9 = {
-    base: base$8,
+var DefaultTheme$b = {
+    base: base$9,
     guttersNormalizeXl: guttersNormalizeXl,
     guttersXl: guttersXl,
     guttersNormalizeLg: guttersNormalizeLg,
@@ -227,28 +262,97 @@ var DefaultTheme$9 = {
     guttersNone: guttersNone
 };
 
-var base$9 = 'max-w-full';
+var base$a = 'max-w-full';
 
-var DefaultTheme$a = {
-    base: base$9
+var DefaultTheme$c = {
+    base: base$a
+};
+
+var headerBase = 'text-xl font-semibold mb-0-8';
+var wrapperBase$1 = 'mb-2-2';
+
+var DefaultTheme$d = {
+    headerBase: headerBase,
+    wrapperBase: wrapperBase$1
+};
+
+var inputBase$1 = 'cursor-pointer';
+var inputIconBase = 'block form-select';
+var inputIconSizeMd = 'w-1-4 h-1-4';
+var inputIconSizeSm = 'w-1-2 h-1-2';
+
+var optionBase = 'cursor-pointer py-0-4 px-0-8';
+var optionStateDefault = 'bg-white hover:bg-tertiary-100';
+var optionStateActive = 'bg-tertiary-100';
+
+var DefaultTheme$e = {
+    inputBase: inputBase$1,
+    inputIconBase: inputIconBase,
+    inputIconSizeMd: inputIconSizeMd,
+    inputIconSizeSm: inputIconSizeSm,
+
+    optionBase: optionBase,
+    optionStateDefault: optionStateDefault,
+    optionStateActive: optionStateActive
+};
+
+var base$b =
+    'rounded-lg font-bold px-0-6 py-0-3 inline-block border-2 leading-none align-middle';
+
+var variantPrimary$2 = 'bg-primary-100 border-primary-100 text-white';
+var variantSecondary$2 = 'border-secondary-200 text-secondary-200';
+var variantTertiary$2 = 'text-danger border-danger';
+var variantQuaternary$2 = '';
+var variantQuinary$2 = '';
+
+var DefaultTheme$f = {
+    base: base$b,
+
+    variantPrimary: variantPrimary$2,
+    variantSecondary: variantSecondary$2,
+    variantTertiary: variantTertiary$2,
+    variantQuaternary: variantQuaternary$2,
+    variantQuinary: variantQuinary$2
+};
+
+var wrapperBase$2 = 'relative';
+var dropdownBase = 'absolute z-50 top-full min-w-full mt-0-4 bg-white overflow-hidden';
+var dropdownVariantPrimary = 'shadow-example rounded';
+var dropdownVariantSecondary = 'shadow-example rounded-lg';
+var dropdownPlacementLeft = 'left-0';
+var dropdownPlacementRight = 'right-0';
+
+var DefaultTheme$g = {
+    wrapperBase: wrapperBase$2,
+    dropdownBase: dropdownBase,
+    dropdownVariantPrimary: dropdownVariantPrimary,
+    dropdownVariantSecondary: dropdownVariantSecondary,
+    dropdownPlacementLeft: dropdownPlacementLeft,
+    dropdownPlacementRight: dropdownPlacementRight
 };
 
 
 
-var DefaultTheme$b = /*#__PURE__*/Object.freeze({
+var DefaultTheme$h = /*#__PURE__*/Object.freeze({
     __proto__: null,
     CButton: DefaultTheme,
     CLink: DefaultTheme$1,
-    CFormInput: DefaultTheme$2,
-    CForm: DefaultTheme$3,
-    CCheckbox: DefaultTheme$4,
-    CRadio: DefaultTheme$4,
-    CTab: DefaultTheme$5,
-    CList: DefaultTheme$6,
-    CListItem: DefaultTheme$7,
-    CContainer: DefaultTheme$8,
-    CRow: DefaultTheme$9,
-    CCol: DefaultTheme$a
+    CFormInput: DefaultTheme$3,
+    CForm: DefaultTheme$4,
+    CCheckbox: DefaultTheme$5,
+    CRadio: DefaultTheme$5,
+    CTab: DefaultTheme$6,
+    CTabPanel: DefaultTheme$7,
+    CList: DefaultTheme$8,
+    CListItem: DefaultTheme$9,
+    CContainer: DefaultTheme$a,
+    CRow: DefaultTheme$b,
+    CCol: DefaultTheme$c,
+    CFormField: DefaultTheme$2,
+    CFormPanel: DefaultTheme$d,
+    CFormSelectCustom: DefaultTheme$e,
+    CBadge: DefaultTheme$f,
+    CDropdown: DefaultTheme$g
 });
 
 var justifyCenter = 'justify-center';
@@ -330,7 +434,7 @@ var DEFAULTS = {
 
     CRow: {
         direction: 'row',
-        gutters: 'md',
+        gutters: 'lg',
         cols: 12
     },
 
@@ -350,7 +454,8 @@ var DEFAULTS = {
     },
 
     CDropdown: {
-        variant: 'primary'
+        variant: 'primary',
+        placement: 'left'
     },
 
     CFormInput: {
@@ -469,7 +574,7 @@ var NAME = 'CForm';
 var props = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$3; }
+        default: function () { return DefaultTheme$4; }
     }
 };
 
@@ -500,12 +605,6 @@ var CForm = {
     }
 };
 
-var headerBase = 'text-2xl font-semibold mb-1-1';
-
-var DefaultTheme$c = {
-    headerBase: headerBase
-};
-
 var NAME$1 = 'CFormPanel';
 
 var CFormPanel = {
@@ -518,7 +617,7 @@ var CFormPanel = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$c; }
+            default: function () { return DefaultTheme$d; }
         },
 
         label: {
@@ -556,26 +655,64 @@ var CFormPanel = {
     render: function render(h) {
         var ref = this.theme;
         var headerBase = ref.headerBase;
+        var wrapperBase = ref.wrapperBase;
 
-        return h('section', [
-            this.label
-                ? h(
-                      'header',
-                      {
-                          staticClass: headerBase
-                      },
-                      [h('div', this.label)]
-                  )
-                : null,
+        return h(
+            'section',
+            {
+                staticClass: wrapperBase
+            },
+            [
+                this.label
+                    ? h(
+                          'header',
+                          {
+                              staticClass: headerBase
+                          },
+                          [h('div', this.label)]
+                      )
+                    : null,
 
-            this.open ? h('main', [this.$slots.default]) : null
-        ]);
+                this.open ? h('main', [this.$slots.default]) : null
+            ]
+        );
     }
 };
 
 var NAME$2 = 'CFormField';
+var validSizes = ['sm', 'md'];
 
-var CFormField$1 = {
+var createSizeMap = function (ref) {
+    var labelSizeSm = ref.labelSizeSm;
+    var labelSizeMd = ref.labelSizeMd;
+    var innerWrapsizeSm = ref.innerWrapsizeSm;
+    var innerWrapsizeMd = ref.innerWrapsizeMd;
+    var controlWrapSizeMd = ref.controlWrapSizeMd;
+    var controlWrapSizeSm = ref.controlWrapSizeSm;
+    var appendSizeSm = ref.appendSizeSm;
+    var appendSizeMd = ref.appendSizeMd;
+    var prependSizeSm = ref.prependSizeSm;
+    var prependSizeMd = ref.prependSizeMd;
+
+    return {
+        md: {
+            label: labelSizeMd,
+            innerWrap: innerWrapsizeMd,
+            append: appendSizeMd,
+            prepend: prependSizeMd,
+            controlWrap: controlWrapSizeMd
+        },
+        sm: {
+            label: labelSizeSm,
+            innerWrap: innerWrapsizeSm,
+            append: appendSizeSm,
+            prepend: prependSizeSm,
+            controlWrap: controlWrapSizeSm
+        }
+    };
+};
+
+var CFormField = {
     name: NAME$2,
 
     inheritAttrs: false,
@@ -629,6 +766,17 @@ var CFormField$1 = {
         labelBgColor: {
             type: String,
             default: null
+        },
+
+        labelStick: {
+            type: Boolean,
+            default: false
+        },
+
+        size: {
+            type: String,
+            default: 'md',
+            validator: function (value) { return validSizes.includes(value); }
         }
     },
 
@@ -655,15 +803,13 @@ var CFormField$1 = {
             var labelStateError = ref.labelStateError;
             var labelPositionFloat = ref.labelPositionFloat;
             var labelBgPrimary = ref.labelBgPrimary;
-            var prependBase = ref.prependBase;
-            var appendBase = ref.appendBase;
 
             var outerWrapClasses = [outerWrapBase];
             var innerWrapClasses = [innerWrapBase];
             var controlWrapClasses = [controlWrapBase];
             var labelClasses = [labelBase];
-            var prependWrapClasses = [prependBase];
-            var appendWrapClasses = [appendBase];
+
+            var sizes = createSizeMap(this$1.theme);
 
             if (!this$1.inline) {
                 outerWrapClasses.push(outerWrapSpace);
@@ -675,6 +821,7 @@ var CFormField$1 = {
                 labelClasses.push(this$1.labelBgColor);
             }
 
+            // status
             var isError = function () {
                 innerWrapClasses.push(innerWrapStateError);
                 labelClasses.push(labelStateError);
@@ -714,13 +861,29 @@ var CFormField$1 = {
                     break level1;
                 }
 
-                if (this$1.modelValue) {
+                if (this$1.modelValue || this$1.labelStick) {
                     isNotEmpty();
                     break level1;
                 }
 
                 isDefault();
             }
+
+            var ref$1 = getHashMapValue(
+                sizes,
+                this$1.size
+            );
+            var label = ref$1.label;
+            var innerWrap = ref$1.innerWrap;
+            var prepend = ref$1.prepend;
+            var append = ref$1.append;
+            var controlWrap = ref$1.controlWrap;
+
+            labelClasses.push(label);
+            innerWrapClasses.push(innerWrap);
+            controlWrapClasses.push(controlWrap);
+            var appendWrapClasses = [append];
+            var prependWrapClasses = [prepend];
 
             return {
                 outerWrapClasses: outerWrapClasses,
@@ -763,14 +926,14 @@ var CFormField$1 = {
                                     ? this.getControl(h)
                                     : this.$slots.default,
 
-                                this.label
+                                this.$slots.label || this.label
                                     ? h(
                                           'div', // label
                                           {
                                               class: labelClasses,
                                               ref: 'label'
                                           },
-                                          this.label
+                                          this.$slots.label ? this.$slots.label : this.label
                                       )
                                     : null
                             ]
@@ -785,6 +948,8 @@ var CFormField$1 = {
     }
 };
 
+// TODO: support attr - inputmode
+
 var validTypes = [
     'text',
     'textarea',
@@ -797,6 +962,16 @@ var validTypes = [
     'date'
 ];
 
+var createSizeMap$1 = function (ref) {
+    var sizeSmBase = ref.sizeSmBase;
+    var sizeMdBase = ref.sizeMdBase;
+
+    return {
+        md: sizeMdBase,
+        sm: sizeSmBase
+    };
+};
+
 var NAME$3 = 'CFormInput';
 
 var CFormInput = {
@@ -806,7 +981,7 @@ var CFormInput = {
         selfInstall(Vue, theme, this);
     },
 
-    mixins: [CFormField$1],
+    mixins: [CFormField],
 
     props: {
         type: {
@@ -822,10 +997,10 @@ var CFormInput = {
 
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$2; }
+            default: function () { return DefaultTheme$3; }
         },
 
-        // extarea specific
+        // textarea specific
 
         rows: {
             type: Number,
@@ -931,19 +1106,26 @@ var CFormInput = {
             var ref = this.theme;
             var base = ref.base;
             var stateReadonly = ref.stateReadonly;
+            var stateNotLabel = ref.stateNotLabel;
             var typeTextarea = ref.typeTextarea;
             var controlWrap = ref.controlWrap;
-            var apperanceWrap = ref.apperanceWrap;
-            var apperanceBase = ref.apperanceBase;
-            var apperanceStateDisable = ref.apperanceStateDisable;
+            var apperanceNumberWrap = ref.apperanceNumberWrap;
+            var apperanceNumberBase = ref.apperanceNumberBase;
+            var apperanceNumberStateDisable = ref.apperanceNumberStateDisable;
+
+            var size = createSizeMap$1(this.theme);
 
             var isTextArea = this.type === 'textarea';
 
             var inputClasses = [base];
 
-            if (this.isTextArea) { inputClasses.push(typeTextarea); }
+            if (isTextArea) { inputClasses.push(typeTextarea); }
 
             if (this.readonly) { inputClasses.push(stateReadonly); }
+
+            if (!this.label) { inputClasses.push(stateNotLabel); }
+
+            inputClasses.push(getHashMapValue(size, this.size));
 
             return h(
                 'div',
@@ -990,16 +1172,16 @@ var CFormInput = {
                         ? h(
                               'div',
                               {
-                                  staticClass: apperanceWrap
+                                  staticClass: apperanceNumberWrap
                               },
                               [
                                   h(
                                       'span',
                                       {
-                                          staticClass: apperanceBase,
+                                          staticClass: apperanceNumberBase,
                                           class: [
                                               this.modelValue === this.max
-                                                  ? apperanceStateDisable
+                                                  ? apperanceNumberStateDisable
                                                   : null
                                           ],
                                           on: {
@@ -1011,10 +1193,10 @@ var CFormInput = {
                                   h(
                                       'span',
                                       {
-                                          staticClass: apperanceBase,
+                                          staticClass: apperanceNumberBase,
                                           class: [
                                               this.modelValue <= this.min
-                                                  ? apperanceStateDisable
+                                                  ? apperanceNumberStateDisable
                                                   : null
                                           ],
                                           on: {
@@ -1032,21 +1214,44 @@ var CFormInput = {
     }
 };
 
-var inputBase$1 = 'cursor-pointer';
-var inputIcon = 'block form-select w-1-4 h-1-4';
-var optionBase = 'cursor-pointer py-0-4 px-0-8';
-var optionStateDefault = 'bg-white hover:bg-tertiary-100';
-var optionStateActive = 'bg-tertiary-100';
+var CFormField$1 = {
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
 
-var DefaultTheme$d = {
-    inputBase: inputBase$1,
-    inputIcon: inputIcon,
-    optionBase: optionBase,
-    optionStateDefault: optionStateDefault,
-    optionStateActive: optionStateActive
+    mixins: [CFormField],
+
+    props: {
+        theme: {
+            type: Object,
+            default: function () { return DefaultTheme$2; }
+        }
+    },
+
+    methods: {
+        getControl: function getControl(h) {
+            return h('div', [this.$slots.default]);
+        }
+    }
 };
 
+var validSizes$1 = ['sm', 'md'];
+
 var NAME$4 = 'CFormSelectCustom';
+
+var createSizeMap$2 = function (ref) {
+    var inputIconSizeMd = ref.inputIconSizeMd;
+    var inputIconSizeSm = ref.inputIconSizeSm;
+
+    return {
+        md: {
+            icon: inputIconSizeMd
+        },
+        sm: {
+            icon: inputIconSizeSm
+        }
+    };
+};
 
 var mapOption = function (ref) {
         var option = ref.option;
@@ -1085,10 +1290,15 @@ var CFormSelectCustom = {
 
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$d; }
+            default: function () { return DefaultTheme$e; }
         },
 
         label: {
+            type: String,
+            default: null
+        },
+
+        placeholder: {
             type: String,
             default: null
         },
@@ -1111,6 +1321,12 @@ var CFormSelectCustom = {
         error: {
             type: Boolean,
             default: false
+        },
+
+        size: {
+            type: String,
+            default: 'md',
+            validator: function (value) { return validSizes$1.includes(value); }
         }
     },
 
@@ -1120,6 +1336,7 @@ var CFormSelectCustom = {
     },
 
     render: function render(h, ref) {
+        var data = ref.data;
         var listeners = ref.listeners;
         var props = ref.props;
         var scopedSlots = ref.scopedSlots;
@@ -1128,14 +1345,23 @@ var CFormSelectCustom = {
         var theme = props.theme;
         var modelValue = props.modelValue;
         var label = props.label;
+        var placeholder = props.placeholder;
         var optionLabel = props.optionLabel;
         var optionValue = props.optionValue;
         var error = props.error;
+        var size = props.size;
 
         var selectedOption = options.find(function (item) { return item[optionValue] === modelValue; });
-
         var inputBase = theme.inputBase;
-        var inputIcon = theme.inputIcon;
+        var inputIconBase = theme.inputIconBase;
+        var sizes = createSizeMap$2(theme);
+
+        var iconClass = [inputIconBase];
+
+        var ref$1 = getHashMapValue(sizes, size);
+        var icon = ref$1.icon;
+
+        iconClass.push(icon);
 
         var cumputeOptionClasses = function (isSelected) {
             var optionBase = theme.optionBase;
@@ -1161,26 +1387,31 @@ var CFormSelectCustom = {
                 holder: function (ref) {
                         var toggle = ref.toggle;
 
-                        return h('CFormInput', {
-                        props: {
-                            readonly: true,
-                            error: error,
-                            label: label,
-                            modelValue: selectedOption
-                                ? scopedSlots.selected
-                                    ? scopedSlots.selected(selectedOption)[0].text
-                                    : selectedOption[optionLabel]
-                                : null
-                        },
-                        ref: 'holder',
-                        staticClass: inputBase,
-                        scopedSlots: {
-                            append: function () { return h('i', { staticClass: inputIcon }); }
-                        },
-                        on: {
-                            click: toggle
-                        }
-                    });
+                        return h(
+                        'CFormInput',
+                        mergeData(data, {
+                            props: {
+                                readonly: true,
+                                error: error,
+                                label: label,
+                                placeholder: placeholder,
+                                size: size,
+                                modelValue: selectedOption
+                                    ? scopedSlots.selected
+                                        ? scopedSlots.selected(selectedOption)[0].text
+                                        : selectedOption[optionLabel]
+                                    : null
+                            },
+                            ref: 'holder',
+                            staticClass: inputBase,
+                            scopedSlots: {
+                                append: function () { return h('i', { class: iconClass }); }
+                            },
+                            on: {
+                                click: toggle
+                            }
+                        })
+                    );
         },
 
                 dropdown: function (ref) {
@@ -1240,43 +1471,36 @@ var computeClasses = function (type, ref) {
     var disabled = ref.disabled;
     var error = ref.error;
     var theme = ref.theme;
-    var isChecked = ref.isChecked;
 
     var labelBase = theme.labelBase;
     var labelStateDefault = theme.labelStateDefault;
     var labelStateDisabled = theme.labelStateDisabled;
-    var iconRadioBase = theme.iconRadioBase;
-    var iconCheckboxBase = theme.iconCheckboxBase;
-    var iconStateDefault = theme.iconStateDefault;
-    var iconStateChecked = theme.iconStateChecked;
-    var iconStateDisabled = theme.iconStateDisabled;
-    var iconStateError = theme.iconStateError;
+    var labelStateError = theme.labelStateError;
     var wrapperBase = theme.wrapperBase;
     var inputBase = theme.inputBase;
+    var inputCheckboxBase = theme.inputCheckboxBase;
+    var inputCheckboxStateError = theme.inputCheckboxStateError;
+    var inputRadioBase = theme.inputRadioBase;
+    var inputRadioStateError = theme.inputRadioStateError;
 
     var labelClasses = [labelBase];
-    var iconClasses = [type === 'checkbox' ? iconCheckboxBase : iconRadioBase];
+    var inputClass = [inputBase];
+
+    inputClass.push(type === 'checkbox' ? inputCheckboxBase : inputRadioBase);
 
     if (disabled) {
         labelClasses.push(labelStateDisabled);
-        iconClasses.push(iconStateDisabled);
     } else if (error) {
-        iconClasses.push(iconStateError);
+        labelClasses.push(labelStateError);
+        inputClass.push(type === 'checkbox' ? inputCheckboxStateError : inputRadioStateError);
     } else {
         labelClasses.push(labelStateDefault);
-
-        if (isChecked) {
-            iconClasses.push(iconStateChecked);
-        } else {
-            iconClasses.push(iconStateDefault);
-        }
     }
 
     return {
         labelClasses: labelClasses,
-        iconClasses: iconClasses,
         wrapperBase: wrapperBase,
-        inputBase: inputBase
+        inputClass: inputClass
     };
 };
 
@@ -1299,7 +1523,7 @@ function radioCheckbox(type) {
         props: {
             theme: {
                 type: Object,
-                default: function () { return DefaultTheme$4; }
+                default: function () { return DefaultTheme$5; }
             },
 
             label: {
@@ -1357,12 +1581,11 @@ function radioCheckbox(type) {
                 isChecked: isChecked
             });
             var labelClasses = ref$1.labelClasses;
-            var iconClasses = ref$1.iconClasses;
-            var inputBase = ref$1.inputBase;
+            var inputClass = ref$1.inputClass;
             var wrapperBase = ref$1.wrapperBase;
 
             var inputData = {
-                staticClass: inputBase,
+                class: inputClass,
                 attrs: {
                     id: id,
                     name: name,
@@ -1412,7 +1635,6 @@ function radioCheckbox(type) {
                 [
                     h('label', { class: labelClasses, attrs: { for: id } }, [
                         h('input', inputData),
-                        h('span', { class: iconClasses }),
                         label
                     ])
                 ]
@@ -1481,13 +1703,14 @@ function radioCheckboxGroup(type) {
             var listeners = ref.listeners;
 
             var children = props.data.map(function (ref) {
-                    var id = ref.id;
-                    var label = ref.label;
-                    var name = ref.name;
-                    var disabled = ref.disabled;
-                    var value = ref.value;
+                var id = ref.id;
+                var label = ref.label;
+                var name = ref.name;
+                var disabled = ref.disabled;
+                var value = ref.value;
 
-                    return h(ChildComponent, {
+                var onChange = listeners['change'] || noop;
+                return h(ChildComponent, {
                     props: {
                         modelValue: props.modelValue,
                         id: id,
@@ -1497,11 +1720,10 @@ function radioCheckboxGroup(type) {
                         value: value
                     },
                     on: {
-                        change: function (val) { return listeners['change'](val); }
+                        change: function (val) { return onChange(val); }
                     }
                 });
-            }
-            );
+            });
 
             return h('div', children);
         }
@@ -1835,7 +2057,7 @@ var CLink = {
 
 var NAME$a = 'CButton';
 var validVariants$1 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
-var validSizes = ['lg', 'md', 'sm'];
+var validSizes$2 = ['lg', 'md', 'sm'];
 var validTagNames = ['button', 'a'];
 var validTypes$1 = ['submit', 'reset'];
 
@@ -1916,7 +2138,7 @@ var props$3 = Object.assign({}, linkProps,
     size: {
         type: String,
         default: function () { return getComponentConfig(NAME$a, 'size'); },
-        validator: function (value) { return validSizes.includes(value); }
+        validator: function (value) { return validSizes$2.includes(value); }
     },
 
     block: {
@@ -2104,7 +2326,7 @@ var CTab = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$5; }
+            default: function () { return DefaultTheme$6; }
         },
 
         label: {
@@ -2217,12 +2439,6 @@ var CTabPanels = {
     }
 };
 
-var base$a = '';
-
-var DefaultTheme$e = {
-    base: base$a
-};
-
 var NAME$e = 'CTabPanel';
 
 var CTabPanel = {
@@ -2237,7 +2453,7 @@ var CTabPanel = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$e; }
+            default: function () { return DefaultTheme$7; }
         },
 
         tag: {
@@ -2279,7 +2495,7 @@ var NAME$f = 'CList';
 var props$4 = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$6; }
+        default: function () { return DefaultTheme$8; }
     },
 
     tag: {
@@ -2354,7 +2570,7 @@ var NAME$g = 'CListItem';
 var props$5 = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$7; }
+        default: function () { return DefaultTheme$9; }
     },
 
     tag: {
@@ -2390,20 +2606,8 @@ var CListItem = {
     }
 };
 
-var wrapperBase$1 = 'relative';
-var dropdownBase =
-    'absolute z-10 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden';
-var dropdownVariantPrimary = 'shadow-example rounded';
-var dropdownVariantSecondary = 'shadow-example rounded-lg';
-
-var DefaultTheme$f = {
-    wrapperBase: wrapperBase$1,
-    dropdownBase: dropdownBase,
-    dropdownVariantPrimary: dropdownVariantPrimary,
-    dropdownVariantSecondary: dropdownVariantSecondary
-};
-
 var validVariants$2 = ['primary', 'secondary'];
+var validPlacements = ['left', 'right'];
 
 var NAME$h = 'CDropdown';
 
@@ -2413,13 +2617,19 @@ var CDropdown = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$f; }
+            default: function () { return DefaultTheme$g; }
         },
 
         variant: {
             type: String,
             default: function () { return getComponentConfig(NAME$h, 'variant'); },
             validator: function (value) { return validVariants$2.includes(value); }
+        },
+
+        placement: {
+            type: String,
+            default: function () { return getComponentConfig(NAME$h, 'placement'); },
+            validator: function (value) { return validPlacements.includes(value); }
         }
     },
 
@@ -2456,6 +2666,8 @@ var CDropdown = {
             var dropdownBase = ref.dropdownBase;
             var dropdownVariantPrimary = ref.dropdownVariantPrimary;
             var dropdownVariantSecondary = ref.dropdownVariantSecondary;
+            var dropdownPlacementLeft = ref.dropdownPlacementLeft;
+            var dropdownPlacementRight = ref.dropdownPlacementRight;
 
             var wrapperClasses = [wrapperBase];
             var dropdownClasses = [dropdownBase];
@@ -2464,10 +2676,15 @@ var CDropdown = {
                 variants: {
                     primary: dropdownVariantPrimary,
                     secondary: dropdownVariantSecondary
+                },
+                placement: {
+                    left: dropdownPlacementLeft,
+                    right: dropdownPlacementRight
                 }
             };
 
             dropdownClasses.push(themeMap.variants[this$1.variant]);
+            dropdownClasses.push(themeMap.placement[this$1.placement]);
 
             return {
                 wrapperClasses: wrapperClasses,
@@ -2522,25 +2739,6 @@ var CDropdown = {
     }
 };
 
-var base$b =
-    'rounded-lg font-bold px-0-6 py-0-3 inline-block border-2 leading-none align-middle';
-
-var variantPrimary$2 = 'bg-primary-100 border-primary-100 text-white';
-var variantSecondary$2 = 'border-secondary-200 text-secondary-200';
-var variantTertiary$2 = 'text-danger border-danger';
-var variantQuaternary$2 = '';
-var variantQuinary$2 = '';
-
-var DefaultTheme$g = {
-    base: base$b,
-
-    variantPrimary: variantPrimary$2,
-    variantSecondary: variantSecondary$2,
-    variantTertiary: variantTertiary$2,
-    variantQuaternary: variantQuaternary$2,
-    variantQuinary: variantQuinary$2
-};
-
 var NAME$i = 'CBadge';
 var validVariants$3 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 
@@ -2565,7 +2763,7 @@ var createThemeMap$2 = function (ref) {
 var props$6 = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$g; }
+        default: function () { return DefaultTheme$f; }
     },
 
     label: {
@@ -2624,7 +2822,7 @@ var CBadge = {
 var props$7 = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$8; }
+        default: function () { return DefaultTheme$a; }
     },
 
     fluid: {
@@ -2670,27 +2868,44 @@ var CContainer = {
     }
 };
 
+var OFFSET_PROP_NAME = 'offset';
 var NAME$j = 'CCol';
 
 var breakpoints = getComponentConfig('common', 'screens');
 
 var generateProps = function () {
+    var obj;
+
     var breakpointCols = breakpoints.reduce(function (prop, breakpoint) {
         prop[breakpoint] = numProp();
         return prop;
     }, Object.create(null));
 
-    return Object.assign({}, {theme: {
+    var breakpointOffsets = breakpoints.reduce(function (prop, breakpoint) {
+        prop[suffixPropName(breakpoint, OFFSET_PROP_NAME)] = numProp();
+        return prop;
+    }, Object.create(null));
+
+    return Object.assign({
+        theme: {
             type: Object,
-            default: function () { return DefaultTheme$a; }
+            default: function () { return DefaultTheme$c; }
         },
 
         cols: {
             type: Number,
             default: null
-        }},
+        }
+    },
 
-        breakpointCols);
+        breakpointCols,
+
+        ( obj = {}, obj[OFFSET_PROP_NAME] = {
+            type: Number,
+            default: null
+        }, obj ),
+
+        breakpointOffsets);
 };
 
 var CCol = {
@@ -2723,6 +2938,12 @@ var CCol = {
                 breakpoints.reduce(function (output, item) {
                     output[item] = props[item];
                     return output;
+                }, Object.create(null))),
+            offset: Object.assign({}, {default: props.offset},
+                // TODO: refactoring, dry
+                breakpoints.reduce(function (output, item) {
+                    output[item] = props[suffixPropName(item, OFFSET_PROP_NAME)];
+                    return output;
                 }, Object.create(null)))
         };
 
@@ -2737,6 +2958,7 @@ var COLS_PROP_NAME = 'cols';
 
 var getBreakpoint = function (key, name) { return key.replace(name, '').toLowerCase(); };
 var wPrefix = 'w-';
+var offsetPrefix = 'ml-';
 
 var createThemeMap$3 = function (ref) {
     var guttersNormalizeXl = ref.guttersNormalizeXl;
@@ -2802,7 +3024,7 @@ var generateProps$1 = function () {
     return Object.assign(( obj = {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$9; }
+            default: function () { return DefaultTheme$b; }
         }
     }, obj[COLS_PROP_NAME] = {
             type: Number,
@@ -2841,6 +3063,7 @@ var currentClass$4 = function (props) {
     }
 
     // breakpoints gutters
+
     breakpointPropMap[GUTTERS_PROP_NAME].forEach(function (key) {
         if (!props[key]) { return undefined; }
 
@@ -2867,12 +3090,14 @@ var currentClass$4 = function (props) {
 var createColBreakpointClass = function (ref) {
     var props = ref.props;
     var cols = ref.cols;
+    var offset = ref.offset;
     var colsLimit = ref.colsLimit;
 
-    if (!cols) { return undefined; }
+    if (!cols) { return null; }
 
     var classes = [];
 
+    // width
     if (cols.default) {
         if (cols.default < colsLimit) {
             classes.push(("" + wPrefix + (cols.default) + "/" + colsLimit));
@@ -2883,9 +3108,21 @@ var createColBreakpointClass = function (ref) {
         }
     }
 
+    // offset
+    if (offset.default) {
+        if (offset.default < colsLimit) {
+            classes.push(("" + offsetPrefix + (offset.default) + "/" + colsLimit));
+        }
+
+        if (offset.default === colsLimit) {
+            classes.push((offsetPrefix + "full"));
+        }
+    }
+
     breakpointPropMap[COLS_PROP_NAME].forEach(function (breakpoint) {
         var propsValue = props[breakpoint] || colsLimit;
 
+        // breakpoint width
         if (cols[breakpoint]) {
             if (cols[breakpoint] < propsValue) {
                 classes.push((breakpoint + ":" + wPrefix + (cols[breakpoint]) + "/" + propsValue));
@@ -2897,6 +3134,21 @@ var createColBreakpointClass = function (ref) {
         } else {
             if (props[breakpoint] && cols.default) {
                 classes.push((breakpoint + ":" + wPrefix + (cols.default) + "/" + propsValue));
+            }
+        }
+
+        // breakpoint offset
+        if (offset[breakpoint]) {
+            if (offset[breakpoint] < propsValue) {
+                classes.push((breakpoint + ":" + offsetPrefix + (offset[breakpoint]) + "/" + propsValue));
+            }
+
+            if (offset[breakpoint] === propsValue) {
+                classes.push((breakpoint + ":" + offsetPrefix + "full"));
+            }
+        } else {
+            if (props[breakpoint] && offset.default) {
+                classes.push((breakpoint + ":" + offsetPrefix + (offset.default) + "/" + propsValue));
             }
         }
     });
@@ -2928,16 +3180,17 @@ var CRow = {
         var ref$1 = currentClass$4(props);
         var rowClasses = ref$1.rowClasses;
         var colClasses = ref$1.colClasses;
-
         var computedChildren = children.map(function (col) {
             if (!col.data) { return; }
 
             var ref = col.data;
-            var cols = ref.cols; if ( cols === void 0 ) cols = null;
+            var cols = ref.cols;
+            var offset = ref.offset;
 
             var colBreakpointClass = createColBreakpointClass({
                 props: props,
                 cols: cols,
+                offset: offset,
                 colsLimit: props.cols
             });
 
@@ -2964,6 +3217,7 @@ var components = {
     CLink: CLink,
     CForm: CForm,
     CFormPanel: CFormPanel,
+    CFormField: CFormField$1,
     CFormInput: CFormInput,
     CFormSelectCustom: CFormSelectCustom,
     CRadio: CRadio,
@@ -3026,7 +3280,7 @@ var install = function(Vue, options) {
     var config = options.config; if ( config === void 0 ) config = {};
     var injectComponentList = options.components; if ( injectComponentList === void 0 ) injectComponentList = null;
 
-    var CurrentTheme = Object.assign({}, DefaultTheme$b,
+    var CurrentTheme = Object.assign({}, DefaultTheme$h,
         theme);
 
     var componentsToRegister = injectComponentList || Object.keys(components);
@@ -3045,4 +3299,4 @@ var index = {
 };
 
 export default index;
-export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CRadio, CRadioGroup, CRow, CTab, CTabPanel, CTabPanels, CTabs, selfInstall };
+export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField$1 as CFormField, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CRadio, CRadioGroup, CRow, CTab, CTabPanel, CTabPanels, CTabs, selfInstall };

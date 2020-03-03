@@ -207,6 +207,7 @@ module.exports = {
         margin: (theme, { negative }) => ({
             auto: 'auto',
             ...theme('spacing'),
+            ...theme('width'),
             ...negative(theme('spacing'))
         }),
         maxHeight: {
@@ -411,6 +412,7 @@ module.exports = {
         },
 
         customForms: theme => {
+            // TODO: refactoring
             return {
                 default: {
                     input: {
@@ -434,7 +436,8 @@ module.exports = {
 
                         '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
                             color: undefined,
-                            opacity: 0
+                            opacity: 0,
+                            fontSize: theme('fontSize.sm')
                         },
 
                         '&:focus': {
@@ -466,12 +469,79 @@ module.exports = {
                         lineHeight: undefined,
                         backgroundPosition: 'center',
                         backgroundSize: 'contain',
-                        iconColor: theme('colors.black.100'),
-                        icon: iconColor =>
-                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${iconColor}"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>`
+                        icon: () =>
+                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>`
                     },
 
-                    checkbox: {}
+                    checkbox: {
+                        appearance: 'none',
+                        display: 'inline-block',
+                        verticalAlign: 'middle',
+                        backgroundOrigin: 'border-box',
+                        userSelect: 'none',
+                        flexShrink: 0,
+                        height: undefined,
+                        width: undefined,
+                        color: undefined,
+                        iconColor: theme('colors.secondary.200'),
+                        backgroundColor: theme('colors.white'),
+                        borderWidth: theme('borderWidth.2'),
+                        borderColor: theme('colors.black.200'),
+                        icon: iconColor =>
+                            `<svg xmlns="http://www.w3.org/2000/svg" fill="${iconColor}" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"/></svg>`,
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: 'none',
+                            borderColor: theme('borderWidth.2')
+                        },
+                        '&:checked': {
+                            borderColor: theme('colors.black.200'),
+                            backgroundColor: 'transparent',
+                            backgroundSize: '50%',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
+                        }
+                    },
+
+                    radio: {
+                        appearance: 'none',
+                        colorAdjust: 'exact',
+                        iconColor: theme('colors.secondary.200'),
+                        height: theme('spacing.0-8'),
+                        width: theme('spacing.0-8'),
+                        backgroundColor: theme('colors.white'),
+                        borderWidth: theme('borderWidth.2'),
+                        borderColor: theme('colors.black.200'),
+                        icon: iconColor =>
+                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="${iconColor}"><circle cx="5" cy="5" r="3"/></svg>`,
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: 'none',
+                            borderColor: theme('borderWidth.2')
+                        },
+                        '&:checked': {
+                            borderColor: theme('colors.black.200'),
+                            backgroundColor: 'transparent',
+                            backgroundSize: '88%',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
+                        }
+                    }
+                },
+
+                'not-label': {
+                    input: {
+                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                            color: undefined,
+                            opacity: 1
+                        }
+                    }
+                },
+
+                'is-error': {
+                    checkbox: {
+                        borderColor: theme('colors.danger')
+                    }
                 }
             };
         }

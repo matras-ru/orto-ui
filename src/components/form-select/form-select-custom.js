@@ -1,8 +1,22 @@
+import { mergeData } from 'vue-functional-data-merge';
 import { selfInstall } from '@/';
 import DefaultTheme from '@/themes/default/CFormSelectCustom';
 import { getComponentConfig } from '@/config';
+import { getHashMapValue } from '@/utils';
+const validSizes = ['sm', 'md'];
 
 const NAME = 'CFormSelectCustom';
+
+const createSizeMap = ({ inputIconSizeMd, inputIconSizeSm }) => {
+    return {
+        md: {
+            icon: inputIconSizeMd
+        },
+        sm: {
+            icon: inputIconSizeSm
+        }
+    };
+};
 
 const mapOption = ({ option, optionLabel, optionValue }) =>
     Object.keys(option).reduce((output, item) => {
@@ -44,6 +58,11 @@ export default {
             default: null
         },
 
+        placeholder: {
+            type: String,
+            default: null
+        },
+
         data: {
             type: Array,
             default: () => []
@@ -62,6 +81,12 @@ export default {
         error: {
             type: Boolean,
             default: false
+        },
+
+        size: {
+            type: String,
+            default: 'md',
+            validator: value => validSizes.includes(value)
         }
     },
 
@@ -70,12 +95,28 @@ export default {
         event: 'change'
     },
 
-    render(h, { listeners, props, scopedSlots }) {
-        const { data: options, theme, modelValue, label, optionLabel, optionValue, error } = props;
+    render(h, { data, listeners, props, scopedSlots }) {
+        const {
+            data: options,
+            theme,
+            modelValue,
+            label,
+            placeholder,
+            optionLabel,
+            optionValue,
+            error,
+            size
+        } = props;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
+        const { inputBase, inputIconBase } = theme;
+        const sizes = createSizeMap(theme);
 
-        const { inputBase, inputIcon } = theme;
+        const iconClass = [inputIconBase];
+
+        const { icon } = getHashMapValue(sizes, size);
+
+        iconClass.push(icon);
 
         const cumputeOptionClasses = isSelected => {
             const { optionBase, optionStateDefault, optionStateActive } = theme;
@@ -97,26 +138,31 @@ export default {
 
             scopedSlots: {
                 holder: ({ toggle }) =>
-                    h('CFormInput', {
-                        props: {
-                            readonly: true,
-                            error,
-                            label,
-                            modelValue: selectedOption
-                                ? scopedSlots.selected
-                                    ? scopedSlots.selected(selectedOption)[0].text
-                                    : selectedOption[optionLabel]
-                                : null
-                        },
-                        ref: 'holder',
-                        staticClass: inputBase,
-                        scopedSlots: {
-                            append: () => h('i', { staticClass: inputIcon })
-                        },
-                        on: {
-                            click: toggle
-                        }
-                    }),
+                    h(
+                        'CFormInput',
+                        mergeData(data, {
+                            props: {
+                                readonly: true,
+                                error,
+                                label,
+                                placeholder,
+                                size,
+                                modelValue: selectedOption
+                                    ? scopedSlots.selected
+                                        ? scopedSlots.selected(selectedOption)[0].text
+                                        : selectedOption[optionLabel]
+                                    : null
+                            },
+                            ref: 'holder',
+                            staticClass: inputBase,
+                            scopedSlots: {
+                                append: () => h('i', { class: iconClass })
+                            },
+                            on: {
+                                click: toggle
+                            }
+                        })
+                    ),
 
                 dropdown: ({ close }) => {
                     return h('CList', [

@@ -13,44 +13,38 @@ const computeIsChecked = ({ type, modelValue, value, trueValue }) => {
     return modelValue === value;
 };
 
-const computeClasses = (type, { disabled, error, theme, isChecked }) => {
+const computeClasses = (type, { disabled, error, theme }) => {
     const {
         labelBase,
         labelStateDefault,
         labelStateDisabled,
-        iconRadioBase,
-        iconCheckboxBase,
-        iconStateDefault,
-        iconStateChecked,
-        iconStateDisabled,
-        iconStateError,
+        labelStateError,
         wrapperBase,
-        inputBase
+        inputBase,
+        inputCheckboxBase,
+        inputCheckboxStateError,
+        inputRadioBase,
+        inputRadioStateError
     } = theme;
 
     const labelClasses = [labelBase];
-    const iconClasses = [type === 'checkbox' ? iconCheckboxBase : iconRadioBase];
+    const inputClass = [inputBase];
+
+    inputClass.push(type === 'checkbox' ? inputCheckboxBase : inputRadioBase);
 
     if (disabled) {
         labelClasses.push(labelStateDisabled);
-        iconClasses.push(iconStateDisabled);
     } else if (error) {
-        iconClasses.push(iconStateError);
+        labelClasses.push(labelStateError);
+        inputClass.push(type === 'checkbox' ? inputCheckboxStateError : inputRadioStateError);
     } else {
         labelClasses.push(labelStateDefault);
-
-        if (isChecked) {
-            iconClasses.push(iconStateChecked);
-        } else {
-            iconClasses.push(iconStateDefault);
-        }
     }
 
     return {
         labelClasses,
-        iconClasses,
         wrapperBase,
-        inputBase
+        inputClass
     };
 };
 
@@ -123,7 +117,7 @@ export default function(type) {
 
             const isChecked = computeIsChecked({ type, modelValue, value, trueValue });
 
-            const { labelClasses, iconClasses, inputBase, wrapperBase } = computeClasses(type, {
+            const { labelClasses, inputClass, wrapperBase } = computeClasses(type, {
                 theme,
                 error,
                 disabled,
@@ -131,7 +125,7 @@ export default function(type) {
             });
 
             const inputData = {
-                staticClass: inputBase,
+                class: inputClass,
                 attrs: {
                     id,
                     name,
@@ -181,7 +175,6 @@ export default function(type) {
                 [
                     h('label', { class: labelClasses, attrs: { for: id } }, [
                         h('input', inputData),
-                        h('span', { class: iconClasses }),
                         label
                     ])
                 ]

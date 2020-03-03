@@ -1,4 +1,37 @@
+import { getHashMapValue } from '@/utils';
+
 const NAME = 'CFormField';
+const validSizes = ['sm', 'md'];
+
+const createSizeMap = ({
+    labelSizeSm,
+    labelSizeMd,
+    innerWrapsizeSm,
+    innerWrapsizeMd,
+    controlWrapSizeMd,
+    controlWrapSizeSm,
+    appendSizeSm,
+    appendSizeMd,
+    prependSizeSm,
+    prependSizeMd
+}) => {
+    return {
+        md: {
+            label: labelSizeMd,
+            innerWrap: innerWrapsizeMd,
+            append: appendSizeMd,
+            prepend: prependSizeMd,
+            controlWrap: controlWrapSizeMd
+        },
+        sm: {
+            label: labelSizeSm,
+            innerWrap: innerWrapsizeSm,
+            append: appendSizeSm,
+            prepend: prependSizeSm,
+            controlWrap: controlWrapSizeSm
+        }
+    };
+};
 
 export default {
     name: NAME,
@@ -54,6 +87,17 @@ export default {
         labelBgColor: {
             type: String,
             default: null
+        },
+
+        labelStick: {
+            type: Boolean,
+            default: false
+        },
+
+        size: {
+            type: String,
+            default: 'md',
+            validator: value => validSizes.includes(value)
         }
     },
 
@@ -84,17 +128,15 @@ export default {
                 labelStateDefault,
                 labelStateError,
                 labelPositionFloat,
-                labelBgPrimary,
-                prependBase,
-                appendBase
+                labelBgPrimary
             } = this.theme;
 
             const outerWrapClasses = [outerWrapBase];
             const innerWrapClasses = [innerWrapBase];
             const controlWrapClasses = [controlWrapBase];
             const labelClasses = [labelBase];
-            const prependWrapClasses = [prependBase];
-            const appendWrapClasses = [appendBase];
+
+            const sizes = createSizeMap(this.theme);
 
             if (!this.inline) {
                 outerWrapClasses.push(outerWrapSpace);
@@ -106,6 +148,7 @@ export default {
                 labelClasses.push(this.labelBgColor);
             }
 
+            // status
             const isError = () => {
                 innerWrapClasses.push(innerWrapStateError);
                 labelClasses.push(labelStateError);
@@ -145,13 +188,24 @@ export default {
                     break level1;
                 }
 
-                if (this.modelValue) {
+                if (this.modelValue || this.labelStick) {
                     isNotEmpty();
                     break level1;
                 }
 
                 isDefault();
             }
+
+            const { label, innerWrap, prepend, append, controlWrap } = getHashMapValue(
+                sizes,
+                this.size
+            );
+
+            labelClasses.push(label);
+            innerWrapClasses.push(innerWrap);
+            controlWrapClasses.push(controlWrap);
+            const appendWrapClasses = [append];
+            const prependWrapClasses = [prepend];
 
             return {
                 outerWrapClasses,
@@ -188,14 +242,14 @@ export default {
                                     ? this.getControl(h)
                                     : this.$slots.default,
 
-                                this.label
+                                this.$slots.label || this.label
                                     ? h(
                                           'div', // label
                                           {
                                               class: labelClasses,
                                               ref: 'label'
                                           },
-                                          this.label
+                                          this.$slots.label ? this.$slots.label : this.label
                                       )
                                     : null
                             ]
