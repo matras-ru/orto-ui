@@ -1,5 +1,6 @@
 // TODO: add limit...
 import { selfInstall } from '@/';
+import { noop } from '@/utils';
 
 export default function(type) {
     const mapComponents = {
@@ -34,8 +35,9 @@ export default function(type) {
         },
 
         render(h, { props, listeners }) {
-            const children = props.data.map(({ id, label, name, disabled, value }) =>
-                h(ChildComponent, {
+            const children = props.data.map(({ id, label, name, disabled, value }) => {
+                const onChange = listeners['change'] || noop;
+                return h(ChildComponent, {
                     props: {
                         modelValue: props.modelValue,
                         id,
@@ -45,10 +47,10 @@ export default function(type) {
                         value
                     },
                     on: {
-                        change: val => listeners['change'](val)
+                        change: val => onChange(val)
                     }
-                })
-            );
+                });
+            });
 
             return h('div', children);
         }

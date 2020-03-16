@@ -58,10 +58,12 @@
 
 ### Props
 
-| Name            | Type     | Default | Description             |
-| --------------- | -------- | ------- | ----------------------- |
-| `cols`          | `Number` |         | cols count              |
-| `${breakpoint}` | `Number` |         | cols count - breakpoint |
+| Name                  | Type     | Default | Description                   |
+| --------------------- | -------- | ------- | ----------------------------- |
+| `cols`                | `Number` |         | cols count                    |
+| `offset`              | `Number` |         | offset cols left              |
+| `${breakpoint}`       | `Number` |         | cols count - breakpoint       |
+| `offset${breakpoint}` | `Number` |         | offset cols left - breakpoint |
 
 ### Slots
 

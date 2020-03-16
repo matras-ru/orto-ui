@@ -3,6 +3,7 @@ import DefaultTheme from '@/themes/default/CDropdown';
 import { getComponentConfig } from '@/config';
 
 const validVariants = ['primary', 'secondary'];
+const validPlacements = ['left', 'right'];
 
 const NAME = 'CDropdown';
 
@@ -19,6 +20,12 @@ export default {
             type: String,
             default: () => getComponentConfig(NAME, 'variant'),
             validator: value => validVariants.includes(value)
+        },
+
+        placement: {
+            type: String,
+            default: () => getComponentConfig(NAME, 'placement'),
+            validator: value => validPlacements.includes(value)
         }
     },
 
@@ -52,7 +59,9 @@ export default {
                 wrapperBase,
                 dropdownBase,
                 dropdownVariantPrimary,
-                dropdownVariantSecondary
+                dropdownVariantSecondary,
+                dropdownPlacementLeft,
+                dropdownPlacementRight
             } = this.theme;
 
             const wrapperClasses = [wrapperBase];
@@ -62,10 +71,15 @@ export default {
                 variants: {
                     primary: dropdownVariantPrimary,
                     secondary: dropdownVariantSecondary
+                },
+                placement: {
+                    left: dropdownPlacementLeft,
+                    right: dropdownPlacementRight
                 }
             };
 
             dropdownClasses.push(themeMap.variants[this.variant]);
+            dropdownClasses.push(themeMap.placement[this.placement]);
 
             return {
                 wrapperClasses,

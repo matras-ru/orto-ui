@@ -1,29 +1,31 @@
-export const wrapperBase = 'flex flex-wrap mb-0-7';
+export const wrapperBase = 'flex flex-wrap mb-0-4';
 
-export const labelBase = 'inline-flex';
+export const labelBase = 'relative pl-1-4';
 export const labelStateDefault = 'cursor-pointer';
-export const labelStateDisabled = 'cursor-not-allowed';
+export const labelStateDisabled = 'cursor-not-allowed opacity-50';
+export const labelStateError = 'cursor-pointer';
 
-export const iconRadioBase = 'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-full';
-export const iconCheckboxBase = 'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm';
+export const inputBase = 'absolute top-0-2 left-0 w-0-8 h-0-8';
 
-export const iconStateDefault = 'border-black-200 bg-white';
-export const iconStateChecked = 'border-black-200 bg-secondary-200 shadow-inner';
-export const iconStateDisabled = 'border-tertiary-200 bg-white';
-export const iconStateError = 'border-danger bg-white';
+export const inputCheckboxBase = 'form-checkbox';
+export const inputCheckboxStateError = 'form-checkbox-is-error';
 
-export const inputBase = 'absolute opacity-0 invisible';
+export const inputRadioBase = 'form-radio';
+export const inputRadioStateError = 'form-radio-is-error';
 
 export default {
+    wrapperBase,
+
     labelBase,
     labelStateDefault,
     labelStateDisabled,
-    iconRadioBase,
-    iconCheckboxBase,
-    iconStateDefault,
-    iconStateChecked,
-    iconStateDisabled,
-    iconStateError,
+    labelStateError,
+
     inputBase,
-    wrapperBase
+
+    inputCheckboxBase,
+    inputCheckboxStateError,
+
+    inputRadioBase,
+    inputRadioStateError
 };

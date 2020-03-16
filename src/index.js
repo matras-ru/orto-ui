@@ -8,6 +8,8 @@ import { CForm } from '@/components/form';
 
 import { CFormPanel } from '@/components/form-panel';
 import { CFormInput } from '@/components/form-input';
+import { CFormField } from '@/components/form-field';
+
 import { CFormSelectCustom } from '@/components/form-select';
 
 import { CRadio, CRadioGroup } from '@/components/radio';
@@ -30,6 +32,7 @@ const components = {
     CLink,
     CForm,
     CFormPanel,
+    CFormField,
     CFormInput,
     CFormSelectCustom,
     CRadio,
@@ -111,6 +114,7 @@ const install = function(Vue, options = {}) {
 export { CForm };
 export { CFormPanel };
 export { CFormInput };
+export { CFormField };
 export { CFormSelectCustom };
 export { CRadio };
 export { CRadioGroup };

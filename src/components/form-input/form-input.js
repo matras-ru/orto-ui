@@ -2,6 +2,9 @@ import { selfInstall } from '@/';
 import CFormField from '@/mixins/form-field';
 import DefaultTheme from '@/themes/default/CFormInput';
 import { getComponentConfig } from '@/config';
+import { getHashMapValue } from '@/utils';
+
+// TODO: support attr - inputmode
 
 const validTypes = [
     'text',
@@ -14,6 +17,13 @@ const validTypes = [
     'search',
     'date'
 ];
+
+const createSizeMap = ({ sizeSmBase, sizeMdBase }) => {
+    return {
+        md: sizeMdBase,
+        sm: sizeSmBase
+    };
+};
 
 const NAME = 'CFormInput';
 
@@ -43,7 +53,7 @@ export default {
             default: () => DefaultTheme
         },
 
-        // extarea specific
+        // textarea specific
 
         rows: {
             type: Number,
@@ -141,20 +151,27 @@ export default {
             const {
                 base,
                 stateReadonly,
+                stateNotLabel,
                 typeTextarea,
                 controlWrap,
-                apperanceWrap,
-                apperanceBase,
-                apperanceStateDisable
+                apperanceNumberWrap,
+                apperanceNumberBase,
+                apperanceNumberStateDisable
             } = this.theme;
+
+            const size = createSizeMap(this.theme);
 
             const isTextArea = this.type === 'textarea';
 
             const inputClasses = [base];
 
-            if (this.isTextArea) inputClasses.push(typeTextarea);
+            if (isTextArea) inputClasses.push(typeTextarea);
 
             if (this.readonly) inputClasses.push(stateReadonly);
+
+            if (!this.label) inputClasses.push(stateNotLabel);
+
+            inputClasses.push(getHashMapValue(size, this.size));
 
             return h(
                 'div',
@@ -205,16 +222,16 @@ export default {
                         ? h(
                               'div',
                               {
-                                  staticClass: apperanceWrap
+                                  staticClass: apperanceNumberWrap
                               },
                               [
                                   h(
                                       'span',
                                       {
-                                          staticClass: apperanceBase,
+                                          staticClass: apperanceNumberBase,
                                           class: [
                                               this.modelValue === this.max
-                                                  ? apperanceStateDisable
+                                                  ? apperanceNumberStateDisable
                                                   : null
                                           ],
                                           on: {
@@ -226,10 +243,10 @@ export default {
                                   h(
                                       'span',
                                       {
-                                          staticClass: apperanceBase,
+                                          staticClass: apperanceNumberBase,
                                           class: [
                                               this.modelValue <= this.min
-                                                  ? apperanceStateDisable
+                                                  ? apperanceNumberStateDisable
                                                   : null
                                           ],
                                           on: {

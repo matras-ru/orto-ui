@@ -91,8 +91,120 @@
                     </CFormSelectCustom>
                 </CFormPanel>
 
+                <CFormPanel label="size sm">
+                    <div class="flex flex-wrap -mx-0-2">
+                        <div class="px-0-2 w-1/3">
+                            <CFormSelectCustom
+                                v-bind="{
+                                    data: widths,
+                                    size: 'sm',
+                                    placeholder: 'Ширина',
+                                    optionValue: 'id'
+                                }"
+                                v-model="exampleModel.width"
+                            >
+                            </CFormSelectCustom>
+                        </div>
+
+                        <div class="px-0-2 w-1/3">
+                            <CFormSelectCustom
+                                v-bind="{
+                                    data: [
+                                        {
+                                            id: 1,
+                                            label: 200
+                                        },
+                                        {
+                                            id: 2,
+                                            label: 100
+                                        }
+                                    ],
+                                    size: 'sm',
+                                    placeholder: 'Длина',
+                                    optionValue: 'id',
+                                    error: $v.exampleModel.selectModel.$error
+                                }"
+                                v-model="exampleModel.selectModel"
+                            >
+                            </CFormSelectCustom>
+                        </div>
+
+                        <div class="px-0-2 w-1/3">
+                            <CFormSelectCustom
+                                v-bind="{
+                                    data: [
+                                        {
+                                            id: 1,
+                                            label: 18
+                                        },
+                                        {
+                                            id: 2,
+                                            label: 20
+                                        }
+                                    ],
+                                    size: 'sm',
+                                    placeholder: 'Высота',
+                                    optionValue: 'id',
+                                    error: $v.exampleModel.selectModel.$error
+                                }"
+                                v-model="exampleModel.selectModel"
+                            >
+                            </CFormSelectCustom>
+                        </div>
+                    </div>
+                </CFormPanel>
+
+                <div class="w-3/4">
+                    <CFormPanel label="Размер">
+                        <CFormField labelStick>
+                            <template #label>
+                                <span class="text-xs">Ширина, длина, высота</span>
+                            </template>
+                            <div class="flex justify-between">
+                                <div class="px-0-4">
+                                    <CDropdown>
+                                        <template #holder="{ toggle }">
+                                            <CLink variant="quinary" @click="toggle">
+                                                {{ activeSort.label }}
+                                            </CLink>
+                                        </template>
+                                        <template #dropdown="{ toggle }">
+                                            <CList>
+                                                <CListItem
+                                                    v-for="({ id, label }, idx) in widths"
+                                                    :key="idx"
+                                                    @click="
+                                                        () => {
+                                                            setValue(id, 'width');
+                                                            toggle();
+                                                        }
+                                                    "
+                                                    class="cursor-pointer py-0-4 px-0-8 bg-white hover:bg-tertiary-100"
+                                                    >{{ label }}</CListItem
+                                                >
+                                            </CList>
+                                        </template>
+                                    </CDropdown>
+                                </div>
+                                <div class="px-0-4 text-tertiary-300">x</div>
+                                <div class="px-0-4">
+                                    <CLink variant="quinary">200</CLink>
+                                </div>
+                                <div class="px-0-4 text-tertiary-300">x</div>
+                                <div class="px-0-4">
+                                    <CLink variant="quinary">18</CLink>
+                                </div>
+                            </div>
+                        </CFormField>
+                    </CFormPanel>
+                </div>
+
+                <CFormPanel label="Empty Form Field">
+                    <CFormField label="Ш, Д, В" modelValue="22"> </CFormField>
+                </CFormPanel>
+
                 <div class="bg-secondary-100 p-1-6">
-                    <CFormPanel label="Default">
+                    <CFormPanel label="labelBgColor">
                         <CFormInput
                             label="Адрес доставки *"
                             placeholder="Ул.Пушкина д.Колотушкина"
@@ -115,14 +227,48 @@
                     </CFormInput>
                 </CFormPanel>
 
-                <CFormPanel label="Error">
+                <CFormPanel label="Error size sm">
                     <CFormInput
                         error
                         label="Имя и фамилия *"
                         placeholder="Вася Пупкин"
+                        size="sm"
                         v-model="exampleModel.inputModel"
                     >
                     </CFormInput>
+                </CFormPanel>
+
+                <CFormPanel label="Empty label size sm">
+                    <CFormInput
+                        placeholder="Вася Пупкин"
+                        size="sm"
+                        v-model="exampleModel.inputModel"
+                    />
+                </CFormPanel>
+
+                <CFormPanel label="Size sm prepend">
+                    <div class="flex flex-wrap -mx-0-4">
+                        <div class="w-1/2 px-0-4">
+                            <CFormInput
+                                size="sm"
+                                inline
+                                placeholder="1111"
+                                v-model="exampleModel.inputModel"
+                            >
+                                <template #prepend>от</template>
+                            </CFormInput>
+                        </div>
+                        <div class="w-1/2 px-0-4">
+                            <CFormInput
+                                size="sm"
+                                inline
+                                placeholder="2222"
+                                v-model="exampleModel.inputModel"
+                            >
+                                <template #prepend>до</template>
+                            </CFormInput>
+                        </div>
+                    </div>
                 </CFormPanel>
 
                 <CFormPanel label="Textarea">
@@ -136,18 +282,20 @@
                 </CFormPanel>
             </div>
 
-            <CFormPanel label="Default">
-                <CCheckbox
-                    v-bind="{
-                        id: 'checkbox1',
-                        label: 'checkbox1',
-                        name: 'checkbox1',
-                        value: 'checkbox1',
-                        error: $v.exampleModel.checkboxModel.$error
-                    }"
-                    v-model="exampleModel.checkboxModel"
-                />
-            </CFormPanel>
+            <div class="w-1/6">
+                <CFormPanel label="Default">
+                    <CCheckbox
+                        v-bind="{
+                            id: 'checkbox1',
+                            label: 'checkbox1 checkbox1 checkbox1 checkbox1',
+                            name: 'checkbox1',
+                            value: 'checkbox1',
+                            error: $v.exampleModel.checkboxModel.$error
+                        }"
+                        v-model="exampleModel.checkboxModel"
+                    />
+                </CFormPanel>
+            </div>
 
             <CFormPanel label="Disable">
                 <CCheckbox
@@ -234,6 +382,16 @@ export default {
 
     data() {
         return {
+            widths: [
+                {
+                    id: 1,
+                    label: 120
+                },
+                {
+                    id: 2,
+                    label: 1140
+                }
+            ],
             exampleModel: {
                 checkboxModel: false,
                 checkboxGroupModel: [],
@@ -242,7 +400,8 @@ export default {
                 inputModel: null,
                 inputNumberModel: 0,
                 selectModel: null,
-                textareaModel: null
+                textareaModel: null,
+                width: 1
             }
         };
     },
@@ -268,9 +427,21 @@ export default {
         }
     },
 
+    computed: {
+        activeSort() {
+            return this.widths.find(sort => sort.id === this.exampleModel.width);
+        }
+    },
+
     methods: {
         validate() {
             this.$v.$touch();
+        },
+
+        setValue(val, type) {
+            if (type === 'width') {
+                this.exampleModel.width = val;
+            }
         }
     }
 };

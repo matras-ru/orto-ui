@@ -49,20 +49,26 @@ export default {
     },
 
     render(h) {
-        const { headerBase } = this.theme;
+        const { headerBase, wrapperBase } = this.theme;
 
-        return h('section', [
-            this.label
-                ? h(
-                      'header',
-                      {
-                          staticClass: headerBase
-                      },
-                      [h('div', this.label)]
-                  )
-                : null,
+        return h(
+            'section',
+            {
+                staticClass: wrapperBase
+            },
+            [
+                this.label
+                    ? h(
+                          'header',
+                          {
+                              staticClass: headerBase
+                          },
+                          [h('div', this.label)]
+                      )
+                    : null,
 
-            this.open ? h('main', [this.$slots.default]) : null
-        ]);
+                this.open ? h('main', [this.$slots.default]) : null
+            ]
+        );
     }
 };

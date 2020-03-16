@@ -17,7 +17,6 @@ describe('Checkbox', () => {
 
         const input = wrapper.find('input');
         const label = wrapper.find('label');
-        const icon = wrapper.find('span');
 
         expect(input.attributes('id')).toBeDefined();
         expect(input.attributes('id')).toBe('checkbox1');
@@ -25,19 +24,15 @@ describe('Checkbox', () => {
         expect(input.attributes('type')).toBe('checkbox');
         expect(input.attributes('name')).toBeDefined();
         expect(input.attributes('name')).toBe('checkbox1');
-
         expect(input.attributes('name')).toBe('checkbox1');
-
         expect(label.attributes('for')).toBe('checkbox1');
+
         expect(wrapper.text()).toBe('default');
 
-        expect(wrapper.classes().sort()).toEqual('flex flex-wrap mb-0-7'.split(' ').sort());
-        expect(input.classes().sort()).toEqual('absolute opacity-0 invisible'.split(' ').sort());
-        expect(label.classes().sort()).toEqual('inline-flex cursor-pointer'.split(' ').sort());
-        expect(icon.classes().sort()).toEqual(
-            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm border-black-200 bg-white'
-                .split(' ')
-                .sort()
+        expect(wrapper.classes().sort()).toEqual('flex flex-wrap mb-0-4'.split(' ').sort());
+        expect(label.classes().sort()).toEqual('relative pl-1-4 cursor-pointer'.split(' ').sort());
+        expect(input.classes().sort()).toEqual(
+            'form-checkbox absolute top-0-2 left-0 w-0-8 h-0-8'.split(' ').sort()
         );
     });
 
@@ -55,17 +50,11 @@ describe('Checkbox', () => {
 
         const input = wrapper.find('input');
         const label = wrapper.find('label');
-        const icon = wrapper.find('span');
 
         expect(input.attributes('disabled')).toBeDefined();
         expect(input.attributes('disabled')).toBe('disabled');
-
-        expect(label.classes().sort()).toEqual('inline-flex cursor-not-allowed'.split(' ').sort());
-        expect(icon.classes().sort()).toEqual(
-            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm border-tertiary-200 bg-white'
-                .split(' ')
-                .sort()
-        );
+        expect(label.classes()).toContain('cursor-not-allowed');
+        expect(label.classes()).toContain('opacity-50');
     });
 
     it('is error', () => {
@@ -80,33 +69,8 @@ describe('Checkbox', () => {
             }
         });
 
-        const icon = wrapper.find('span');
-
-        expect(icon.classes().sort()).toEqual(
-            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm border-danger bg-white'.split(' ').sort()
-        );
-    });
-
-    it('is checked', () => {
-        const wrapper = mount(CCheckbox, {
-            context: {
-                props: {
-                    id: 'checkbox1',
-                    name: 'checkbox1',
-                    value: 'checkbox1',
-                    modelValue: true
-                }
-            }
-        });
-
-        const label = wrapper.find('label');
-        const icon = wrapper.find('span');
-        expect(label.classes().sort()).toEqual('inline-flex cursor-pointer'.split(' ').sort());
-        expect(icon.classes().sort()).toEqual(
-            'w-0-8 h-0-8 border-2 mr-0-5 mt-0-2 rounded-sm border-black-200 bg-secondary-200 shadow-inner'
-                .split(' ')
-                .sort()
-        );
+        const input = wrapper.find('input');
+        expect(input.classes()).toContain('form-checkbox-is-error');
     });
 
     it('v-model - single value - true/false', () => {

@@ -11,6 +11,7 @@ const COLS_PROP_NAME = 'cols';
 
 const getBreakpoint = (key, name) => key.replace(name, '').toLowerCase();
 const wPrefix = 'w-';
+const offsetPrefix = 'ml-';
 
 const createThemeMap = ({
     guttersNormalizeXl,
@@ -111,6 +112,7 @@ const currentClass = props => {
     }
 
     // breakpoints gutters
+
     breakpointPropMap[GUTTERS_PROP_NAME].forEach(key => {
         if (!props[key]) return undefined;
 
@@ -135,11 +137,12 @@ const currentClass = props => {
     };
 };
 
-const createColBreakpointClass = ({ props, cols, colsLimit }) => {
-    if (!cols) return undefined;
+const createColBreakpointClass = ({ props, cols, offset, colsLimit }) => {
+    if (!cols) return null;
 
     const classes = [];
 
+    // width
     if (cols.default) {
         if (cols.default < colsLimit) {
             classes.push(`${wPrefix}${cols.default}/${colsLimit}`);
@@ -150,9 +153,21 @@ const createColBreakpointClass = ({ props, cols, colsLimit }) => {
         }
     }
 
+    // offset
+    if (offset.default) {
+        if (offset.default < colsLimit) {
+            classes.push(`${offsetPrefix}${offset.default}/${colsLimit}`);
+        }
+
+        if (offset.default === colsLimit) {
+            classes.push(`${offsetPrefix}full`);
+        }
+    }
+
     breakpointPropMap[COLS_PROP_NAME].forEach(breakpoint => {
         const propsValue = props[breakpoint] || colsLimit;
 
+        // breakpoint width
         if (cols[breakpoint]) {
             if (cols[breakpoint] < propsValue) {
                 classes.push(`${breakpoint}:${wPrefix}${cols[breakpoint]}/${propsValue}`);
@@ -164,6 +179,21 @@ const createColBreakpointClass = ({ props, cols, colsLimit }) => {
         } else {
             if (props[breakpoint] && cols.default) {
                 classes.push(`${breakpoint}:${wPrefix}${cols.default}/${propsValue}`);
+            }
+        }
+
+        // breakpoint offset
+        if (offset[breakpoint]) {
+            if (offset[breakpoint] < propsValue) {
+                classes.push(`${breakpoint}:${offsetPrefix}${offset[breakpoint]}/${propsValue}`);
+            }
+
+            if (offset[breakpoint] === propsValue) {
+                classes.push(`${breakpoint}:${offsetPrefix}full`);
+            }
+        } else {
+            if (props[breakpoint] && offset.default) {
+                classes.push(`${breakpoint}:${offsetPrefix}${offset.default}/${propsValue}`);
             }
         }
     });
@@ -189,15 +219,15 @@ export default {
 
     render(h, { props, data, children = [] }) {
         const { rowClasses, colClasses } = currentClass(props);
-
         const computedChildren = children.map(col => {
             if (!col.data) return;
 
-            const { cols = null } = col.data;
+            const { cols, offset } = col.data;
 
             const colBreakpointClass = createColBreakpointClass({
                 props,
                 cols,
+                offset,
                 colsLimit: props.cols
             });
 
