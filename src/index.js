@@ -1,5 +1,5 @@
-import * as DefaultTheme from '@/themes/default';
 import * as vClickOutside from 'v-click-outside-x';
+import * as DefaultTheme from '@/themes/default';
 import { ConfigPlugin } from '@/config';
 /* COMPONENTS */
 
@@ -92,7 +92,7 @@ const extendComponent = (Vue, CurrentTheme, componentName) => {
     });
 };
 
-const install = function(Vue, options = {}) {
+const install = function (Vue, options = {}) {
     const { theme = {}, config = {}, components: injectComponentList = null } = options;
 
     const CurrentTheme = {

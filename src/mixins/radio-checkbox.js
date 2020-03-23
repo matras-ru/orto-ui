@@ -48,7 +48,7 @@ const computeClasses = (type, { disabled, error, theme }) => {
     };
 };
 
-export default function(type) {
+export default function (type) {
     //
     return {
         install(Vue, theme) {

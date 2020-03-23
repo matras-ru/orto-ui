@@ -1,4 +1,3 @@
-import { mergeData } from 'vue-functional-data-merge';
 import { selfInstall } from '@/';
 import DefaultTheme from '@/themes/default/CFormSelectCustom';
 import { getComponentConfig } from '@/config';
@@ -95,7 +94,7 @@ export default {
         event: 'change'
     },
 
-    render(h, { data, listeners, props, scopedSlots }) {
+    render(h, { listeners, props, scopedSlots }) {
         const {
             data: options,
             theme,
@@ -138,31 +137,28 @@ export default {
 
             scopedSlots: {
                 holder: ({ toggle }) =>
-                    h(
-                        'CFormInput',
-                        mergeData(data, {
-                            props: {
-                                readonly: true,
-                                error,
-                                label,
-                                placeholder,
-                                size,
-                                modelValue: selectedOption
-                                    ? scopedSlots.selected
-                                        ? scopedSlots.selected(selectedOption)[0].text
-                                        : selectedOption[optionLabel]
-                                    : null
-                            },
-                            ref: 'holder',
-                            staticClass: inputBase,
-                            scopedSlots: {
-                                append: () => h('i', { class: iconClass })
-                            },
-                            on: {
-                                click: toggle
-                            }
-                        })
-                    ),
+                    h('CFormInput', {
+                        props: {
+                            readonly: true,
+                            error,
+                            label,
+                            placeholder,
+                            size,
+                            modelValue: selectedOption
+                                ? scopedSlots.selected
+                                    ? scopedSlots.selected(selectedOption)[0].text
+                                    : selectedOption[optionLabel]
+                                : null
+                        },
+                        ref: 'holder',
+                        staticClass: inputBase,
+                        scopedSlots: {
+                            append: () => h('i', { class: iconClass })
+                        },
+                        on: {
+                            click: toggle
+                        }
+                    }),
 
                 dropdown: ({ close }) => {
                     return h('CList', [

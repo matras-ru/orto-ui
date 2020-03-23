@@ -12,7 +12,7 @@
         <section class="mb-1-5">
             <h2 class="mb-1-2">Gutters</h2>
 
-            <div class="mb-0-8 ">
+            <div class="mb-0-8">
                 <h3 class="mb-1-2">md (default)</h3>
                 <div class="exmpl-panel">
                     <CContainer>
@@ -64,7 +64,7 @@
         <section class="mb-1-5">
             <h2 class="mb-1-2">Offset</h2>
 
-            <div class="mb-0-8 ">
+            <div class="mb-0-8">
                 <div class="exmpl-panel">
                     <CContainer>
                         <CRow>

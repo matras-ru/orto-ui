@@ -2,7 +2,7 @@
 import { mount } from '@vue/test-utils';
 import CList from './list';
 
-const baaseClass = 'flex flex-wrap';
+const baaseClass = 'flex';
 const defaultCLass = 'flex-col';
 const horizontalClass = 'flex-row';
 const betweenClass = 'justify-between';
@@ -12,7 +12,6 @@ describe('CList', () => {
         const wrapper = mount(CList);
         expect(wrapper.isFunctionalComponent).toBe(true);
         expect(wrapper.is('ul')).toBe(true);
-        expect(wrapper.classes().length).toBe(3);
         expect(wrapper.classes().sort()).toEqual(`${baaseClass} ${defaultCLass}`.split(' ').sort());
     });
 
@@ -37,7 +36,6 @@ describe('CList', () => {
             }
         });
 
-        expect(wrapper.classes().length).toBe(3);
         expect(wrapper.classes().sort()).toEqual(
             `${baaseClass} ${horizontalClass}`.split(' ').sort()
         );
@@ -52,7 +50,6 @@ describe('CList', () => {
             }
         });
 
-        expect(wrapper.classes().length).toBe(4);
         expect(wrapper.classes().sort()).toEqual(
             `${baaseClass} ${defaultCLass} ${betweenClass}`.split(' ').sort()
         );
