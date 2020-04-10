@@ -58,39 +58,39 @@
                         v-model="exampleModel.selectModel"
                     />
                 </CFormPanel>
-
-                <CFormPanel label="Slot">
-                    <CFormSelectCustom
-                        v-bind="{
-                            data: [
-                                {
-                                    id: 1,
-                                    price: 15080,
-                                    width: 200,
-                                    height: 250
-                                },
-                                {
-                                    id: 2,
-                                    price: 5550,
-                                    width: 100,
-                                    height: 100
-                                }
-                            ],
-                            label: 'Выберите размер',
-                            optionValue: 'id',
-                            error: $v.exampleModel.selectModel.$error
-                        }"
-                        v-model="exampleModel.selectModel"
-                    >
-                        <template #selected="{ price, width, height }">
-                            {{ width }} x {{ height }} — {{ price }} р.
-                        </template>
-                        <template #default="{ price, width, height }">
-                            {{ width }} x {{ height }} — {{ price }} р.
-                        </template>
-                    </CFormSelectCustom>
-                </CFormPanel>
-
+                <div style="max-width: 300px;">
+                    <CFormPanel label="Slot">
+                        <CFormSelectCustom
+                            v-bind="{
+                                data: [
+                                    {
+                                        id: 1,
+                                        price: 15080,
+                                        width: 200,
+                                        height: 250
+                                    },
+                                    {
+                                        id: 2,
+                                        price: 5550,
+                                        width: 100,
+                                        height: 100
+                                    }
+                                ],
+                                label: 'Выберите размер',
+                                optionValue: 'id',
+                                error: $v.exampleModel.selectModel.$error
+                            }"
+                            v-model="exampleModel.selectModel"
+                        >
+                            <template #selected="{ price, width, height }">
+                                {{ width }} x {{ height }} — {{ price }} р.
+                            </template>
+                            <template #default="{ price, width, height }">
+                                {{ width }} x {{ height }} — {{ price }} р.
+                            </template>
+                        </CFormSelectCustom>
+                    </CFormPanel>
+                </div>
                 <CFormPanel label="size sm">
                     <div class="flex flex-wrap -mx-0-2">
                         <div class="px-0-2 w-1/3">

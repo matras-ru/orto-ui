@@ -1,4 +1,5 @@
 import { noop } from '@/utils';
+import { mergeData } from 'vue-functional-data-merge';
 import { getComponentConfig } from '@/config';
 import { selfInstall } from '@/';
 
@@ -41,7 +42,7 @@ export default {
         event: 'onChange'
     },
 
-    render(h, { props, children = [], listeners }) {
+    render(h, { data, props, children = [], listeners }) {
         const { vertical, justify } = props;
 
         const normalizeTabs = children.map(tab => {
@@ -66,7 +67,8 @@ export default {
 
         return h(
             'CList',
-            {
+
+            mergeData(data, {
                 attrs: {
                     role: 'tablist'
                 },
@@ -74,7 +76,8 @@ export default {
                     direction: vertical ? 'vertical' : 'horizontal',
                     justify
                 }
-            },
+            }),
+
             [...normalizeTabs]
         );
     }

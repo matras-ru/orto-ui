@@ -2,7 +2,7 @@
 import { selfInstall } from '@/';
 import { noop } from '@/utils';
 
-export default function(type) {
+export default function (type) {
     const mapComponents = {
         checkbox: 'CCheckbox',
         radio: 'CRadio'

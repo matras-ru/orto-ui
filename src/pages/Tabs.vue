@@ -1,12 +1,12 @@
 <template>
     <div>
         <CContainer>
-            <CTabs v-model="activeTab" justify="between">
-                <CTab label="Описание" name="description" />
-                <CTab label="Характеристики" name="parameters" />
-                <CTab label="Состав" name="structure" />
-                <CTab name="feedback">Отзывы (8)</CTab>
-                <CTab label="Доставка и оплата" name="delivery" />
+            <CTabs v-model="activeTab" justify="between" class="overflow-x-auto">
+                <CTab label="Описание" name="description" class="whitespace-no-wrap" />
+                <CTab label="Характеристики" name="parameters" class="whitespace-no-wrap" />
+                <CTab label="Состав" name="structure" class="whitespace-no-wrap" />
+                <CTab name="feedback" class="whitespace-no-wrap">Отзывы (8)</CTab>
+                <CTab label="Доставка и оплата" name="delivery" class="whitespace-no-wrap" />
             </CTabs>
         </CContainer>
 

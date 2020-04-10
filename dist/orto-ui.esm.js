@@ -207,7 +207,7 @@ var DefaultTheme$7 = {
     base: base$5
 };
 
-var base$6 = 'flex flex-wrap';
+var base$6 = 'flex';
 var directionColumn = 'flex-col';
 var directionHorizontal = 'flex-row';
 
@@ -330,8 +330,6 @@ var DefaultTheme$g = {
     dropdownPlacementLeft: dropdownPlacementLeft,
     dropdownPlacementRight: dropdownPlacementRight
 };
-
-
 
 var DefaultTheme$h = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -1336,7 +1334,6 @@ var CFormSelectCustom = {
     },
 
     render: function render(h, ref) {
-        var data = ref.data;
         var listeners = ref.listeners;
         var props = ref.props;
         var scopedSlots = ref.scopedSlots;
@@ -1387,31 +1384,28 @@ var CFormSelectCustom = {
                 holder: function (ref) {
                         var toggle = ref.toggle;
 
-                        return h(
-                        'CFormInput',
-                        mergeData(data, {
-                            props: {
-                                readonly: true,
-                                error: error,
-                                label: label,
-                                placeholder: placeholder,
-                                size: size,
-                                modelValue: selectedOption
-                                    ? scopedSlots.selected
-                                        ? scopedSlots.selected(selectedOption)[0].text
-                                        : selectedOption[optionLabel]
-                                    : null
-                            },
-                            ref: 'holder',
-                            staticClass: inputBase,
-                            scopedSlots: {
-                                append: function () { return h('i', { class: iconClass }); }
-                            },
-                            on: {
-                                click: toggle
-                            }
-                        })
-                    );
+                        return h('CFormInput', {
+                        props: {
+                            readonly: true,
+                            error: error,
+                            label: label,
+                            placeholder: placeholder,
+                            size: size,
+                            modelValue: selectedOption
+                                ? scopedSlots.selected
+                                    ? scopedSlots.selected(selectedOption)[0].text
+                                    : selectedOption[optionLabel]
+                                : null
+                        },
+                        ref: 'holder',
+                        staticClass: inputBase,
+                        scopedSlots: {
+                            append: function () { return h('i', { class: iconClass }); }
+                        },
+                        on: {
+                            click: toggle
+                        }
+                    });
         },
 
                 dropdown: function (ref) {
@@ -1504,7 +1498,7 @@ var computeClasses = function (type, ref) {
     };
 };
 
-function radioCheckbox(type) {
+function radioCheckbox (type) {
     //
     return {
         install: function install(Vue, theme) {
@@ -1666,7 +1660,7 @@ var CRadio = Object.assign({}, {name: NAME$5},
 
 // TODO: add limit...
 
-function radioCheckboxGroup(type) {
+function radioCheckboxGroup (type) {
     var mapComponents = {
         checkbox: 'CCheckbox',
         radio: 'CRadio'
@@ -2272,6 +2266,7 @@ var CTabs = {
     },
 
     render: function render(h, ref) {
+        var data = ref.data;
         var props = ref.props;
         var children = ref.children; if ( children === void 0 ) children = [];
         var listeners = ref.listeners;
@@ -2298,7 +2293,8 @@ var CTabs = {
 
         return h(
             'CList',
-            {
+
+            mergeData(data, {
                 attrs: {
                     role: 'tablist'
                 },
@@ -2306,7 +2302,8 @@ var CTabs = {
                     direction: vertical ? 'vertical' : 'horizontal',
                     justify: justify
                 }
-            },
+            }),
+
             [].concat( normalizeTabs )
         );
     }
@@ -3273,7 +3270,7 @@ var extendComponent = function (Vue, CurrentTheme, componentName) {
         {props: props}));
 };
 
-var install = function(Vue, options) {
+var install = function (Vue, options) {
     if ( options === void 0 ) options = {};
 
     var theme = options.theme; if ( theme === void 0 ) theme = {};

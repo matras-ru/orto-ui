@@ -35,7 +35,7 @@ describe('CTabs', () => {
             }
         });
 
-        expect(wrapper.classes().length).toBe(4);
+        expect(wrapper.classes().length).toBe(3);
         expect(wrapper.classes()).toContain('flex-col');
         expect(wrapper.classes()).toContain('justify-center');
     });
@@ -80,19 +80,11 @@ describe('CTabs', () => {
         expect(wrapper).toBeDefined();
         expect(wrapper.findAll(CTab).length).toBe(2);
 
-        expect(
-            tab1
-                .find('a')
-                .classes()
-                .sort()
-        ).toEqual(`${baseTabLinkClasses}`.split(' ').sort());
+        expect(tab1.find('a').classes().sort()).toEqual(`${baseTabLinkClasses}`.split(' ').sort());
 
-        expect(
-            tab2
-                .find('a')
-                .classes()
-                .sort()
-        ).toEqual(`${baseTabLinkClasses} ${activeTabLinkClasses}`.split(' ').sort());
+        expect(tab2.find('a').classes().sort()).toEqual(
+            `${baseTabLinkClasses} ${activeTabLinkClasses}`.split(' ').sort()
+        );
 
         wrapper.destroy();
     });

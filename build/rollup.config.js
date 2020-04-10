@@ -1,6 +1,7 @@
 import path from 'path';
 import vue from 'rollup-plugin-vue';
 import alias from '@rollup/plugin-alias';
+import resolve from '@rollup/plugin-node-resolve';
 import buble from '@rollup/plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
@@ -11,7 +12,7 @@ import visualizer from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
 
-const projectRoot = path.resolve(__dirname, '..');
+const projectRootDir = path.resolve(__dirname, '..');
 
 const baseConfig = {
     input: 'src/index.js',
@@ -22,12 +23,12 @@ const baseConfig = {
             }),
             commonjs(),
             alias({
-                resolve: ['.js', '.vue'],
                 entries: {
-                    '@': path.resolve(projectRoot, 'src'),
-                    '@root': path.resolve(projectRoot, '')
+                    '@': path.resolve(projectRootDir, 'src'),
+                    '@root': path.resolve(projectRootDir, '')
                 }
-            })
+            }),
+            resolve()
         ],
         vue: {
             css: true,
@@ -43,8 +44,6 @@ const baseConfig = {
     }
 };
 
-// ESM/UMD/IIFE shared settings: externals
-// Refer to https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency
 const external = [
     'vue-functional-data-merge',
     'lodash.merge',
@@ -54,23 +53,15 @@ const external = [
     '@tailwindcss/custom-forms',
     'v-click-outside-x',
     'vue'
-    // list external dependencies, exactly the way it is written in the import statement.
-    // eg. 'jquery'
 ];
 
-// UMD/IIFE shared settings: output.globals
-// Refer to https://rollupjs.org/guide/en#output-globals for details
 const globals = {
     'v-click-outside-x': 'vClickOutside',
     vue: 'Vue',
     'vue-functional-data-merge': 'vueFunctionalDataMerge',
     'lodash.merge': 'merge'
-
-    // Provide global variable names to replace your external imports
-    // eg. jquery: '$'
 };
 
-// Customize configs for individual targets
 const buildFormats = [];
 if (!argv.format || argv.format === 'es') {
     const esConfig = {
@@ -145,5 +136,4 @@ if (!argv.format || argv.format === 'iife') {
     buildFormats.push(unpkgConfig);
 }
 
-// Export config
 export default buildFormats;
