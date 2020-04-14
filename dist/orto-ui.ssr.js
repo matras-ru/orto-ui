@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vClickOutside=require('v-click-outside-x'),Vue=_interopDefault(require('vue')),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=_interopDefault(require('lodash.merge'));var base =
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});function _interopDefault(e){return(e&&(typeof e==='object')&&'default'in e)?e['default']:e}var vClickOutside=require('v-click-outside-x'),Vue=_interopDefault(require('vue')),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=_interopDefault(require('lodash.merge')),resolveConfig=_interopDefault(require('tailwindcss/resolveConfig')),customForms=_interopDefault(require('@tailwindcss/custom-forms'));var base =
     'inline-flex items-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
 var variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
@@ -2703,6 +2703,749 @@ var CBadge = {
 
         return h('span', vueFunctionalDataMerge.mergeData(data, componentData), props.label ? props.label : children);
     }
+};var base$c = 'w-full h-auto object-cover';
+
+var DefaultTheme$i = {
+    base: base$c
+};var tailwind_config = {
+    prefix: '',
+    important: false,
+    separator: ':',
+    theme: {
+        screens: {
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px'
+        },
+        colors: {
+            transparent: 'transparent',
+            inherit: 'inherit',
+
+            black: {
+                100: '#292929',
+                200: '#3d4145'
+            },
+            white: '#fff',
+
+            primary: {
+                100: '#ffcd00'
+            },
+            secondary: {
+                100: '#f3f7f9',
+                200: '#3da2e2'
+            },
+            tertiary: {
+                100: '#e0e7ec',
+                200: '#c3d0d7',
+                300: '#a6b1b6'
+            },
+            danger: '#f1001a',
+
+            layout: {
+                section: '#fff',
+                container: '#f1f1f1',
+                row: '#87bdd8',
+                col: '#b1cbbb'
+            }
+        },
+        spacing: {
+            px: '1px',
+            '0': '0',
+            '-0-3': '-0.375rem',
+            '0-1': '0.125rem',
+            '0-2': '0.25rem',
+            '0-3': '0.375rem',
+            '0-4': '0.5rem',
+            '0-5': '0.625rem',
+            '0-6': '0.75rem',
+            '0-7': '0.875rem',
+            '0-8': '1rem',
+            '1-1': '1.125rem',
+            '1-2': '1.25rem',
+            '1-3': '1.375rem',
+            '1-4': '1.5rem',
+            '1-5': '1.625rem',
+            '1-6': '1.75rem',
+            '1-7': '1.875rem',
+            '1-8': '2rem',
+            '2-1': '2.125rem',
+            '2-2': '2.25rem',
+            '2-3': '2.375rem',
+            '2-4': '2.5rem',
+            '2-5': '2.625rem',
+            '2-6': '2.75rem',
+            '2-7': '2.875rem',
+            '2-8': '3rem',
+            '12-4': '12.5rem'
+        },
+        backgroundColor: function (theme) { return theme('colors'); },
+        backgroundPosition: {
+            bottom: 'bottom',
+            center: 'center',
+            left: 'left',
+            'left-bottom': 'left bottom',
+            'left-top': 'left top',
+            right: 'right',
+            'right-bottom': 'right bottom',
+            'right-top': 'right top',
+            top: 'top'
+        },
+        backgroundSize: {
+            auto: 'auto',
+            cover: 'cover',
+            contain: 'contain'
+        },
+        borderColor: function (theme) { return (Object.assign({}, theme('colors'),
+            {default: theme('colors.gray.300', 'currentColor')})); },
+        borderRadius: {
+            none: '0',
+            sm: '0.125rem',
+            default: '0.25rem',
+            lg: '1.375rem',
+            full: '9999px'
+        },
+        borderWidth: {
+            default: '1px',
+            '0': '0',
+            '2': '2px',
+            '3': '3px',
+            '4': '4px',
+            '8': '8px'
+        },
+        boxShadow: {
+            default: '0 6px 12px rgba(255, 205, 0, .7)',
+            inner: 'inset 0 0 0 2px #FFFFFF',
+            none: 'none',
+            example: '0 15px 30px 0 rgba(166, 177, 182, 0.5)'
+        },
+        container: function (theme) { return ({
+            padding: theme('spacing.0-8'),
+            center: true
+        }); },
+        cursor: {
+            auto: 'auto',
+            default: 'default',
+            pointer: 'pointer',
+            wait: 'wait',
+            text: 'text',
+            move: 'move',
+            'not-allowed': 'not-allowed'
+        },
+        fill: function (theme) { return ({
+            default: theme('colors.black.100')
+        }); },
+        flex: {
+            '1': '1 1 0%',
+            auto: '1 1 auto',
+            initial: '0 1 auto',
+            none: 'none'
+        },
+        flexGrow: {
+            '0': '0',
+            default: '1'
+        },
+        flexShrink: {
+            '0': '0',
+            default: '1'
+        },
+        fontFamily: {
+            body: ['Helvetica', 'sans-serif']
+        },
+        fontSize: {
+            '2xs': '0.625rem',
+            xs: '0.75rem',
+            sm: '0.875rem',
+            base: '1rem', // 16px
+            lg: '1.125rem', // 18px
+            xl: '1.25rem',
+            '2xl': '1.5rem',
+            '3xl': '1.875rem',
+            '4xl': '2.25rem',
+            '5xl': '3rem',
+            '6xl': '4rem'
+        },
+        fontWeight: {
+            hairline: '100',
+            thin: '200',
+            light: '300',
+            normal: '400',
+            medium: '500',
+            semibold: '600',
+            bold: '700',
+            extrabold: '800',
+            black: '900'
+        },
+        height: function (theme) { return (Object.assign({}, {auto: 'auto'},
+            theme('spacing'),
+            {full: '100%',
+            '1/2': '50%',
+            screen: '100vh'})); },
+        inset: function (theme) { return (Object.assign({}, {'0': '0',
+            auto: 'auto',
+            '1/2': '50%',
+            full: '100%'},
+            theme('spacing'))); },
+        letterSpacing: {
+            tighter: '-0.05em',
+            tight: '-0.025em',
+            normal: '0',
+            wide: '0.025em',
+            wider: '0.05em',
+            widest: '0.1em'
+        },
+        lineHeight: {
+            none: '1',
+            tight: '1.25',
+            snug: '1.375',
+            normal: '1.5',
+            relaxed: '1.625',
+            loose: '2'
+        },
+        listStyleType: {
+            none: 'none',
+            disc: 'disc',
+            decimal: 'decimal'
+        },
+        margin: function (theme, ref) {
+            var negative = ref.negative;
+
+            return (Object.assign({}, {auto: 'auto'},
+            theme('spacing'),
+            theme('width'),
+            negative(theme('spacing'))));
+},
+        maxHeight: {
+            full: '100%',
+            screen: '100vh'
+        },
+        maxWidth: {
+            none: 'none',
+            xs: '20rem',
+            sm: '24rem',
+            md: '28rem',
+            lg: '32rem',
+            xl: '36rem',
+            '2xl': '42rem',
+            '3xl': '48rem',
+            '4xl': '56rem',
+            '5xl': '64rem',
+            '6xl': '72rem',
+            full: '100%'
+        },
+        minHeight: {
+            '0': '0',
+            full: '100%',
+            screen: '100vh'
+        },
+        minWidth: {
+            '0': '0',
+            full: '100%'
+        },
+        objectPosition: {
+            bottom: 'bottom',
+            center: 'center',
+            left: 'left',
+            'left-bottom': 'left bottom',
+            'left-top': 'left top',
+            right: 'right',
+            'right-bottom': 'right bottom',
+            'right-top': 'right top',
+            top: 'top'
+        },
+        opacity: {
+            '0': '0',
+            '25': '0.25',
+            '50': '0.5',
+            '75': '0.75',
+            '100': '1'
+        },
+        order: {
+            first: '-9999',
+            last: '9999',
+            none: '0',
+            '1': '1',
+            '2': '2',
+            '3': '3',
+            '4': '4',
+            '5': '5',
+            '6': '6',
+            '7': '7',
+            '8': '8',
+            '9': '9',
+            '10': '10',
+            '11': '11',
+            '12': '12'
+        },
+        padding: function (theme) { return theme('spacing'); },
+        stroke: {
+            current: 'currentColor'
+        },
+        textColor: function (theme) { return theme('colors'); },
+        width: function (theme) { return (Object.assign({}, {auto: 'auto'},
+            theme('spacing'),
+            {'1/2': '50%',
+            '1/3': '33.33333%',
+            '2/3': '66.66667%',
+            '1/4': '25%',
+            '2/4': '50%',
+            '3/4': '75%',
+            '1/5': '20%',
+            '2/5': '40%',
+            '3/5': '60%',
+            '4/5': '80%',
+            '1/6': '16.66667%',
+            '2/6': '33.33333%',
+            '3/6': '50%',
+            '4/6': '66.66667%',
+            '5/6': '83.33333%',
+            '1/12': '8.33333%',
+            '2/12': '16.66667%',
+            '3/12': '25%',
+            '4/12': '33.33333%',
+            '5/12': '41.66667%',
+            '6/12': '50%',
+            '7/12': '58.33333%',
+            '8/12': '66.66667%',
+            '9/12': '75%',
+            '10/12': '83.33333%',
+            '11/12': '91.66667%',
+            full: '100%',
+            screen: '100vw'})); },
+        zIndex: {
+            auto: 'auto',
+            '0': '0',
+            '10': '10',
+            '20': '20',
+            '30': '30',
+            '40': '40',
+            '50': '50'
+        },
+        // .transition-{property}
+        transitionProperty: {
+            none: 'none',
+            all: 'all',
+            default:
+                'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+            colors: 'background-color, border-color, color, fill, stroke',
+            border: 'border-color',
+            bg: 'background-color',
+            opacity: 'opacity',
+            shadow: 'box-shadow',
+            transform: 'transform'
+        },
+        // .duration-{duration}
+        transitionDuration: {
+            default: '0ms',
+            '75': '75ms',
+            '100': '100ms',
+            '150': '150ms',
+            '250': '250ms',
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+            '1000': '1000ms'
+        },
+        // .ease-{timingFunction}
+        transitionTimingFunction: {
+            linear: 'linear',
+            in: 'cubic-bezier(0.4, 0, 1, 1)',
+            out: 'cubic-bezier(0, 0, 0.2, 1)',
+            'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)'
+        },
+        // .origin-{origin}
+        transformOrigin: {
+            center: 'center',
+            top: 'top',
+            'top-right': 'top right',
+            right: 'right',
+            'bottom-right': 'bottom right',
+            bottom: 'bottom',
+            'bottom-left': 'bottom left',
+            left: 'left',
+            'top-left': 'top left'
+        },
+        // .translate-x-{distance}
+        // .translate-y-{distance}
+        // .-translate-x-{distance}
+        // .-translate-y-{distance}
+        translate: function (theme, ref) {
+            var negative = ref.negative;
+
+            return (Object.assign({}, theme('spacing'),
+            negative(theme('spacing')),
+            {'-full': '-100%',
+            '-1/2': '-50%',
+            '1/2': '50%',
+            full: '100%'}));
+},
+        // .scale-{scale}
+        // .scale-x-{scale}
+        // .scale-y-{scale}
+        scale: {
+            '0': '0',
+            '50': '.5',
+            '75': '.75',
+            '90': '.9',
+            '95': '.95',
+            '100': '1',
+            '105': '1.05',
+            '110': '1.1',
+            '125': '1.25',
+            '150': '1.5'
+        },
+        // .rotate-{angle}
+        rotate: {
+            '-180': '-180deg',
+            '-90': '-90deg',
+            '-45': '-45deg',
+            '0': '0',
+            '45': '45deg',
+            '90': '90deg',
+            '180': '180deg'
+        },
+        // .skew-x-{amount}
+        // .skew-y-{amount}
+        skew: {
+            '-12': '-12deg',
+            '-6': '-6deg',
+            '-3': '-3deg',
+            '0': '0',
+            '3': '3deg',
+            '6': '6deg',
+            '12': '12deg'
+        },
+
+        customForms: function (theme) {
+            // TODO: refactoring
+            return {
+                default: {
+                    input: {
+                        appearance: 'none',
+                        borderRadius: undefined,
+                        borderColor: undefined,
+                        backgroundColor: 'transparent',
+                        borderWidth: undefined,
+                        paddingTop: undefined,
+                        paddingRight: undefined,
+                        paddingBottom: undefined,
+                        paddingLeft: undefined,
+                        fontSize: undefined,
+                        lineHeight: undefined,
+
+                        '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+                            '-webkit-appearance': 'none'
+                        },
+
+                        '-moz-appearance': 'textfield',
+
+                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                            color: undefined,
+                            opacity: 0,
+                            fontSize: theme('fontSize.sm')
+                        },
+
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: undefined,
+                            borderColor: undefined,
+
+                            '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                                color: undefined,
+                                opacity: 1
+                            }
+                        }
+                    },
+
+                    select: {
+                        appearance: undefined,
+                        colorAdjust: undefined,
+                        '&::-ms-expand': undefined,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundColor: undefined,
+                        borderColor: undefined,
+                        borderWidth: undefined,
+                        borderRadius: undefined,
+                        paddingTop: undefined,
+                        paddingRight: undefined,
+                        paddingBottom: undefined,
+                        paddingLeft: undefined,
+                        fontSize: undefined,
+                        lineHeight: undefined,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'contain',
+                        icon: function () { return "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z\"/></svg>"; }
+                    },
+
+                    checkbox: {
+                        appearance: 'none',
+                        display: 'inline-block',
+                        verticalAlign: 'middle',
+                        backgroundOrigin: 'border-box',
+                        userSelect: 'none',
+                        flexShrink: 0,
+                        height: undefined,
+                        width: undefined,
+                        color: undefined,
+                        iconColor: theme('colors.secondary.200'),
+                        backgroundColor: theme('colors.white'),
+                        borderWidth: theme('borderWidth.2'),
+                        borderColor: theme('colors.black.200'),
+                        icon: function (iconColor) { return ("<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"" + iconColor + "\" viewBox=\"0 0 10 10\"><path d=\"M0 0h10v10H0z\"/></svg>"); },
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: 'none',
+                            borderColor: theme('borderWidth.2')
+                        },
+                        '&:checked': {
+                            borderColor: theme('colors.black.200'),
+                            backgroundColor: 'transparent',
+                            backgroundSize: '50%',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
+                        }
+                    },
+
+                    radio: {
+                        appearance: 'none',
+                        colorAdjust: 'exact',
+                        iconColor: theme('colors.secondary.200'),
+                        height: theme('spacing.0-8'),
+                        width: theme('spacing.0-8'),
+                        backgroundColor: theme('colors.white'),
+                        borderWidth: theme('borderWidth.2'),
+                        borderColor: theme('colors.black.200'),
+                        icon: function (iconColor) { return ("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 10\" fill=\"" + iconColor + "\"><circle cx=\"5\" cy=\"5\" r=\"3\"/></svg>"); },
+                        '&:focus': {
+                            outline: 'none',
+                            boxShadow: 'none',
+                            borderColor: theme('borderWidth.2')
+                        },
+                        '&:checked': {
+                            borderColor: theme('colors.black.200'),
+                            backgroundColor: 'transparent',
+                            backgroundSize: '88%',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
+                        }
+                    }
+                },
+
+                'not-label': {
+                    input: {
+                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
+                            color: undefined,
+                            opacity: 1
+                        }
+                    }
+                },
+
+                'is-error': {
+                    checkbox: {
+                        borderColor: theme('colors.danger')
+                    }
+                }
+            };
+        }
+    },
+    variants: {
+        alignContent: ['responsive'],
+        alignItems: ['responsive'],
+        alignSelf: ['responsive'],
+        appearance: ['responsive'],
+        backgroundAttachment: ['responsive'],
+        backgroundColor: ['responsive', 'hover', 'focus'],
+        backgroundPosition: ['responsive'],
+        backgroundRepeat: ['responsive'],
+        backgroundSize: ['responsive'],
+        borderCollapse: ['responsive'],
+        borderColor: ['responsive', 'hover', 'focus'],
+        borderRadius: ['responsive'],
+        borderStyle: ['responsive'],
+        borderWidth: ['responsive'],
+        boxShadow: ['responsive', 'hover', 'focus'],
+        cursor: ['responsive'],
+        display: ['responsive'],
+        fill: ['responsive'],
+        flex: ['responsive'],
+        flexDirection: ['responsive'],
+        flexGrow: ['responsive'],
+        flexShrink: ['responsive'],
+        flexWrap: ['responsive'],
+        float: ['responsive'],
+        fontFamily: ['responsive'],
+        fontSize: ['responsive'],
+        fontSmoothing: ['responsive'],
+        fontStyle: ['responsive'],
+        fontWeight: ['responsive', 'hover', 'focus'],
+        height: ['responsive'],
+        inset: ['responsive'],
+        justifyContent: ['responsive'],
+        letterSpacing: ['responsive'],
+        lineHeight: ['responsive'],
+        listStylePosition: ['responsive'],
+        listStyleType: ['responsive'],
+        margin: ['responsive'],
+        maxHeight: ['responsive'],
+        maxWidth: ['responsive'],
+        minHeight: ['responsive'],
+        minWidth: ['responsive'],
+        objectFit: ['responsive'],
+        objectPosition: ['responsive'],
+        opacity: ['responsive'],
+        order: ['responsive'],
+        outline: ['responsive', 'focus'],
+        overflow: ['responsive'],
+        padding: ['responsive'],
+        pointerEvents: ['responsive'],
+        position: ['responsive'],
+        resize: ['responsive'],
+        stroke: ['responsive'],
+        tableLayout: ['responsive'],
+        textAlign: ['responsive'],
+        textColor: ['responsive', 'hover', 'focus'],
+        textDecoration: ['responsive', 'hover', 'focus'],
+        textTransform: ['responsive'],
+        userSelect: ['responsive'],
+        verticalAlign: ['responsive'],
+        visibility: ['responsive'],
+        whitespace: ['responsive'],
+        width: ['responsive'],
+        wordBreak: ['responsive'],
+        zIndex: ['responsive'],
+        transitionProperty: [''],
+        transitionDuration: [''],
+        transitionTimingFunction: [''],
+        transform: [''],
+        transformOrigin: [''],
+        translate: ['responsive'],
+        scale: [''],
+        rotate: [''],
+        skew: ['']
+    },
+    corePlugins: {},
+    plugins: [
+        customForms,
+
+        function (ref) {
+            var addBase = ref.addBase;
+            var config = ref.config;
+
+            addBase({
+                a: {
+                    color: config('theme.colors.black.100')
+                },
+                h1: {
+                    fontSize: config('theme.fontSize.2xl'),
+                    fontWeight: config('theme.fontWeight.bold')
+                },
+                h2: {
+                    fontSize: config('theme.fontSize.xl'),
+                    fontWeight: config('theme.fontWeight.bold')
+                },
+                h3: {
+                    fontSize: config('theme.fontSize.base'),
+                    fontWeight: config('theme.fontWeight.bold')
+                },
+                p: { marginTop: config('theme.margin.1-2') }
+            });
+        }
+    ]
+};/* TODO: MVP
+
+- type
+- size
+...
+
+*/
+
+var NAME$j = 'CPicture';
+
+var ref = resolveConfig(tailwind_config);
+var screens = ref.theme.screens;
+
+var breakpoints = Object.keys(screens);
+
+var generateProps = function () {
+    var breakpointSources = breakpoints.reduce(function (prop, breakpoint) {
+        prop[breakpoint] = stringProp();
+        return prop;
+    }, Object.create(null));
+
+    return Object.assign({}, {theme: {
+            type: Object,
+            default: function () { return DefaultTheme$i; }
+        },
+
+        // TODO: more types
+        type: {
+            type: String,
+            default: 'jpg'
+        },
+
+        lazy: {
+            type: Boolean,
+            default: false
+        },
+
+        src: stringProp()},
+
+        breakpointSources);
+};
+
+var createSources = function (h, breakpoints, props) { return breakpoints.map(function (br) {
+        if (props[br]) {
+            return h('source', {
+                attrs: {
+                    type: ("image/" + (props.type)),
+                    srcset: props[br],
+                    media: ("(min-width: " + (screens[br]) + ")")
+                }
+            });
+        }
+    }); };
+
+var currentClass$3 = function (ref) {
+    var theme = ref.theme;
+
+    var base = theme.base;
+    var classes = [base];
+
+    return classes;
+};
+
+var CPicture = {
+    name: NAME$j,
+
+    functional: true,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    get props() {
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
+        delete this.props;
+        // eslint-disable-next-line no-return-assign
+        return (this.props = generateProps());
+    },
+
+    render: function render(h, ref) {
+        var data = ref.data;
+        var props = ref.props;
+
+        var imgData = {
+            class: currentClass$3(props),
+            attrs: {
+                src: props.src,
+                loading: props.lazy ? 'lazy' : null
+            }
+        };
+
+        var sources = createSources(h, breakpoints, props);
+
+        return h('picture', sources.concat( [h('img', vueFunctionalDataMerge.mergeData(data, imgData))]));
+    }
 };var props$7 = {
     theme: {
         type: Object,
@@ -2715,7 +3458,7 @@ var CBadge = {
     }
 };
 
-var currentClass$3 = function (ref) {
+var currentClass$4 = function (ref) {
     var fluid = ref.fluid;
     var theme = ref.theme;
 
@@ -2745,25 +3488,25 @@ var CContainer = {
         var children = ref.children;
 
         var componentData = {
-            class: currentClass$3(props)
+            class: currentClass$4(props)
         };
 
         return h('div', vueFunctionalDataMerge.mergeData(data, componentData), children);
     }
 };var OFFSET_PROP_NAME = 'offset';
-var NAME$j = 'CCol';
+var NAME$k = 'CCol';
 
-var breakpoints = getComponentConfig('common', 'screens');
+var breakpoints$1 = getComponentConfig('common', 'screens');
 
-var generateProps = function () {
+var generateProps$1 = function () {
     var obj;
 
-    var breakpointCols = breakpoints.reduce(function (prop, breakpoint) {
+    var breakpointCols = breakpoints$1.reduce(function (prop, breakpoint) {
         prop[breakpoint] = numProp();
         return prop;
     }, Object.create(null));
 
-    var breakpointOffsets = breakpoints.reduce(function (prop, breakpoint) {
+    var breakpointOffsets = breakpoints$1.reduce(function (prop, breakpoint) {
         prop[suffixPropName(breakpoint, OFFSET_PROP_NAME)] = numProp();
         return prop;
     }, Object.create(null));
@@ -2791,7 +3534,7 @@ var generateProps = function () {
 };
 
 var CCol = {
-    name: NAME$j,
+    name: NAME$k,
 
     functional: true,
 
@@ -2803,7 +3546,7 @@ var CCol = {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
         delete this.props;
         // eslint-disable-next-line no-return-assign
-        return (this.props = generateProps());
+        return (this.props = generateProps$1());
     },
 
     render: function render(h, ref) {
@@ -2817,13 +3560,13 @@ var CCol = {
         var componentData = {
             staticClass: base,
             cols: Object.assign({}, {default: props.cols},
-                breakpoints.reduce(function (output, item) {
+                breakpoints$1.reduce(function (output, item) {
                     output[item] = props[item];
                     return output;
                 }, Object.create(null))),
             offset: Object.assign({}, {default: props.offset},
                 // TODO: refactoring, dry
-                breakpoints.reduce(function (output, item) {
+                breakpoints$1.reduce(function (output, item) {
                     output[item] = props[suffixPropName(item, OFFSET_PROP_NAME)];
                     return output;
                 }, Object.create(null)))
@@ -2831,7 +3574,7 @@ var CCol = {
 
         return h('div', vueFunctionalDataMerge.mergeData(data, componentData), children);
     }
-};var NAME$k = 'CRow';
+};var NAME$l = 'CRow';
 var VALID_GUTTERS = ['none', 'sm', 'md', 'lg', 'xl'];
 var GUTTERS_PROP_NAME = 'gutters';
 var COLS_PROP_NAME = 'cols';
@@ -2881,7 +3624,7 @@ var createThemeMap$3 = function (ref) {
 // Cached copy of the breakpoint prop names
 var breakpointPropMap = Object.create(null);
 
-var generateProps$1 = function () {
+var generateProps$2 = function () {
     var obj, obj$1;
 
     var breakpoints = getComponentConfig('common', 'screens');
@@ -2908,14 +3651,14 @@ var generateProps$1 = function () {
         }
     }, obj[COLS_PROP_NAME] = {
             type: Number,
-            default: function () { return getComponentConfig(NAME$k, COLS_PROP_NAME); }
+            default: function () { return getComponentConfig(NAME$l, COLS_PROP_NAME); }
         }, obj ),
 
         breakpointCols,
 
         ( obj$1 = {}, obj$1[GUTTERS_PROP_NAME] = {
             type: String,
-            default: function () { return getComponentConfig(NAME$k, 'gutters'); },
+            default: function () { return getComponentConfig(NAME$l, 'gutters'); },
             validator: function (value) { return VALID_GUTTERS.includes(value); }
         }, obj$1 ),
 
@@ -2923,7 +3666,7 @@ var generateProps$1 = function () {
 };
 
 //
-var currentClass$4 = function (props) {
+var currentClass$5 = function (props) {
     var gutter = props.gutters;
     var theme = props.theme;
     var base = theme.base;
@@ -3037,7 +3780,7 @@ var createColBreakpointClass = function (ref) {
 };
 
 var CRow = {
-    name: NAME$k,
+    name: NAME$l,
 
     functional: true,
 
@@ -3049,7 +3792,7 @@ var CRow = {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
         delete this.props;
         // eslint-disable-next-line no-return-assign
-        return (this.props = generateProps$1());
+        return (this.props = generateProps$2());
     },
 
     render: function render(h, ref) {
@@ -3057,7 +3800,7 @@ var CRow = {
         var data = ref.data;
         var children = ref.children; if ( children === void 0 ) children = [];
 
-        var ref$1 = currentClass$4(props);
+        var ref$1 = currentClass$5(props);
         var rowClasses = ref$1.rowClasses;
         var colClasses = ref$1.colClasses;
         var computedChildren = children.map(function (col) {
@@ -3111,7 +3854,8 @@ var CRow = {
     CContainer: CContainer,
     CRow: CRow,
     CCol: CCol,
-    CDropdown: CDropdown
+    CDropdown: CDropdown,
+    CPicture: CPicture
 };
 
 var selfInstall = function (Vue, theme, component) {
@@ -3174,4 +3918,4 @@ var install = function (Vue, options) {
 
 var index = {
     install: install
-};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField$1;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;exports.selfInstall=selfInstall;
+};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField$1;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;exports.selfInstall=selfInstall;

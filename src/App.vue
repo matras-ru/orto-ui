@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="flex -mx-1-4 mb-1-5">
+            <div class="flex -mx-1-4 mb-2-5">
                 <div class="px-1-4">
                     <CLink :to="{ name: 'layout' }">Layout</CLink>
                 </div>
@@ -27,6 +27,10 @@
 
                 <div class="px-1-4">
                     <CLink :to="{ name: 'form' }">Form</CLink>
+                </div>
+
+                <div class="px-1-4">
+                    <CLink :to="{ name: 'picture' }">Picture</CLink>
                 </div>
             </div>
 

@@ -22,6 +22,7 @@ import { CTabs, CTab, CTabPanels, CTabPanel } from '@/components/tabs';
 import { CList, CListItem } from '@/components/list';
 import { CDropdown } from '@/components/dropdown';
 import { CBadge } from '@/components/badge';
+import { CPicture } from '@/components/picture';
 
 /*  LAYOUT */
 import { CContainer, CRow, CCol } from '@/components/layout';
@@ -48,7 +49,8 @@ const components = {
     CContainer,
     CRow,
     CCol,
-    CDropdown
+    CDropdown,
+    CPicture
 };
 
 export const selfInstall = (Vue, theme = {}, component) => {
@@ -132,6 +134,7 @@ export { CContainer };
 export { CRow };
 export { CCol };
 export { CDropdown };
+export { CPicture };
 
 export default {
     install
