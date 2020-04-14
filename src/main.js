@@ -45,7 +45,8 @@ const routes = [
     { name: 'form', path: '/form', component: () => import('@/pages/Form') },
     { name: 'test', path: '/test', component: () => import('@/pages/Test') },
     { name: 'layout', path: '/layout', component: () => import('@/pages/Layout') },
-    { name: 'tabs', path: '/tabs', component: () => import('@/pages/Tabs') }
+    { name: 'tabs', path: '/tabs', component: () => import('@/pages/Tabs') },
+    { name: 'picture', path: '/picture', component: () => import('@/pages/Picture') }
 ];
 
 const router = new VueRouter({

@@ -624,7 +624,8 @@ module.exports = {
     corePlugins: {},
     plugins: [
         require('@tailwindcss/custom-forms'),
-        function({ addBase, config }) {
+
+        ({ addBase, config }) => {
             addBase({
                 a: {
                     color: config('theme.colors.black.100')
