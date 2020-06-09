@@ -108,7 +108,7 @@ export default {
         } = props;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
-        const { inputBase, inputIconBase } = theme;
+        const { inputBase, inputIconBase, listBase } = theme;
         const sizes = createSizeMap(theme);
 
         const iconClass = [inputIconBase];
@@ -161,31 +161,37 @@ export default {
                     }),
 
                 dropdown: ({ close }) => {
-                    return h('CList', [
-                        options.map(option => {
-                            const { value, label } = mapOption({
-                                option,
-                                optionLabel,
-                                optionValue
-                            });
+                    return h(
+                        'CList',
+                        {
+                            staticClass: listBase
+                        },
+                        [
+                            options.map(option => {
+                                const { value, label } = mapOption({
+                                    option,
+                                    optionLabel,
+                                    optionValue
+                                });
 
-                            const isSelected = value === modelValue;
+                                const isSelected = value === modelValue;
 
-                            return h(
-                                'CListItem',
-                                {
-                                    class: cumputeOptionClasses(isSelected),
-                                    on: {
-                                        click: () => {
-                                            listeners['change'](value);
-                                            close();
+                                return h(
+                                    'CListItem',
+                                    {
+                                        class: cumputeOptionClasses(isSelected),
+                                        on: {
+                                            click: () => {
+                                                listeners['change'](value);
+                                                close();
+                                            }
                                         }
-                                    }
-                                },
-                                scopedSlots.default ? scopedSlots.default(option) : label
-                            );
-                        })
-                    ]);
+                                    },
+                                    scopedSlots.default ? scopedSlots.default(option) : label
+                                );
+                            })
+                        ]
+                    );
                 }
             }
         });

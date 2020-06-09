@@ -28,6 +28,11 @@ export const prependSizeSm = 'pr-0-2';
 export const appendSizeMd = 'pl-0-4';
 export const appendSizeSm = 'pl-0-2';
 
+export const hintBase = 'text-tertiary-300';
+export const errorBase = 'text-danger';
+
+export const bottomPlaceholderBase = 'text-sm mt-0-2';
+
 export default {
     outerWrapBase,
     outerWrapSpace,
@@ -56,5 +61,10 @@ export default {
     appendSizeMd,
 
     labelSizeSm,
-    labelSizeMd
+    labelSizeMd,
+
+    hintBase,
+    errorBase,
+
+    bottomPlaceholderBase
 };

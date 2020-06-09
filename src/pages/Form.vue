@@ -48,6 +48,46 @@
                                 {
                                     id: 2,
                                     name: '100 x 100 — 15 080 р.'
+                                },
+                                {
+                                    id: 3,
+                                    name: '100 x 100 — 5 550 р.'
+                                },
+                                {
+                                    id: 4,
+                                    name: '100 x 100 — 15 080 р.'
+                                },
+                                {
+                                    id: 5,
+                                    name: '100 x 100 — 5 550 р.'
+                                },
+                                {
+                                    id: 6,
+                                    name: '100 x 100 — 15 080 р.'
+                                },
+                                {
+                                    id: 7,
+                                    name: '100 x 100 — 5 550 р.'
+                                },
+                                {
+                                    id: 8,
+                                    name: '100 x 100 — 15 080 р.'
+                                },
+                                {
+                                    id: 9,
+                                    name: '100 x 100 — 5 550 р.'
+                                },
+                                {
+                                    id: 10,
+                                    name: '100 x 100 — 15 080 р.'
+                                },
+                                {
+                                    id: 11,
+                                    name: '100 x 100 — 5 550 р.'
+                                },
+                                {
+                                    id: 12,
+                                    name: '100 x 100 — 15 080 р.'
                                 }
                             ],
                             label: 'Выберите размер',
@@ -210,6 +250,8 @@
                             placeholder="Ул.Пушкина д.Колотушкина"
                             v-model="exampleModel.inputModel"
                             labelBgColor="bg-secondary-100"
+                            errorMessage="Поле обязательно"
+                            hint="Нужны, чтобы заполнить гарантию"
                             :error="$v.exampleModel.inputModel.$error"
                         >
                         </CFormInput>

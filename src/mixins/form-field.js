@@ -114,7 +114,10 @@ export default {
             controlWrapClasses,
             labelClasses,
             prependWrapClasses,
-            appendWrapClasses
+            appendWrapClasses,
+            hintClasses,
+            errorClasses,
+            bottomPlaceholderClasses
         } = (() => {
             const {
                 outerWrapBase,
@@ -128,18 +131,24 @@ export default {
                 labelStateDefault,
                 labelStateError,
                 labelPositionFloat,
-                labelBgPrimary
+                labelBgPrimary,
+                hintBase,
+                errorBase,
+                bottomPlaceholderBase
             } = this.theme;
 
             const outerWrapClasses = [outerWrapBase];
             const innerWrapClasses = [innerWrapBase];
             const controlWrapClasses = [controlWrapBase];
             const labelClasses = [labelBase];
+            const hintClasses = [hintBase];
+            const errorClasses = [errorBase];
+            const bottomPlaceholderClasses = [bottomPlaceholderBase];
 
             const sizes = createSizeMap(this.theme);
 
             if (!this.inline) {
-                outerWrapClasses.push(outerWrapSpace);
+                outerWrapClasses.push(bottomPlaceholderBase);
             }
 
             if (!this.labelBgColor) {
@@ -213,7 +222,10 @@ export default {
                 controlWrapClasses,
                 labelClasses,
                 prependWrapClasses,
-                appendWrapClasses
+                appendWrapClasses,
+                hintClasses,
+                errorClasses,
+                bottomPlaceholderClasses
             };
         })();
 
@@ -258,7 +270,14 @@ export default {
                             ? h('div', { class: appendWrapClasses }, this.$scopedSlots.append())
                             : null // prepend
                     ]
-                )
+                ),
+                (this.error && this.errorMessage) || this.hint
+                    ? h('div', { class: bottomPlaceholderClasses }, [
+                          this.error && this.errorMessage
+                              ? h('div', { class: errorClasses }, this.errorMessage)
+                              : h('div', { class: hintClasses }, this.hint)
+                      ])
+                    : null
             ]
         );
     }

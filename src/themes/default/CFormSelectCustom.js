@@ -7,6 +7,8 @@ export const optionBase = 'cursor-pointer py-0-4 px-0-8';
 export const optionStateDefault = 'bg-white hover:bg-tertiary-100';
 export const optionStateActive = 'bg-tertiary-100';
 
+export const listBase = 'overscroll-contain overflow-y-auto max-h-18-6';
+
 export default {
     inputBase,
     inputIconBase,
@@ -15,5 +17,7 @@ export default {
 
     optionBase,
     optionStateDefault,
-    optionStateActive
+    optionStateActive,
+
+    listBase
 };

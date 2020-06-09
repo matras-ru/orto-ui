@@ -68,7 +68,8 @@ module.exports = {
             '2-6': '2.75rem',
             '2-7': '2.875rem',
             '2-8': '3rem',
-            '12-4': '12.5rem'
+            '12-4': '12.5rem',
+            '18-6': '18.75rem' // 300px
         },
         backgroundColor: theme => theme('colors'),
         backgroundPosition: {
@@ -210,10 +211,11 @@ module.exports = {
             ...theme('width'),
             ...negative(theme('spacing'))
         }),
-        maxHeight: {
+        maxHeight: theme => ({
+            ...theme('spacing'),
             full: '100%',
             screen: '100vh'
-        },
+        }),
         maxWidth: {
             none: 'none',
             xs: '20rem',
