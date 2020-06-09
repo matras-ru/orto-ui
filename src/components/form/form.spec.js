@@ -7,7 +7,7 @@ describe('Form', () => {
     it('is rendered', async () => {
         const wrapper = mount(CForm);
 
-        expect(wrapper.is('form')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('FORM');
         expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
     });
 

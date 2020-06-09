@@ -10,7 +10,7 @@ describe('CContainer', () => {
         const wrapper = mount(CContainer);
 
         expect(wrapper.isFunctionalComponent).toBe(true);
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('DIV');
         expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
         expect(wrapper.classes().length).toBe(1);
         expect(wrapper.text()).toEqual('');

@@ -11,7 +11,7 @@ describe('Badge', () => {
     it('The button is rendered', () => {
         const wrapper = mount(CBadge);
 
-        expect(wrapper.is('span')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('SPAN');
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${variantPrimaryClass}`.split(' ').sort()
         );
@@ -26,7 +26,7 @@ describe('Badge', () => {
             }
         });
 
-        expect(wrapper.is('span')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('SPAN');
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${variantSecondaryClass}`.split(' ').sort()
         );

@@ -53,25 +53,6 @@ const components = {
     CPicture
 };
 
-export const selfInstall = (Vue, theme = {}, component) => {
-    const { props = {}, name } = component;
-    const defaultComponentTheme = { ...(props && props.theme ? props.theme.default() : {}) };
-
-    props.theme = {
-        type: Object,
-        default: () => {
-            return { ...defaultComponentTheme, ...theme };
-        }
-    };
-
-    Vue.component(name, {
-        ...component,
-        ...{
-            props
-        }
-    });
-};
-
 const extendComponent = (Vue, CurrentTheme, componentName) => {
     // TODO: if props is undefined
     const { props = {} } = components[componentName];

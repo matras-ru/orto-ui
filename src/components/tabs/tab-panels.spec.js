@@ -8,7 +8,7 @@ describe('CTabPanels', () => {
     it('default', () => {
         const wrapper = mount(CTabPanels);
 
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('DIV');
     });
 
     it('with panels', () => {
@@ -17,7 +17,7 @@ describe('CTabPanels', () => {
         });
 
         expect(wrapper).toBeDefined();
-        expect(wrapper.findAll(CTabPanel).length).toBe(2);
+        expect(wrapper.findAll('section[role="tabpanel"]').length).toBe(2);
     });
 
     it('panel', () => {
@@ -25,7 +25,7 @@ describe('CTabPanels', () => {
             slots: { default: [CTabPanel] }
         });
 
-        const panel = wrapper.find(CTabPanel);
+        const panel = wrapper.findAll('section[role="tabpanel"]').at(0);
         expect(wrapper).toBeDefined();
 
         expect(panel.attributes('role')).toBeDefined;

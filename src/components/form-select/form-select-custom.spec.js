@@ -52,7 +52,7 @@ describe('Form Select Custom ', () => {
             localVue
         });
 
-        const holder = wrapper.find({ ref: 'holder' });
+        const holder = wrapper.findComponent({ ref: 'holder' });
 
         holder.trigger('click');
         await wrapper.vm.$nextTick();
@@ -113,7 +113,7 @@ describe('Form Select Custom ', () => {
             localVue
         });
 
-        const holder = wrapper.find({ ref: 'holder' });
+        const holder = wrapper.findComponent({ ref: 'holder' });
         holder.trigger('click');
         await wrapper.vm.$nextTick();
 
@@ -172,13 +172,12 @@ describe('Form Select Custom ', () => {
             localVue
         });
 
-        const holder = wrapper.find({ ref: 'holder' });
+        const holder = wrapper.findComponent({ ref: 'holder' });
         holder.trigger('click');
         await wrapper.vm.$nextTick();
 
-        const options = wrapper.findAll(CListItem);
+        const options = wrapper.findAllComponents(CListItem);
         expect(options.at(0).classes('bg-tertiary-100')).toBe(true);
-
         expect(options.at(1).classes('bg-white')).toBe(true);
         expect(options.at(1).classes('hover:bg-tertiary-100')).toBe(true);
 
@@ -240,14 +239,14 @@ describe('Form Select Custom ', () => {
             localVue
         });
 
-        const holder = wrapper.find({ ref: 'holder' });
+        const holder = wrapper.findComponent({ ref: 'holder' });
         const input = holder.find('input');
 
         expect(input.element.value).toBe('10 x 20 — 1000');
 
         holder.trigger('click');
         await wrapper.vm.$nextTick();
-        const options = wrapper.findAll(CListItem);
+        const options = wrapper.findAllComponents(CListItem);
 
         expect(options.at(0).text()).toBe('10 x 20 — 1000');
         expect(options.at(1).text()).toBe('30 x 50 — 1500');

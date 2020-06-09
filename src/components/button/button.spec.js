@@ -13,7 +13,7 @@ describe('Button', () => {
     it('The button is rendered', () => {
         const wrapper = mount(CButton);
 
-        expect(wrapper.is('button')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('BUTTON');
         expect(wrapper.attributes('href')).not.toBeDefined();
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${defaultClass} ${defaultSizeClass}`.split(' ').sort()
@@ -29,7 +29,7 @@ describe('Button', () => {
             }
         });
 
-        expect(wrapper.is('button')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('BUTTON');
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${secondaryClass} ${defaultSizeClass}`.split(' ').sort()
         );
@@ -48,7 +48,7 @@ describe('Button', () => {
             }
         });
 
-        expect(wrapper.is('button')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('BUTTON');
         expect(called).toBe(0);
         expect(evt).toEqual(null);
         wrapper.trigger('click');
@@ -107,7 +107,7 @@ describe('Button', () => {
             }
         });
 
-        expect(wrapper.is('a')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('A');
         expect(wrapper.classes('no-underline')).toBe(false);
         expect(wrapper.classes('text-secondary-200')).toBe(false);
         expect(wrapper.classes('hover:text-black-200')).toBe(false);

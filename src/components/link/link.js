@@ -1,5 +1,5 @@
 import { getComponentConfig } from '@/config';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import { getHashMapValue } from '@/utils';
 import DefaultTheme from '@/themes/default/CLink';
 

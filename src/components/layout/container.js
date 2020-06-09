@@ -1,5 +1,5 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import DefaultTheme from '@/themes/default/CContainer';
 
 const props = {

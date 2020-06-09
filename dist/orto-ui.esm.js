@@ -397,6 +397,24 @@ var justifyClaassUtil = function (justify) {
     return justifyMap[justify] || null;
 };
 
+var selfInstall = function (Vue, theme, component) {
+    if ( theme === void 0 ) theme = {};
+
+    var props = component.props; if ( props === void 0 ) props = {};
+    var name = component.name;
+    var defaultComponentTheme = Object.assign({}, (props && props.theme ? props.theme.default() : {}));
+
+    props.theme = {
+        type: Object,
+        default: function () {
+            return Object.assign({}, defaultComponentTheme, theme);
+        }
+    };
+
+    Vue.component(name, Object.assign({}, component,
+        {props: props}));
+};
+
 var DEFAULTS = {
     common: {
         screens: ['sm', 'md', 'lg', 'xl'],
@@ -3985,24 +4003,6 @@ var components = {
     CPicture: CPicture
 };
 
-var selfInstall = function (Vue, theme, component) {
-    if ( theme === void 0 ) theme = {};
-
-    var props = component.props; if ( props === void 0 ) props = {};
-    var name = component.name;
-    var defaultComponentTheme = Object.assign({}, (props && props.theme ? props.theme.default() : {}));
-
-    props.theme = {
-        type: Object,
-        default: function () {
-            return Object.assign({}, defaultComponentTheme, theme);
-        }
-    };
-
-    Vue.component(name, Object.assign({}, component,
-        {props: props}));
-};
-
 var extendComponent = function (Vue, CurrentTheme, componentName) {
     // TODO: if props is undefined
     var ref = components[componentName];
@@ -4048,4 +4048,4 @@ var index = {
 };
 
 export default index;
-export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField$1 as CFormField, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CPicture, CRadio, CRadioGroup, CRow, CTab, CTabPanel, CTabPanels, CTabs, selfInstall };
+export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField$1 as CFormField, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CPicture, CRadio, CRadioGroup, CRow, CTab, CTabPanel, CTabPanels, CTabs };

@@ -25,7 +25,7 @@ describe('CRow', () => {
         const wrapper = mount(CRow);
 
         expect(wrapper.isFunctionalComponent).toBe(true);
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.element.tagName).toBe('DIV');
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
         );
@@ -51,8 +51,8 @@ describe('gutters', () => {
             localVue
         });
 
-        const Row = wrapper.find({ ref: 'row-test' });
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Row = wrapper.findComponent({ ref: 'row-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
             `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
@@ -88,8 +88,8 @@ describe('gutters', () => {
             localVue
         });
 
-        const Row = wrapper.find({ ref: 'row-test' });
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Row = wrapper.findComponent({ ref: 'row-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
             `${baseClass} ${smBreakpoint}:${mdGuttersNormalizeClass}`.split(' ').sort()
@@ -143,8 +143,8 @@ describe('cols', () => {
             localVue
         });
 
-        const Row = wrapper.find({ ref: 'row-test' });
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Row = wrapper.findComponent({ ref: 'row-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
             `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
@@ -192,8 +192,8 @@ describe('cols', () => {
             localVue
         });
 
-        const Row = wrapper.find({ ref: 'row-test' });
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Row = wrapper.findComponent({ ref: 'row-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
             `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
@@ -244,8 +244,8 @@ describe('cols', () => {
             localVue
         });
 
-        const Row = wrapper.find({ ref: 'row-test' });
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Row = wrapper.findComponent({ ref: 'row-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Row.classes().sort()).toEqual(
             `${baseClass} ${lgGuttersNormalizeClass}`.split(' ').sort()
@@ -267,9 +267,7 @@ describe('cols', () => {
         CCol(:cols="1")
         eq:
         div(class="...") - row
-        div(class="... w-1/3 sm:w-1/4 md:w-1/5") - col
-    */
-
+        div(class="... w-1/3 sm:w-1/4 md:w-1/5") - col */
         const App = localVue.extend({
             render(h) {
                 return h('div', {}, [
@@ -304,7 +302,7 @@ describe('cols', () => {
             localVue
         });
 
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Col.classes().sort()).toEqual(
             `${colBaseClass} ${lgGuttersClass} w-1/3 ${smBreakpoint}:w-1/4 ${mdBreakpoint}:w-1/5`
@@ -322,8 +320,7 @@ describe('cols', () => {
         CCol(:offsetLg="3")
         eq:
         div(class="...") - row
-        div(class="... lg:ml-3/12") - col
-        */
+        div(class="... lg:ml-3/12") - col */
         const App = localVue.extend({
             render(h) {
                 return h('div', {}, [
@@ -353,7 +350,7 @@ describe('cols', () => {
             localVue
         });
 
-        const Col = wrapper.find({ ref: 'col-test' });
+        const Col = wrapper.findComponent({ ref: 'col-test' });
 
         expect(Col.classes()).toContain('lg:ml-3/12');
 

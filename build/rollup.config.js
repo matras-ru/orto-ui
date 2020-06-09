@@ -7,8 +7,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
-import analyze from 'rollup-plugin-analyzer';
-import visualizer from 'rollup-plugin-visualizer';
+// import analyze from 'rollup-plugin-analyzer';
+// import visualizer from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
 
@@ -59,7 +59,9 @@ const globals = {
     'v-click-outside-x': 'vClickOutside',
     vue: 'Vue',
     'vue-functional-data-merge': 'vueFunctionalDataMerge',
-    'lodash.merge': 'merge'
+    'lodash.merge': 'merge',
+    'tailwindcss/resolveConfig': 'resolveConfig ',
+    '@tailwindcss/custom-forms': 'customForms '
 };
 
 const buildFormats = [];
@@ -70,7 +72,8 @@ if (!argv.format || argv.format === 'es') {
         output: {
             file: 'dist/orto-ui.esm.js',
             format: 'esm',
-            exports: 'named'
+            exports: 'named',
+            globals
         },
         plugins: [
             ...baseConfig.plugins.preVue,
@@ -102,9 +105,9 @@ if (!argv.format || argv.format === 'cjs') {
                     optimizeSSR: true
                 }
             }),
-            ...baseConfig.plugins.postVue,
-            analyze({ summaryOnly: true }),
-            visualizer({ open: true })
+            ...baseConfig.plugins.postVue
+            // analyze({ summaryOnly: true })
+            // visualizer({ open: true })
         ]
     };
     buildFormats.push(umdConfig);

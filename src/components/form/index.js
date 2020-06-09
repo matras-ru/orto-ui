@@ -1,1 +1,1 @@
-export { default as CForm } from './form';
+export { default as CForm } from './form.js';

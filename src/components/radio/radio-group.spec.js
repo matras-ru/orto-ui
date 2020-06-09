@@ -30,8 +30,7 @@ describe('Radio group', () => {
             }
         });
 
-        expect(wrapper.contains(CRadio)).toBe(true);
-        expect(wrapper.findAll(CRadio).length).toBe(2);
+        expect(wrapper.findAll('input[type="radio"]').length).toBe(2);
     });
 
     it('v-model', () => {
@@ -76,7 +75,7 @@ describe('Radio group', () => {
             localVue: localVue
         });
 
-        const input = wrapper.find('input');
+        const input = wrapper.find('input[type="radio"]');
 
         expect(wrapper.vm.model).toEqual(null);
 

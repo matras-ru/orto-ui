@@ -17,7 +17,7 @@ describe('CPicture', () => {
         const img = wrapper.find('img');
 
         expect(wrapper.isFunctionalComponent).toBe(true);
-        expect(wrapper.is('picture')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('PICTURE');
 
         expect(img.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
         expect(img.attributes('src')).toEqual('picture1.jpg');
@@ -38,7 +38,7 @@ describe('CPicture', () => {
         const sources = wrapper.findAll('source');
 
         expect(wrapper.isFunctionalComponent).toBe(true);
-        expect(wrapper.is('picture')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('PICTURE');
 
         expect(img.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
         expect(img.attributes('src')).toEqual('picture1.jpg');

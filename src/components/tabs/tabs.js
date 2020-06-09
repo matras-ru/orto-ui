@@ -1,7 +1,7 @@
 import { noop } from '@/utils';
 import { mergeData } from 'vue-functional-data-merge';
 import { getComponentConfig } from '@/config';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 
 const NAME = 'CTabs';
 

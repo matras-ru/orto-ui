@@ -1,4 +1,4 @@
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import DefaultTheme from '@/themes/default/CDropdown';
 import { getComponentConfig } from '@/config';
 

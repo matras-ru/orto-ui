@@ -1,5 +1,5 @@
 // TODO: add limit...
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import { noop } from '@/utils';
 
 export default function (type) {

@@ -1,6 +1,6 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { getHashMapValue } from '@/utils';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 
 import { getComponentConfig } from '@/config';
 import DefaultTheme from '@/themes/default/CBadge';

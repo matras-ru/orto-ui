@@ -1,4 +1,4 @@
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import CFormField from '@/mixins/form-field';
 import DefaultTheme from '@/themes/default/CFormField';
 

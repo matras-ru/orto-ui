@@ -20,7 +20,7 @@ describe('CTabs', () => {
     it('default', () => {
         const wrapper = mount(CTabs);
 
-        expect(wrapper.is('ul')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('UL');
         expect(wrapper.attributes('role')).toBeDefined();
         expect(wrapper.attributes('role')).toBe('tablist');
     });
@@ -46,7 +46,7 @@ describe('CTabs', () => {
         });
 
         expect(wrapper).toBeDefined();
-        expect(wrapper.findAll(CTab).length).toBe(3);
+        expect(wrapper.findAll('li[role="presentation"]').length).toBe(3);
     });
 
     it('tab link style: default, active', () => {
@@ -74,11 +74,11 @@ describe('CTabs', () => {
 
         const wrapper = mount(App);
 
-        const tab1 = wrapper.find({ ref: 'tab-1' }); // default tab
-        const tab2 = wrapper.find({ ref: 'tab-2' }); // active tab
+        const tab1 = wrapper.findComponent({ ref: 'tab-1' }); // default tab
+        const tab2 = wrapper.findComponent({ ref: 'tab-2' }); // active tab
 
         expect(wrapper).toBeDefined();
-        expect(wrapper.findAll(CTab).length).toBe(2);
+        expect(wrapper.findAllComponents(CTab).length).toBe(2);
 
         expect(tab1.find('a').classes().sort()).toEqual(`${baseTabLinkClasses}`.split(' ').sort());
 
@@ -117,7 +117,7 @@ describe('CTabs', () => {
         });
 
         const wrapper = mount(App);
-        const tab2 = wrapper.find({ ref: 'tab-2' }); // active tab
+        const tab2 = wrapper.findComponent({ ref: 'tab-2' }); // active tab
 
         expect(wrapper).toBeDefined();
 

@@ -36,3 +36,22 @@ export const justifyClaassUtil = justify => {
 
     return justifyMap[justify] || null;
 };
+
+export const selfInstall = (Vue, theme = {}, component) => {
+    const { props = {}, name } = component;
+    const defaultComponentTheme = { ...(props && props.theme ? props.theme.default() : {}) };
+
+    props.theme = {
+        type: Object,
+        default: () => {
+            return { ...defaultComponentTheme, ...theme };
+        }
+    };
+
+    Vue.component(name, {
+        ...component,
+        ...{
+            props
+        }
+    });
+};

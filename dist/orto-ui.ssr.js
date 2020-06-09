@@ -330,6 +330,24 @@ var justifyClaassUtil = function (justify) {
     };
 
     return justifyMap[justify] || null;
+};
+
+var selfInstall = function (Vue, theme, component) {
+    if ( theme === void 0 ) theme = {};
+
+    var props = component.props; if ( props === void 0 ) props = {};
+    var name = component.name;
+    var defaultComponentTheme = Object.assign({}, (props && props.theme ? props.theme.default() : {}));
+
+    props.theme = {
+        type: Object,
+        default: function () {
+            return Object.assign({}, defaultComponentTheme, theme);
+        }
+    };
+
+    Vue.component(name, Object.assign({}, component,
+        {props: props}));
 };var DEFAULTS = {
     common: {
         screens: ['sm', 'md', 'lg', 'xl'],
@@ -3858,24 +3876,6 @@ var CRow = {
     CPicture: CPicture
 };
 
-var selfInstall = function (Vue, theme, component) {
-    if ( theme === void 0 ) theme = {};
-
-    var props = component.props; if ( props === void 0 ) props = {};
-    var name = component.name;
-    var defaultComponentTheme = Object.assign({}, (props && props.theme ? props.theme.default() : {}));
-
-    props.theme = {
-        type: Object,
-        default: function () {
-            return Object.assign({}, defaultComponentTheme, theme);
-        }
-    };
-
-    Vue.component(name, Object.assign({}, component,
-        {props: props}));
-};
-
 var extendComponent = function (Vue, CurrentTheme, componentName) {
     // TODO: if props is undefined
     var ref = components[componentName];
@@ -3918,4 +3918,4 @@ var install = function (Vue, options) {
 
 var index = {
     install: install
-};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField$1;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;exports.selfInstall=selfInstall;
+};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField$1;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;

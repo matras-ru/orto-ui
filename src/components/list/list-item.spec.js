@@ -8,7 +8,8 @@ describe('CListItem', () => {
     it('default empty CListItem is functional component and rendered', () => {
         const wrapper = mount(CListItem);
         expect(wrapper.isFunctionalComponent).toBe(true);
-        expect(wrapper.is('li')).toBe(true);
+
+        expect(wrapper.element.tagName).toEqual('LI');
         expect(wrapper.classes().sort()).toEqual(`${defaultClass}`.split(' ').sort());
         expect(wrapper.classes().length).toBe(1);
         expect(wrapper.text()).toEqual('');
@@ -23,7 +24,7 @@ describe('CListItem', () => {
             }
         });
 
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('DIV');
     });
 
     it('custom attributes', () => {

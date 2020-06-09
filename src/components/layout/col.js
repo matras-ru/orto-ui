@@ -1,5 +1,5 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import { getComponentConfig } from '@/config';
 import { numProp, suffixPropName } from '@/utils';
 import DefaultTheme from '@/themes/default/CCol';

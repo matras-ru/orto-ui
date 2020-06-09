@@ -12,10 +12,9 @@ describe('Link', () => {
     it('default', () => {
         const wrapper = mount(CLink);
 
-        expect(wrapper.is('span')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('SPAN');
         expect(wrapper.attributes('href')).not.toBeDefined();
         expect(wrapper.attributes('target')).not.toBeDefined();
-
         expect(wrapper.classes().sort()).toEqual(`${baseClass} ${primaryClass}`.split(' ').sort());
     });
 
@@ -96,7 +95,7 @@ describe('click event', () => {
                 }
             }
         });
-        expect(wrapper.is('span')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('SPAN');
         expect(called).toBe(0);
         expect(evt).toEqual(null);
         wrapper.find('span').trigger('click');
@@ -114,7 +113,7 @@ describe('click event', () => {
                 click: [spy1, spy2]
             }
         });
-        expect(wrapper.is('span')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('SPAN');
         expect(spy1).not.toHaveBeenCalled();
         expect(spy2).not.toHaveBeenCalled();
         wrapper.find('span').trigger('click');
@@ -138,7 +137,7 @@ describe('click event', () => {
                 }
             }
         });
-        expect(wrapper.is('span')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('SPAN');
         expect(called).toBe(0);
         expect(evt).toEqual(null);
         wrapper.find('span').trigger('click');
@@ -179,8 +178,6 @@ describe('click event', () => {
             localVue
         });
 
-        expect(wrapper.isVueInstance()).toBe(true);
-
         wrapper.vm.$root.$on('clicked::link', spy);
         wrapper.trigger('click');
         expect(spy).not.toHaveBeenCalled();
@@ -216,27 +213,21 @@ describe('Router Link', () => {
         });
 
         const wrapper = mount(App, {
-            localVue,
-            attachToDocument: true
+            localVue
         });
 
-        expect(wrapper.isVueInstance()).toBe(true);
-        expect(wrapper.is('section')).toBe(true);
-
+        expect(wrapper.element.tagName).toEqual('SECTION');
         expect(wrapper.findAll('a').length).toBe(3);
         const $links = wrapper.findAll('a');
 
-        expect($links.at(0).isVueInstance()).toBe(true);
         expect($links.at(0).vm.$options.name).toBe('CLink');
         expect($links.at(0).vm.$children.length).toBe(1);
         expect($links.at(0).vm.$children[0].$options.name).toBe('RouterLink');
 
-        expect($links.at(1).isVueInstance()).toBe(true);
         expect($links.at(1).vm.$options.name).toBe('CLink');
         expect($links.at(1).vm.$children.length).toBe(1);
         expect($links.at(1).vm.$children[0].$options.name).toBe('RouterLink');
 
-        expect($links.at(2).isVueInstance()).toBe(true);
         expect($links.at(2).vm.$options.name).toBe('CLink');
         expect($links.at(2).vm.$children.length).toBe(0);
 

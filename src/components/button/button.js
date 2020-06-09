@@ -1,6 +1,6 @@
 import { mergeData } from 'vue-functional-data-merge';
 import { noop, getHashMapValue } from '@/utils';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 
 import { getComponentConfig } from '@/config';
 import { createProps as createLinkProps } from '@/components/link/link.js';

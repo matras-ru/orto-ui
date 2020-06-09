@@ -30,8 +30,7 @@ describe('Checkbox group', () => {
             }
         });
 
-        expect(wrapper.contains(CCheckbox)).toBe(true);
-        expect(wrapper.findAll(CCheckbox).length).toBe(2);
+        expect(wrapper.findAll('input[type="checkbox"]').length).toBe(2);
     });
 
     it('v-model', () => {
@@ -76,7 +75,7 @@ describe('Checkbox group', () => {
             localVue: localVue
         });
 
-        const input = wrapper.find('input');
+        const input = wrapper.find('input[type="checkbox"]');
 
         expect(wrapper.vm.model).toEqual([]);
         input.setChecked();

@@ -1,5 +1,5 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { selfInstall } from '@/';
+import { selfInstall } from '@/utils/index.js';
 import { justifyClaassUtil } from '@/utils';
 import { getComponentConfig } from '@/config';
 import DefaultTheme from '@/themes/default/CList';

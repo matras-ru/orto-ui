@@ -11,7 +11,7 @@ describe('CList', () => {
     it('default empty CList is functional component and rendered. Should have tag ul by default', () => {
         const wrapper = mount(CList);
         expect(wrapper.isFunctionalComponent).toBe(true);
-        expect(wrapper.is('ul')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('UL');
         expect(wrapper.classes().sort()).toEqual(`${baaseClass} ${defaultCLass}`.split(' ').sort());
     });
 
@@ -24,7 +24,7 @@ describe('CList', () => {
             }
         });
 
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('DIV');
     });
 
     it('horizontal mode', () => {

@@ -12,7 +12,7 @@ describe('Dropdown basic', () => {
             localVue
         });
 
-        expect(wrapper.is('div')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('DIV');
         expect(wrapper.classes('relative')).toBe(true);
 
         wrapper.destroy();
@@ -28,9 +28,9 @@ describe('Dropdown basic', () => {
             }
         });
 
-        const dropdown = wrapper.find({ ref: 'dropdown' });
+        const dropdown = wrapper.findComponent({ ref: 'dropdown' });
 
-        expect(dropdown.is('div')).toBe(true);
+        expect(dropdown.element.tagName).toEqual('DIV');
         expect(dropdown.classes().sort()).toEqual(
             'absolute z-50 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden shadow-example rounded'
                 .split(' ')
@@ -54,9 +54,9 @@ describe('Dropdown basic', () => {
         });
 
         expect(wrapper.vm.placement).toBe('right');
-        const dropdown = wrapper.find({ ref: 'dropdown' });
+        const dropdown = wrapper.findComponent({ ref: 'dropdown' });
 
-        expect(dropdown.is('div')).toBe(true);
+        expect(dropdown.element.tagName).toEqual('DIV');
         expect(dropdown.classes()).not.toContain('left-0');
         expect(dropdown.classes()).toContain('right-0');
     });
@@ -70,14 +70,14 @@ describe('Dropdown slots', () => {
         const wrapper = mount(CDropdown, {
             localVue,
             scopedSlots: {
-                holder: function() {
+                holder: function () {
                     return this.$createElement('div', 'Click me');
                 }
             }
         });
 
         const holder = wrapper.find('div div');
-        expect(holder.is('div')).toBe(true);
+        expect(holder.element.tagName).toEqual('DIV');
 
         wrapper.destroy();
     });
@@ -86,7 +86,7 @@ describe('Dropdown slots', () => {
         const wrapper = mount(CDropdown, {
             localVue,
             scopedSlots: {
-                holder: function({ toggle }) {
+                holder: function ({ toggle }) {
                     return this.$createElement(
                         'div',
                         {
@@ -103,17 +103,17 @@ describe('Dropdown slots', () => {
         });
 
         const holder = wrapper.find('div div');
-
+        let dropdown;
         expect(wrapper.vm.isShow).toBe(false);
-
-        expect(wrapper.contains({ ref: 'dropdown' })).toBe(false);
+        dropdown = wrapper.findComponent({ ref: 'dropdown' });
+        expect(dropdown.exists()).toBe(false);
 
         holder.trigger('click');
         await wrapper.vm.$nextTick();
 
         expect(wrapper.vm.isShow).toBe(true);
-        expect(wrapper.contains({ ref: 'dropdown' })).toBe(true);
-
+        dropdown = wrapper.findComponent({ ref: 'dropdown' });
+        expect(dropdown.exists()).toBe(true);
         holder.trigger('click');
         await wrapper.vm.$nextTick();
 
@@ -132,7 +132,7 @@ describe('Dropdown slots', () => {
                 };
             },
             scopedSlots: {
-                dropdown: function({ toggle }) {
+                dropdown: function ({ toggle }) {
                     return this.$createElement(
                         'div',
                         {

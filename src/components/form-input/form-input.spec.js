@@ -14,8 +14,8 @@ describe('Input basic', () => {
 
         const input = wrapper.find('input');
 
-        expect(wrapper.is('label')).toBe(true);
-        expect(input.is('input')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('LABEL');
+        expect(input.element.tagName).toEqual('INPUT');
         expect(input.attributes('type')).toBeDefined();
         expect(input.attributes('type')).toBe('text');
         expect(input.attributes('id')).toBeDefined();
@@ -39,8 +39,8 @@ describe('Input types', () => {
 
         const textarea = wrapper.find('textarea');
 
-        expect(wrapper.is('label')).toBe(true);
-        expect(textarea.is('textarea')).toBe(true);
+        expect(wrapper.element.tagName).toEqual('LABEL');
+        expect(textarea.element.tagName).toEqual('TEXTAREA');
         expect(textarea.attributes('type')).not.toBeDefined();
         expect(textarea.attributes('id')).toBeDefined();
         expect(textarea.attributes('id')).toBe('foo');
@@ -113,7 +113,7 @@ describe('Input states', () => {
         wrapper.setProps({ label: 'label' });
         await wrapper.vm.$nextTick();
 
-        const label = wrapper.find({ ref: 'label' });
+        const label = wrapper.findComponent({ ref: 'label' });
         expect(innerWrapper.classes('border-black-200')).toBe(true);
 
         expect(label.classes()).not.toContain('transform');
@@ -132,7 +132,7 @@ describe('Input states', () => {
     it('not empty', async () => {
         wrapper.setProps({ modelValue: 'foo', label: 'label' });
         await wrapper.vm.$nextTick();
-        const label = wrapper.find({ ref: 'label' });
+        const label = wrapper.findComponent({ ref: 'label' });
 
         expect(innerWrapper.classes('border-black-200')).toBe(true);
         expect(label.classes()).toContain('transform');
@@ -143,7 +143,7 @@ describe('Input states', () => {
     it('error', async () => {
         wrapper.setProps({ error: true, label: 'label' });
         await wrapper.vm.$nextTick();
-        const label = wrapper.find({ ref: 'label' });
+        const label = wrapper.findComponent({ ref: 'label' });
 
         expect(innerWrapper.classes('border-danger')).toBe(true);
         expect(label.classes('text-danger')).toBe(true);
@@ -154,7 +154,7 @@ describe('Input states', () => {
         input.trigger('focus');
 
         await wrapper.vm.$nextTick();
-        const label = wrapper.find({ ref: 'label' });
+        const label = wrapper.findComponent({ ref: 'label' });
 
         expect(innerWrapper.classes('border-primary-100')).toBe(true);
         expect(label.classes()).toContain('transform');
