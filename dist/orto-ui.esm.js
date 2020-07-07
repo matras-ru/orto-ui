@@ -98,6 +98,11 @@ var prependSizeSm = 'pr-0-2';
 var appendSizeMd = 'pl-0-4';
 var appendSizeSm = 'pl-0-2';
 
+var hintBase = 'text-tertiary-300';
+var errorBase = 'text-danger';
+
+var bottomPlaceholderBase = 'text-sm mt-0-2';
+
 var DefaultTheme$2 = {
     outerWrapBase: outerWrapBase,
     outerWrapSpace: outerWrapSpace,
@@ -126,7 +131,12 @@ var DefaultTheme$2 = {
     appendSizeMd: appendSizeMd,
 
     labelSizeSm: labelSizeSm,
-    labelSizeMd: labelSizeMd
+    labelSizeMd: labelSizeMd,
+
+    hintBase: hintBase,
+    errorBase: errorBase,
+
+    bottomPlaceholderBase: bottomPlaceholderBase
 };
 
 var controlWrap = 'relative';
@@ -287,6 +297,8 @@ var optionBase = 'cursor-pointer py-0-4 px-0-8';
 var optionStateDefault = 'bg-white hover:bg-tertiary-100';
 var optionStateActive = 'bg-tertiary-100';
 
+var listBase = 'overscroll-contain overflow-y-auto max-h-18-6';
+
 var DefaultTheme$e = {
     inputBase: inputBase$1,
     inputIconBase: inputIconBase,
@@ -295,7 +307,9 @@ var DefaultTheme$e = {
 
     optionBase: optionBase,
     optionStateDefault: optionStateDefault,
-    optionStateActive: optionStateActive
+    optionStateActive: optionStateActive,
+
+    listBase: listBase
 };
 
 var base$b =
@@ -821,16 +835,22 @@ var CFormField = {
             var labelStateError = ref.labelStateError;
             var labelPositionFloat = ref.labelPositionFloat;
             var labelBgPrimary = ref.labelBgPrimary;
+            var hintBase = ref.hintBase;
+            var errorBase = ref.errorBase;
+            var bottomPlaceholderBase = ref.bottomPlaceholderBase;
 
             var outerWrapClasses = [outerWrapBase];
             var innerWrapClasses = [innerWrapBase];
             var controlWrapClasses = [controlWrapBase];
             var labelClasses = [labelBase];
+            var hintClasses = [hintBase];
+            var errorClasses = [errorBase];
+            var bottomPlaceholderClasses = [bottomPlaceholderBase];
 
             var sizes = createSizeMap(this$1.theme);
 
             if (!this$1.inline) {
-                outerWrapClasses.push(outerWrapSpace);
+                outerWrapClasses.push(bottomPlaceholderBase);
             }
 
             if (!this$1.labelBgColor) {
@@ -909,7 +929,10 @@ var CFormField = {
                 controlWrapClasses: controlWrapClasses,
                 labelClasses: labelClasses,
                 prependWrapClasses: prependWrapClasses,
-                appendWrapClasses: appendWrapClasses
+                appendWrapClasses: appendWrapClasses,
+                hintClasses: hintClasses,
+                errorClasses: errorClasses,
+                bottomPlaceholderClasses: bottomPlaceholderClasses
             };
         })();
         var outerWrapClasses = ref.outerWrapClasses;
@@ -918,6 +941,9 @@ var CFormField = {
         var labelClasses = ref.labelClasses;
         var prependWrapClasses = ref.prependWrapClasses;
         var appendWrapClasses = ref.appendWrapClasses;
+        var hintClasses = ref.hintClasses;
+        var errorClasses = ref.errorClasses;
+        var bottomPlaceholderClasses = ref.bottomPlaceholderClasses;
 
         return h(
             'label', // outer wrap
@@ -960,7 +986,14 @@ var CFormField = {
                             ? h('div', { class: appendWrapClasses }, this.$scopedSlots.append())
                             : null // prepend
                     ]
-                )
+                ),
+                (this.error && this.errorMessage) || this.hint
+                    ? h('div', { class: bottomPlaceholderClasses }, [
+                          this.error && this.errorMessage
+                              ? h('div', { class: errorClasses }, this.errorMessage)
+                              : h('div', { class: hintClasses }, this.hint)
+                      ])
+                    : null
             ]
         );
     }
@@ -1371,6 +1404,7 @@ var CFormSelectCustom = {
         var selectedOption = options.find(function (item) { return item[optionValue] === modelValue; });
         var inputBase = theme.inputBase;
         var inputIconBase = theme.inputIconBase;
+        var listBase = theme.listBase;
         var sizes = createSizeMap$2(theme);
 
         var iconClass = [inputIconBase];
@@ -1431,33 +1465,39 @@ var CFormSelectCustom = {
                 dropdown: function (ref) {
                     var close = ref.close;
 
-                    return h('CList', [
-                        options.map(function (option) {
-                            var ref = mapOption({
-                                option: option,
-                                optionLabel: optionLabel,
-                                optionValue: optionValue
-                            });
-                            var value = ref.value;
-                            var label = ref.label;
+                    return h(
+                        'CList',
+                        {
+                            staticClass: listBase
+                        },
+                        [
+                            options.map(function (option) {
+                                var ref = mapOption({
+                                    option: option,
+                                    optionLabel: optionLabel,
+                                    optionValue: optionValue
+                                });
+                                var value = ref.value;
+                                var label = ref.label;
 
-                            var isSelected = value === modelValue;
+                                var isSelected = value === modelValue;
 
-                            return h(
-                                'CListItem',
-                                {
-                                    class: cumputeOptionClasses(isSelected),
-                                    on: {
-                                        click: function () {
-                                            listeners['change'](value);
-                                            close();
+                                return h(
+                                    'CListItem',
+                                    {
+                                        class: cumputeOptionClasses(isSelected),
+                                        on: {
+                                            click: function () {
+                                                listeners['change'](value);
+                                                close();
+                                            }
                                         }
-                                    }
-                                },
-                                scopedSlots.default ? scopedSlots.default(option) : label
-                            );
-                        })
-                    ]);
+                                    },
+                                    scopedSlots.default ? scopedSlots.default(option) : label
+                                );
+                            })
+                        ]
+                    );
                 }
             }
         });
@@ -2912,7 +2952,8 @@ var tailwind_config = {
             '2-6': '2.75rem',
             '2-7': '2.875rem',
             '2-8': '3rem',
-            '12-4': '12.5rem'
+            '12-4': '12.5rem',
+            '18-6': '18.75rem' // 300px
         },
         backgroundColor: function (theme) { return theme('colors'); },
         backgroundPosition: {
@@ -3050,10 +3091,9 @@ var tailwind_config = {
             theme('width'),
             negative(theme('spacing'))));
 },
-        maxHeight: {
-            full: '100%',
-            screen: '100vh'
-        },
+        maxHeight: function (theme) { return (Object.assign({}, theme('spacing'),
+            {full: '100%',
+            screen: '100vh'})); },
         maxWidth: {
             none: 'none',
             xs: '20rem',

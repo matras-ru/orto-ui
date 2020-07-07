@@ -148,7 +148,7 @@ export default {
             const sizes = createSizeMap(this.theme);
 
             if (!this.inline) {
-                outerWrapClasses.push(bottomPlaceholderBase);
+                outerWrapClasses.push(outerWrapSpace);
             }
 
             if (!this.labelBgColor) {

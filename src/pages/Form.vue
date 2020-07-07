@@ -250,6 +250,30 @@
                             placeholder="Ул.Пушкина д.Колотушкина"
                             v-model="exampleModel.inputModel"
                             labelBgColor="bg-secondary-100"
+                        >
+                        </CFormInput>
+                        <CFormInput
+                            label="Адрес доставки *"
+                            placeholder="Ул.Пушкина д.Колотушкина"
+                            v-model="exampleModel.inputModel"
+                            labelBgColor="bg-secondary-100"
+                        >
+                        </CFormInput>
+                        <CFormInput
+                            label="Адрес доставки *"
+                            placeholder="Ул.Пушкина д.Колотушкина"
+                            v-model="exampleModel.inputModel"
+                            labelBgColor="bg-secondary-100"
+                            errorMessage="Поле обязательно"
+                            hint="Нужны, чтобы заполнить гарантию"
+                            :error="$v.exampleModel.inputModel.$error"
+                        >
+                        </CFormInput>
+                        <CFormInput
+                            label="Адрес доставки *"
+                            placeholder="Ул.Пушкина д.Колотушкина"
+                            v-model="exampleModel.inputModel"
+                            labelBgColor="bg-secondary-100"
                             errorMessage="Поле обязательно"
                             hint="Нужны, чтобы заполнить гарантию"
                             :error="$v.exampleModel.inputModel.$error"
