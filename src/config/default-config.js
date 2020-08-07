@@ -30,7 +30,8 @@ export default {
     },
 
     CListItem: {
-        tag: 'li'
+        tag: 'li',
+        inline: true
     },
 
     CRow: {

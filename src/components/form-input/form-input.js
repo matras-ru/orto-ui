@@ -27,6 +27,8 @@ const createSizeMap = ({ sizeSmBase, sizeMdBase }) => {
 
 const NAME = 'CFormInput';
 
+const REGEXP_NUMBER = /^\d+$/;
+
 export default {
     name: NAME,
 
@@ -85,6 +87,15 @@ export default {
     },
 
     methods: {
+        paste(event) {
+            console.log('wfwfpaste');
+            const clipboardData = event.clipboardData || window.clipboardData;
+
+            if (clipboardData && !REGEXP_NUMBER.test(clipboardData.getData('text'))) {
+                event.preventDefault();
+            }
+        },
+
         decrease() {
             let numericValue = this.numericProcess(this.modelValue);
 
@@ -119,7 +130,7 @@ export default {
             const localValue = isNaN(num) ? value : num;
 
             // 1
-            if (!localValue) return null;
+            if (!localValue) return this.min;
 
             // 2
             if (localValue >= this.max) return this.max;
@@ -213,7 +224,11 @@ export default {
 
                             input: e => this.onUpdate({ e, type: 'input' }),
 
-                            change: e => this.onUpdate({ e, type: 'change' })
+                            change: e => this.onUpdate({ e, type: 'change' }),
+
+                            ...(this.isNumeric && {
+                                paste: e => this.paste(e)
+                            })
                         }
                     }),
 

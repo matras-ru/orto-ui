@@ -7,6 +7,7 @@ module.exports = {
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+        'vue/valid-v-for': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'vue/no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'prettier/prettier': [
             'error',

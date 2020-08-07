@@ -1,5 +1,6 @@
 module.exports = {
     prefix: '',
+    target: 'relaxed',
     important: false,
     separator: ':',
     theme: {
@@ -72,6 +73,7 @@ module.exports = {
             '18-6': '18.75rem' // 300px
         },
         backgroundColor: theme => theme('colors'),
+        backgroundOpacity: theme => theme('opacity'),
         backgroundPosition: {
             bottom: 'bottom',
             center: 'center',
@@ -92,6 +94,7 @@ module.exports = {
             ...theme('colors'),
             default: theme('colors.gray.300', 'currentColor')
         }),
+        borderOpacity: theme => theme('opacity'),
         borderRadius: {
             none: '0',
             sm: '0.125rem',
@@ -114,7 +117,9 @@ module.exports = {
             example: '0 15px 30px 0 rgba(166, 177, 182, 0.5)'
         },
         container: theme => ({
-            padding: theme('spacing.0-8'),
+            padding: {
+                default: theme('spacing.0-8')
+            },
             center: true
         }),
         cursor: {
@@ -126,6 +131,9 @@ module.exports = {
             move: 'move',
             'not-allowed': 'not-allowed'
         },
+        divideColor: theme => theme('borderColor'),
+        divideOpacity: theme => theme('borderOpacity'),
+        divideWidth: theme => theme('borderWidth'),
         fill: theme => ({
             default: theme('colors.black.100')
         }),
@@ -275,10 +283,21 @@ module.exports = {
             '12': '12'
         },
         padding: theme => theme('spacing'),
+        placeholderColor: theme => theme('colors'),
+        placeholderOpacity: theme => theme('opacity'),
+        space: (theme, { negative }) => ({
+            ...theme('spacing'),
+            ...negative(theme('spacing'))
+        }),
         stroke: {
             current: 'currentColor'
         },
+        strokeWidth: {
+            '0': '0',
+            '1': '1'
+        },
         textColor: theme => theme('colors'),
+        textOpacity: theme => theme('opacity'),
         width: theme => ({
             auto: 'auto',
             ...theme('spacing'),
@@ -320,39 +339,15 @@ module.exports = {
             '40': '40',
             '50': '50'
         },
-        // .transition-{property}
-        transitionProperty: {
-            none: 'none',
-            all: 'all',
-            default:
-                'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
-            colors: 'background-color, border-color, color, fill, stroke',
-            border: 'border-color',
-            bg: 'background-color',
-            opacity: 'opacity',
-            shadow: 'box-shadow',
-            transform: 'transform'
-        },
-        // .duration-{duration}
-        transitionDuration: {
-            default: '0ms',
-            '75': '75ms',
-            '100': '100ms',
-            '150': '150ms',
-            '250': '250ms',
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-            '1000': '1000ms'
-        },
-        // .ease-{timingFunction}
-        transitionTimingFunction: {
-            linear: 'linear',
-            in: 'cubic-bezier(0.4, 0, 1, 1)',
-            out: 'cubic-bezier(0, 0, 0.2, 1)',
-            'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)'
-        },
-        // .origin-{origin}
+        gap: theme => theme('spacing'),
+        gridTemplateColumns: {},
+        gridColumn: {},
+        gridColumnStart: {},
+        gridColumnEnd: {},
+        gridTemplateRows: {},
+        gridRow: {},
+        gridRowStart: {},
+        gridRowEnd: {},
         transformOrigin: {
             center: 'center',
             top: 'top',
@@ -364,21 +359,6 @@ module.exports = {
             left: 'left',
             'top-left': 'top left'
         },
-        // .translate-x-{distance}
-        // .translate-y-{distance}
-        // .-translate-x-{distance}
-        // .-translate-y-{distance}
-        translate: (theme, { negative }) => ({
-            ...theme('spacing'),
-            ...negative(theme('spacing')),
-            '-full': '-100%',
-            '-1/2': '-50%',
-            '1/2': '50%',
-            full: '100%'
-        }),
-        // .scale-{scale}
-        // .scale-x-{scale}
-        // .scale-y-{scale}
         scale: {
             '0': '0',
             '50': '.5',
@@ -391,7 +371,6 @@ module.exports = {
             '125': '1.25',
             '150': '1.5'
         },
-        // .rotate-{angle}
         rotate: {
             '-180': '-180deg',
             '-90': '-90deg',
@@ -401,8 +380,14 @@ module.exports = {
             '90': '90deg',
             '180': '180deg'
         },
-        // .skew-x-{amount}
-        // .skew-y-{amount}
+        translate: (theme, { negative }) => ({
+            ...theme('spacing'),
+            ...negative(theme('spacing')),
+            '-full': '-100%',
+            '-1/2': '-50%',
+            '1/2': '50%',
+            full: '100%'
+        }),
         skew: {
             '-12': '-12deg',
             '-6': '-6deg',
@@ -412,7 +397,76 @@ module.exports = {
             '6': '6deg',
             '12': '12deg'
         },
-
+        transitionProperty: {
+            none: 'none',
+            all: 'all',
+            default:
+                'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+            colors: 'background-color, border-color, color, fill, stroke',
+            border: 'border-color',
+            bg: 'background-color',
+            opacity: 'opacity',
+            shadow: 'box-shadow',
+            transform: 'transform'
+        },
+        transitionTimingFunction: {
+            linear: 'linear',
+            in: 'cubic-bezier(0.4, 0, 1, 1)',
+            out: 'cubic-bezier(0, 0, 0.2, 1)',
+            'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)'
+        },
+        transitionDuration: {
+            default: '0ms',
+            '75': '75ms',
+            '100': '100ms',
+            '150': '150ms',
+            '250': '250ms',
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+            '1000': '1000ms'
+        },
+        transitionDelay: {
+            '75': '75ms',
+            '100': '100ms',
+            '150': '150ms',
+            '200': '200ms',
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+            '1000': '1000ms'
+        },
+        animation: {
+            none: 'none',
+            spin: 'spin 1s linear infinite',
+            ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+            pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            bounce: 'bounce 1s infinite'
+        },
+        keyframes: {
+            spin: {
+                from: { transform: 'rotate(0deg)' },
+                to: { transform: 'rotate(360deg)' }
+            },
+            ping: {
+                '0%': { transform: 'scale(1)', opacity: '1' },
+                '75%, 100%': { transform: 'scale(2)', opacity: '0' }
+            },
+            pulse: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '.5' }
+            },
+            bounce: {
+                '0%, 100%': {
+                    transform: 'translateY(-25%)',
+                    animationTimingFunction: 'cubic-bezier(0.8,0,1,1)'
+                },
+                '50%': {
+                    transform: 'translateY(0)',
+                    animationTimingFunction: 'cubic-bezier(0,0,0.2,1)'
+                }
+            }
+        },
         customForms: theme => {
             // TODO: refactoring
             return {
@@ -546,15 +600,42 @@ module.exports = {
                     }
                 }
             };
-        }
+        },
+        columnCount: [1, 2, 3],
+        columnGap: {
+            default: '1rem',
+            // will fallback to 'gap' || 'gridGap' values
+            sm: '1rem',
+            md: '1.5rem',
+            lg: '2rem'
+        },
+        columnWidth: {},
+        columnRuleColor: false, // will fallback to `borderColor` values
+        columnRuleWidth: false, // will fallback to `borderWidth` values
+        columnRuleStyle: [
+            'none',
+            'hidden',
+            'dotted',
+            'dashed',
+            'solid',
+            'double',
+            'groove',
+            'ridge',
+            'inset',
+            'outset'
+        ],
+        columnFill: ['auto', 'balance', 'balance-all'],
+        columnSpan: ['none', 'all']
     },
     variants: {
+        accessibility: ['responsive', 'focus'],
         alignContent: ['responsive'],
         alignItems: ['responsive'],
         alignSelf: ['responsive'],
         appearance: ['responsive'],
         backgroundAttachment: ['responsive'],
-        backgroundColor: ['responsive', 'hover', 'focus'],
+        backgroundColor: ['responsive', 'hover'],
+        backgroundOpacity: ['responsive', 'hover'],
         backgroundPosition: ['responsive'],
         backgroundRepeat: ['responsive'],
         backgroundSize: ['responsive'],
@@ -564,8 +645,13 @@ module.exports = {
         borderStyle: ['responsive'],
         borderWidth: ['responsive'],
         boxShadow: ['responsive', 'hover', 'focus'],
+        boxSizing: ['responsive'],
+        container: ['responsive'],
         cursor: ['responsive'],
         display: ['responsive'],
+        divideColor: ['responsive'],
+        divideOpacity: ['responsive'],
+        divideWidth: ['responsive'],
         fill: ['responsive'],
         flex: ['responsive'],
         flexDirection: ['responsive'],
@@ -596,11 +682,16 @@ module.exports = {
         order: ['responsive'],
         outline: ['responsive', 'focus'],
         overflow: ['responsive'],
+        overscrollBehavior: ['responsive'],
         padding: ['responsive'],
+        placeholderColor: ['responsive', 'focus'],
+        placeholderOpacity: ['responsive', 'focus'],
         pointerEvents: ['responsive'],
         position: ['responsive'],
         resize: ['responsive'],
+        space: ['responsive'],
         stroke: ['responsive'],
+        strokeWidth: ['responsive'],
         tableLayout: ['responsive'],
         textAlign: ['responsive'],
         textColor: ['responsive', 'hover', 'focus'],
@@ -613,39 +704,36 @@ module.exports = {
         width: ['responsive'],
         wordBreak: ['responsive'],
         zIndex: ['responsive'],
-        transitionProperty: [''],
-        transitionDuration: [''],
-        transitionTimingFunction: [''],
-        transform: [''],
-        transformOrigin: [''],
-        translate: ['responsive'],
-        scale: [''],
-        rotate: [''],
-        skew: ['']
+        gap: ['responsive'],
+        gridAutoFlow: ['responsive'],
+        gridTemplateColumns: ['responsive'],
+        gridColumn: ['responsive'],
+        gridColumnStart: ['responsive'],
+        gridColumnEnd: ['responsive'],
+        gridTemplateRows: ['responsive'],
+        gridRow: ['responsive'],
+        gridRowStart: ['responsive'],
+        gridRowEnd: ['responsive'],
+        transform: ['responsive'],
+        transformOrigin: ['responsive'],
+        scale: ['responsive', 'hover'],
+        rotate: ['responsive', 'hover'],
+        translate: ['responsive', 'hover'],
+        skew: ['responsive', 'hover'],
+        transitionProperty: ['responsive'],
+        transitionTimingFunction: ['responsive'],
+        transitionDuration: ['responsive'],
+        transitionDelay: ['responsive'],
+        animation: ['responsive'],
+        columnCount: ['responsive'],
+        columnGap: ['responsive'],
+        columnWidth: ['responsive'],
+        columnRuleColor: ['responsive'],
+        columnRuleWidth: ['responsive'],
+        columnRuleStyle: ['responsive'],
+        columnFill: ['responsive'],
+        columnSpan: ['responsive']
     },
     corePlugins: {},
-    plugins: [
-        require('@tailwindcss/custom-forms'),
-
-        ({ addBase, config }) => {
-            addBase({
-                a: {
-                    color: config('theme.colors.black.100')
-                },
-                h1: {
-                    fontSize: config('theme.fontSize.2xl'),
-                    fontWeight: config('theme.fontWeight.bold')
-                },
-                h2: {
-                    fontSize: config('theme.fontSize.xl'),
-                    fontWeight: config('theme.fontWeight.bold')
-                },
-                h3: {
-                    fontSize: config('theme.fontSize.base'),
-                    fontWeight: config('theme.fontWeight.bold')
-                },
-                p: { marginTop: config('theme.margin.1-2') }
-            });
-        }
-    ]
+    plugins: [require('@tailwindcss/custom-forms'), require('tailwindcss-multi-column')()]
 };

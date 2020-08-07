@@ -29,11 +29,16 @@ const props = {
         type: String,
         default: null,
         validator: value => getComponentConfig('common', 'validJustifyContent').includes(value)
+    },
+
+    block: {
+        type: Boolean,
+        default: false
     }
 };
 
-const currentClass = ({ direction, justify, theme }) => {
-    const { base, directionColumn, directionHorizontal } = theme;
+const currentClass = ({ direction, justify, theme, block }) => {
+    const { base, directionColumn, directionHorizontal, DISPLAY_FLEX, DISPLAY_BLOCK } = theme;
 
     const classMap = {
         vertical: directionColumn,
@@ -42,11 +47,17 @@ const currentClass = ({ direction, justify, theme }) => {
 
     const classes = [base];
 
-    // horizontal/vertical
-    classes.push(classMap[direction]);
+    if (block) {
+        classes.push(DISPLAY_BLOCK);
+    } else {
+        classes.push(DISPLAY_FLEX);
 
-    // horizontal align
-    classes.push(justifyClaassUtil(justify));
+        // horizontal/vertical
+        classes.push(classMap[direction]);
+
+        // horizontal align
+        classes.push(justifyClaassUtil(justify));
+    }
 
     return classes;
 };

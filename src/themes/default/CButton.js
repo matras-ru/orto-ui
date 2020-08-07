@@ -1,5 +1,5 @@
 export const base =
-    'inline-flex items-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
+    'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
 export const variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
 export const variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';

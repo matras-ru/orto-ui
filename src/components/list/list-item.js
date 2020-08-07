@@ -14,6 +14,11 @@ const props = {
     tag: {
         type: String,
         default: () => getComponentConfig(NAME, 'tag')
+    },
+
+    inline: {
+        type: Boolean,
+        default: () => getComponentConfig(NAME, 'inline')
     }
 };
 
@@ -29,10 +34,11 @@ export default {
     props,
 
     render(h, { props, data, children }) {
-        const { base } = props.theme;
+        const { base, DISPLAY_INLINE, DISPLAY_BLOCK } = props.theme;
 
         const componentData = {
-            staticClass: base
+            staticClass: base,
+            class: [props.inline ? DISPLAY_INLINE : DISPLAY_BLOCK]
         };
 
         return h(props.tag, mergeData(data, componentData), children);
