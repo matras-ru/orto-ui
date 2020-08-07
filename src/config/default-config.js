@@ -42,6 +42,10 @@ export default {
 
     CCol: {},
 
+    CListToggle: {
+        limit: 5
+    },
+
     CTabs: {
         vertical: false,
         justify: 'start'

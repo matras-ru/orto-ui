@@ -55,7 +55,7 @@
         <br />
         <div class="w-1/2">
             <div>LABEL</div>
-            <CTest>
+            <CListToggle :limit="10">
                 <template #wrap>
                     <CList block class="col-gap col-count-3"></CList>
                 </template>
@@ -67,7 +67,7 @@
                 <CListItem v-for="({ title }, idx) in options" :key="idx" :inline="false">
                     {{ title }}
                 </CListItem>
-            </CTest>
+            </CListToggle>
         </div>
     </div>
 </template>
@@ -77,7 +77,6 @@ export default {
     name: 'Index',
 
     data: () => ({
-        limit: 8,
         options: [
             {
                 title: '80 x 180'
@@ -129,7 +128,7 @@ export default {
 
     methods: {
         test() {
-            alert('wfwf');
+            alert('test');
         }
     }
 };

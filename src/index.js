@@ -23,7 +23,7 @@ import { CList, CListItem } from '@/components/list';
 import { CDropdown } from '@/components/dropdown';
 import { CBadge } from '@/components/badge';
 import { CPicture } from '@/components/picture';
-import { CTest } from '@/components/test';
+import { CListToggle } from '@/components/list-toggle';
 
 /*  LAYOUT */
 import { CContainer, CRow, CCol } from '@/components/layout';
@@ -52,7 +52,7 @@ const components = {
     CCol,
     CDropdown,
     CPicture,
-    CTest
+    CListToggle
 };
 
 const extendComponent = (Vue, CurrentTheme, componentName) => {
@@ -118,7 +118,7 @@ export { CRow };
 export { CCol };
 export { CDropdown };
 export { CPicture };
-export { CTest };
+export { CListToggle };
 
 export default {
     install

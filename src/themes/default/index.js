@@ -15,4 +15,4 @@ export { default as CFormPanel } from './CFormPanel';
 export { default as CFormSelectCustom } from './CFormSelectCustom';
 export { default as CBadge } from './CBadge';
 export { default as CDropdown } from './CDropdown';
-export { default as CTest } from './CTest';
+export { default as CListToggle } from './CListToggle';
