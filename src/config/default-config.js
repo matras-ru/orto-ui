@@ -11,7 +11,8 @@ export default {
     },
 
     CBadge: {
-        variant: 'primary'
+        variant: 'primary',
+        size: 'md'
     },
 
     CLink: {

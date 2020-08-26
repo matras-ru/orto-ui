@@ -320,14 +320,18 @@ var DefaultTheme$e = {
     listBase: listBase
 };
 
-var base$b =
-    'rounded-lg font-bold px-0-6 py-0-3 inline-block border-2 leading-none align-middle';
+var base$b = 'rounded-lg font-bold inline-block border-2 leading-none align-middle';
 
 var variantPrimary$2 = 'bg-primary-100 border-primary-100 text-white';
 var variantSecondary$2 = 'border-secondary-200 text-secondary-200';
 var variantTertiary$2 = 'text-danger border-danger';
 var variantQuaternary$2 = '';
 var variantQuinary$2 = '';
+
+// TODO: Unit
+var sizeSm$1 = 'text-sm px-0-4 py-0-2';
+var sizeMd$1 = 'text-base px-0-6 py-0-3';
+var sizeLg$1 = 'text-lg px-0-8 py-0-4';
 
 var DefaultTheme$f = {
     base: base$b,
@@ -336,7 +340,10 @@ var DefaultTheme$f = {
     variantSecondary: variantSecondary$2,
     variantTertiary: variantTertiary$2,
     variantQuaternary: variantQuaternary$2,
-    variantQuinary: variantQuinary$2
+    variantQuinary: variantQuinary$2,
+    sizeSm: sizeSm$1,
+    sizeMd: sizeMd$1,
+    sizeLg: sizeLg$1
 };
 
 var wrapperBase$2 = 'relative';
@@ -453,7 +460,8 @@ var DEFAULTS = {
     },
 
     CBadge: {
-        variant: 'primary'
+        variant: 'primary',
+        size: 'md'
     },
 
     CLink: {
@@ -2851,6 +2859,7 @@ var CDropdown = {
 
 var NAME$i = 'CBadge';
 var validVariants$3 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
+var validSizes$3 = ['lg', 'md', 'sm'];
 
 var createThemeMap$2 = function (ref) {
     var variantPrimary = ref.variantPrimary;
@@ -2858,6 +2867,9 @@ var createThemeMap$2 = function (ref) {
     var variantTertiary = ref.variantTertiary;
     var variantQuaternary = ref.variantQuaternary;
     var variantQuinary = ref.variantQuinary;
+    var sizeLg = ref.sizeLg;
+    var sizeSm = ref.sizeSm;
+    var sizeMd = ref.sizeMd;
 
     return {
         variants: {
@@ -2866,6 +2878,11 @@ var createThemeMap$2 = function (ref) {
             tertiary: variantTertiary,
             quaternary: variantQuaternary,
             quinary: variantQuinary
+        },
+        sizes: {
+            lg: sizeLg,
+            md: sizeMd,
+            sm: sizeSm
         }
     };
 };
@@ -2885,22 +2902,30 @@ var props$6 = {
         type: String,
         default: function () { return getComponentConfig(NAME$i, 'variant'); },
         validator: function (value) { return validVariants$3.includes(value); }
+    },
+
+    size: {
+        type: String,
+        default: function () { return getComponentConfig(NAME$i, 'size'); },
+        validator: function (value) { return validSizes$3.includes(value); }
     }
 };
 
 var currentClass$2 = function (ref) {
-    var disabled = ref.disabled;
     var size = ref.size;
     var variant = ref.variant;
-    var block = ref.block;
     var theme = ref.theme;
 
     var base = theme.base;
     var ref$1 = createThemeMap$2(theme);
     var variants = ref$1.variants;
+    var sizes = ref$1.sizes;
     var classes = [base];
 
     classes.push(getHashMapValue(variants, variant));
+
+    // TODO: Unit
+    classes.push(getHashMapValue(sizes, size));
 
     return classes;
 };
@@ -20365,7 +20390,7 @@ var tailwind_config = {
         },
         spacing: {
             px: '1px',
-            '0': '0',
+            0: '0',
             '-0-3': '-0.375rem',
             '0-1': '0.125rem',
             '0-2': '0.25rem',
@@ -20424,11 +20449,11 @@ var tailwind_config = {
         },
         borderWidth: {
             default: '1px',
-            '0': '0',
-            '2': '2px',
-            '3': '3px',
-            '4': '4px',
-            '8': '8px'
+            0: '0',
+            2: '2px',
+            3: '3px',
+            4: '4px',
+            8: '8px'
         },
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
@@ -20458,17 +20483,17 @@ var tailwind_config = {
             default: theme('colors.black.100')
         }); },
         flex: {
-            '1': '1 1 0%',
+            1: '1 1 0%',
             auto: '1 1 auto',
             initial: '0 1 auto',
             none: 'none'
         },
         flexGrow: {
-            '0': '0',
+            0: '0',
             default: '1'
         },
         flexShrink: {
-            '0': '0',
+            0: '0',
             default: '1'
         },
         fontFamily: {
@@ -20503,7 +20528,7 @@ var tailwind_config = {
             {full: '100%',
             '1/2': '50%',
             screen: '100vh'})); },
-        inset: function (theme) { return (Object.assign({}, {'0': '0',
+        inset: function (theme) { return (Object.assign({}, {0: '0',
             auto: 'auto',
             '1/2': '50%',
             full: '100%'},
@@ -20555,12 +20580,12 @@ var tailwind_config = {
             full: '100%'
         },
         minHeight: {
-            '0': '0',
+            0: '0',
             full: '100%',
             screen: '100vh'
         },
         minWidth: {
-            '0': '0',
+            0: '0',
             full: '100%'
         },
         objectPosition: {
@@ -20575,28 +20600,28 @@ var tailwind_config = {
             top: 'top'
         },
         opacity: {
-            '0': '0',
-            '25': '0.25',
-            '50': '0.5',
-            '75': '0.75',
-            '100': '1'
+            0: '0',
+            25: '0.25',
+            50: '0.5',
+            75: '0.75',
+            100: '1'
         },
         order: {
             first: '-9999',
             last: '9999',
             none: '0',
-            '1': '1',
-            '2': '2',
-            '3': '3',
-            '4': '4',
-            '5': '5',
-            '6': '6',
-            '7': '7',
-            '8': '8',
-            '9': '9',
-            '10': '10',
-            '11': '11',
-            '12': '12'
+            1: '1',
+            2: '2',
+            3: '3',
+            4: '4',
+            5: '5',
+            6: '6',
+            7: '7',
+            8: '8',
+            9: '9',
+            10: '10',
+            11: '11',
+            12: '12'
         },
         padding: function (theme) { return theme('spacing'); },
         placeholderColor: function (theme) { return theme('colors'); },
@@ -20611,8 +20636,8 @@ var tailwind_config = {
             current: 'currentColor'
         },
         strokeWidth: {
-            '0': '0',
-            '1': '1'
+            0: '0',
+            1: '1'
         },
         textColor: function (theme) { return theme('colors'); },
         textOpacity: function (theme) { return theme('opacity'); },
@@ -20648,12 +20673,12 @@ var tailwind_config = {
             screen: '100vw'})); },
         zIndex: {
             auto: 'auto',
-            '0': '0',
-            '10': '10',
-            '20': '20',
-            '30': '30',
-            '40': '40',
-            '50': '50'
+            0: '0',
+            10: '10',
+            20: '20',
+            30: '30',
+            40: '40',
+            50: '50'
         },
         gap: function (theme) { return theme('spacing'); },
         gridTemplateColumns: {},
@@ -20676,25 +20701,25 @@ var tailwind_config = {
             'top-left': 'top left'
         },
         scale: {
-            '0': '0',
-            '50': '.5',
-            '75': '.75',
-            '90': '.9',
-            '95': '.95',
-            '100': '1',
-            '105': '1.05',
-            '110': '1.1',
-            '125': '1.25',
-            '150': '1.5'
+            0: '0',
+            50: '.5',
+            75: '.75',
+            90: '.9',
+            95: '.95',
+            100: '1',
+            105: '1.05',
+            110: '1.1',
+            125: '1.25',
+            150: '1.5'
         },
         rotate: {
             '-180': '-180deg',
             '-90': '-90deg',
             '-45': '-45deg',
-            '0': '0',
-            '45': '45deg',
-            '90': '90deg',
-            '180': '180deg'
+            0: '0',
+            45: '45deg',
+            90: '90deg',
+            180: '180deg'
         },
         translate: function (theme, ref) {
             var negative = ref.negative;
@@ -20710,10 +20735,10 @@ var tailwind_config = {
             '-12': '-12deg',
             '-6': '-6deg',
             '-3': '-3deg',
-            '0': '0',
-            '3': '3deg',
-            '6': '6deg',
-            '12': '12deg'
+            0: '0',
+            3: '3deg',
+            6: '6deg',
+            12: '12deg'
         },
         transitionProperty: {
             none: 'none',
@@ -20735,24 +20760,24 @@ var tailwind_config = {
         },
         transitionDuration: {
             default: '0ms',
-            '75': '75ms',
-            '100': '100ms',
-            '150': '150ms',
-            '250': '250ms',
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-            '1000': '1000ms'
+            75: '75ms',
+            100: '100ms',
+            150: '150ms',
+            250: '250ms',
+            300: '300ms',
+            500: '500ms',
+            700: '700ms',
+            1000: '1000ms'
         },
         transitionDelay: {
-            '75': '75ms',
-            '100': '100ms',
-            '150': '150ms',
-            '200': '200ms',
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-            '1000': '1000ms'
+            75: '75ms',
+            100: '100ms',
+            150: '150ms',
+            200: '200ms',
+            300: '300ms',
+            500: '500ms',
+            700: '700ms',
+            1000: '1000ms'
         },
         animation: {
             none: 'none',

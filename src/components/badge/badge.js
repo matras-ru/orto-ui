@@ -1,19 +1,22 @@
 import { mergeData } from 'vue-functional-data-merge';
-import { getHashMapValue } from '@/utils';
-import { selfInstall } from '@/utils/index.js';
+import { getHashMapValue, selfInstall } from '@/utils';
 
 import { getComponentConfig } from '@/config';
 import DefaultTheme from '@/themes/default/CBadge';
 
 const NAME = 'CBadge';
 const validVariants = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
+const validSizes = ['lg', 'md', 'sm'];
 
 const createThemeMap = ({
     variantPrimary,
     variantSecondary,
     variantTertiary,
     variantQuaternary,
-    variantQuinary
+    variantQuinary,
+    sizeLg,
+    sizeSm,
+    sizeMd
 }) => {
     return {
         variants: {
@@ -22,6 +25,11 @@ const createThemeMap = ({
             tertiary: variantTertiary,
             quaternary: variantQuaternary,
             quinary: variantQuinary
+        },
+        sizes: {
+            lg: sizeLg,
+            md: sizeMd,
+            sm: sizeSm
         }
     };
 };
@@ -41,15 +49,24 @@ const props = {
         type: String,
         default: () => getComponentConfig(NAME, 'variant'),
         validator: value => validVariants.includes(value)
+    },
+
+    size: {
+        type: String,
+        default: () => getComponentConfig(NAME, 'size'),
+        validator: value => validSizes.includes(value)
     }
 };
 
-const currentClass = ({ disabled, size, variant, block, theme }) => {
+const currentClass = ({ size, variant, theme }) => {
     const { base } = theme;
-    const { variants } = createThemeMap(theme);
+    const { variants, sizes } = createThemeMap(theme);
     const classes = [base];
 
     classes.push(getHashMapValue(variants, variant));
+
+    // TODO: Unit
+    classes.push(getHashMapValue(sizes, size));
 
     return classes;
 };

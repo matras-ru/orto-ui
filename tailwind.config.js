@@ -43,7 +43,7 @@ module.exports = {
         },
         spacing: {
             px: '1px',
-            '0': '0',
+            0: '0',
             '-0-3': '-0.375rem',
             '0-1': '0.125rem',
             '0-2': '0.25rem',
@@ -104,11 +104,11 @@ module.exports = {
         },
         borderWidth: {
             default: '1px',
-            '0': '0',
-            '2': '2px',
-            '3': '3px',
-            '4': '4px',
-            '8': '8px'
+            0: '0',
+            2: '2px',
+            3: '3px',
+            4: '4px',
+            8: '8px'
         },
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
@@ -138,17 +138,17 @@ module.exports = {
             default: theme('colors.black.100')
         }),
         flex: {
-            '1': '1 1 0%',
+            1: '1 1 0%',
             auto: '1 1 auto',
             initial: '0 1 auto',
             none: 'none'
         },
         flexGrow: {
-            '0': '0',
+            0: '0',
             default: '1'
         },
         flexShrink: {
-            '0': '0',
+            0: '0',
             default: '1'
         },
         fontFamily: {
@@ -186,7 +186,7 @@ module.exports = {
             screen: '100vh'
         }),
         inset: theme => ({
-            '0': '0',
+            0: '0',
             auto: 'auto',
             '1/2': '50%',
             full: '100%',
@@ -239,12 +239,12 @@ module.exports = {
             full: '100%'
         },
         minHeight: {
-            '0': '0',
+            0: '0',
             full: '100%',
             screen: '100vh'
         },
         minWidth: {
-            '0': '0',
+            0: '0',
             full: '100%'
         },
         objectPosition: {
@@ -259,28 +259,28 @@ module.exports = {
             top: 'top'
         },
         opacity: {
-            '0': '0',
-            '25': '0.25',
-            '50': '0.5',
-            '75': '0.75',
-            '100': '1'
+            0: '0',
+            25: '0.25',
+            50: '0.5',
+            75: '0.75',
+            100: '1'
         },
         order: {
             first: '-9999',
             last: '9999',
             none: '0',
-            '1': '1',
-            '2': '2',
-            '3': '3',
-            '4': '4',
-            '5': '5',
-            '6': '6',
-            '7': '7',
-            '8': '8',
-            '9': '9',
-            '10': '10',
-            '11': '11',
-            '12': '12'
+            1: '1',
+            2: '2',
+            3: '3',
+            4: '4',
+            5: '5',
+            6: '6',
+            7: '7',
+            8: '8',
+            9: '9',
+            10: '10',
+            11: '11',
+            12: '12'
         },
         padding: theme => theme('spacing'),
         placeholderColor: theme => theme('colors'),
@@ -293,8 +293,8 @@ module.exports = {
             current: 'currentColor'
         },
         strokeWidth: {
-            '0': '0',
-            '1': '1'
+            0: '0',
+            1: '1'
         },
         textColor: theme => theme('colors'),
         textOpacity: theme => theme('opacity'),
@@ -332,12 +332,12 @@ module.exports = {
         }),
         zIndex: {
             auto: 'auto',
-            '0': '0',
-            '10': '10',
-            '20': '20',
-            '30': '30',
-            '40': '40',
-            '50': '50'
+            0: '0',
+            10: '10',
+            20: '20',
+            30: '30',
+            40: '40',
+            50: '50'
         },
         gap: theme => theme('spacing'),
         gridTemplateColumns: {},
@@ -360,25 +360,25 @@ module.exports = {
             'top-left': 'top left'
         },
         scale: {
-            '0': '0',
-            '50': '.5',
-            '75': '.75',
-            '90': '.9',
-            '95': '.95',
-            '100': '1',
-            '105': '1.05',
-            '110': '1.1',
-            '125': '1.25',
-            '150': '1.5'
+            0: '0',
+            50: '.5',
+            75: '.75',
+            90: '.9',
+            95: '.95',
+            100: '1',
+            105: '1.05',
+            110: '1.1',
+            125: '1.25',
+            150: '1.5'
         },
         rotate: {
             '-180': '-180deg',
             '-90': '-90deg',
             '-45': '-45deg',
-            '0': '0',
-            '45': '45deg',
-            '90': '90deg',
-            '180': '180deg'
+            0: '0',
+            45: '45deg',
+            90: '90deg',
+            180: '180deg'
         },
         translate: (theme, { negative }) => ({
             ...theme('spacing'),
@@ -392,10 +392,10 @@ module.exports = {
             '-12': '-12deg',
             '-6': '-6deg',
             '-3': '-3deg',
-            '0': '0',
-            '3': '3deg',
-            '6': '6deg',
-            '12': '12deg'
+            0: '0',
+            3: '3deg',
+            6: '6deg',
+            12: '12deg'
         },
         transitionProperty: {
             none: 'none',
@@ -417,24 +417,24 @@ module.exports = {
         },
         transitionDuration: {
             default: '0ms',
-            '75': '75ms',
-            '100': '100ms',
-            '150': '150ms',
-            '250': '250ms',
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-            '1000': '1000ms'
+            75: '75ms',
+            100: '100ms',
+            150: '150ms',
+            250: '250ms',
+            300: '300ms',
+            500: '500ms',
+            700: '700ms',
+            1000: '1000ms'
         },
         transitionDelay: {
-            '75': '75ms',
-            '100': '100ms',
-            '150': '150ms',
-            '200': '200ms',
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-            '1000': '1000ms'
+            75: '75ms',
+            100: '100ms',
+            150: '150ms',
+            200: '200ms',
+            300: '300ms',
+            500: '500ms',
+            700: '700ms',
+            1000: '1000ms'
         },
         animation: {
             none: 'none',

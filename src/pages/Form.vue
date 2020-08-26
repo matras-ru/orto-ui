@@ -5,8 +5,8 @@
             <br />
             <br />
 
-            <div style="max-width: 300px;">
-                <div style="max-width: 100px;">
+            <div style="max-width: 300px">
+                <div style="max-width: 100px">
                     <CFormPanel label="Number">
                         <CFormInput
                             type="number"
@@ -36,6 +36,34 @@
                         </CList>
                     </template>
                 </CDropdown>
+
+                <CFormPanel label="Group">
+                    <CCheckboxGroup
+                        :data="[
+                            {
+                                id: 'checkbox3',
+                                label: 'checkbox3',
+                                name: 'checkbox3',
+                                value: 'checkbox3'
+                            },
+                            {
+                                id: 'checkbox4',
+                                label: 'checkbox4',
+                                name: 'checkbox4',
+                                value: 'checkbox4'
+                            },
+                            {
+                                id: 'checkbox5',
+                                label: 'checkbox5',
+                                name: 'checkbox5',
+                                value: 'checkbox5'
+                            }
+                        ]"
+                        v-model="exampleModel.checkboxGroupModel"
+                    />
+                </CFormPanel>
+
+                <CButton @click="() => (exampleModel.checkboxGroupModel = [])">Clear</CButton>
 
                 <CFormPanel label="Default">
                     <CFormSelectCustom
@@ -98,7 +126,7 @@
                         v-model="exampleModel.selectModel"
                     />
                 </CFormPanel>
-                <div style="max-width: 300px;">
+                <div style="max-width: 300px">
                     <CFormPanel label="Slot">
                         <CFormSelectCustom
                             v-bind="{
@@ -372,26 +400,6 @@
                         value: 'checkbox2',
                         disabled: true
                     }"
-                />
-            </CFormPanel>
-
-            <CFormPanel label="Group">
-                <CCheckboxGroup
-                    :data="[
-                        {
-                            id: 'checkbox3',
-                            label: 'checkbox3',
-                            name: 'checkbox3',
-                            value: 'checkbox3'
-                        },
-                        {
-                            id: 'checkbox4',
-                            label: 'checkbox4',
-                            name: 'checkbox4',
-                            value: 'checkbox4'
-                        }
-                    ]"
-                    v-model="exampleModel.checkboxGroupModel"
                 />
             </CFormPanel>
 

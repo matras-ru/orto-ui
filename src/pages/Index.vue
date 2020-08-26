@@ -39,7 +39,9 @@
         <CLink variant="quinary">quinary</CLink>
         <br /><br />
         <!--  Badge -->
-        <CBadge>-20%</CBadge>
+        <CBadge size="lg">-20%</CBadge>
+        <CBadge size="md">-20%</CBadge>
+        <CBadge size="sm">-20%</CBadge>
         <br />
         <br />
         <h1 class="text-4xl">
