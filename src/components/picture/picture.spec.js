@@ -2,7 +2,7 @@
 import { mount } from '@vue/test-utils';
 import CPicture from './picture';
 
-const baseClass = 'w-full h-auto object-cover';
+const baseClass = 'w-full object-cover';
 
 describe('CPicture', () => {
     it('rendered', () => {

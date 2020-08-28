@@ -88,7 +88,6 @@ export default {
 
     methods: {
         paste(event) {
-            console.log('wfwfpaste');
             const clipboardData = event.clipboardData || window.clipboardData;
 
             if (clipboardData && !REGEXP_NUMBER.test(clipboardData.getData('text'))) {

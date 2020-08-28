@@ -1030,7 +1030,6 @@ var CFormInput = {
 
     methods: {
         paste: function paste(event) {
-            console.log('wfwfpaste');
             var clipboardData = event.clipboardData || window.clipboardData;
 
             if (clipboardData && !REGEXP_NUMBER.test(clipboardData.getData('text'))) {
@@ -2839,7 +2838,7 @@ var CBadge = {
 
         return h('span', vueFunctionalDataMerge.mergeData(data, componentData), props.label ? props.label : children);
     }
-};var base$c = 'w-full h-auto object-cover';
+};var base$c = 'w-full object-cover';
 
 var DefaultTheme$j = {
     base: base$c
