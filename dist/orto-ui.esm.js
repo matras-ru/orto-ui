@@ -1152,11 +1152,14 @@ var CFormInput = {
             var localValue = isNaN(num) ? value : num;
 
             // 1
-            if (!localValue) { return this.min; }
+            if (!localValue) { return this.min || 0; }
 
             // 2
-            if (localValue >= this.max) { return this.max; }
-            if (localValue <= this.min) { return this.min; }
+            if (this.max) {
+                if (localValue >= this.max) { return this.max; }
+            }
+
+            if (localValue <= this.min) { return this.min || 0; }
 
             // 3
             if (localValue < 0) { return this.min >= 0 ? this.min : 0; }

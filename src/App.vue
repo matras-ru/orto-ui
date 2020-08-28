@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <main style="padding: 30px;">
+        <main style="padding: 30px">
             <div class="flex -mx-1-4 mb-1-5">
                 <div class="px-1-4">
                     <CLink :to="{ name: 'index' }">Router link INDEX</CLink>

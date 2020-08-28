@@ -18,6 +18,19 @@
                             <template #down>♥</template>
                         </CFormInput>
                     </CFormPanel>
+
+                    <CFormPanel label="Number @input">
+                        <CFormInput
+                            type="number"
+                            @input="
+                                value => {
+                                    exampleModel.inputNumberModel = value;
+                                }
+                            "
+                            :modelValue="exampleModel.inputNumberModel"
+                        >
+                        </CFormInput>
+                    </CFormPanel>
                 </div>
 
                 <CDropdown>
