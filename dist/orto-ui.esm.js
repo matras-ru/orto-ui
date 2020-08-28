@@ -1509,7 +1509,6 @@ var CFormSelectCustom = {
                     this$1.$nextTick().then(function () {
                         if (isShow && this$1.$refs.selected) {
                             this$1.$refs.selected.scrollIntoView({
-                                behavior: 'smooth',
                                 block: 'nearest',
                                 inline: 'start'
                             });

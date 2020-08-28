@@ -164,7 +164,6 @@ export default {
                     this.$nextTick().then(() => {
                         if (isShow && this.$refs.selected) {
                             this.$refs.selected.scrollIntoView({
-                                behavior: 'smooth',
                                 block: 'nearest',
                                 inline: 'start'
                             });
