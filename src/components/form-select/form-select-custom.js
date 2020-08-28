@@ -39,8 +39,6 @@ export default {
 
     inheritAttrs: false,
 
-    functional: true,
-
     props: {
         modelValue: {
             type: [String, Number],
@@ -94,7 +92,7 @@ export default {
         event: 'change'
     },
 
-    render(h, { listeners, props, scopedSlots }) {
+    render(h) {
         const {
             data: options,
             theme,
@@ -105,7 +103,7 @@ export default {
             optionValue,
             error,
             size
-        } = props;
+        } = this;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
         const { inputBase, inputIconBase, listBase } = theme;
@@ -145,8 +143,8 @@ export default {
                             placeholder,
                             size,
                             modelValue: selectedOption
-                                ? scopedSlots.selected
-                                    ? scopedSlots.selected(selectedOption)[0].text
+                                ? this.$scopedSlots.selected
+                                    ? this.$scopedSlots.selected(selectedOption)[0].text
                                     : selectedOption[optionLabel]
                                 : null
                         },
@@ -160,7 +158,19 @@ export default {
                         }
                     }),
 
-                dropdown: ({ close }) => {
+                dropdown: ({ close, isShow }) => {
+                    // First to selected
+                    // TODO:
+                    this.$nextTick().then(() => {
+                        if (isShow && this.$refs.selected) {
+                            this.$refs.selected.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest',
+                                inline: 'start'
+                            });
+                        }
+                    });
+
                     return h(
                         'CList',
                         {
@@ -180,14 +190,19 @@ export default {
                                     'CListItem',
                                     {
                                         class: cumputeOptionClasses(isSelected),
+                                        ...(isSelected && {
+                                            ref: 'selected'
+                                        }),
                                         on: {
                                             click: () => {
-                                                listeners['change'](value);
+                                                this.$emit('change', value);
                                                 close();
                                             }
                                         }
                                     },
-                                    scopedSlots.default ? scopedSlots.default(option) : label
+                                    this.$scopedSlots.default
+                                        ? this.$scopedSlots.default(option)
+                                        : label
                                 );
                             })
                         ]

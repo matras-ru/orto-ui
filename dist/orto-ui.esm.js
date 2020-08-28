@@ -1372,8 +1372,6 @@ var CFormSelectCustom = {
 
     inheritAttrs: false,
 
-    functional: true,
-
     props: {
         modelValue: {
             type: [String, Number],
@@ -1427,20 +1425,19 @@ var CFormSelectCustom = {
         event: 'change'
     },
 
-    render: function render(h, ref) {
-        var listeners = ref.listeners;
-        var props = ref.props;
-        var scopedSlots = ref.scopedSlots;
+    render: function render(h) {
+        var this$1 = this;
 
-        var options = props.data;
-        var theme = props.theme;
-        var modelValue = props.modelValue;
-        var label = props.label;
-        var placeholder = props.placeholder;
-        var optionLabel = props.optionLabel;
-        var optionValue = props.optionValue;
-        var error = props.error;
-        var size = props.size;
+        var ref = this;
+        var options = ref.data;
+        var theme = ref.theme;
+        var modelValue = ref.modelValue;
+        var label = ref.label;
+        var placeholder = ref.placeholder;
+        var optionLabel = ref.optionLabel;
+        var optionValue = ref.optionValue;
+        var error = ref.error;
+        var size = ref.size;
 
         var selectedOption = options.find(function (item) { return item[optionValue] === modelValue; });
         var inputBase = theme.inputBase;
@@ -1487,8 +1484,8 @@ var CFormSelectCustom = {
                             placeholder: placeholder,
                             size: size,
                             modelValue: selectedOption
-                                ? scopedSlots.selected
-                                    ? scopedSlots.selected(selectedOption)[0].text
+                                ? this$1.$scopedSlots.selected
+                                    ? this$1.$scopedSlots.selected(selectedOption)[0].text
                                     : selectedOption[optionLabel]
                                 : null
                         },
@@ -1505,6 +1502,19 @@ var CFormSelectCustom = {
 
                 dropdown: function (ref) {
                     var close = ref.close;
+                    var isShow = ref.isShow;
+
+                    // First to selected
+                    // TODO:
+                    this$1.$nextTick().then(function () {
+                        if (isShow && this$1.$refs.selected) {
+                            this$1.$refs.selected.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest',
+                                inline: 'start'
+                            });
+                        }
+                    });
 
                     return h(
                         'CList',
@@ -1525,16 +1535,19 @@ var CFormSelectCustom = {
 
                                 return h(
                                     'CListItem',
-                                    {
-                                        class: cumputeOptionClasses(isSelected),
-                                        on: {
+                                    Object.assign({}, {class: cumputeOptionClasses(isSelected)},
+                                        (isSelected && {
+                                            ref: 'selected'
+                                        }),
+                                        {on: {
                                             click: function () {
-                                                listeners['change'](value);
+                                                this$1.$emit('change', value);
                                                 close();
                                             }
-                                        }
-                                    },
-                                    scopedSlots.default ? scopedSlots.default(option) : label
+                                        }}),
+                                    this$1.$scopedSlots.default
+                                        ? this$1.$scopedSlots.default(option)
+                                        : label
                                 );
                             })
                         ]
