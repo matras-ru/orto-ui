@@ -272,6 +272,8 @@ var optionStateActive = 'bg-tertiary-100';
 
 var listBase = 'overscroll-contain overflow-y-auto max-h-18-6';
 
+var fakeSelectBase = 'absolute w-full h-full left-0 top-0 opacity-0 z-1 cursor-pointer';
+
 var DefaultTheme$e = {
     inputBase: inputBase$1,
     inputIconBase: inputIconBase,
@@ -282,7 +284,9 @@ var DefaultTheme$e = {
     optionStateDefault: optionStateDefault,
     optionStateActive: optionStateActive,
 
-    listBase: listBase
+    listBase: listBase,
+
+    fakeSelectBase: fakeSelectBase
 };var base$b = 'rounded-lg font-bold inline-block border-2 leading-none align-middle';
 
 var variantPrimary$2 = 'bg-primary-100 border-primary-100 text-white';
@@ -1333,6 +1337,11 @@ var CFormSelectCustom = {
             type: String,
             default: 'md',
             validator: function (value) { return validSizes$1.includes(value); }
+        },
+
+        useNativeList: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -1354,11 +1363,13 @@ var CFormSelectCustom = {
         var optionValue = ref.optionValue;
         var error = ref.error;
         var size = ref.size;
+        var useNativeList = ref.useNativeList;
 
         var selectedOption = options.find(function (item) { return item[optionValue] === modelValue; });
         var inputBase = theme.inputBase;
         var inputIconBase = theme.inputIconBase;
         var listBase = theme.listBase;
+        var fakeSelectBase = theme.fakeSelectBase;
         var sizes = createSizeMap$2(theme);
 
         var iconClass = [inputIconBase];
@@ -1383,92 +1394,140 @@ var CFormSelectCustom = {
             return classes;
         };
 
+        // for mobile platform
+        // TODO: unit
+        var fakeNativeSelect = function () { return h(
+                'select',
+                {
+                    staticClass: fakeSelectBase,
+                    directives: [
+                        {
+                            name: 'model',
+                            rawName: 'v-model',
+                            value: modelValue,
+                            expression: 'modelValue'
+                        }
+                    ],
+                    on: {
+                        change: function (e) {
+                            var target = e.target;
+
+                            var selectedVal = Array.from(target.options)
+                                .filter(function (option) { return option.selected; })
+                                .map(function (option) { return ('_value' in option ? option._value : option.value); });
+
+                            this$1.$emit('change', selectedVal[0]);
+                        }
+                    }
+                },
+                options.map(function (option) {
+                    var ref = mapOption({
+                        option: option,
+                        optionLabel: optionLabel,
+                        optionValue: optionValue
+                    });
+                    var value = ref.value;
+                    var label = ref.label;
+
+                    var computedLabel = this$1.$scopedSlots.default
+                        ? this$1.$scopedSlots.default(option)[0].text
+                        : label;
+
+                    return h('option', {
+                        domProps: { value: value, innerHTML: computedLabel }
+                    });
+                })
+            ); };
+
         return h('CDropdown', {
             props: {
                 variant: getComponentConfig(NAME$4, 'dropdownVariant')
             },
 
-            scopedSlots: {
-                holder: function (ref) {
+            scopedSlots: Object.assign({}, {holder: function (ref) {
                         var toggle = ref.toggle;
 
-                        return h('CFormInput', {
-                        props: {
-                            readonly: true,
-                            error: error,
-                            label: label,
-                            placeholder: placeholder,
-                            size: size,
-                            modelValue: selectedOption
-                                ? this$1.$scopedSlots.selected
-                                    ? this$1.$scopedSlots.selected(selectedOption)[0].text
-                                    : selectedOption[optionLabel]
-                                : null
-                        },
-                        ref: 'holder',
-                        staticClass: inputBase,
-                        scopedSlots: {
-                            append: function () { return h('i', { class: iconClass }); }
-                        },
-                        on: {
-                            click: toggle
-                        }
-                    });
-        },
+                        return h('div', [
+                        h('CFormInput', {
+                            props: {
+                                readonly: true,
+                                error: error,
+                                label: label,
+                                placeholder: placeholder,
+                                size: size,
+                                modelValue: selectedOption
+                                    ? this$1.$scopedSlots.selected
+                                        ? this$1.$scopedSlots.selected(selectedOption)[0].text
+                                        : selectedOption[optionLabel]
+                                    : null
+                            },
+                            ref: 'holder',
+                            staticClass: inputBase,
+                            scopedSlots: {
+                                append: function () { return h('i', { class: iconClass }); }
+                            },
+                            on: {
+                                click: toggle
+                            }
+                        }),
+                        useNativeList ? fakeNativeSelect() : null
+                    ]);
+}        },
 
-                dropdown: function (ref) {
-                    var close = ref.close;
-                    var isShow = ref.isShow;
+                (!useNativeList && {
+                    dropdown: function (ref) {
+                        var close = ref.close;
+                        var isShow = ref.isShow;
 
-                    // First to selected
-                    // TODO:
-                    this$1.$nextTick().then(function () {
-                        if (isShow && this$1.$refs.selected) {
-                            this$1.$refs.selected.scrollIntoView({
-                                block: 'nearest',
-                                inline: 'start'
-                            });
-                        }
-                    });
-
-                    return h(
-                        'CList',
-                        {
-                            staticClass: listBase
-                        },
-                        [
-                            options.map(function (option) {
-                                var ref = mapOption({
-                                    option: option,
-                                    optionLabel: optionLabel,
-                                    optionValue: optionValue
+                        // First to selected
+                        // TODO:
+                        this$1.$nextTick().then(function () {
+                            if (isShow && this$1.$refs.selected) {
+                                this$1.$refs.selected.scrollIntoView({
+                                    block: 'nearest',
+                                    inline: 'start'
                                 });
-                                var value = ref.value;
-                                var label = ref.label;
+                            }
+                        });
 
-                                var isSelected = value === modelValue;
+                        return h(
+                            'CList',
+                            {
+                                staticClass: listBase
+                            },
+                            [
+                                options.map(function (option) {
+                                    var ref = mapOption({
+                                        option: option,
+                                        optionLabel: optionLabel,
+                                        optionValue: optionValue
+                                    });
+                                    var value = ref.value;
+                                    var label = ref.label;
 
-                                return h(
-                                    'CListItem',
-                                    Object.assign({}, {class: cumputeOptionClasses(isSelected)},
-                                        (isSelected && {
-                                            ref: 'selected'
-                                        }),
-                                        {on: {
-                                            click: function () {
-                                                this$1.$emit('change', value);
-                                                close();
-                                            }
-                                        }}),
-                                    this$1.$scopedSlots.default
-                                        ? this$1.$scopedSlots.default(option)
-                                        : label
-                                );
-                            })
-                        ]
-                    );
-                }
-            }
+                                    var isSelected = value === modelValue;
+
+                                    return h(
+                                        'CListItem',
+                                        Object.assign({}, {class: cumputeOptionClasses(isSelected)},
+                                            (isSelected && {
+                                                ref: 'selected'
+                                            }),
+                                            {on: {
+                                                click: function () {
+                                                    this$1.$emit('change', value);
+                                                    close();
+                                                }
+                                            }}),
+                                        this$1.$scopedSlots.default
+                                            ? this$1.$scopedSlots.default(option)
+                                            : label
+                                    );
+                                })
+                            ]
+                        );
+                    }
+                }))
         });
     }
 };var computeIsChecked = function (ref) {

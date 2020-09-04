@@ -84,6 +84,11 @@ export default {
             type: String,
             default: 'md',
             validator: value => validSizes.includes(value)
+        },
+
+        useNativeList: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -102,11 +107,12 @@ export default {
             optionLabel,
             optionValue,
             error,
-            size
+            size,
+            useNativeList
         } = this;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
-        const { inputBase, inputIconBase, listBase } = theme;
+        const { inputBase, inputIconBase, listBase, fakeSelectBase } = theme;
         const sizes = createSizeMap(theme);
 
         const iconClass = [inputIconBase];
@@ -128,6 +134,50 @@ export default {
             return classes;
         };
 
+        // for mobile platform
+        // TODO: unit
+        const fakeNativeSelect = () =>
+            h(
+                'select',
+                {
+                    staticClass: fakeSelectBase,
+                    directives: [
+                        {
+                            name: 'model',
+                            rawName: 'v-model',
+                            value: modelValue,
+                            expression: 'modelValue'
+                        }
+                    ],
+                    on: {
+                        change: e => {
+                            const target = e.target;
+
+                            const selectedVal = Array.from(target.options)
+                                .filter(option => option.selected)
+                                .map(option => ('_value' in option ? option._value : option.value));
+
+                            this.$emit('change', selectedVal[0]);
+                        }
+                    }
+                },
+                options.map(option => {
+                    const { value, label } = mapOption({
+                        option,
+                        optionLabel,
+                        optionValue
+                    });
+
+                    const computedLabel = this.$scopedSlots.default
+                        ? this.$scopedSlots.default(option)[0].text
+                        : label;
+
+                    return h('option', {
+                        domProps: { value, innerHTML: computedLabel }
+                    });
+                })
+            );
+
         return h('CDropdown', {
             props: {
                 variant: getComponentConfig(NAME, 'dropdownVariant')
@@ -135,78 +185,83 @@ export default {
 
             scopedSlots: {
                 holder: ({ toggle }) =>
-                    h('CFormInput', {
-                        props: {
-                            readonly: true,
-                            error,
-                            label,
-                            placeholder,
-                            size,
-                            modelValue: selectedOption
-                                ? this.$scopedSlots.selected
-                                    ? this.$scopedSlots.selected(selectedOption)[0].text
-                                    : selectedOption[optionLabel]
-                                : null
-                        },
-                        ref: 'holder',
-                        staticClass: inputBase,
-                        scopedSlots: {
-                            append: () => h('i', { class: iconClass })
-                        },
-                        on: {
-                            click: toggle
-                        }
-                    }),
+                    h('div', [
+                        h('CFormInput', {
+                            props: {
+                                readonly: true,
+                                error,
+                                label,
+                                placeholder,
+                                size,
+                                modelValue: selectedOption
+                                    ? this.$scopedSlots.selected
+                                        ? this.$scopedSlots.selected(selectedOption)[0].text
+                                        : selectedOption[optionLabel]
+                                    : null
+                            },
+                            ref: 'holder',
+                            staticClass: inputBase,
+                            scopedSlots: {
+                                append: () => h('i', { class: iconClass })
+                            },
+                            on: {
+                                click: toggle
+                            }
+                        }),
+                        useNativeList ? fakeNativeSelect() : null
+                    ]),
 
-                dropdown: ({ close, isShow }) => {
-                    // First to selected
-                    // TODO:
-                    this.$nextTick().then(() => {
-                        if (isShow && this.$refs.selected) {
-                            this.$refs.selected.scrollIntoView({
-                                block: 'nearest',
-                                inline: 'start'
-                            });
-                        }
-                    });
-
-                    return h(
-                        'CList',
-                        {
-                            staticClass: listBase
-                        },
-                        [
-                            options.map(option => {
-                                const { value, label } = mapOption({
-                                    option,
-                                    optionLabel,
-                                    optionValue
+                ...(!useNativeList && {
+                    dropdown: ({ close, isShow }) => {
+                        // First to selected
+                        // TODO:
+                        this.$nextTick().then(() => {
+                            if (isShow && this.$refs.selected) {
+                                this.$refs.selected.scrollIntoView({
+                                    block: 'nearest',
+                                    inline: 'start'
                                 });
+                            }
+                        });
 
-                                const isSelected = value === modelValue;
+                        return h(
+                            'CList',
+                            {
+                                staticClass: listBase
+                            },
+                            [
+                                options.map(option => {
+                                    const { value, label } = mapOption({
+                                        option,
+                                        optionLabel,
+                                        optionValue
+                                    });
 
-                                return h(
-                                    'CListItem',
-                                    {
-                                        class: cumputeOptionClasses(isSelected),
-                                        ...(isSelected && {
-                                            ref: 'selected'
-                                        }),
-                                        on: {
-                                            click: () => {
-                                                this.$emit('change', value);
-                                                close();
+                                    const isSelected = value === modelValue;
+
+                                    return h(
+                                        'CListItem',
+                                        {
+                                            class: cumputeOptionClasses(isSelected),
+                                            ...(isSelected && {
+                                                ref: 'selected'
+                                            }),
+                                            on: {
+                                                click: () => {
+                                                    this.$emit('change', value);
+                                                    close();
+                                                }
                                             }
-                                        }
-                                    },
-                                    this.$scopedSlots.default
-                                        ? this.$scopedSlots.default(option)
-                                        : label
-                                );
-                            })
-                        ]
-                    );
-                }
+                                        },
+                                        this.$scopedSlots.default
+                                            ? this.$scopedSlots.default(option)
+                                            : label
+                                    );
+                                })
+                            ]
+                        );
+                    }
+                })
             }
         });
     }
