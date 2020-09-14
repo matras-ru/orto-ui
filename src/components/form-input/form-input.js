@@ -36,6 +36,8 @@ export default {
         selfInstall(Vue, theme, this);
     },
 
+    inheritAttrs: false,
+
     mixins: [CFormField],
 
     props: {
@@ -194,6 +196,7 @@ export default {
                 [
                     h(isTextArea ? 'textarea' : 'input', {
                         attrs: {
+                            ...this.$attrs,
                             name: this.name,
                             id: this.id,
                             type: !isTextArea ? this.type : null,
@@ -220,16 +223,23 @@ export default {
                             focus: () => {
                                 if (this.readonly) return;
                                 this.focused = true;
+                                this.$emit('focus');
                             },
 
-                            blur: () => (this.focused = false),
+                            blur: () => {
+                                this.focused = false;
+                                this.$emit('blur');
+                            },
 
                             input: e => this.onUpdate({ e, type: 'input' }),
 
                             change: e => this.onUpdate({ e, type: 'change' }),
 
                             ...(this.isNumeric && {
-                                paste: e => this.paste(e)
+                                paste: e => {
+                                    this.paste(e);
+                                    this.$emit('paste');
+                                }
                             })
                         }
                     }),

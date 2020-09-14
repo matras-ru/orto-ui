@@ -982,6 +982,8 @@ var CFormInput = {
         selfInstall(Vue, theme, this);
     },
 
+    inheritAttrs: false,
+
     mixins: [CFormField],
 
     props: {
@@ -1146,7 +1148,8 @@ var CFormInput = {
                 },
                 [
                     h(isTextArea ? 'textarea' : 'input', {
-                        attrs: Object.assign({}, {name: this.name,
+                        attrs: Object.assign({}, this.$attrs,
+                            {name: this.name,
                             id: this.id,
                             type: !isTextArea ? this.type : null,
                             rows: isTextArea ? this.rows : null},
@@ -1170,16 +1173,23 @@ var CFormInput = {
                             {focus: function () {
                                 if (this$1.readonly) { return; }
                                 this$1.focused = true;
+                                this$1.$emit('focus');
                             },
 
-                            blur: function () { return (this$1.focused = false); },
+                            blur: function () {
+                                this$1.focused = false;
+                                this$1.$emit('blur');
+                            },
 
                             input: function (e) { return this$1.onUpdate({ e: e, type: 'input' }); },
 
                             change: function (e) { return this$1.onUpdate({ e: e, type: 'change' }); }},
 
                             (this.isNumeric && {
-                                paste: function (e) { return this$1.paste(e); }
+                                paste: function (e) {
+                                    this$1.paste(e);
+                                    this$1.$emit('paste');
+                                }
                             }))
                     }),
 
