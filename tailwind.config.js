@@ -112,9 +112,8 @@ module.exports = {
         },
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
-            inner: 'inset 0 0 0 2px #FFFFFF',
-            none: 'none',
-            example: '0 15px 30px 0 rgba(166, 177, 182, 0.5)'
+            secondary: '0 15px 40px 0 rgba(166, 177, 182, 0.5)',
+            none: 'none'
         },
         container: theme => ({
             padding: {

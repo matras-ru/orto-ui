@@ -313,8 +313,8 @@ var DefaultTheme$f = {
     sizeLg: sizeLg$1
 };var wrapperBase$2 = 'relative';
 var dropdownBase = 'absolute z-50 top-full min-w-full mt-0-4 bg-white overflow-hidden';
-var dropdownVariantPrimary = 'shadow-example rounded';
-var dropdownVariantSecondary = 'shadow-example rounded-lg';
+var dropdownVariantPrimary = 'shadow-secondary rounded';
+var dropdownVariantSecondary = 'shadow-secondary rounded-lg';
 var dropdownPlacementLeft = 'left-0';
 var dropdownPlacementRight = 'right-0';
 
@@ -20410,9 +20410,8 @@ var tailwindcssMultiColumn = function () {
         },
         boxShadow: {
             default: '0 6px 12px rgba(255, 205, 0, .7)',
-            inner: 'inset 0 0 0 2px #FFFFFF',
-            none: 'none',
-            example: '0 15px 30px 0 rgba(166, 177, 182, 0.5)'
+            secondary: '0 15px 40px 0 rgba(166, 177, 182, 0.5)',
+            none: 'none'
         },
         container: function (theme) { return ({
             padding: {

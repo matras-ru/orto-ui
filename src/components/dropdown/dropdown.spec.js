@@ -32,7 +32,7 @@ describe('Dropdown basic', () => {
 
         expect(dropdown.element.tagName).toEqual('DIV');
         expect(dropdown.classes().sort()).toEqual(
-            'absolute z-50 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden shadow-example rounded'
+            'absolute z-50 top-full min-w-full left-0 mt-0-4 bg-white overflow-hidden shadow-secondary rounded'
                 .split(' ')
                 .sort()
         );
