@@ -1,6 +1,6 @@
 export default {
     common: {
-        screens: ['sm', 'md', 'lg', 'xl'],
+        screens: ['sm', 'md', 'lg', 'xl', 'xxl'],
         validJustifyContent: ['start', 'end', 'between', 'center']
     },
 

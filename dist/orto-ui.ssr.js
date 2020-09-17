@@ -383,7 +383,7 @@ var selfInstall = function (Vue, theme, component) {
         {props: props}));
 };var DEFAULTS = {
     common: {
-        screens: ['sm', 'md', 'lg', 'xl'],
+        screens: ['sm', 'md', 'lg', 'xl', 'xxl'],
         validJustifyContent: ['start', 'end', 'between', 'center']
     },
 
