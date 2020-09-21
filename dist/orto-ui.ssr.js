@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=require('lodash.merge'),resolveConfig=require('tailwindcss/resolveConfig'),customForms=require('@tailwindcss/custom-forms');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule){return e}else{var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k];}});}});}n['default']=e;return Object.freeze(n);}}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var merge__default=/*#__PURE__*/_interopDefaultLegacy(merge);var resolveConfig__default=/*#__PURE__*/_interopDefaultLegacy(resolveConfig);var customForms__default=/*#__PURE__*/_interopDefaultLegacy(customForms);var base =
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=require('lodash.merge'),resolveConfig=require('tailwindcss/resolveConfig'),customForms=require('@tailwindcss/custom-forms');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule)return e;var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k];}});}});}n['default']=e;return Object.freeze(n);}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var merge__default=/*#__PURE__*/_interopDefaultLegacy(merge);var resolveConfig__default=/*#__PURE__*/_interopDefaultLegacy(resolveConfig);var customForms__default=/*#__PURE__*/_interopDefaultLegacy(customForms);var base =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
 var variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
@@ -1052,7 +1052,7 @@ var CFormInput = {
 
             if (numericValue <= this.min) { return; }
 
-            this.update({ type: 'input', value: numericValue - 1 });
+            this.update({ type: 'change', value: numericValue - 1 });
         },
 
         increase: function increase() {
@@ -1064,7 +1064,7 @@ var CFormInput = {
 
             if (numericValue === this.max) { return; }
 
-            this.update({ type: 'input', value: numericValue + 1 });
+            this.update({ type: 'change', value: numericValue + 1 });
         },
 
         numericProcess: function numericProcess(value) {

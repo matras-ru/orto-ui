@@ -1132,7 +1132,7 @@ var CFormInput = {
 
             if (numericValue <= this.min) { return; }
 
-            this.update({ type: 'input', value: numericValue - 1 });
+            this.update({ type: 'change', value: numericValue - 1 });
         },
 
         increase: function increase() {
@@ -1144,7 +1144,7 @@ var CFormInput = {
 
             if (numericValue === this.max) { return; }
 
-            this.update({ type: 'input', value: numericValue + 1 });
+            this.update({ type: 'change', value: numericValue + 1 });
         },
 
         numericProcess: function numericProcess(value) {

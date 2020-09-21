@@ -7,5 +7,5 @@ svg {
 }
 
 .exmpl-panel {
-    @apply bg-layout-section border border-layout-container p-0-8 rounded shadow-example;
+    @apply bg-layout-section border border-layout-container p-0-8 rounded;
 }

@@ -106,7 +106,7 @@ export default {
 
             if (numericValue <= this.min) return;
 
-            this.update({ type: 'input', value: numericValue - 1 });
+            this.update({ type: 'change', value: numericValue - 1 });
         },
 
         increase() {
@@ -118,7 +118,7 @@ export default {
 
             if (numericValue === this.max) return;
 
-            this.update({ type: 'input', value: numericValue + 1 });
+            this.update({ type: 'change', value: numericValue + 1 });
         },
 
         numericProcess(value) {
