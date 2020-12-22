@@ -2,8 +2,7 @@ import { mergeData } from 'vue-functional-data-merge';
 import { selfInstall } from '@/utils/index.js';
 import DefaultTheme from '@/themes/default/CPicture';
 import { stringProp } from '@/utils';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '@root/tailwind.config.js';
+import { getComponentConfig } from '@/config';
 
 /* TODO: MVP
 
@@ -15,10 +14,7 @@ import tailwindConfig from '@root/tailwind.config.js';
 
 const NAME = 'CPicture';
 
-const {
-    theme: { screens }
-} = resolveConfig(tailwindConfig);
-
+const screens = getComponentConfig('common', 'screens');
 const breakpoints = Object.keys(screens);
 
 const generateProps = () => {

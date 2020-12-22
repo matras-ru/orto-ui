@@ -7,7 +7,8 @@ import DefaultTheme from '@/themes/default/CCol';
 const OFFSET_PROP_NAME = 'offset';
 const NAME = 'CCol';
 
-const breakpoints = getComponentConfig('common', 'screens');
+const screens = getComponentConfig('common', 'screens');
+const breakpoints = Object.keys(screens);
 
 const generateProps = () => {
     const breakpointCols = breakpoints.reduce((prop, breakpoint) => {

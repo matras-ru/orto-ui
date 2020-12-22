@@ -55,7 +55,8 @@ const createThemeMap = ({
 let breakpointPropMap = Object.create(null);
 
 const generateProps = () => {
-    const breakpoints = getComponentConfig('common', 'screens');
+    const screens = getComponentConfig('common', 'screens');
+    const breakpoints = Object.keys(screens);
 
     const breakpointGutters = breakpoints.reduce((prop, breakpoint) => {
         prop[suffixPropName(breakpoint, GUTTERS_PROP_NAME)] = stringProp();
