@@ -3879,7 +3879,7 @@ var generateProps = function () {
 };
 
 var createSources = function (h, screens, props) {
-    var breakpoints = Object.keys(screens);
+    var breakpoints = Object.keys(screens).reverse();
 
     return breakpoints.map(function (br) {
         if (props[br]) {

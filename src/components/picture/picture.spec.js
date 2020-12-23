@@ -69,11 +69,11 @@ describe('CPicture', () => {
         expect(img.attributes('src')).toEqual('picture1.jpg');
 
         expect(sources.at(0).attributes('type')).toEqual('image/jpg');
-        expect(sources.at(0).attributes('srcset')).toEqual('picture2.jpg');
-        expect(sources.at(0).attributes('media')).toEqual('(min-width: 640px)');
+        expect(sources.at(0).attributes('srcset')).toEqual('picture3.jpg');
+        expect(sources.at(0).attributes('media')).toEqual('(min-width: 1024px)');
 
         expect(sources.at(1).attributes('type')).toEqual('image/jpg');
-        expect(sources.at(1).attributes('srcset')).toEqual('picture3.jpg');
-        expect(sources.at(1).attributes('media')).toEqual('(min-width: 1024px)');
+        expect(sources.at(1).attributes('srcset')).toEqual('picture2.jpg');
+        expect(sources.at(1).attributes('media')).toEqual('(min-width: 640px)');
     });
 });
