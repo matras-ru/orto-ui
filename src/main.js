@@ -15,15 +15,24 @@ import '@/assets/css/tailwind.css';
 // import { CRadio } from './index';
 // import { CRadioGroup } from './index';
 
-// const customConfig = {
-//     CButton: {
-//         variant: 'tertiary',
-//         size: 'lg',
-//         tag: 'button'
-//     }
-// };
+const customConfig = {
+    common: {
+        screens: {
+            sm: '640px',
+            md: '768px',
+            lg: '1024px'
+        }
+    },
+    CFormSelectCustom: {
+        optionValue: 'value',
+        optionLabel: 'label',
+        dropdownVariant: 'secondary'
+    }
+};
 
-Vue.use(OrtoUi);
+Vue.use(OrtoUi, {
+    config: customConfig
+});
 
 // const btnTheme = {
 //     baseClass:

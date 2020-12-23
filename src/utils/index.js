@@ -2,8 +2,6 @@ import { justifyCenter, justifyBetween, justifyStart, justifyEnd } from '@/theme
 
 export const noop = () => {};
 
-export const isObject = obj => obj !== null && typeof obj === 'object';
-
 export const hasOwnProperty = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
 
 export const getHashMapValue = (themeMap, key) => {

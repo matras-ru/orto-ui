@@ -1,5 +1,6 @@
 /* eslint-env jest */
 import { mount, createLocalVue } from '@vue/test-utils';
+import { ConfigPlugin } from '@/config';
 
 import CRow from './row';
 import CCol from './col';
@@ -20,6 +21,11 @@ const smGuttersClass = 'px-0-2';
 const fullWidthClass = 'w-full';
 const defaultCols = 12;
 
+const plugin = function (Vue, options = {}) {
+    const { config = {} } = options;
+    ConfigPlugin(config, Vue);
+};
+
 describe('CRow', () => {
     it('default', () => {
         const wrapper = mount(CRow);
@@ -36,7 +42,9 @@ describe('CRow', () => {
 });
 
 describe('gutters', () => {
-    const localVue = new createLocalVue();
+    const localVue = createLocalVue();
+
+    localVue.use(plugin);
 
     it('add CCol gutter class', () => {
         const App = localVue.extend({
@@ -106,7 +114,8 @@ describe('gutters', () => {
 });
 
 describe('cols', () => {
-    const localVue = new createLocalVue();
+    const localVue = createLocalVue();
+    localVue.use(plugin);
 
     it('basic', () => {
         const App = localVue.extend({

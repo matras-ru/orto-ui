@@ -80,6 +80,8 @@ const extendComponent = (Vue, CurrentTheme, componentName) => {
 const install = function (Vue, options = {}) {
     const { theme = {}, config = {}, components: injectComponentList = null } = options;
 
+    ConfigPlugin(config, Vue);
+
     const CurrentTheme = {
         ...DefaultTheme,
         ...theme
@@ -92,8 +94,6 @@ const install = function (Vue, options = {}) {
     });
 
     Vue.use(vClickOutside);
-
-    ConfigPlugin(config, Vue);
 };
 
 export { CForm };

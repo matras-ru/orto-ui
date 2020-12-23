@@ -14,10 +14,10 @@ import { getComponentConfig } from '@/config';
 
 const NAME = 'CPicture';
 
-const screens = getComponentConfig('common', 'screens');
-const breakpoints = Object.keys(screens);
-
 const generateProps = () => {
+    const screens = getComponentConfig('common', 'screens');
+    const breakpoints = Object.keys(screens);
+
     const breakpointSources = breakpoints.reduce((prop, breakpoint) => {
         prop[breakpoint] = stringProp();
         return prop;
@@ -46,8 +46,10 @@ const generateProps = () => {
     };
 };
 
-const createSources = (h, breakpoints, props) =>
-    breakpoints.map(br => {
+const createSources = (h, screens, props) => {
+    const breakpoints = Object.keys(screens);
+
+    return breakpoints.map(br => {
         if (props[br]) {
             return h('source', {
                 attrs: {
@@ -58,6 +60,7 @@ const createSources = (h, breakpoints, props) =>
             });
         }
     });
+};
 
 const currentClass = ({ theme }) => {
     const { base } = theme;
@@ -82,7 +85,7 @@ export default {
         return (this.props = generateProps());
     },
 
-    render(h, { data, props }) {
+    render(h, { data, props, parent }) {
         const imgData = {
             class: currentClass(props),
             attrs: {
@@ -91,7 +94,11 @@ export default {
             }
         };
 
-        const sources = createSources(h, breakpoints, props);
+        const sources = createSources(
+            h,
+            parent.$ortoUIConfig.getConfigValue('common.screens'),
+            props
+        );
 
         return h('picture', [...sources, h('img', mergeData(data, imgData))]);
     }

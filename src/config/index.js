@@ -1,23 +1,7 @@
 import Vue from 'vue';
-import { isObject, hasOwnProperty } from '@/utils';
-
+import { hasOwnProperty } from '@/utils';
+import get from 'lodash.get';
 import DEFAULTS from './default-config';
-
-const get = (obj, path, defaultValue = null) => {
-    if (path in obj) {
-        return obj[path];
-    }
-
-    const steps = path.split('.');
-
-    if (steps.length === 0) {
-        return defaultValue;
-    }
-
-    return steps.every(step => isObject(obj) && step in obj && (obj = obj[step]) != null)
-        ? obj
-        : defaultValue;
-};
 
 const PROP_NAME = '$ortoUIConfig';
 

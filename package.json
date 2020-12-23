@@ -29,6 +29,7 @@
     ],
     "dependencies": {
         "@tailwindcss/custom-forms": "^0.2.1",
+        "lodash.get": "^4.4.2",
         "lodash.merge": "^4.6.2",
         "tailwindcss": "^1.9.5",
         "v-click-outside-x": "^4.1.0",

@@ -7,10 +7,10 @@ import DefaultTheme from '@/themes/default/CCol';
 const OFFSET_PROP_NAME = 'offset';
 const NAME = 'CCol';
 
-const screens = getComponentConfig('common', 'screens');
-const breakpoints = Object.keys(screens);
-
 const generateProps = () => {
+    const screens = getComponentConfig('common', 'screens');
+    const breakpoints = Object.keys(screens);
+
     const breakpointCols = breakpoints.reduce((prop, breakpoint) => {
         prop[breakpoint] = numProp();
         return prop;
@@ -59,8 +59,10 @@ export default {
         return (this.props = generateProps());
     },
 
-    render(h, { data, props, children }) {
+    render(h, { data, props, parent, children }) {
         const { base } = props.theme;
+        const screens = parent.$ortoUIConfig.getConfigValue('common.screens');
+        const breakpoints = Object.keys(screens);
 
         const componentData = {
             staticClass: base,

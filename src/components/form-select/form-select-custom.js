@@ -67,12 +67,12 @@ export default {
 
         optionValue: {
             type: String,
-            default: getComponentConfig(NAME, 'optionValue')
+            default: () => getComponentConfig(NAME, 'optionValue')
         },
 
         optionLabel: {
             type: String,
-            default: getComponentConfig(NAME, 'optionLabel')
+            default: () => getComponentConfig(NAME, 'optionLabel')
         },
 
         error: {
