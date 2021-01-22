@@ -127,7 +127,7 @@ export default {
             2 - min/max
             3 - negative
             */
-            const num = parseFloat(value);
+            const num = parseInt(value);
             const localValue = isNaN(num) ? value : num;
 
             // 1
@@ -244,7 +244,7 @@ export default {
                         }
                     }),
 
-                    // custom number apperance
+                    // custom number appearance
                     this.isNumeric
                         ? h(
                               'div',

@@ -2070,7 +2070,7 @@ var CFormInput = {
             2 - min/max
             3 - negative
             */
-            var num = parseFloat(value);
+            var num = parseInt(value);
             var localValue = isNaN(num) ? value : num;
 
             // 1
@@ -2190,7 +2190,7 @@ var CFormInput = {
                             }))
                     }),
 
-                    // custom number apperance
+                    // custom number appearance
                     this.isNumeric
                         ? h(
                               'div',
