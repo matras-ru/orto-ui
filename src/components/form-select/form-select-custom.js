@@ -188,6 +188,7 @@ export default {
                     h('div', [
                         h('CFormInput', {
                             props: {
+                                ...this.$attrs,
                                 readonly: true,
                                 error,
                                 label,

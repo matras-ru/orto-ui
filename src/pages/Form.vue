@@ -286,6 +286,29 @@
 
                 <div class="bg-secondary-100 p-1-6">
                     <CFormPanel label="labelBgColor">
+                        <CFormSelectCustom
+                            v-bind="{
+                                data: [
+                                    {
+                                        id: 1,
+                                        label: 18
+                                    },
+                                    {
+                                        id: 2,
+                                        label: 20
+                                    }
+                                ],
+                                size: 'sm',
+                                placeholder: 'Высота',
+                                optionValue: 'id',
+                                error: $v.exampleModel.selectModel.$error,
+                                labelBgColor: 'bg-secondary-100'
+                            }"
+                            label="Адрес доставки *"
+                            v-model="exampleModel.selectModel"
+                        >
+                        </CFormSelectCustom>
+
                         <CFormInput
                             label="Адрес доставки *"
                             placeholder="Ул.Пушкина д.Колотушкина"
