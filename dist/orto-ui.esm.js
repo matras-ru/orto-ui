@@ -1635,7 +1635,7 @@ var CFormPanel = {
         var wrapperBase = ref.wrapperBase;
 
         return h(
-            'section',
+            'div',
             {
                 staticClass: wrapperBase
             },
@@ -1650,7 +1650,7 @@ var CFormPanel = {
                       )
                     : null,
 
-                this.open ? h('main', [this.$slots.default]) : null
+                this.open ? h('div', [this.$slots.default]) : null
             ]
         );
     }
@@ -1891,7 +1891,7 @@ var CFormField = {
         var bottomPlaceholderClasses = ref.bottomPlaceholderClasses;
 
         return h(
-            'label', // outer wrap
+            'div', // outer wrap
             {
                 class: outerWrapClasses
             },

@@ -6,7 +6,7 @@ describe('Form panel', () => {
     it('is rendered', () => {
         const wrapper = mount(CFormGroup);
 
-        expect(wrapper.element.tagName).toEqual('SECTION');
+        expect(wrapper.element.tagName).toEqual('DIV');
     });
 
     it('default slot', () => {
