@@ -52,7 +52,7 @@ export default {
         const { headerBase, wrapperBase } = this.theme;
 
         return h(
-            'section',
+            'div',
             {
                 staticClass: wrapperBase
             },
@@ -67,7 +67,7 @@ export default {
                       )
                     : null,
 
-                this.open ? h('main', [this.$slots.default]) : null
+                this.open ? h('div', [this.$slots.default]) : null
             ]
         );
     }
