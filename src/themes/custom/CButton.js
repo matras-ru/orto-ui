@@ -16,7 +16,6 @@ export const smallSizeClass = 'text-base px-1-3 py-0-3 leading-snug';
 export default {
     baseClass,
     defaultClass,
-    defaultClass,
     primaryClass,
     secondaryClass,
     tertiaryClass,
