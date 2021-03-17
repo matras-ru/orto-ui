@@ -3,6 +3,10 @@ import DefaultTheme from '@/themes/default/CFormSelectCustom';
 import { getComponentConfig } from '@/config';
 import { getHashMapValue } from '@/utils';
 const validSizes = ['sm', 'md'];
+import CDropdown from '../dropdown/dropdown';
+import CFormInput from '../form-input/form-input';
+import CList from '../list/list';
+import CListItem from '../list/list-item';
 
 const NAME = 'CFormSelectCustom';
 
@@ -35,6 +39,13 @@ export default {
 
     install(Vue, theme) {
         selfInstall(Vue, theme, this);
+    },
+
+    components: {
+        CDropdown,
+        CFormInput,
+        CList,
+        CListItem
     },
 
     inheritAttrs: false,

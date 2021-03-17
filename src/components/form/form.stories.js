@@ -1,5 +1,15 @@
-import { storiesOf } from '@storybook/vue';
+import CForm from './form';
 
-storiesOf('CForm', module).add('Form', () => ({
-    template: '<CForm action="/" method="POST">Form here</CForm>'
-}));
+export default {
+    title: 'Components/Form/CForm',
+    component: CForm
+};
+
+const Template = () => {
+    return {
+        components: { CForm },
+        template: '<CForm />'
+    };
+};
+
+export const Default = Template.bind({});

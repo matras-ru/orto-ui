@@ -6,7 +6,7 @@
 | --------------- | ---------------- | ----------------------------------------- | --------------- |
 | `id`            | `Number, String` | `Math.random().toString(36).substring(7)` | rating id       |
 | `scale`         | `Array`          | `[]`                                      | scale list      |
-| `increment`     | `Number`         | `1`                                       | step            |
+| `increment`     | `Number, String` | `1`                                       | step            |
 | `rating`        | `Number, String` | `undefined`                               | for readOnly    |
 | `readOnly`      | `Boolean`        | `false`                                   | read-only state |
 | `starSize`      | `Number`         | `32`                                      | star size (px)  |

@@ -39,7 +39,7 @@ export default {
         },
 
         increment: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
 
@@ -83,7 +83,7 @@ export default {
 
     model: {
         prop: 'gradeModel',
-        event: 'star-selected'
+        event: 'starSelected'
     },
 
     computed: {
@@ -138,10 +138,11 @@ export default {
                     this.createStars(true, true);
                     this.selectedRating =
                         this.currentRating === this.selectedRating ? 0 : this.currentRating;
-                    this.$emit('star-selected', this.selectedRating);
+                    this.$emit('starSelected', this.selectedRating);
                     this.isSelected = true;
                 } else {
                     this.createStars(true, !this.activeOnClick);
+                    this.$emit('starMouseMove', this.currentRating); // for storybook
                 }
             }
         },
@@ -186,8 +187,8 @@ export default {
                         id: this.id
                     },
                     on: {
-                        'star-selected': e => this.setRating(e, true),
-                        'star-mouse-move': e => this.setRating(e)
+                        starSelected: e => this.setRating(e, true),
+                        starMouseMove: e => this.setRating(e)
                     }
                 });
             }

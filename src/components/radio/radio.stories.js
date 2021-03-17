@@ -1,51 +1,109 @@
-import { storiesOf } from '@storybook/vue';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import CRadio from './radio';
 
-storiesOf('CRadio', module)
-    .addDecorator(withKnobs)
-    .add('Radio knobs', () => ({
-        props: {
-            id: {
-                default: text('id', 'radio1')
+export default {
+    title: 'Components/Radio/CRadio',
+    component: CRadio,
+    argTypes: {
+        label: {
+            defaultValue: 'radio1',
+            description: 'Label',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
             },
-            autofocus: {
-                default: boolean('autofocus', false)
-            },
-            label: {
-                default: text('label', 'Radio1')
-            },
-            name: {
-                default: text('name', 'radio1')
-            },
-            disabled: {
-                default: boolean('disabled', false)
-            },
-            value: {
-                default: text('value', 'radio1')
+            control: {
+                type: 'text'
             }
         },
-        data() {
-            return {
-                radioModel: false
-            };
+        name: {
+            defaultValue: 'radio',
+            description: 'Name',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
         },
-        template:
-            '<CRadio @change="action" v-bind="{ id, autofocus, name, label, disabled, value}" v-model="radioModel" />',
-        methods: { action: action('change') }
-    }))
-    .add('Default radio', () => ({
-        data() {
-            return {
-                radioModel: false
-            };
+        value: {
+            defaultValue: 'radio1',
+            description: 'Value',
+            table: {
+                type: { summary: ['string', 'number', 'boolean'] },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
         },
-        template:
-            '<CRadio @change="action" id="radio2" label="Radio2" name="radio2" value="radio2" v-model="radioModel" />',
-        methods: { action: action('change') }
-    }))
-    .add('Disabled radio', () => ({
-        template:
-            '<CRadio @change="action" id="radio3" label="Radio3" name="radio3" value="radio3" disabled />',
-        methods: { action: action('change') }
-    }));
+        id: {
+            defaultValue: 'radio1',
+            description: 'ID',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        error: {
+            defaultValue: false,
+            description: 'Error',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        disabled: {
+            defaultValue: false,
+            description: 'Disabled',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        modelValue: {
+            description: 'Model value',
+            table: {
+                type: { summary: ['array', 'boolean', 'string', 'number'] },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        change: {
+            action: 'changed',
+            description: 'Event',
+            table: {
+                type: { summary: 'func' },
+                category: 'Events'
+            }
+        }
+    }
+};
+
+const Template = (args, { argTypes }) => {
+    return {
+        components: { CRadio },
+        props: Object.keys(argTypes),
+        template: '<CRadio v-bind="$props" @change="change" />'
+    };
+};
+
+export const Default = Template.bind({});

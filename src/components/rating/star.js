@@ -64,7 +64,7 @@ export default {
 
     model: {
         prop: 'gradeModel',
-        event: 'star-selected'
+        event: 'starSelected'
     },
 
     computed: {
@@ -88,7 +88,7 @@ export default {
     methods: {
         mouseMoving(e) {
             if (e.touchAction !== 'undefined') {
-                this.$emit('star-mouse-move', {
+                this.$emit('starMouseMove', {
                     event: e,
                     position: this.getPosition(e),
                     id: this.starId
@@ -117,7 +117,7 @@ export default {
         },
 
         selected(e) {
-            this.$emit('star-selected', {
+            this.$emit('starSelected', {
                 id: this.starId,
                 position: this.getPosition(e)
             });

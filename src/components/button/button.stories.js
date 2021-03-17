@@ -1,84 +1,255 @@
-import { storiesOf } from '@storybook/vue';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import CButton from './button';
 
-storiesOf('CButton', module)
-    .addDecorator(withKnobs)
-    .add('Button knobs', () => ({
-        props: {
-            id: {
-                default: text('id', 'id')
+export default {
+    title: 'Components/Button/CButton',
+    component: CButton,
+    argTypes: {
+        tag: {
+            defaultValue: 'button',
+            description: 'Choose button or link',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'button' },
+                category: 'Props'
             },
-            value: {
-                default: text('value (string, number)', 'value')
-            },
-            type: {
-                default: text('type (button, reset, submit)', 'button')
-            },
-            size: {
-                default: text('size (sm, lg)', 'md')
-            },
-            variant: {
-                default: text('variant (primary, secondary, tertiary, quaternary)', 'primary')
-            },
-            autofocus: {
-                default: boolean('autofocus', false)
-            },
-            disabled: {
-                default: boolean('disabled', false)
+            control: {
+                type: 'select',
+                options: ['button', 'a']
             }
         },
-        template:
-            '<CButton @onClick="action" v-bind="{ id, value, type, size, variant, autofocus, disabled }">Button</CButton>',
-        methods: { action: action('clicked') }
-    }))
-    .add('Link knobs', () => ({
-        props: {
-            id: {
-                default: text('id', 'id')
+        disabled: {
+            defaultValue: false,
+            description: 'Disabled',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props'
             },
-            href: {
-                default: text('href', '/')
-            },
-            size: {
-                default: text('size (sm, lg)', 'md')
-            },
-            variant: {
-                default: text('variant (primary, secondary, tertiary, quaternary)', 'primary')
-            },
-            autofocus: {
-                default: boolean('autofocus', false)
-            },
-            disabled: {
-                default: boolean('disabled', false)
+            control: {
+                type: 'boolean'
             }
         },
-        template:
-            '<CButton @onClick="action" v-bind="{ id, href,  size, variant, autofocus, disabled }" tag="a" :disabled="disabled">Link</CButton>',
-        methods: { action: action('clicked') }
-    }))
-    .add('Default', () => ({
-        template:
-            '<div><CButton @onClick="action" size="sm">Button</CButton><CButton @onClick="action">Button</CButton><CButton @onClick="action" size="lg">Button</CButton></div>',
-        methods: { action: action('clicked') }
-    }))
-    .add('Primary', () => ({
-        template:
-            '<div><CButton @onClick="action" variant="primary" size="sm">Button</CButton><CButton @onClick="action" variant="primary">Button</CButton><CButton @onClick="action" variant="primary" size="lg">Button</CButton></div>',
-        methods: { action: action('clicked') }
-    }))
-    .add('Secondary', () => ({
-        template:
-            '<div><CButton @onClick="action" variant="secondary" size="sm">Button</CButton><CButton @onClick="action" variant="secondary">Button</CButton><CButton @onClick="action" variant="secondary" size="lg">Button</CButton></div>',
-        methods: { action: action('clicked') }
-    }))
-    .add('Tertiary', () => ({
-        template:
-            '<div><CButton @onClick="action" variant="tertiary" size="sm">Button</CButton><CButton @onClick="action" variant="tertiary">Button</CButton><CButton @onClick="action" variant="tertiary" size="lg">Button</CButton></div>',
-        methods: { action: action('clicked') }
-    }))
-    .add('Quaternary', () => ({
-        template:
-            '<div><CButton @onClick="action" variant="quaternary" size="sm">Button</CButton><CButton @onClick="action" variant="quaternary">Button</CButton><CButton @onClick="action" variant="quaternary" size="lg">Button</CButton></div>',
-        methods: { action: action('clicked') }
-    }));
+        label: {
+            defaultValue: 'Button',
+            description: 'Label',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        type: {
+            defaultValue: 'submit',
+            description: 'Type',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'submit' },
+                category: 'Props'
+            },
+            control: {
+                type: 'select',
+                options: ['submit', 'reset']
+            }
+        },
+        variant: {
+            defaultValue: 'primary',
+            description: 'Variant',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'primary' },
+                category: 'Props'
+            },
+            control: {
+                type: 'select',
+                options: ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary']
+            }
+        },
+        size: {
+            defaultValue: 'md',
+            description: 'Size',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'md' },
+                category: 'Props'
+            },
+            control: {
+                type: 'select',
+                options: ['sm', 'md', 'lg']
+            }
+        },
+        block: {
+            defaultValue: false,
+            description: '100% width',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        href: {
+            description: 'Href',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        target: {
+            defaultValue: '_self',
+            description: 'Target',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        rel: {
+            description: 'Rel',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        to: {
+            description: 'To (nuxt)',
+            table: {
+                type: { summary: ['string', 'object'] },
+                defaultValue: { summary: 'null' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        append: {
+            defaultValue: false,
+            description: 'Append',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        event: {
+            defaultValue: 'click',
+            description: 'Event',
+            table: {
+                type: { summary: ['string', 'array'] },
+                defaultValue: { summary: 'click' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        replace: {
+            defaultValue: false,
+            description: 'Replace',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        activeClass: {
+            defaultValue: 'router-link-active',
+            description: 'Active class',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'router-link-active' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        routerTag: {
+            defaultValue: 'a',
+            description: 'Router tag',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'a' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        exact: {
+            defaultValue: false,
+            description: 'Exact',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        exactActiveClass: {
+            defaultValue: 'router-link-exact-active',
+            description: 'Exact active class',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'router-link-exact-active' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        noPrefetch: {
+            defaultValue: false,
+            description: 'No prefetch (nuxt)',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props ("a" tag)'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        onClick: {
+            action: 'clicked',
+            description: 'Event',
+            table: {
+                type: { summary: 'func' },
+                category: 'Events'
+            }
+        }
+    }
+};
+
+const Template = (args, { argTypes }) => {
+    return {
+        components: { CButton },
+        props: Object.keys(argTypes),
+        template: '<CButton v-bind="$props" @onClick="onClick" />'
+    };
+};
+
+export const Default = Template.bind({});

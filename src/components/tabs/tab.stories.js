@@ -1,11 +1,11 @@
-import CFormPanel from './form-panel';
+import CTab from './tab';
 
 export default {
-    title: 'Components/Form/CFormPanel',
-    component: CFormPanel,
+    title: 'Components/Tab/CTab',
+    component: CTab,
     argTypes: {
         label: {
-            defaultValue: 'Form Panel',
+            defaultValue: 'Tab',
             description: 'Label',
             table: {
                 type: { summary: 'string' },
@@ -16,9 +16,21 @@ export default {
                 type: 'text'
             }
         },
-        collapsible: {
+        name: {
+            defaultValue: 'Tab',
+            description: 'Name',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        isActive: {
             defaultValue: false,
-            description: 'Collapsible',
+            description: 'Is active',
             table: {
                 type: { summary: 'boolean' },
                 defaultValue: { summary: 'false' },
@@ -28,16 +40,12 @@ export default {
                 type: 'boolean'
             }
         },
-        collapsed: {
-            defaultValue: false,
-            description: 'Collapsed',
+        onClick: {
+            action: 'clicked',
+            description: 'Event',
             table: {
-                type: { summary: 'boolean' },
-                defaultValue: { summary: 'false' },
-                category: 'Props'
-            },
-            control: {
-                type: 'boolean'
+                type: { summary: 'func' },
+                category: 'Events'
             }
         }
     }
@@ -45,9 +53,9 @@ export default {
 
 const Template = (args, { argTypes }) => {
     return {
-        components: { CFormPanel },
+        components: { CTab },
         props: Object.keys(argTypes),
-        template: '<CFormPanel v-bind="$props" />'
+        template: '<CTab v-bind="$props" @onClick="onClick" />'
     };
 };
 

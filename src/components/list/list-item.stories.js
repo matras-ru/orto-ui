@@ -1,24 +1,24 @@
-import CFormPanel from './form-panel';
+import CListItem from './list-item';
 
 export default {
-    title: 'Components/Form/CFormPanel',
-    component: CFormPanel,
+    title: 'Components/List/CListItem',
+    component: CListItem,
     argTypes: {
-        label: {
-            defaultValue: 'Form Panel',
-            description: 'Label',
+        tag: {
+            defaultValue: 'li',
+            description: 'Tag',
             table: {
                 type: { summary: 'string' },
-                defaultValue: { summary: 'null' },
+                defaultValue: { summary: 'li' },
                 category: 'Props'
             },
             control: {
                 type: 'text'
             }
         },
-        collapsible: {
-            defaultValue: false,
-            description: 'Collapsible',
+        inline: {
+            defaultValue: true,
+            description: 'Inline',
             table: {
                 type: { summary: 'boolean' },
                 defaultValue: { summary: 'false' },
@@ -28,9 +28,9 @@ export default {
                 type: 'boolean'
             }
         },
-        collapsed: {
+        listItem: {
             defaultValue: false,
-            description: 'Collapsed',
+            description: 'List item',
             table: {
                 type: { summary: 'boolean' },
                 defaultValue: { summary: 'false' },
@@ -45,9 +45,9 @@ export default {
 
 const Template = (args, { argTypes }) => {
     return {
-        components: { CFormPanel },
+        components: { CListItem },
         props: Object.keys(argTypes),
-        template: '<CFormPanel v-bind="$props" />'
+        template: '<CListItem v-bind="$props">List item</CListItem>'
     };
 };
 
