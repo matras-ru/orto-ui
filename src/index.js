@@ -15,6 +15,8 @@ import { CFormSelectCustom } from '@/components/form-select';
 import { CRadio, CRadioGroup } from '@/components/radio';
 import { CCheckbox, CCheckboxGroup } from '@/components/checkbox';
 
+import { CRating } from '@/components/rating';
+
 /*  COMMON */
 import { CButton } from '@/components/button';
 import { CLink } from '@/components/link';
@@ -41,6 +43,7 @@ const components = {
     CRadioGroup,
     CCheckbox,
     CCheckboxGroup,
+    CRating,
     CTabs,
     CTab,
     CTabPanels,
@@ -105,6 +108,7 @@ export { CRadio };
 export { CRadioGroup };
 export { CCheckbox };
 export { CCheckboxGroup };
+export { CRating };
 export { CButton };
 export { CLink };
 export { CTabs };

@@ -476,6 +476,30 @@
                     v-model="exampleModel.radioGroupModel"
                 />
             </CFormPanel>
+            <CFormPanel>
+                <CRating
+                    id="test1"
+                    :scale="[
+                        { id: 1, label: 'Ужасно', value: 1 },
+                        { id: 2, label: 'Плохо', value: 2 },
+                        { id: 3, label: 'Нормально', value: 3 },
+                        { id: 4, label: 'Хорошо', value: 4 },
+                        { id: 5, label: 'Отлично', value: 5 }
+                    ]"
+                    v-model="exampleModel.ratingModel1"
+                />
+            </CFormPanel>
+            <CFormPanel>
+                <CRating id="test2" v-model="exampleModel.ratingModel2" />
+            </CFormPanel>
+            <CFormPanel>
+                <CRating
+                    id="test3"
+                    :rating="exampleModel.ratingModel3"
+                    :readOnly="true"
+                    :increment="0.5"
+                />
+            </CFormPanel>
         </CForm>
 
         <div class="fixed top-0 right-0 p-2-5 bg-white shadow">
@@ -511,7 +535,10 @@ export default {
                 inputNumberModel: 0,
                 selectModel: null,
                 textareaModel: null,
-                width: 1
+                width: 1,
+                ratingModel1: null,
+                ratingModel2: null,
+                ratingModel3: '4.3'
             }
         };
     },

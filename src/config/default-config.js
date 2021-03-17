@@ -78,5 +78,7 @@ export default {
         optionValue: 'value',
         optionLabel: 'label',
         dropdownVariant: 'secondary'
-    }
+    },
+
+    CRating: {}
 };
