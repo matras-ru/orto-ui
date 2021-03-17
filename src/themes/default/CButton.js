@@ -1,14 +1,16 @@
 export const base =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
-export const variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
-export const variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
+export const variantPrimary =
+    'border-primary-100 transition-shadow hover:shadow disabled:shadow-none';
+export const variantSecondary =
+    'bg-primary-100 border-primary-100 transition-shadow hover:shadow disabled:shadow-none';
 export const variantTertiary =
-    'border-secondary-200 text-secondary-200 transition-colors hover:text-white hover:bg-secondary-200';
+    'border-secondary-200 text-secondary-200 transition-colors hover:text-white disabled:text-secondary-200 hover:bg-secondary-200 disabled:bg-transparent';
 export const variantQuaternary =
-    'border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100';
+    'border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100 disabled:bg-transparent';
 export const variantQuinary =
-    'border-black-100 transition-colors hover:text-white hover:bg-black-100';
+    'border-black-100 transition-colors hover:text-white disabled:text-black-100 hover:bg-black-100 disabled:bg-transparent';
 
 export const stateDisable = 'cursor-not-allowed opacity-75';
 
