@@ -165,10 +165,6 @@ export default {
             return isRouterLink(this.computedTag);
         },
 
-        computedRel() {
-            return computeRel({ target: this.target, rel: this.rel });
-        },
-
         computedProps() {
             return this.isRouterLink ? { ...this.$props, tag: this.routerTag } : {};
         }

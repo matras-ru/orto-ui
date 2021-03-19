@@ -1,8 +1,8 @@
-import CFormInput from './form-input';
+import CFormField from './form-field';
 
 export default {
-    title: 'Components/Form/CFormInput',
-    component: CFormInput,
+    title: 'Components/Form/CFormField',
+    component: CFormField,
     argTypes: {
         modelValue: {
             description: 'Model value',
@@ -62,7 +62,6 @@ export default {
             }
         },
         placeholder: {
-            defaultValue: 'Text here',
             description: 'Placeholder',
             table: {
                 type: { summary: 'string' },
@@ -120,7 +119,7 @@ export default {
             }
         },
         labelStick: {
-            defaultValue: false,
+            defaultValue: true,
             description: 'Sticky label',
             table: {
                 type: { summary: 'boolean' },
@@ -143,132 +142,15 @@ export default {
                 type: 'select',
                 options: ['sm', 'md']
             }
-        },
-        type: {
-            defaultValue: 'text',
-            description: 'Type',
-            table: {
-                type: { summary: 'string' },
-                defaultValue: { summary: 'text' },
-                category: 'Props'
-            },
-            control: {
-                type: 'select',
-                options: [
-                    'text',
-                    'textarea',
-                    'password',
-                    'email',
-                    'number',
-                    'url',
-                    'tel',
-                    'search',
-                    'date'
-                ]
-            }
-        },
-        readonly: {
-            defaultValue: false,
-            description: 'Readonly',
-            table: {
-                type: { summary: 'boolean' },
-                defaultValue: { summary: 'false' },
-                category: 'Props'
-            },
-            control: {
-                type: 'boolean'
-            }
-        },
-        rows: {
-            defaultValue: 6,
-            description: 'Rows',
-            table: {
-                type: { summary: 'number' },
-                defaultValue: { summary: 'null' },
-                category: 'Props (type textarea)'
-            },
-            control: {
-                type: 'number',
-                min: 1,
-                step: 1
-            }
-        },
-        min: {
-            description: 'Min',
-            table: {
-                type: { summary: ['number', 'string', 'date'] },
-                defaultValue: { summary: 'null' },
-                category: 'Props (types number, date)'
-            },
-            control: {
-                type: 'text'
-            }
-        },
-        max: {
-            description: 'Max',
-            table: {
-                type: { summary: ['number', 'string', 'date'] },
-                defaultValue: { summary: 'null' },
-                category: 'Props (types number, date)'
-            },
-            control: {
-                type: 'text'
-            }
-        },
-        focus: {
-            action: 'focus',
-            description: 'Event',
-            table: {
-                type: { summary: 'func' },
-                category: 'Events'
-            }
-        },
-        blur: {
-            action: 'blur',
-            description: 'Event',
-            table: {
-                type: { summary: 'func' },
-                category: 'Events'
-            }
-        },
-        input: {
-            action: 'input',
-            description: 'Event',
-            table: {
-                type: { summary: 'func' },
-                category: 'Events'
-            }
-        },
-        change: {
-            action: 'change',
-            description: 'Event',
-            table: {
-                type: { summary: 'func' },
-                category: 'Events'
-            }
-        },
-        click: {
-            action: 'clicked',
-            description: 'Event',
-            table: {
-                type: { summary: 'func' },
-                category: 'Events (type number)'
-            }
         }
     }
 };
 
 const Template = (args, { argTypes }) => {
     return {
-        components: { CFormInput },
+        components: { CFormField },
         props: Object.keys(argTypes),
-        data() {
-            return {
-                model: null
-            };
-        },
-        template:
-            '<CFormInput v-bind="$props" @focus="focus" @blur="blur" @input="input" @change="change" v-model="model" />'
+        template: '<CFormField v-bind="$props" />'
     };
 };
 

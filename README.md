@@ -77,16 +77,19 @@ Vue.use(CButton, btnTheme);
 
 | #   | Component                       | MVP | Doc | Unit | Gemini | StoryBook | Accessibility |
 | --- | ------------------------------- | --- | --- | ---- | ------ | --------- | ------------- |
-| 1   | `button`                        | +   | +   | +    | -      | -         | -             |
-| 2   | `link`                          | +   | +   | +    | -      | -         | -             |
-| 3   | `container row col`             | +   | +   | +    | -      | -         | -             |
-| 4   | `list list-item`                | +   | +   | +    | -      | -         | -             |
-| 5   | `tabs tab tab-panels tab-panel` | +   | +   | +-   | -      | -         | -             |
-| 6   | `checkbox checkbox-group`       | +   | +   | +    | -      | -         | -             |
-| 7   | `radio radio-group`             | +   | +   | +    | -      | -         | -             |
-| 8   | `form-panel`                    | +   | -   | +    | -      | -         | -             |
-| 9   | `form`                          | +   | +   | +    | -      | -         | -             |
-| 10  | `form-input`                    | +   | -   | +    | -      | -         | -             |
-| 11  | `dropdown`                      | +   | +   | +    | -      | -         | -             |
-| 12  | `form-custom-select`            | +   | +   | +    | -      | -         | -             |
-| 13  | `badge`                         | +   | +   | +    | -      | -         | -             |
+| 1   | `button`                        | +   | +   | +    | -      | +         | -             |
+| 2   | `link`                          | +   | +   | +    | -      | +         | -             |
+| 3   | `container row col`             | +   | +   | +    | -      | +         | -             |
+| 4   | `list list-item list-toggle`    | +   | +   | +-   | -      | +         | -             |
+| 5   | `tabs tab tab-panels tab-panel` | +   | +   | +-   | -      | +         | -             |
+| 6   | `checkbox checkbox-group`       | +   | +   | +    | -      | +         | -             |
+| 7   | `radio radio-group`             | +   | +   | +    | -      | +         | -             |
+| 8   | `form-panel`                    | +   | -   | +    | -      | +         | -             |
+| 9   | `form`                          | +   | +   | +    | -      | +         | -             |
+| 10  | `form-input`                    | +   | -   | +    | -      | +         | -             |
+| 11  | `form-field`                    | +   | -   | -    | -      | +         | -             |
+| 12  | `dropdown`                      | +   | +   | +    | -      | +         | -             |
+| 13  | `form-custom-select`            | +   | +   | +    | -      | +         | -             |
+| 14  | `badge`                         | +   | +   | +    | -      | +         | -             |
+| 15  | `picture`                       | +   | +   | +    | -      | +         | -             |
+| 16  | `rating`                        | +   | +   | +    | -      | +         | -             |

@@ -32,6 +32,7 @@ const props = {
     },
 
     block: {
+        // for col-count-
         type: Boolean,
         default: false
     }

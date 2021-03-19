@@ -20,10 +20,12 @@ const props = {
 export default {
     name: NAME,
 
-    data: () => ({
-        childCount: 0,
-        innerLimit: 0
-    }),
+    data() {
+        return {
+            childCount: 0,
+            innerLimit: this.limit
+        };
+    },
 
     install(Vue, theme) {
         selfInstall(Vue, theme, this);
@@ -32,7 +34,6 @@ export default {
     props,
 
     created() {
-        this.innerLimit = this.limit;
         // TODO: optimize
         this.$nextTick().then(() => {
             this.childCount = this.$scopedSlots.default().length;
@@ -53,7 +54,6 @@ export default {
                     click: this.show
                 }
             });
-
             return el;
         };
 
@@ -72,6 +72,7 @@ export default {
 
             return el;
         };
+
         // TODO: проверка + throw err
         return getWrap(this.$scopedSlots.wrap());
     }

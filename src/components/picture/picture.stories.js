@@ -1,12 +1,36 @@
-import CFormPanel from './form-panel';
+import CPicture from './picture';
 
 export default {
-    title: 'Components/Form/CFormPanel',
-    component: CFormPanel,
+    title: 'Components/Picture/CPicture',
+    component: CPicture,
     argTypes: {
-        label: {
-            defaultValue: 'Form Panel',
-            description: 'Label',
+        type: {
+            defaultValue: 'jpg',
+            description: 'Type',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'jpg' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        lazy: {
+            defaultValue: false,
+            description: 'Lazy',
+            table: {
+                type: { summary: 'boolean' },
+                defaultValue: { summary: 'false' },
+                category: 'Props'
+            },
+            control: {
+                type: 'boolean'
+            }
+        },
+        src: {
+            defaultValue: `${require('@/assets/img/picture2.jpg')}`,
+            description: 'SRC',
             table: {
                 type: { summary: 'string' },
                 defaultValue: { summary: 'null' },
@@ -15,39 +39,15 @@ export default {
             control: {
                 type: 'text'
             }
-        },
-        collapsible: {
-            defaultValue: false,
-            description: 'Collapsible',
-            table: {
-                type: { summary: 'boolean' },
-                defaultValue: { summary: 'false' },
-                category: 'Props'
-            },
-            control: {
-                type: 'boolean'
-            }
-        },
-        collapsed: {
-            defaultValue: false,
-            description: 'Collapsed',
-            table: {
-                type: { summary: 'boolean' },
-                defaultValue: { summary: 'false' },
-                category: 'Props'
-            },
-            control: {
-                type: 'boolean'
-            }
         }
     }
 };
 
 const Template = (args, { argTypes }) => {
     return {
-        components: { CFormPanel },
+        components: { CPicture },
         props: Object.keys(argTypes),
-        template: '<CFormPanel v-bind="$props" />'
+        template: '<CPicture v-bind="$props" />'
     };
 };
 
