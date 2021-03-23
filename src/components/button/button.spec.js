@@ -4,8 +4,9 @@ import CButton from './button';
 
 const baseClass =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
-const defaultClass = 'border-primary-100 transition-shadow hover:shadow';
-const secondaryClass = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
+const defaultClass = 'border-primary-100 transition-shadow hover:shadow disabled:shadow-none';
+const secondaryClass =
+    'bg-primary-100 border-primary-100 transition-shadow hover:shadow disabled:shadow-none';
 const disabledClass = 'cursor-not-allowed opacity-75';
 const defaultSizeClass = 'text-base px-1-5 py-0-4 leading-snug';
 

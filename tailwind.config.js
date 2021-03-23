@@ -92,18 +92,18 @@ module.exports = {
         },
         borderColor: theme => ({
             ...theme('colors'),
-            default: theme('colors.gray.300', 'currentColor')
+            DEFAULT: theme('colors.gray.300', 'currentColor')
         }),
         borderOpacity: theme => theme('opacity'),
         borderRadius: {
             none: '0',
             sm: '0.125rem',
-            default: '0.25rem',
+            DEFAULT: '0.25rem',
             lg: '1.375rem',
             full: '9999px'
         },
         borderWidth: {
-            default: '1px',
+            DEFAULT: '1px',
             0: '0',
             2: '2px',
             3: '3px',
@@ -111,13 +111,13 @@ module.exports = {
             8: '8px'
         },
         boxShadow: {
-            default: '0 6px 12px rgba(255, 205, 0, .7)',
+            DEFAULT: '0 6px 12px rgba(255, 205, 0, .7)',
             secondary: '0 15px 40px 0 rgba(166, 177, 182, 0.5)',
             none: 'none'
         },
         container: theme => ({
             padding: {
-                default: theme('spacing.0-8')
+                DEFAULT: theme('spacing.0-8')
             },
             center: true
         }),
@@ -134,7 +134,7 @@ module.exports = {
         divideOpacity: theme => theme('borderOpacity'),
         divideWidth: theme => theme('borderWidth'),
         fill: theme => ({
-            default: theme('colors.black.100')
+            DEFAULT: theme('colors.black.100')
         }),
         flex: {
             1: '1 1 0%',
@@ -144,11 +144,11 @@ module.exports = {
         },
         flexGrow: {
             0: '0',
-            default: '1'
+            DEFAULT: '1'
         },
         flexShrink: {
             0: '0',
-            default: '1'
+            DEFAULT: '1'
         },
         fontFamily: {
             body: ['Helvetica', 'sans-serif']
@@ -399,7 +399,7 @@ module.exports = {
         transitionProperty: {
             none: 'none',
             all: 'all',
-            default:
+            DEFAULT:
                 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
             colors: 'background-color, border-color, color, fill, stroke',
             border: 'border-color',
@@ -415,7 +415,7 @@ module.exports = {
             'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)'
         },
         transitionDuration: {
-            default: '0ms',
+            DEFAULT: '0ms',
             75: '75ms',
             100: '100ms',
             150: '150ms',
@@ -466,143 +466,9 @@ module.exports = {
                 }
             }
         },
-        customForms: theme => {
-            // TODO: refactoring
-            return {
-                default: {
-                    input: {
-                        appearance: 'none',
-                        borderRadius: undefined,
-                        borderColor: undefined,
-                        backgroundColor: 'transparent',
-                        borderWidth: undefined,
-                        paddingTop: undefined,
-                        paddingRight: undefined,
-                        paddingBottom: undefined,
-                        paddingLeft: undefined,
-                        fontSize: undefined,
-                        lineHeight: undefined,
-
-                        '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
-                            '-webkit-appearance': 'none'
-                        },
-
-                        '-moz-appearance': 'textfield',
-
-                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
-                            color: undefined,
-                            opacity: 0,
-                            fontSize: theme('fontSize.sm')
-                        },
-
-                        '&:focus': {
-                            outline: 'none',
-                            boxShadow: undefined,
-                            borderColor: undefined,
-
-                            '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
-                                color: undefined,
-                                opacity: 1
-                            }
-                        }
-                    },
-
-                    select: {
-                        appearance: undefined,
-                        colorAdjust: undefined,
-                        '&::-ms-expand': undefined,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: undefined,
-                        borderColor: undefined,
-                        borderWidth: undefined,
-                        borderRadius: undefined,
-                        paddingTop: undefined,
-                        paddingRight: undefined,
-                        paddingBottom: undefined,
-                        paddingLeft: undefined,
-                        fontSize: undefined,
-                        lineHeight: undefined,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'contain',
-                        icon: () =>
-                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z"/></svg>`
-                    },
-
-                    checkbox: {
-                        appearance: 'none',
-                        display: 'inline-block',
-                        verticalAlign: 'middle',
-                        backgroundOrigin: 'border-box',
-                        userSelect: 'none',
-                        flexShrink: 0,
-                        height: undefined,
-                        width: undefined,
-                        color: undefined,
-                        iconColor: theme('colors.secondary.200'),
-                        backgroundColor: theme('colors.white'),
-                        borderWidth: theme('borderWidth.2'),
-                        borderColor: theme('colors.black.200'),
-                        icon: iconColor =>
-                            `<svg xmlns="http://www.w3.org/2000/svg" fill="${iconColor}" viewBox="0 0 10 10"><path d="M0 0h10v10H0z"/></svg>`,
-                        '&:focus': {
-                            outline: 'none',
-                            boxShadow: 'none',
-                            borderColor: theme('borderWidth.2')
-                        },
-                        '&:checked': {
-                            borderColor: theme('colors.black.200'),
-                            backgroundColor: 'transparent',
-                            backgroundSize: '50%',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat'
-                        }
-                    },
-
-                    radio: {
-                        appearance: 'none',
-                        colorAdjust: 'exact',
-                        iconColor: theme('colors.secondary.200'),
-                        height: theme('spacing.0-8'),
-                        width: theme('spacing.0-8'),
-                        backgroundColor: theme('colors.white'),
-                        borderWidth: theme('borderWidth.2'),
-                        borderColor: theme('colors.black.200'),
-                        icon: iconColor =>
-                            `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="${iconColor}"><circle cx="5" cy="5" r="3"/></svg>`,
-                        '&:focus': {
-                            outline: 'none',
-                            boxShadow: 'none',
-                            borderColor: theme('borderWidth.2')
-                        },
-                        '&:checked': {
-                            borderColor: theme('colors.black.200'),
-                            backgroundColor: 'transparent',
-                            backgroundSize: '88%',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat'
-                        }
-                    }
-                },
-
-                'not-label': {
-                    input: {
-                        '&::placeholder, &::-webkit-input-placeholder, &:-ms-input-placeholder, &:-moz-placeholder, &::-moz-placeholder': {
-                            color: undefined,
-                            opacity: 1
-                        }
-                    }
-                },
-
-                'is-error': {
-                    checkbox: {
-                        borderColor: theme('colors.danger')
-                    }
-                }
-            };
-        },
         columnCount: [1, 2, 3],
         columnGap: {
-            default: '1rem',
+            DEFAULT: '1rem',
             // will fallback to 'gap' || 'gridGap' values
             sm: '1rem',
             md: '1.5rem',
@@ -734,5 +600,5 @@ module.exports = {
         columnSpan: ['responsive']
     },
     corePlugins: {},
-    plugins: [require('@tailwindcss/custom-forms'), require('tailwindcss-multi-column')()]
+    plugins: [require('./src/themes/default/CustomForms'), require('tailwindcss-multi-column')()]
 };
