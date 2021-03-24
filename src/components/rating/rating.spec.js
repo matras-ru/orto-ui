@@ -73,22 +73,22 @@ describe('Rating with rating number', () => {
 });
 
 describe('Rating events', () => {
-    it('should emit star-selected event when selected', () => {
+    it('should emit star selected event when selected', () => {
         const wrapper = mount(CRating);
 
         const stars = wrapper.find('span svg');
         stars.trigger('click');
-        expect(stars.emitted()).toHaveProperty('star-selected');
+        expect(stars.emitted()).toHaveProperty('starSelected');
 
         wrapper.destroy();
     });
 
-    it('should emit star-mouse-move event when mouse move', () => {
+    it('should emit star mouse move event when mouse move', () => {
         const wrapper = mount(CRating);
 
         const stars = wrapper.find('span svg');
         stars.trigger('mousemove');
-        expect(stars.emitted()).toHaveProperty('star-mouse-move');
+        expect(stars.emitted()).toHaveProperty('starMouseMove');
 
         wrapper.destroy();
     });
@@ -115,7 +115,7 @@ describe('Rating readonly and events', () => {
         wrapper.destroy();
     });
 
-    it('should emit star-selected event when selected', () => {
+    it('should emit star selected event when selected', () => {
         const wrapper = mount(CRating, {
             propsData: {
                 readOnly: true,
@@ -125,12 +125,12 @@ describe('Rating readonly and events', () => {
 
         const stars = wrapper.find('span svg');
         stars.trigger('click');
-        expect(wrapper.emitted()).not.toHaveProperty('star-selected');
+        expect(wrapper.emitted()).not.toHaveProperty('starSelected');
 
         wrapper.destroy();
     });
 
-    it('should emit star-mouse-move event when mouse move', async () => {
+    it('should emit star mouse move event when mouse move', async () => {
         const wrapper = mount(CRating, {
             propsData: {
                 readOnly: true,
@@ -140,7 +140,7 @@ describe('Rating readonly and events', () => {
 
         const stars = wrapper.find('span svg');
         await stars.trigger('mousemove');
-        expect(wrapper.emitted()).not.toHaveProperty('star-mouse-move');
+        expect(wrapper.emitted()).not.toHaveProperty('starMouseMove');
 
         wrapper.destroy();
     });

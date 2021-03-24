@@ -2,11 +2,11 @@
     <div>
         <CContainer>
             <CTabs v-model="activeTab" justify="between" class="overflow-x-auto">
-                <CTab label="Описание" name="description" class="whitespace-no-wrap" />
-                <CTab label="Характеристики" name="parameters" class="whitespace-no-wrap" />
-                <CTab label="Состав" name="structure" class="whitespace-no-wrap" />
-                <CTab name="feedback" class="whitespace-no-wrap">Отзывы (8)</CTab>
-                <CTab label="Доставка и оплата" name="delivery" class="whitespace-no-wrap" />
+                <CTab label="Описание" name="description" class="whitespace-nowrap" />
+                <CTab label="Характеристики" name="parameters" class="whitespace-nowrap" />
+                <CTab label="Состав" name="structure" class="whitespace-nowrap" />
+                <CTab name="feedback" class="whitespace-nowrap">Отзывы (8)</CTab>
+                <CTab label="Доставка и оплата" name="delivery" class="whitespace-nowrap" />
             </CTabs>
         </CContainer>
 

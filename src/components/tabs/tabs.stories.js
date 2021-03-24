@@ -74,6 +74,6 @@ export const Example = (args, { argTypes }) => {
             };
         },
         template:
-            '<div><CTabs v-model="activeTab" justify="between" class="overflow-x-auto"><CTab label="Description" name="description" class="whitespace-no-wrap" /><CTab label="Parameters" name="parameters" class="whitespace-no-wrap" /></CTabs><CTabPanels v-model="activeTab" class="p-1-5"><CTabPanel name="description"><div>Content for description</div></CTabPanel><CTabPanel name="parameters"><div>Content for parameters</div></CTabPanel></CTabPanels></div>'
+            '<div><CTabs v-model="activeTab" justify="between" class="overflow-x-auto"><CTab label="Description" name="description" class="whitespace-nowrap" /><CTab label="Parameters" name="parameters" class="whitespace-nowrap" /></CTabs><CTabPanels v-model="activeTab" class="p-1-5"><CTabPanel name="description"><div>Content for description</div></CTabPanel><CTabPanel name="parameters"><div>Content for parameters</div></CTabPanel></CTabPanels></div>'
     };
 };

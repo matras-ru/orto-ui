@@ -123,7 +123,7 @@ export default {
         } = this;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
-        const { inputBase, inputIconBase, listBase, fakeSelectBase } = theme;
+        const { inputBase, inputIconBase, listBase, fakeSelectBase, inputIconClass } = theme;
         const sizes = createSizeMap(theme);
 
         const iconClass = [inputIconBase];
@@ -214,7 +214,7 @@ export default {
                             ref: 'holder',
                             staticClass: inputBase,
                             scopedSlots: {
-                                append: () => h('i', { class: iconClass })
+                                append: () => h('i', { class: [iconClass, inputIconClass] })
                             },
                             on: {
                                 click: toggle
