@@ -1,14 +1,16 @@
 'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=require('lodash.merge');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule)return e;var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k];}});}});}n['default']=e;return Object.freeze(n);}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var merge__default=/*#__PURE__*/_interopDefaultLegacy(merge);var base =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
-var variantPrimary = 'border-primary-100 transition-shadow hover:shadow';
-var variantSecondary = 'bg-primary-100 border-primary-100 transition-shadow hover:shadow';
+var variantPrimary =
+    'border-primary-100 transition-shadow hover:shadow disabled:shadow-none';
+var variantSecondary =
+    'bg-primary-100 border-primary-100 transition-shadow hover:shadow disabled:shadow-none';
 var variantTertiary =
-    'border-secondary-200 text-secondary-200 transition-colors hover:text-white hover:bg-secondary-200';
+    'border-secondary-200 text-secondary-200 transition-colors hover:text-white disabled:text-secondary-200 hover:bg-secondary-200 disabled:bg-transparent';
 var variantQuaternary =
-    'border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100';
+    'border-tertiary-100 text-secondary-200 transition-bg hover:bg-tertiary-100 disabled:bg-transparent';
 var variantQuinary =
-    'border-black-100 transition-colors hover:text-white hover:bg-black-100';
+    'border-black-100 transition-colors hover:text-white disabled:text-black-100 hover:bg-black-100 disabled:bg-transparent';
 
 var stateDisable = 'cursor-not-allowed opacity-75';
 
@@ -209,11 +211,13 @@ var DefaultTheme$8 = {
     DISPLAY_FLEX: DISPLAY_FLEX,
     DISPLAY_BLOCK: DISPLAY_BLOCK
 };var base$7 = '';
+var DISPLAY_LIST_ITEM = 'list-item';
 var DISPLAY_INLINE = 'inline-block';
 var DISPLAY_BLOCK$1 = 'block';
 
 var DefaultTheme$9 = {
     base: base$7,
+    DISPLAY_LIST_ITEM: DISPLAY_LIST_ITEM,
     DISPLAY_INLINE: DISPLAY_INLINE,
     DISPLAY_BLOCK: DISPLAY_BLOCK$1
 };var base$8 = 'container';
@@ -265,6 +269,7 @@ var DefaultTheme$d = {
 var inputIconBase = 'block form-select';
 var inputIconSizeMd = 'w-1-4 h-1-4';
 var inputIconSizeSm = 'w-1-2 h-1-2';
+var inputIconClass = 'form-select-icon';
 
 var optionBase = 'cursor-pointer py-0-4 px-0-8';
 var optionStateDefault = 'bg-white hover:bg-tertiary-100';
@@ -279,6 +284,7 @@ var DefaultTheme$e = {
     inputIconBase: inputIconBase,
     inputIconSizeMd: inputIconSizeMd,
     inputIconSizeSm: inputIconSizeSm,
+    inputIconClass: inputIconClass,
 
     optionBase: optionBase,
     optionStateDefault: optionStateDefault,
@@ -325,7 +331,27 @@ var DefaultTheme$g = {
     dropdownVariantSecondary: dropdownVariantSecondary,
     dropdownPlacementLeft: dropdownPlacementLeft,
     dropdownPlacementRight: dropdownPlacementRight
-};var DefaultTheme$h = {};var DefaultTheme$i=/*#__PURE__*/Object.freeze({__proto__:null,CButton: DefaultTheme,CLink: DefaultTheme$1,CFormInput: DefaultTheme$3,CForm: DefaultTheme$4,CCheckbox: DefaultTheme$5,CRadio: DefaultTheme$5,CTab: DefaultTheme$6,CTabPanel: DefaultTheme$7,CList: DefaultTheme$8,CListItem: DefaultTheme$9,CContainer: DefaultTheme$a,CRow: DefaultTheme$b,CCol: DefaultTheme$c,CFormField: DefaultTheme$2,CFormPanel: DefaultTheme$d,CFormSelectCustom: DefaultTheme$e,CBadge: DefaultTheme$f,CDropdown: DefaultTheme$g,CListToggle: DefaultTheme$h});var justifyCenter = 'justify-center';
+};var DefaultTheme$h = {};var stateDefault$1 = '#dedede';
+var stateActive$1 = '#fda368';
+
+var starsWrapper = 'inline-block';
+var labelWrapper = 'inline-block align-middle';
+
+var stateCursorPointer = 'cursor-pointer';
+
+var DefaultTheme$i = {
+    stateDefault: stateDefault$1,
+    stateActive: stateActive$1,
+
+    starsWrapper: starsWrapper,
+    labelWrapper: labelWrapper,
+
+    stateCursorPointer: stateCursorPointer
+};var base$c = 'inline-block';
+
+var DefaultTheme$j = {
+    base: base$c
+};var DefaultTheme$k=/*#__PURE__*/Object.freeze({__proto__:null,CButton: DefaultTheme,CLink: DefaultTheme$1,CFormInput: DefaultTheme$3,CForm: DefaultTheme$4,CCheckbox: DefaultTheme$5,CRadio: DefaultTheme$5,CTab: DefaultTheme$6,CTabPanel: DefaultTheme$7,CList: DefaultTheme$8,CListItem: DefaultTheme$9,CContainer: DefaultTheme$a,CRow: DefaultTheme$b,CCol: DefaultTheme$c,CFormField: DefaultTheme$2,CFormPanel: DefaultTheme$d,CFormSelectCustom: DefaultTheme$e,CBadge: DefaultTheme$f,CDropdown: DefaultTheme$g,CListToggle: DefaultTheme$h,CRating: DefaultTheme$i,CStar: DefaultTheme$j});var justifyCenter = 'justify-center';
 var justifyBetween = 'justify-between';
 var justifyStart = 'justify-start';
 var justifyEnd = 'justify-end';var noop = function () {};
@@ -1389,7 +1415,9 @@ var lodash_get = get;var DEFAULTS = {
         optionValue: 'value',
         optionLabel: 'label',
         dropdownVariant: 'secondary'
-    }
+    },
+
+    CRating: {}
 };var PROP_NAME = '$ortoUIConfig';
 
 var Config = function Config() {
@@ -2172,9 +2200,286 @@ var CFormInput = {
             return h('div', [this.$slots.default]);
         }
     }
+};var validVariants = ['primary', 'secondary'];
+var validPlacements = ['left', 'right'];
+
+var NAME$4 = 'CDropdown';
+
+var CDropdown = {
+    name: NAME$4,
+
+    props: {
+        theme: {
+            type: Object,
+            default: function () { return DefaultTheme$g; }
+        },
+
+        variant: {
+            type: String,
+            default: function () { return getComponentConfig(NAME$4, 'variant'); },
+            validator: function (value) { return validVariants.includes(value); }
+        },
+
+        placement: {
+            type: String,
+            default: function () { return getComponentConfig(NAME$4, 'placement'); },
+            validator: function (value) { return validPlacements.includes(value); }
+        }
+    },
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    data: function data() {
+        return {
+            isShow: false
+        };
+    },
+
+    methods: {
+        toggle: function toggle() {
+            this.isShow = !this.isShow;
+        },
+
+        close: function close() {
+            this.isShow = false;
+        },
+
+        open: function open() {
+            this.isShow = true;
+        }
+    },
+
+    render: function render(h) {
+        var this$1 = this;
+
+        var ref = (function () {
+            var ref = this$1.theme;
+            var wrapperBase = ref.wrapperBase;
+            var dropdownBase = ref.dropdownBase;
+            var dropdownVariantPrimary = ref.dropdownVariantPrimary;
+            var dropdownVariantSecondary = ref.dropdownVariantSecondary;
+            var dropdownPlacementLeft = ref.dropdownPlacementLeft;
+            var dropdownPlacementRight = ref.dropdownPlacementRight;
+
+            var wrapperClasses = [wrapperBase];
+            var dropdownClasses = [dropdownBase];
+
+            var themeMap = {
+                variants: {
+                    primary: dropdownVariantPrimary,
+                    secondary: dropdownVariantSecondary
+                },
+                placement: {
+                    left: dropdownPlacementLeft,
+                    right: dropdownPlacementRight
+                }
+            };
+
+            dropdownClasses.push(themeMap.variants[this$1.variant]);
+            dropdownClasses.push(themeMap.placement[this$1.placement]);
+
+            return {
+                wrapperClasses: wrapperClasses,
+                dropdownClasses: dropdownClasses
+            };
+        })();
+        var wrapperClasses = ref.wrapperClasses;
+        var dropdownClasses = ref.dropdownClasses;
+
+        return h(
+            'div', // wrapper
+            {
+                class: wrapperClasses,
+                directives: [
+                    {
+                        name: 'click-outside',
+                        value: this.close
+                    }
+                ]
+            },
+            [
+                this.$scopedSlots.holder
+                    ? this.$scopedSlots.holder({
+                          // holder
+                          // TODO: спорное решение передавать функцию в качестве props, не совсем vue way, скорее реакт. Пока оставим так
+                          toggle: this.toggle,
+                          open: this.open,
+                          close: this.close,
+                          isShow: this.isShow
+                      })
+                    : null,
+
+                this.isShow
+                    ? h(
+                          'div', // dropdown
+                          {
+                              class: dropdownClasses,
+                              ref: 'dropdown'
+                          },
+                          this.$scopedSlots.dropdown
+                              ? this.$scopedSlots.dropdown({
+                                    toggle: this.toggle,
+                                    open: this.open,
+                                    close: this.close,
+                                    isShow: this.isShow
+                                })
+                              : null
+                      )
+                    : null
+            ]
+        );
+    }
+};var validDirection = ['vertical', 'horizontal'];
+
+var NAME$5 = 'CList';
+
+var props$1 = {
+    theme: {
+        type: Object,
+        default: function () { return DefaultTheme$8; }
+    },
+
+    tag: {
+        type: String,
+        default: function () { return getComponentConfig(NAME$5, 'tag'); }
+    },
+
+    direction: {
+        type: String,
+        default: function () { return getComponentConfig(NAME$5, 'direction'); },
+        validator: function (value) { return validDirection.includes(value); }
+    },
+
+    justify: {
+        type: String,
+        default: null,
+        validator: function (value) { return getComponentConfig('common', 'validJustifyContent').includes(value); }
+    },
+
+    block: {
+        // for col-count-
+        type: Boolean,
+        default: false
+    }
+};
+
+var currentClass = function (ref) {
+    var direction = ref.direction;
+    var justify = ref.justify;
+    var theme = ref.theme;
+    var block = ref.block;
+
+    var base = theme.base;
+    var directionColumn = theme.directionColumn;
+    var directionHorizontal = theme.directionHorizontal;
+    var DISPLAY_FLEX = theme.DISPLAY_FLEX;
+    var DISPLAY_BLOCK = theme.DISPLAY_BLOCK;
+
+    var classMap = {
+        vertical: directionColumn,
+        horizontal: directionHorizontal
+    };
+
+    var classes = [base];
+
+    if (block) {
+        classes.push(DISPLAY_BLOCK);
+    } else {
+        classes.push(DISPLAY_FLEX);
+
+        // horizontal/vertical
+        classes.push(classMap[direction]);
+
+        // horizontal align
+        classes.push(justifyClaassUtil(justify));
+    }
+
+    return classes;
+};
+
+var CList = {
+    name: NAME$5,
+
+    functional: true,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    props: props$1,
+
+    render: function render(h, ref) {
+        var props = ref.props;
+        var data = ref.data;
+        var children = ref.children;
+
+        var componentData = {
+            class: currentClass(props)
+        };
+
+        return h(props.tag, vueFunctionalDataMerge.mergeData(data, componentData), children);
+    }
+};var NAME$6 = 'CListItem';
+
+var props$2 = {
+    theme: {
+        type: Object,
+        default: function () { return DefaultTheme$9; }
+    },
+
+    tag: {
+        type: String,
+        default: function () { return getComponentConfig(NAME$6, 'tag'); }
+    },
+
+    inline: {
+        type: Boolean,
+        default: function () { return getComponentConfig(NAME$6, 'inline'); }
+    },
+
+    listItem: {
+        type: Boolean,
+        default: false
+    }
+};
+
+var CListItem = {
+    name: NAME$6,
+
+    functional: true,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    props: props$2,
+
+    render: function render(h, ref) {
+        var props = ref.props;
+        var data = ref.data;
+        var children = ref.children;
+
+        var ref$1 = props.theme;
+        var base = ref$1.base;
+        var DISPLAY_LIST_ITEM = ref$1.DISPLAY_LIST_ITEM;
+        var DISPLAY_INLINE = ref$1.DISPLAY_INLINE;
+        var DISPLAY_BLOCK = ref$1.DISPLAY_BLOCK;
+
+        var componentData = {
+            staticClass: base,
+            class:
+                props.tag === 'li' && props.listItem
+                    ? DISPLAY_LIST_ITEM
+                    : [props.inline ? DISPLAY_INLINE : DISPLAY_BLOCK]
+        };
+
+        return h(props.tag, vueFunctionalDataMerge.mergeData(data, componentData), children);
+    }
 };var validSizes$1 = ['sm', 'md'];
 
-var NAME$4 = 'CFormSelectCustom';
+var NAME$7 = 'CFormSelectCustom';
 
 var createSizeMap$2 = function (ref) {
     var inputIconSizeMd = ref.inputIconSizeMd;
@@ -2209,10 +2514,17 @@ var mapOption = function (ref) {
 };
 
 var CFormSelectCustom = {
-    name: NAME$4,
+    name: NAME$7,
 
     install: function install(Vue, theme) {
         selfInstall(Vue, theme, this);
+    },
+
+    components: {
+        CDropdown: CDropdown,
+        CFormInput: CFormInput,
+        CList: CList,
+        CListItem: CListItem
     },
 
     inheritAttrs: false,
@@ -2245,12 +2557,12 @@ var CFormSelectCustom = {
 
         optionValue: {
             type: String,
-            default: function () { return getComponentConfig(NAME$4, 'optionValue'); }
+            default: function () { return getComponentConfig(NAME$7, 'optionValue'); }
         },
 
         optionLabel: {
             type: String,
-            default: function () { return getComponentConfig(NAME$4, 'optionLabel'); }
+            default: function () { return getComponentConfig(NAME$7, 'optionLabel'); }
         },
 
         error: {
@@ -2295,6 +2607,7 @@ var CFormSelectCustom = {
         var inputIconBase = theme.inputIconBase;
         var listBase = theme.listBase;
         var fakeSelectBase = theme.fakeSelectBase;
+        var inputIconClass = theme.inputIconClass;
         var sizes = createSizeMap$2(theme);
 
         var iconClass = [inputIconBase];
@@ -2366,7 +2679,7 @@ var CFormSelectCustom = {
 
         return h('CDropdown', {
             props: {
-                variant: getComponentConfig(NAME$4, 'dropdownVariant')
+                variant: getComponentConfig(NAME$7, 'dropdownVariant')
             },
 
             scopedSlots: Object.assign({}, {holder: function (ref) {
@@ -2388,7 +2701,7 @@ var CFormSelectCustom = {
                             ref: 'holder',
                             staticClass: inputBase,
                             scopedSlots: {
-                                append: function () { return h('i', { class: iconClass }); }
+                                append: function () { return h('i', { class: [iconClass, inputIconClass] }); }
                             },
                             on: {
                                 click: toggle
@@ -2645,10 +2958,10 @@ function radioCheckbox (type) {
             );
         }
     };
-}var NAME$5 = 'CRadio';
+}var NAME$8 = 'CRadio';
 var TYPE = 'radio';
 
-var props$1 = {
+var props$3 = {
     modelValue: {
         type: [String, Number, Boolean],
         default: null
@@ -2660,10 +2973,10 @@ var props$1 = {
     }
 };
 
-var CRadio = Object.assign({}, {name: NAME$5},
+var CRadio = Object.assign({}, {name: NAME$8},
 
     merge__default['default'](radioCheckbox(TYPE), {
-        props: props$1
+        props: props$3
     }));// TODO: add limit...
 
 function radioCheckboxGroup (type) {
@@ -2728,10 +3041,10 @@ function radioCheckboxGroup (type) {
             return h('div', children);
         }
     };
-}var NAME$6 = 'CRadioGroup';
+}var NAME$9 = 'CRadioGroup';
 var TYPE$1 = 'radio';
 
-var CRadioGroup = Object.assign({}, {name: NAME$6},
+var CRadioGroup = Object.assign({}, {name: NAME$9},
 
     merge__default['default'](radioCheckboxGroup(TYPE$1), {
         props: {
@@ -2740,10 +3053,10 @@ var CRadioGroup = Object.assign({}, {name: NAME$6},
                 default: null
             }
         }
-    }));var NAME$7 = 'CCheckbox';
+    }));var NAME$a = 'CCheckbox';
 var TYPE$2 = 'checkbox';
 
-var props$2 = {
+var props$4 = {
     modelValue: {
         type: [Array, Boolean, String, Number],
         default: null
@@ -2751,12 +3064,12 @@ var props$2 = {
 
     trueValue: {
         type: [String, Number, Boolean],
-        default: function () { return getComponentConfig(NAME$7, 'trueValue'); }
+        default: function () { return getComponentConfig(NAME$a, 'trueValue'); }
     },
 
     falseValue: {
         type: [String, Number, Boolean],
-        default: function () { return getComponentConfig(NAME$7, 'falseValue'); }
+        default: function () { return getComponentConfig(NAME$a, 'falseValue'); }
     },
 
     error: {
@@ -2765,14 +3078,14 @@ var props$2 = {
     }
 };
 
-var CCheckbox = Object.assign({}, {name: NAME$7},
+var CCheckbox = Object.assign({}, {name: NAME$a},
 
     merge__default['default'](radioCheckbox(TYPE$2), {
-        props: props$2
-    }));var NAME$8 = 'CCheckboxGroup';
+        props: props$4
+    }));var NAME$b = 'CCheckboxGroup';
 var TYPE$3 = 'checkbox';
 
-var CCheckboxGroup = Object.assign({}, {name: NAME$8},
+var CCheckboxGroup = Object.assign({}, {name: NAME$b},
 
     merge__default['default'](radioCheckboxGroup(TYPE$3), {
         props: {
@@ -2781,10 +3094,431 @@ var CCheckboxGroup = Object.assign({}, {name: NAME$8},
                 default: function () { return []; }
             }
         }
-    }));var NAME$9 = 'CLink';
+    }));var NAME$c = 'CStar';
+
+var CStar = {
+    name: NAME$c,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    props: {
+        theme: {
+            type: Object,
+            default: function () { return DefaultTheme$j; }
+        },
+
+        fill: {
+            type: Number,
+            default: undefined
+        },
+
+        starId: {
+            type: Number,
+            required: true,
+            default: undefined
+        },
+
+        activeColor: {
+            type: String,
+            required: true,
+            default: undefined
+        },
+
+        inactiveColor: {
+            type: String,
+            required: true,
+            default: undefined
+        },
+
+        size: {
+            type: Number,
+            default: undefined
+        },
+
+        gradeModel: {
+            type: Number,
+            default: undefined
+        },
+
+        id: {
+            type: [Number, String],
+            default: undefined
+        }
+    },
+
+    data: function data() {
+        return {
+            starPoints: [19.8, 2.2, 6.6, 43.56, 39.6, 17.16, 0, 17.16, 33, 43.56],
+            isStarActive: true
+        };
+    },
+
+    model: {
+        prop: 'gradeModel',
+        event: 'starSelected'
+    },
+
+    computed: {
+        starPointsToString: function starPointsToString() {
+            return this.starPoints.join(',');
+        },
+
+        gradeId: function gradeId() {
+            return ("url(#" + (this.id) + (this.starId) + ")");
+        },
+
+        starFill: function starFill() {
+            return ((this.fill) + "%");
+        },
+
+        starSize: function starSize() {
+            return ((this.size / 16) + "rem");
+        }
+    },
+
+    methods: {
+        mouseMoving: function mouseMoving(e) {
+            if (e.touchAction !== 'undefined') {
+                this.$emit('starMouseMove', {
+                    event: e,
+                    position: this.getPosition(e),
+                    id: this.starId
+                });
+            }
+        },
+
+        touchStart: function touchStart() {
+            var this$1 = this;
+
+            this.$nextTick(function () {
+                this$1.isStarActive = true;
+            });
+        },
+
+        touchEnd: function touchEnd() {
+            var this$1 = this;
+
+            this.$nextTick(function () {
+                this$1.isStarActive = false;
+            });
+        },
+
+        getPosition: function getPosition(e) {
+            var starWidth = (92 / 100) * this.size;
+            var offset = Math.max(e.offsetX, 1);
+            var position = Math.round((100 / starWidth) * offset);
+
+            return Math.min(position, 100);
+        },
+
+        selected: function selected(e) {
+            this.$emit('starSelected', {
+                id: this.starId,
+                position: this.getPosition(e)
+            });
+        }
+    },
+
+    render: function render(h) {
+        var this$1 = this;
+
+        var ref = this.theme;
+        var base = ref.base;
+        return h(
+            'svg',
+            {
+                attrs: {
+                    viewBox: '0 0 50 50',
+                    xmlns: 'http://www.w3.org/2000/svg',
+                    width: this.starSize
+                },
+                staticClass: base,
+                on: {
+                    mousemove: function (e) {
+                        this$1.mouseMoving(e);
+                    },
+                    click: function (e) {
+                        this$1.selected(e);
+                    },
+                    touchstart: function () {
+                        this$1.touchStart();
+                    },
+                    touchend: function () {
+                        this$1.touchEnd();
+                    }
+                }
+            },
+            [
+                h(
+                    'linearGradient',
+                    {
+                        attrs: {
+                            id: ("" + (this.id) + (this.starId)),
+                            x1: 0,
+                            x2: '100%',
+                            y1: 0,
+                            y2: 0
+                        }
+                    },
+                    [
+                        h('stop', {
+                            attrs: {
+                                offset: this.starFill,
+                                'stop-color': this.activeColor
+                            }
+                        }),
+                        h('stop', {
+                            attrs: {
+                                offset: this.starFill,
+                                'stop-color': this.inactiveColor
+                            }
+                        })
+                    ]
+                ),
+                h('polygon', {
+                    attrs: {
+                        points: this.starPointsToString,
+                        fill: this.gradeId
+                    }
+                })
+            ]
+        );
+    }
+};var NAME$d = 'CRating';
+var SCALE_DEFAULT = [
+    { id: 1, value: 1 },
+    { id: 2, value: 2 },
+    { id: 3, value: 3 },
+    { id: 4, value: 4 },
+    { id: 5, value: 5 }
+];
+
+var CRating = {
+    name: NAME$d,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    components: {
+        CStar: CStar
+    },
+
+    props: {
+        theme: {
+            type: Object,
+            default: function () { return DefaultTheme$i; }
+        },
+
+        id: {
+            type: [Number, String],
+            default: Math.random().toString(36).substring(7)
+        },
+
+        scale: {
+            type: [Number, Array],
+            default: 5
+        },
+
+        increment: {
+            type: [Number, String],
+            default: 1
+        },
+
+        rating: {
+            type: [Number, String],
+            default: undefined
+        },
+
+        readOnly: {
+            type: Boolean,
+            default: false
+        },
+
+        starSize: {
+            type: Number,
+            default: 32
+        },
+
+        activeOnClick: {
+            type: Boolean,
+            default: false
+        },
+
+        gradeModel: {
+            type: Number,
+            default: undefined
+        }
+    },
+
+    data: function data() {
+        return {
+            fillLevel: [],
+            currentRating: this.rating,
+            selectedRating: this.rating,
+            isSelected: false,
+            activeColor: this.theme.stateActive,
+            inactiveColor: this.theme.stateDefault,
+            scaleComputed: this.scale.length ? this.scale : SCALE_DEFAULT
+        };
+    },
+
+    model: {
+        prop: 'gradeModel',
+        event: 'starSelected'
+    },
+
+    computed: {
+        computedLabel: function computedLabel() {
+            var this$1 = this;
+
+            return this.scaleComputed.find(function (item) { return item.value === this$1.currentRating; });
+        },
+
+        maxRating: function maxRating() {
+            return this.scale.length || this.scale;
+        },
+
+        roundedRating: function roundedRating() {
+            var inv = 1.0 / this.increment;
+            return Math.min(this.maxRating, Math.ceil(this.currentRating * inv) / inv);
+        },
+
+        activeColors: function activeColors() {
+            if (Array.isArray(this.activeColor)) {
+                return this.padColors(
+                    this.activeColor,
+                    this.maxRating,
+                    this.activeColor.slice(-1)[0]
+                );
+            }
+            return new Array(this.maxRating).fill(this.activeColor);
+        },
+
+        currentActiveColor: function currentActiveColor() {
+            if (!this.activeOnClick) {
+                return this.currentRating > 0
+                    ? this.activeColors[Math.ceil(this.currentRating) - 1]
+                    : this.inactiveColor;
+            }
+            return this.selectedRating > 0
+                ? this.activeColors[Math.ceil(this.selectedRating) - 1]
+                : this.inactiveColor;
+        }
+    },
+
+    created: function created() {
+        this.createStars();
+    },
+
+    methods: {
+        setRating: function setRating(e, persist) {
+            if (!this.readOnly) {
+                var position = e.position / 100;
+                this.currentRating = (e.id + position).toFixed(2);
+                this.currentRating =
+                    this.currentRating > this.maxRating ? this.maxRating : this.currentRating;
+                if (persist) {
+                    this.createStars(true, true);
+                    this.selectedRating =
+                        this.currentRating === this.selectedRating ? 0 : this.currentRating;
+                    this.$emit('starSelected', this.selectedRating);
+                    this.isSelected = true;
+                } else {
+                    this.createStars(true, !this.activeOnClick);
+                    this.$emit('starMouseMove', this.currentRating); // for storybook
+                }
+            }
+        },
+
+        resetRating: function resetRating() {
+            if (!this.readOnly) {
+                this.currentRating = this.selectedRating;
+                this.createStars(this.isSelected);
+            }
+        },
+
+        createStars: function createStars(round, applyFill) {
+            if ( round === void 0 ) round = true;
+            if ( applyFill === void 0 ) applyFill = true;
+
+            this.currentRating = round ? this.roundedRating : this.currentRating;
+            for (var i = 0; i < this.maxRating; i++) {
+                var level = 0;
+                if (i < this.currentRating) {
+                    level = this.currentRating - i > 1 ? 100 : (this.currentRating - i) * 100;
+                }
+                if (applyFill) {
+                    this.fillLevel[i] = Math.round(level);
+                }
+            }
+        },
+
+        padColors: function padColors(array, minLength, fillValue) {
+            return Object.assign(new Array(minLength).fill(fillValue), array);
+        }
+    },
+
+    render: function render(h) {
+        var this$1 = this;
+
+        var ref = this.theme;
+        var starsWrapper = ref.starsWrapper;
+        var labelWrapper = ref.labelWrapper;
+        ref.stateCursorPointer;
+        var stars = this.scaleComputed.map(function (ref, i) {
+            var value = ref.value;
+
+            if (typeof value === 'number' && value <= this$1.maxRating && value >= 0) {
+                return h('CStar', {
+                    props: {
+                        fill: this$1.fillLevel[i],
+                        starId: i,
+                        activeColor: this$1.currentActiveColor,
+                        inactiveColor: this$1.inactiveColor,
+                        size: this$1.starSize,
+                        gradeModel: this$1.gradeModel,
+                        id: this$1.id
+                    },
+                    on: {
+                        starSelected: function (e) { return this$1.setRating(e, true); },
+                        starMouseMove: function (e) { return this$1.setRating(e); }
+                    }
+                });
+            }
+        });
+
+        return h('div', [
+            h(
+                'span',
+                {
+                    staticClass: starsWrapper,
+                    class: { stateCursorPointer: !this.readOnly },
+                    on: {
+                        mouseleave: function () { return this$1.resetRating(); }
+                    }
+                },
+                stars
+            ),
+            (this.computedLabel && this.computedLabel.label) || this.rating
+                ? h(
+                      'div',
+                      {
+                          staticClass: labelWrapper
+                      },
+                      this.computedLabel && this.computedLabel.label
+                          ? (" - " + (this.computedLabel.label))
+                          : (" - " + (this.rating))
+                  )
+                : null
+        ]);
+    }
+};var NAME$e = 'CLink';
 var LINK_TAG = 'a';
 var SPAN_TAG = 'span';
-var validVariants = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
+var validVariants$1 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 
 var concat = function () {
     var args = [], len = arguments.length;
@@ -2806,17 +3540,6 @@ var computeTag = function (ref, instance) {
         : href
         ? LINK_TAG
         : SPAN_TAG;
-};
-
-var computeRel = function (ref) {
-    if ( ref === void 0 ) ref = {};
-    var target = ref.target;
-    var rel = ref.rel;
-
-    if (target === '_blank' && isNull(rel)) {
-        return 'noopener';
-    }
-    return rel || null;
 };
 
 var createThemeMap = function (ref) {
@@ -2846,7 +3569,7 @@ function createProps() {
 
         target: {
             type: String,
-            default: function () { return getComponentConfig(NAME$9, 'target'); }
+            default: function () { return getComponentConfig(NAME$e, 'target'); }
         },
 
         rel: {
@@ -2904,7 +3627,7 @@ function createProps() {
 }
 
 var CLink = {
-    name: NAME$9,
+    name: NAME$e,
 
     inheritAttrs: false,
 
@@ -2926,8 +3649,8 @@ var CLink = {
 
         variant: {
             type: String,
-            default: function () { return getComponentConfig(NAME$9, 'variant'); },
-            validator: function (value) { return validVariants.includes(value); }
+            default: function () { return getComponentConfig(NAME$e, 'variant'); },
+            validator: function (value) { return validVariants$1.includes(value); }
         },
 
         inline: {
@@ -2952,10 +3675,6 @@ var CLink = {
 
         isRouterLink: function isRouterLink$1() {
             return isRouterLink(this.computedTag);
-        },
-
-        computedRel: function computedRel() {
-            return computeRel({ target: this.target, rel: this.rel });
         },
 
         computedProps: function computedProps() {
@@ -3045,8 +3764,8 @@ var CLink = {
 
         return h(this.computedTag, componentData, this.label ? this.label : this.$slots.default);
     }
-};var NAME$a = 'CButton';
-var validVariants$1 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
+};var NAME$f = 'CButton';
+var validVariants$2 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 var validSizes$2 = ['lg', 'md', 'sm'];
 var validTagNames = ['button', 'a'];
 var validTypes$1 = ['submit', 'reset'];
@@ -3090,7 +3809,7 @@ var createThemeMap$1 = function (ref) {
     };
 };
 
-var props$3 = Object.assign({}, linkProps,
+var props$5 = Object.assign({}, linkProps,
 
     {theme: {
         type: Object,
@@ -3104,7 +3823,7 @@ var props$3 = Object.assign({}, linkProps,
 
     tag: {
         type: String,
-        default: function () { return getComponentConfig(NAME$a, 'tag'); },
+        default: function () { return getComponentConfig(NAME$f, 'tag'); },
         validator: function (value) { return validTagNames.includes(value); }
     },
 
@@ -3121,13 +3840,13 @@ var props$3 = Object.assign({}, linkProps,
 
     variant: {
         type: String,
-        default: function () { return getComponentConfig(NAME$a, 'variant'); },
-        validator: function (value) { return validVariants$1.includes(value); }
+        default: function () { return getComponentConfig(NAME$f, 'variant'); },
+        validator: function (value) { return validVariants$2.includes(value); }
     },
 
     size: {
         type: String,
-        default: function () { return getComponentConfig(NAME$a, 'size'); },
+        default: function () { return getComponentConfig(NAME$f, 'size'); },
         validator: function (value) { return validSizes$2.includes(value); }
     },
 
@@ -3136,7 +3855,7 @@ var props$3 = Object.assign({}, linkProps,
         default: false
     }});
 
-var currentClass = function (ref) {
+var currentClass$1 = function (ref) {
     var disabled = ref.disabled;
     var size = ref.size;
     var variant = ref.variant;
@@ -3175,7 +3894,7 @@ var computeAttrs = function (props) {
 };
 
 var CButton = {
-    name: NAME$a,
+    name: NAME$f,
 
     functional: true,
 
@@ -3183,7 +3902,7 @@ var CButton = {
         selfInstall(Vue, theme, this);
     },
 
-    props: props$3,
+    props: props$5,
 
     render: function render(h, ref) {
         var data = ref.data;
@@ -3208,7 +3927,7 @@ var CButton = {
         };
 
         var componentData = {
-            class: currentClass(props),
+            class: currentClass$1(props),
             props: computeLinkProps(props),
             attrs: computeAttrs(props),
             on: on
@@ -3220,10 +3939,10 @@ var CButton = {
             props.label ? props.label : children
         );
     }
-};var NAME$b = 'CTabs';
+};var NAME$g = 'CTabs';
 
 var CTabs = {
-    name: NAME$b,
+    name: NAME$g,
 
     functional: true,
 
@@ -3244,12 +3963,12 @@ var CTabs = {
 
         vertical: {
             type: Boolean,
-            default: function () { return getComponentConfig(NAME$b, 'vertical'); }
+            default: function () { return getComponentConfig(NAME$g, 'vertical'); }
         },
 
         justify: {
             type: String,
-            default: function () { return getComponentConfig(NAME$b, 'justify'); },
+            default: function () { return getComponentConfig(NAME$g, 'justify'); },
             validator: function (value) { return getComponentConfig('common', 'validJustifyContent').includes(value); }
         }
     },
@@ -3301,10 +4020,10 @@ var CTabs = {
             [].concat( normalizeTabs )
         );
     }
-};var NAME$c = 'CTab';
+};var NAME$h = 'CTab';
 
 var CTab = {
-    name: NAME$c,
+    name: NAME$h,
 
     inheritAttrs: false,
 
@@ -3369,10 +4088,10 @@ var CTab = {
             )
         ]);
     }
-};var NAME$d = 'CTabPanels';
+};var NAME$i = 'CTabPanels';
 
 var CTabPanels = {
-    name: NAME$d,
+    name: NAME$i,
 
     functional: true,
 
@@ -3394,7 +4113,7 @@ var CTabPanels = {
         // v-if/show
         lazy: {
             type: Boolean,
-            default: function () { return getComponentConfig(NAME$d, 'lazy'); }
+            default: function () { return getComponentConfig(NAME$i, 'lazy'); }
         }
     },
 
@@ -3424,10 +4143,10 @@ var CTabPanels = {
 
         return h('div', vueFunctionalDataMerge.mergeData(data, {}), [].concat( normalizeTabPanels ));
     }
-};var NAME$e = 'CTabPanel';
+};var NAME$j = 'CTabPanel';
 
 var CTabPanel = {
-    name: NAME$e,
+    name: NAME$j,
 
     functional: true,
 
@@ -3443,7 +4162,7 @@ var CTabPanel = {
 
         tag: {
             type: String,
-            default: function () { return getComponentConfig(NAME$e, 'tag'); }
+            default: function () { return getComponentConfig(NAME$j, 'tag'); }
         },
 
         name: {
@@ -3471,274 +4190,7 @@ var CTabPanel = {
         };
         return h(props.tag, vueFunctionalDataMerge.mergeData(data, componentData), [children]);
     }
-};var validDirection = ['vertical', 'horizontal'];
-
-var NAME$f = 'CList';
-
-var props$4 = {
-    theme: {
-        type: Object,
-        default: function () { return DefaultTheme$8; }
-    },
-
-    tag: {
-        type: String,
-        default: function () { return getComponentConfig(NAME$f, 'tag'); }
-    },
-
-    direction: {
-        type: String,
-        default: function () { return getComponentConfig(NAME$f, 'direction'); },
-        validator: function (value) { return validDirection.includes(value); }
-    },
-
-    justify: {
-        type: String,
-        default: null,
-        validator: function (value) { return getComponentConfig('common', 'validJustifyContent').includes(value); }
-    },
-
-    block: {
-        type: Boolean,
-        default: false
-    }
-};
-
-var currentClass$1 = function (ref) {
-    var direction = ref.direction;
-    var justify = ref.justify;
-    var theme = ref.theme;
-    var block = ref.block;
-
-    var base = theme.base;
-    var directionColumn = theme.directionColumn;
-    var directionHorizontal = theme.directionHorizontal;
-    var DISPLAY_FLEX = theme.DISPLAY_FLEX;
-    var DISPLAY_BLOCK = theme.DISPLAY_BLOCK;
-
-    var classMap = {
-        vertical: directionColumn,
-        horizontal: directionHorizontal
-    };
-
-    var classes = [base];
-
-    if (block) {
-        classes.push(DISPLAY_BLOCK);
-    } else {
-        classes.push(DISPLAY_FLEX);
-
-        // horizontal/vertical
-        classes.push(classMap[direction]);
-
-        // horizontal align
-        classes.push(justifyClaassUtil(justify));
-    }
-
-    return classes;
-};
-
-var CList = {
-    name: NAME$f,
-
-    functional: true,
-
-    install: function install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    props: props$4,
-
-    render: function render(h, ref) {
-        var props = ref.props;
-        var data = ref.data;
-        var children = ref.children;
-
-        var componentData = {
-            class: currentClass$1(props)
-        };
-
-        return h(props.tag, vueFunctionalDataMerge.mergeData(data, componentData), children);
-    }
-};var NAME$g = 'CListItem';
-
-var props$5 = {
-    theme: {
-        type: Object,
-        default: function () { return DefaultTheme$9; }
-    },
-
-    tag: {
-        type: String,
-        default: function () { return getComponentConfig(NAME$g, 'tag'); }
-    },
-
-    inline: {
-        type: Boolean,
-        default: function () { return getComponentConfig(NAME$g, 'inline'); }
-    }
-};
-
-var CListItem = {
-    name: NAME$g,
-
-    functional: true,
-
-    install: function install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    props: props$5,
-
-    render: function render(h, ref) {
-        var props = ref.props;
-        var data = ref.data;
-        var children = ref.children;
-
-        var ref$1 = props.theme;
-        var base = ref$1.base;
-        var DISPLAY_INLINE = ref$1.DISPLAY_INLINE;
-        var DISPLAY_BLOCK = ref$1.DISPLAY_BLOCK;
-
-        var componentData = {
-            staticClass: base,
-            class: [props.inline ? DISPLAY_INLINE : DISPLAY_BLOCK]
-        };
-
-        return h(props.tag, vueFunctionalDataMerge.mergeData(data, componentData), children);
-    }
-};var validVariants$2 = ['primary', 'secondary'];
-var validPlacements = ['left', 'right'];
-
-var NAME$h = 'CDropdown';
-
-var CDropdown = {
-    name: NAME$h,
-
-    props: {
-        theme: {
-            type: Object,
-            default: function () { return DefaultTheme$g; }
-        },
-
-        variant: {
-            type: String,
-            default: function () { return getComponentConfig(NAME$h, 'variant'); },
-            validator: function (value) { return validVariants$2.includes(value); }
-        },
-
-        placement: {
-            type: String,
-            default: function () { return getComponentConfig(NAME$h, 'placement'); },
-            validator: function (value) { return validPlacements.includes(value); }
-        }
-    },
-
-    install: function install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    data: function data() {
-        return {
-            isShow: false
-        };
-    },
-
-    methods: {
-        toggle: function toggle() {
-            this.isShow = !this.isShow;
-        },
-
-        close: function close() {
-            this.isShow = false;
-        },
-
-        open: function open() {
-            this.isShow = true;
-        }
-    },
-
-    render: function render(h) {
-        var this$1 = this;
-
-        var ref = (function () {
-            var ref = this$1.theme;
-            var wrapperBase = ref.wrapperBase;
-            var dropdownBase = ref.dropdownBase;
-            var dropdownVariantPrimary = ref.dropdownVariantPrimary;
-            var dropdownVariantSecondary = ref.dropdownVariantSecondary;
-            var dropdownPlacementLeft = ref.dropdownPlacementLeft;
-            var dropdownPlacementRight = ref.dropdownPlacementRight;
-
-            var wrapperClasses = [wrapperBase];
-            var dropdownClasses = [dropdownBase];
-
-            var themeMap = {
-                variants: {
-                    primary: dropdownVariantPrimary,
-                    secondary: dropdownVariantSecondary
-                },
-                placement: {
-                    left: dropdownPlacementLeft,
-                    right: dropdownPlacementRight
-                }
-            };
-
-            dropdownClasses.push(themeMap.variants[this$1.variant]);
-            dropdownClasses.push(themeMap.placement[this$1.placement]);
-
-            return {
-                wrapperClasses: wrapperClasses,
-                dropdownClasses: dropdownClasses
-            };
-        })();
-        var wrapperClasses = ref.wrapperClasses;
-        var dropdownClasses = ref.dropdownClasses;
-
-        return h(
-            'div', // wrapper
-            {
-                class: wrapperClasses,
-                directives: [
-                    {
-                        name: 'click-outside',
-                        value: this.close
-                    }
-                ]
-            },
-            [
-                this.$scopedSlots.holder
-                    ? this.$scopedSlots.holder({
-                          // holder
-                          // TODO: спорное решение передавать функцию в качестве props, не совсем vue way, скорее реакт. Пока оставим так
-                          toggle: this.toggle,
-                          open: this.open,
-                          close: this.close,
-                          isShow: this.isShow
-                      })
-                    : null,
-
-                this.isShow
-                    ? h(
-                          'div', // dropdown
-                          {
-                              class: dropdownClasses,
-                              ref: 'dropdown'
-                          },
-                          this.$scopedSlots.dropdown
-                              ? this.$scopedSlots.dropdown({
-                                    toggle: this.toggle,
-                                    open: this.open,
-                                    close: this.close,
-                                    isShow: this.isShow
-                                })
-                              : null
-                      )
-                    : null
-            ]
-        );
-    }
-};var NAME$i = 'CBadge';
+};var NAME$k = 'CBadge';
 var validVariants$3 = ['primary', 'secondary', 'tertiary', 'quaternary', 'quinary'];
 var validSizes$3 = ['lg', 'md', 'sm'];
 
@@ -3781,13 +4233,13 @@ var props$6 = {
 
     variant: {
         type: String,
-        default: function () { return getComponentConfig(NAME$i, 'variant'); },
+        default: function () { return getComponentConfig(NAME$k, 'variant'); },
         validator: function (value) { return validVariants$3.includes(value); }
     },
 
     size: {
         type: String,
-        default: function () { return getComponentConfig(NAME$i, 'size'); },
+        default: function () { return getComponentConfig(NAME$k, 'size'); },
         validator: function (value) { return validSizes$3.includes(value); }
     }
 };
@@ -3812,7 +4264,7 @@ var currentClass$2 = function (ref) {
 };
 
 var CBadge = {
-    name: NAME$i,
+    name: NAME$k,
 
     functional: true,
 
@@ -3833,10 +4285,10 @@ var CBadge = {
 
         return h('span', vueFunctionalDataMerge.mergeData(data, componentData), props.label ? props.label : children);
     }
-};var base$c = 'w-full object-cover';
+};var base$d = 'w-full object-cover';
 
-var DefaultTheme$j = {
-    base: base$c
+var DefaultTheme$l = {
+    base: base$d
 };/* TODO: MVP
 
 - type
@@ -3845,7 +4297,7 @@ var DefaultTheme$j = {
 
 */
 
-var NAME$j = 'CPicture';
+var NAME$l = 'CPicture';
 
 var generateProps = function () {
     var screens = getComponentConfig('common', 'screens');
@@ -3858,7 +4310,7 @@ var generateProps = function () {
 
     return Object.assign({}, {theme: {
             type: Object,
-            default: function () { return DefaultTheme$j; }
+            default: function () { return DefaultTheme$l; }
         },
 
         // TODO: more types
@@ -3903,7 +4355,7 @@ var currentClass$3 = function (ref) {
 };
 
 var CPicture = {
-    name: NAME$j,
+    name: NAME$l,
 
     functional: true,
 
@@ -3939,7 +4391,7 @@ var CPicture = {
 
         return h('picture', sources.concat( [h('img', vueFunctionalDataMerge.mergeData(data, imgData))]));
     }
-};var NAME$k = 'CListToggle';
+};var NAME$m = 'CListToggle';
 
 var props$7 = {
     theme: {
@@ -3949,17 +4401,19 @@ var props$7 = {
 
     limit: {
         type: Number,
-        default: function () { return getComponentConfig(NAME$k, 'limit'); }
+        default: function () { return getComponentConfig(NAME$m, 'limit'); }
     }
 };
 
 var CListToggle = {
-    name: NAME$k,
+    name: NAME$m,
 
-    data: function () { return ({
-        childCount: 0,
-        innerLimit: 0
-    }); },
+    data: function data() {
+        return {
+            childCount: 0,
+            innerLimit: this.limit
+        };
+    },
 
     install: function install(Vue, theme) {
         selfInstall(Vue, theme, this);
@@ -3970,7 +4424,6 @@ var CListToggle = {
     created: function created() {
         var this$1 = this;
 
-        this.innerLimit = this.limit;
         // TODO: optimize
         this.$nextTick().then(function () {
             this$1.childCount = this$1.$scopedSlots.default().length;
@@ -3993,7 +4446,6 @@ var CListToggle = {
                     click: this$1.show
                 }
             });
-
             return el;
         };
 
@@ -4012,6 +4464,7 @@ var CListToggle = {
 
             return el;
         };
+
         // TODO: проверка + throw err
         return getWrap(this.$scopedSlots.wrap());
     }
@@ -4063,7 +4516,7 @@ var CContainer = {
         return h('div', vueFunctionalDataMerge.mergeData(data, componentData), children);
     }
 };var OFFSET_PROP_NAME = 'offset';
-var NAME$l = 'CCol';
+var NAME$n = 'CCol';
 
 var generateProps$1 = function () {
     var obj;
@@ -4104,7 +4557,7 @@ var generateProps$1 = function () {
 };
 
 var CCol = {
-    name: NAME$l,
+    name: NAME$n,
 
     functional: true,
 
@@ -4147,7 +4600,7 @@ var CCol = {
 
         return h('div', vueFunctionalDataMerge.mergeData(data, componentData), children);
     }
-};var NAME$m = 'CRow';
+};var NAME$o = 'CRow';
 var VALID_GUTTERS = ['none', 'sm', 'md', 'lg', 'xl'];
 var GUTTERS_PROP_NAME = 'gutters';
 var COLS_PROP_NAME = 'cols';
@@ -4225,14 +4678,14 @@ var generateProps$2 = function () {
         }
     }, obj[COLS_PROP_NAME] = {
             type: Number,
-            default: function () { return getComponentConfig(NAME$m, COLS_PROP_NAME); }
+            default: function () { return getComponentConfig(NAME$o, COLS_PROP_NAME); }
         }, obj ),
 
         breakpointCols,
 
         ( obj$1 = {}, obj$1[GUTTERS_PROP_NAME] = {
             type: String,
-            default: function () { return getComponentConfig(NAME$m, 'gutters'); },
+            default: function () { return getComponentConfig(NAME$o, 'gutters'); },
             validator: function (value) { return VALID_GUTTERS.includes(value); }
         }, obj$1 ),
 
@@ -4354,7 +4807,7 @@ var createColBreakpointClass = function (ref) {
 };
 
 var CRow = {
-    name: NAME$m,
+    name: NAME$o,
 
     functional: true,
 
@@ -4419,6 +4872,7 @@ var CRow = {
     CRadioGroup: CRadioGroup,
     CCheckbox: CCheckbox,
     CCheckboxGroup: CCheckboxGroup,
+    CRating: CRating,
     CTabs: CTabs,
     CTab: CTab,
     CTabPanels: CTabPanels,
@@ -4461,7 +4915,7 @@ var install = function (Vue, options) {
 
     ConfigPlugin(config, Vue);
 
-    var CurrentTheme = Object.assign({}, DefaultTheme$i,
+    var CurrentTheme = Object.assign({}, DefaultTheme$k,
         theme);
 
     var componentsToRegister = injectComponentList || Object.keys(components);
@@ -4475,4 +4929,4 @@ var install = function (Vue, options) {
 
 var index = {
     install: install
-};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField$1;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CListToggle=CListToggle;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;
+};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField$1;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CListToggle=CListToggle;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRating=CRating;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;
