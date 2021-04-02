@@ -230,7 +230,7 @@ export default {
         })();
 
         return h(
-            'div', // outer wrap
+            'label', // outer wrap
             {
                 class: outerWrapClasses
             },

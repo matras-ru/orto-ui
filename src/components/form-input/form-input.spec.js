@@ -14,7 +14,7 @@ describe('Input basic', () => {
 
         const input = wrapper.find('input');
 
-        expect(wrapper.element.tagName).toEqual('DIV');
+        expect(wrapper.element.tagName).toEqual('LABEL');
         expect(input.element.tagName).toEqual('INPUT');
         expect(input.attributes('type')).toBeDefined();
         expect(input.attributes('type')).toBe('text');
@@ -39,7 +39,7 @@ describe('Input types', () => {
 
         const textarea = wrapper.find('textarea');
 
-        expect(wrapper.element.tagName).toEqual('DIV');
+        expect(wrapper.element.tagName).toEqual('LABEL');
         expect(textarea.element.tagName).toEqual('TEXTAREA');
         expect(textarea.attributes('type')).not.toBeDefined();
         expect(textarea.attributes('id')).toBeDefined();
@@ -100,7 +100,7 @@ describe('Input states', () => {
     beforeEach(() => {
         wrapper = mount(CFormInput);
         input = wrapper.find('input');
-        innerWrapper = wrapper.find('div div');
+        innerWrapper = wrapper.find('div');
     });
 
     afterEach(() => {
