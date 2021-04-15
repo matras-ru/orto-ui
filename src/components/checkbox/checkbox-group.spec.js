@@ -9,24 +9,22 @@ config.stubs['CCheckbox'] = CCheckbox;
 describe('Checkbox group', () => {
     it('is rendered & not empty', () => {
         const wrapper = mount(CCheckboxGroup, {
-            context: {
-                props: {
-                    modelValue: [],
-                    data: [
-                        {
-                            id: 'chkb1',
-                            label: 'chkb1',
-                            name: 'chkb1',
-                            value: 'chkb1'
-                        },
-                        {
-                            id: 'chkb2',
-                            label: 'chkb2',
-                            name: 'chkb2',
-                            value: 'chkb2'
-                        }
-                    ]
-                }
+            propsData: {
+                modelValue: [],
+                data: [
+                    {
+                        id: 'chkb1',
+                        label: 'chkb1',
+                        name: 'chkb1',
+                        value: 'chkb1'
+                    },
+                    {
+                        id: 'chkb2',
+                        label: 'chkb2',
+                        name: 'chkb2',
+                        value: 'chkb2'
+                    }
+                ]
             }
         });
 

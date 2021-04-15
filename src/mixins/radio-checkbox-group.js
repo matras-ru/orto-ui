@@ -1,6 +1,7 @@
 // TODO: add limit...
 import { selfInstall } from '@/utils/index.js';
-import { noop } from '@/utils';
+import FormPanel from '@/mixins/form-panel';
+import DefaultTheme from '@/themes/default/CCheckboxRadioGroup';
 
 export default function (type) {
     const mapComponents = {
@@ -15,12 +16,12 @@ export default function (type) {
             selfInstall(Vue, theme, this);
         },
 
-        functional: true,
+        mixins: [FormPanel],
 
         props: {
             theme: {
                 type: Object,
-                default: () => {}
+                default: () => DefaultTheme
             },
 
             data: {
@@ -34,25 +35,26 @@ export default function (type) {
             event: 'change'
         },
 
-        render(h, { props, listeners }) {
-            const children = props.data.map(({ id, label, name, disabled, value }) => {
-                const onChange = listeners['change'] || noop;
-                return h(ChildComponent, {
-                    props: {
-                        modelValue: props.modelValue,
-                        id,
-                        label,
-                        name,
-                        disabled,
-                        value
-                    },
-                    on: {
-                        change: val => onChange(val)
-                    }
+        methods: {
+            getControl(h) {
+                const children = this.data.map(({ id, label, name, disabled, value }) => {
+                    return h(ChildComponent, {
+                        props: {
+                            modelValue: this.modelValue,
+                            id,
+                            label,
+                            name,
+                            disabled,
+                            value
+                        },
+                        on: {
+                            change: val => this.$emit('change', val)
+                        }
+                    });
                 });
-            });
 
-            return h('div', children);
+                return h('div', children);
+            }
         }
     };
 }

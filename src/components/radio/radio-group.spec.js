@@ -9,24 +9,22 @@ config.stubs['CRadio'] = CRadio;
 describe('Radio group', () => {
     it('is rendered & not empty', () => {
         const wrapper = mount(CRadioGroup, {
-            context: {
-                props: {
-                    modelValue: null,
-                    data: [
-                        {
-                            id: 'radio1',
-                            label: 'radio1',
-                            name: 'radio1',
-                            value: 'radio1'
-                        },
-                        {
-                            id: 'radio2',
-                            label: 'radio2',
-                            name: 'radio2',
-                            value: 'radio2'
-                        }
-                    ]
-                }
+            propsData: {
+                modelValue: null,
+                data: [
+                    {
+                        id: 'radio1',
+                        label: 'radio1',
+                        name: 'radio1',
+                        value: 'radio1'
+                    },
+                    {
+                        id: 'radio2',
+                        label: 'radio2',
+                        name: 'radio2',
+                        value: 'radio2'
+                    }
+                ]
             }
         });
 

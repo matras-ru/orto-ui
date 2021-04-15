@@ -50,31 +50,30 @@
                     </template>
                 </CDropdown>
 
-                <CFormPanel label="Group">
-                    <CCheckboxGroup
-                        :data="[
-                            {
-                                id: 'checkbox3',
-                                label: 'checkbox3',
-                                name: 'checkbox3',
-                                value: 'checkbox3'
-                            },
-                            {
-                                id: 'checkbox4',
-                                label: 'checkbox4',
-                                name: 'checkbox4',
-                                value: 'checkbox4'
-                            },
-                            {
-                                id: 'checkbox5',
-                                label: 'checkbox5',
-                                name: 'checkbox5',
-                                value: 'checkbox5'
-                            }
-                        ]"
-                        v-model="exampleModel.checkboxGroupModel"
-                    />
-                </CFormPanel>
+                <CCheckboxGroup
+                    label="Group"
+                    :data="[
+                        {
+                            id: 'checkbox3',
+                            label: 'checkbox3',
+                            name: 'checkbox3',
+                            value: 'checkbox3'
+                        },
+                        {
+                            id: 'checkbox4',
+                            label: 'checkbox4',
+                            name: 'checkbox4',
+                            value: 'checkbox4'
+                        },
+                        {
+                            id: 'checkbox5',
+                            label: 'checkbox5',
+                            name: 'checkbox5',
+                            value: 'checkbox5'
+                        }
+                    ]"
+                    v-model="exampleModel.checkboxGroupModel"
+                />
 
                 <CButton @click="() => (exampleModel.checkboxGroupModel = [])">Clear</CButton>
 
