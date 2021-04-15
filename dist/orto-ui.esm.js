@@ -290,12 +290,12 @@ var DefaultTheme$c = {
     base: base$a
 };
 
-var headerBase = 'text-xl font-semibold mb-0-8';
-var wrapperBase$1 = 'mb-2-2';
+var panelHeaderBase = 'text-xl font-semibold mb-0-8';
+var panelWrapperBase = 'mb-2-2';
 
-var DefaultTheme$d = {
-    headerBase: headerBase,
-    wrapperBase: wrapperBase$1
+var CFormPanel = {
+    panelHeaderBase: panelHeaderBase,
+    panelWrapperBase: panelWrapperBase
 };
 
 var inputBase$1 = 'cursor-pointer';
@@ -312,7 +312,7 @@ var listBase = 'overscroll-contain overflow-y-auto max-h-18-6';
 
 var fakeSelectBase = 'absolute w-full h-full left-0 top-0 opacity-0 z-1 cursor-pointer';
 
-var DefaultTheme$e = {
+var DefaultTheme$d = {
     inputBase: inputBase$1,
     inputIconBase: inputIconBase,
     inputIconSizeMd: inputIconSizeMd,
@@ -341,7 +341,7 @@ var sizeSm$1 = 'text-sm px-0-4 py-0-2';
 var sizeMd$1 = 'text-base px-0-6 py-0-3';
 var sizeLg$1 = 'text-lg px-0-8 py-0-4';
 
-var DefaultTheme$f = {
+var DefaultTheme$e = {
     base: base$b,
 
     variantPrimary: variantPrimary$2,
@@ -354,15 +354,15 @@ var DefaultTheme$f = {
     sizeLg: sizeLg$1
 };
 
-var wrapperBase$2 = 'relative';
+var wrapperBase$1 = 'relative';
 var dropdownBase = 'absolute z-50 top-full min-w-full mt-0-4 bg-white overflow-hidden';
 var dropdownVariantPrimary = 'shadow-secondary rounded';
 var dropdownVariantSecondary = 'shadow-secondary rounded-lg';
 var dropdownPlacementLeft = 'left-0';
 var dropdownPlacementRight = 'right-0';
 
-var DefaultTheme$g = {
-    wrapperBase: wrapperBase$2,
+var DefaultTheme$f = {
+    wrapperBase: wrapperBase$1,
     dropdownBase: dropdownBase,
     dropdownVariantPrimary: dropdownVariantPrimary,
     dropdownVariantSecondary: dropdownVariantSecondary,
@@ -370,7 +370,7 @@ var DefaultTheme$g = {
     dropdownPlacementRight: dropdownPlacementRight
 };
 
-var DefaultTheme$h = {};
+var DefaultTheme$g = {};
 
 var stateDefault$1 = '#dedede';
 var stateActive$1 = '#fda368';
@@ -380,7 +380,7 @@ var labelWrapper = 'inline-block align-middle';
 
 var stateCursorPointer = 'cursor-pointer';
 
-var DefaultTheme$i = {
+var DefaultTheme$h = {
     stateDefault: stateDefault$1,
     stateActive: stateActive$1,
 
@@ -392,11 +392,11 @@ var DefaultTheme$i = {
 
 var base$c = 'inline-block';
 
-var DefaultTheme$j = {
+var DefaultTheme$i = {
     base: base$c
 };
 
-var DefaultTheme$k = /*#__PURE__*/Object.freeze({
+var DefaultTheme$j = /*#__PURE__*/Object.freeze({
     __proto__: null,
     CButton: DefaultTheme,
     CLink: DefaultTheme$1,
@@ -412,13 +412,13 @@ var DefaultTheme$k = /*#__PURE__*/Object.freeze({
     CRow: DefaultTheme$b,
     CCol: DefaultTheme$c,
     CFormField: DefaultTheme$2,
-    CFormPanel: DefaultTheme$d,
-    CFormSelectCustom: DefaultTheme$e,
-    CBadge: DefaultTheme$f,
-    CDropdown: DefaultTheme$g,
-    CListToggle: DefaultTheme$h,
-    CRating: DefaultTheme$i,
-    CStar: DefaultTheme$j
+    CFormPanel: CFormPanel,
+    CFormSelectCustom: DefaultTheme$d,
+    CBadge: DefaultTheme$e,
+    CDropdown: DefaultTheme$f,
+    CListToggle: DefaultTheme$g,
+    CRating: DefaultTheme$h,
+    CStar: DefaultTheme$i
 });
 
 var justifyCenter = 'justify-center';
@@ -1616,21 +1616,8 @@ var CForm = {
     }
 };
 
-var NAME$1 = 'CFormPanel';
-
-var CFormPanel = {
-    name: NAME$1,
-
-    install: function install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
+var FormPanel = {
     props: {
-        theme: {
-            type: Object,
-            default: function () { return DefaultTheme$d; }
-        },
-
         label: {
             type: String,
             default: null
@@ -1649,15 +1636,12 @@ var CFormPanel = {
 
     data: function data() {
         return {
-            open: true
+            open: !this.collapsed
         };
     },
 
-    created: function created() {
-        this.open = !this.collapsed;
-    },
-
     methods: {
+        // TODO:
         toggle: function toggle() {
             this.open = !this.open;
         }
@@ -1665,28 +1649,60 @@ var CFormPanel = {
 
     render: function render(h) {
         var ref = this.theme;
-        var headerBase = ref.headerBase;
-        var wrapperBase = ref.wrapperBase;
+        var panelHeaderBase = ref.panelHeaderBase;
+        var panelWrapperBase = ref.panelWrapperBase;
 
         return h(
             'div',
             {
-                staticClass: wrapperBase
+                staticClass: panelWrapperBase
             },
             [
                 this.label
                     ? h(
                           'header',
                           {
-                              staticClass: headerBase
+                              staticClass: panelHeaderBase
                           },
                           [h('div', this.label)]
                       )
                     : null,
-
-                this.open ? h('div', [this.$slots.default]) : null
+                this.open
+                    ? h('div', [
+                          [
+                              this.getControl !== void 0 // control slot
+                                  ? this.getControl(h)
+                                  : this.$slots.default
+                          ]
+                      ])
+                    : null
             ]
         );
+    }
+};
+
+var NAME$1 = 'CFormPanel';
+
+var CFormPanel$1 = {
+    name: NAME$1,
+
+    install: function install(Vue, theme) {
+        selfInstall(Vue, theme, this);
+    },
+
+    mixins: [FormPanel],
+
+    props: {
+        theme: {
+            type: Object,
+            default: function () { return CFormPanel; }
+        }
+    },
+
+    methods: {
+        getControl: function getControl(h) {
+            return h('div', [this.$slots.default]);
+        }
     }
 };
 
@@ -1925,7 +1941,7 @@ var CFormField = {
         var bottomPlaceholderClasses = ref.bottomPlaceholderClasses;
 
         return h(
-            'div', // outer wrap
+            'label', // outer wrap
             {
                 class: outerWrapClasses
             },
@@ -2303,7 +2319,7 @@ var CDropdown = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$g; }
+            default: function () { return DefaultTheme$f; }
         },
 
         variant: {
@@ -2635,7 +2651,7 @@ var CFormSelectCustom = {
 
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$e; }
+            default: function () { return DefaultTheme$d; }
         },
 
         label: {
@@ -3081,6 +3097,8 @@ var CRadio = Object.assign({}, {name: NAME$8},
         props: props$3
     }));
 
+var DefaultTheme$k = Object.assign({}, CFormPanel);
+
 // TODO: add limit...
 
 function radioCheckboxGroup (type) {
@@ -3096,12 +3114,12 @@ function radioCheckboxGroup (type) {
             selfInstall(Vue, theme, this);
         },
 
-        functional: true,
+        mixins: [FormPanel],
 
         props: {
             theme: {
                 type: Object,
-                default: function () {}
+                default: function () { return DefaultTheme$k; }
             },
 
             data: {
@@ -3115,34 +3133,34 @@ function radioCheckboxGroup (type) {
             event: 'change'
         },
 
-        render: function render(h, ref) {
-            var props = ref.props;
-            var listeners = ref.listeners;
+        methods: {
+            getControl: function getControl(h) {
+                var this$1 = this;
 
-            var children = props.data.map(function (ref) {
-                var id = ref.id;
-                var label = ref.label;
-                var name = ref.name;
-                var disabled = ref.disabled;
-                var value = ref.value;
+                var children = this.data.map(function (ref) {
+                    var id = ref.id;
+                    var label = ref.label;
+                    var name = ref.name;
+                    var disabled = ref.disabled;
+                    var value = ref.value;
 
-                var onChange = listeners['change'] || noop;
-                return h(ChildComponent, {
-                    props: {
-                        modelValue: props.modelValue,
-                        id: id,
-                        label: label,
-                        name: name,
-                        disabled: disabled,
-                        value: value
-                    },
-                    on: {
-                        change: function (val) { return onChange(val); }
-                    }
+                    return h(ChildComponent, {
+                        props: {
+                            modelValue: this$1.modelValue,
+                            id: id,
+                            label: label,
+                            name: name,
+                            disabled: disabled,
+                            value: value
+                        },
+                        on: {
+                            change: function (val) { return this$1.$emit('change', val); }
+                        }
+                    });
                 });
-            });
 
-            return h('div', children);
+                return h('div', children);
+            }
         }
     };
 }
@@ -3218,7 +3236,7 @@ var CStar = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$j; }
+            default: function () { return DefaultTheme$i; }
         },
 
         fill: {
@@ -3423,7 +3441,7 @@ var CRating = {
     props: {
         theme: {
             type: Object,
-            default: function () { return DefaultTheme$i; }
+            default: function () { return DefaultTheme$h; }
         },
 
         id: {
@@ -4351,7 +4369,7 @@ var createThemeMap$2 = function (ref) {
 var props$6 = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$f; }
+        default: function () { return DefaultTheme$e; }
     },
 
     label: {
@@ -4530,7 +4548,7 @@ var NAME$m = 'CListToggle';
 var props$7 = {
     theme: {
         type: Object,
-        default: function () { return DefaultTheme$h; }
+        default: function () { return DefaultTheme$g; }
     },
 
     limit: {
@@ -5006,7 +5024,7 @@ var components = {
     CBadge: CBadge,
     CLink: CLink,
     CForm: CForm,
-    CFormPanel: CFormPanel,
+    CFormPanel: CFormPanel$1,
     CFormField: CFormField$1,
     CFormInput: CFormInput,
     CFormSelectCustom: CFormSelectCustom,
@@ -5034,7 +5052,7 @@ var extendComponent = function (Vue, CurrentTheme, componentName) {
     var ref = components[componentName];
     var props = ref.props; if ( props === void 0 ) props = {};
 
-    var themeDefaultSettings = Object.assign({}, (props && props.theme ? props.theme.default() : {}));
+    var themeDefaultSettings = props.theme ? props.theme.default() : {};
     var themeSettings = CurrentTheme[componentName];
 
     props.theme = {
@@ -5057,7 +5075,7 @@ var install = function (Vue, options) {
 
     ConfigPlugin(config, Vue);
 
-    var CurrentTheme = Object.assign({}, DefaultTheme$k,
+    var CurrentTheme = Object.assign({}, DefaultTheme$j,
         theme);
 
     var componentsToRegister = injectComponentList || Object.keys(components);
@@ -5074,4 +5092,4 @@ var index = {
 };
 
 export default index;
-export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField$1 as CFormField, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CListToggle, CPicture, CRadio, CRadioGroup, CRating, CRow, CTab, CTabPanel, CTabPanels, CTabs };
+export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField$1 as CFormField, CFormInput, CFormPanel$1 as CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CListToggle, CPicture, CRadio, CRadioGroup, CRating, CRow, CTab, CTabPanel, CTabPanels, CTabs };

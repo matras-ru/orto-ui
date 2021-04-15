@@ -62,7 +62,7 @@ const extendComponent = (Vue, CurrentTheme, componentName) => {
     // TODO: if props is undefined
     const { props = {} } = components[componentName];
 
-    const themeDefaultSettings = { ...(props && props.theme ? props.theme.default() : {}) };
+    const themeDefaultSettings = props.theme ? props.theme.default() : {};
     const themeSettings = CurrentTheme[componentName];
 
     props.theme = {
