@@ -9,6 +9,10 @@ describe('Form', () => {
 
         expect(wrapper.element.tagName).toEqual('FORM');
         expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('default slot', async () => {
@@ -19,5 +23,7 @@ describe('Form', () => {
         });
 
         expect(wrapper.text()).toEqual('foobar');
+
+        wrapper.destroy();
     });
 });

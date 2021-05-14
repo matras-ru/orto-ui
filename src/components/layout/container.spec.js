@@ -14,6 +14,10 @@ describe('CContainer', () => {
         expect(wrapper.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
         expect(wrapper.classes().length).toBe(1);
         expect(wrapper.text()).toEqual('');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('fluid', () => {
@@ -27,5 +31,9 @@ describe('CContainer', () => {
 
         expect(wrapper.classes().sort()).toEqual(`${baseClass} ${fluidClass}`.split(' ').sort());
         expect(wrapper.classes().length).toBe(2);
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 });

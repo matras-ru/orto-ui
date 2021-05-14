@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Applies variant class 1`] = `<button class="inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none text-base px-1-5 py-0-4 leading-snug bg-primary-100 border-primary-100 transition-shadow hover:shadow disabled:shadow-none"></button>`;
+
+exports[`Button Button as link - missing link classes 1`] = `<a href="//google.com" target="_blank" class="inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none text-base px-1-5 py-0-4 leading-snug border-primary-100 transition-shadow hover:shadow disabled:shadow-none"></a>`;
+
+exports[`Button The button is disabled 1`] = `<button disabled="disabled" class="inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none text-base px-1-5 py-0-4 leading-snug border-primary-100 transition-shadow hover:shadow disabled:shadow-none cursor-not-allowed opacity-75"></button>`;
+
+exports[`Button The button is rendered 1`] = `<button class="inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none text-base px-1-5 py-0-4 leading-snug border-primary-100 transition-shadow hover:shadow disabled:shadow-none"></button>`;

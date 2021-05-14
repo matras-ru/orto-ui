@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge The badge is rendered 1`] = `<span class="rounded-lg font-bold inline-block border-2 leading-none align-middle bg-primary-100 border-primary-100 text-white text-base px-0-6 py-0-3"></span>`;
+
+exports[`Badge The badge is rendered 2`] = `<span class="rounded-lg font-bold inline-block border-2 leading-none align-middle border-secondary-200 text-secondary-200 text-base px-0-6 py-0-3"></span>`;

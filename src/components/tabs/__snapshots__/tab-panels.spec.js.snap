@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CTabPanels with panels 1`] = `
+<div>
+  <section role="tabpanel" aria-labelledby="tab-null"></section>
+  <section role="tabpanel" aria-labelledby="tab-null"></section>
+</div>
+`;

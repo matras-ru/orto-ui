@@ -16,6 +16,10 @@ describe('Link', () => {
         expect(wrapper.attributes('href')).not.toBeDefined();
         expect(wrapper.attributes('target')).not.toBeDefined();
         expect(wrapper.classes().sort()).toEqual(`${baseClass} ${primaryClass}`.split(' ').sort());
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('custom attrs: href & target', () => {
@@ -30,6 +34,10 @@ describe('Link', () => {
         expect(wrapper.attributes('target')).toBe('_blank');
         expect(wrapper.attributes('href')).toBeDefined();
         expect(wrapper.attributes('href')).toBe('//google.com');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('default slot', () => {
@@ -68,6 +76,10 @@ describe('Link', () => {
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${primaryClass} ${disabledClass}`.split(' ').sort()
         );
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('variant: primary', () => {
@@ -78,6 +90,9 @@ describe('Link', () => {
         });
 
         expect(wrapper.classes().sort()).toEqual(`${baseClass} ${primaryClass}`.split(' ').sort());
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 });
 

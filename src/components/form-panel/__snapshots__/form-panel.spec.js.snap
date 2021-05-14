@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form panel is rendered 1`] = `
+<div class="mb-2-2">
+  <div>
+    <div></div>
+  </div>
+</div>
+`;

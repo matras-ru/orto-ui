@@ -38,6 +38,10 @@ describe('CRow', () => {
 
         expect(wrapper.classes().length).toBe(3);
         expect(wrapper.text()).toEqual('');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 });
 
@@ -69,6 +73,8 @@ describe('gutters', () => {
 
         expect(Col.classes().sort()).toEqual(`${colBaseClass} ${lgGuttersClass}`.split(' ').sort());
         expect(Col.classes().length).toBe(2);
+
+        expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });
@@ -166,6 +172,8 @@ describe('cols', () => {
                 .sort()
         );
         expect(Col.classes().length).toBe(4);
+
+        expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });
@@ -271,7 +279,7 @@ describe('cols', () => {
         wrapper.destroy();
     });
 
-    it('same breaakpoints CCol props', () => {
+    it('same breakpoints CCol props', () => {
         /* CRow(:cols="3" :sm="4" :md="5")
         CCol(:cols="1")
         eq:

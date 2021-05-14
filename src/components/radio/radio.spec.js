@@ -35,6 +35,10 @@ describe('Radio', () => {
             'form-radio absolute top-0-2 left-0 w-0-8 h-0-8'.split(' ').sort()
         );
         expect(label.classes().sort()).toEqual('relative pl-1-4 cursor-pointer'.split(' ').sort());
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('is disabled', () => {
@@ -56,6 +60,10 @@ describe('Radio', () => {
         expect(input.attributes('disabled')).toBe('disabled');
         expect(label.classes()).toContain('cursor-not-allowed');
         expect(label.classes()).toContain('opacity-50');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('is error', () => {
@@ -72,6 +80,9 @@ describe('Radio', () => {
 
         const input = wrapper.find('input');
         expect(input.classes()).toContain('form-radio-is-error');
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('v-model', () => {

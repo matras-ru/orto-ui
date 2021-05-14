@@ -23,6 +23,10 @@ describe('CTabs', () => {
         expect(wrapper.element.tagName).toEqual('UL');
         expect(wrapper.attributes('role')).toBeDefined();
         expect(wrapper.attributes('role')).toBe('tablist');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('custom props', () => {
@@ -38,6 +42,8 @@ describe('CTabs', () => {
         expect(wrapper.classes().length).toBe(3);
         expect(wrapper.classes()).toContain('flex-col');
         expect(wrapper.classes()).toContain('justify-center');
+
+        wrapper.destroy();
     });
 
     it('with tabs', () => {
@@ -47,6 +53,8 @@ describe('CTabs', () => {
 
         expect(wrapper).toBeDefined();
         expect(wrapper.findAll('li[role="presentation"]').length).toBe(3);
+
+        wrapper.destroy();
     });
 
     it('tab link style: default, active', () => {
@@ -85,6 +93,8 @@ describe('CTabs', () => {
         expect(tab2.find('a').classes().sort()).toEqual(
             `${baseTabLinkClasses} ${activeTabLinkClasses}`.split(' ').sort()
         );
+
+        expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });

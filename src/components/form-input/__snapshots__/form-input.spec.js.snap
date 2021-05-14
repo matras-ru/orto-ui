@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input basic is rendered 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input name="foo" id="foo" type="text" class="w-full form-input form-input-not-label"></div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input states empty 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input type="text" class="w-full form-input"></div>
+      <div class="absolute left-0 max-w-full truncate pointer-events-none uppercase origin-top-left transition-transform ease-in duration-150 leading-snug bg-white text-tertiary-300 px-0-4 top-0-5">label</div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input states empty label (show placeholder) 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input type="text" class="w-full form-input form-input-not-label" placeholder="label"></div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input states error 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-danger px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input type="text" class="w-full form-input"></div>
+      <div class="absolute left-0 max-w-full truncate pointer-events-none uppercase origin-top-left transition-transform ease-in duration-150 leading-snug bg-white text-danger px-0-4 top-0-5">label</div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input states not empty 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input type="text" class="w-full form-input"></div>
+      <div class="absolute left-0 max-w-full truncate pointer-events-none uppercase origin-top-left transition-transform ease-in duration-150 leading-snug bg-white transform -translate-y-full scale-75 text-tertiary-300 px-0-4 top-0-5">label</div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input types number 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input name="foo" id="foo" type="number" class="w-full form-input form-input-not-label">
+        <div class="absolute top-0 right-0 flex flex-col h-full"><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none opacity-50 pointer-events-none"></span><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none opacity-50 pointer-events-none"></span></div>
+      </div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input types number min/max 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><input name="foo" id="foo" type="number" min="0" max="100" class="w-full form-input form-input-not-label">
+        <div class="absolute top-0 right-0 flex flex-col h-full"><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none"></span><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none opacity-50 pointer-events-none"></span></div>
+      </div>
+    </div>
+  </div>
+</label>
+`;
+
+exports[`Input types textarea 1`] = `
+<label class="block px-0-4 mb-0-8">
+  <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
+    <div class="flex-auto relative py-0-5">
+      <div class="relative"><textarea name="foo" id="foo" rows="6" class="w-full form-input resize-none form-input-not-label"></textarea></div>
+    </div>
+  </div>
+</label>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CTabs default 1`] = `<ul role="tablist" class="flex flex-row justify-start"></ul>`;
+
+exports[`CTabs tab link style: default, active 1`] = `
+<ul role="tablist" class="flex flex-row justify-start">
+  <li role="presentation" class="inline-block"><a role="tab" aria-selected="false" tabindex="-1" id="tab-tab-1" href="#tab-1" target="_self" class="outline-none select-none font-semibold text-lg uppercase px-1-5 py-0-7 no-underline cursor-pointer inline-block">tab 1</a></li>
+  <li role="presentation" class="inline-block"><a role="tab" aria-selected="true" id="tab-tab-2" href="#tab-2" target="_self" class="outline-none select-none font-semibold text-lg uppercase px-1-5 py-0-7 no-underline cursor-pointer inline-block text-secondary-200 border-b-4 border-secondary-200">tab 2</a></li>
+</ul>
+`;

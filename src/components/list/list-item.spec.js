@@ -13,6 +13,10 @@ describe('CListItem', () => {
         expect(wrapper.classes().sort()).toEqual(`${defaultClass}`.split(' ').sort());
         expect(wrapper.classes().length).toBe(1);
         expect(wrapper.text()).toEqual('');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('html tag equal div when prop tag = div', () => {
@@ -25,6 +29,9 @@ describe('CListItem', () => {
         });
 
         expect(wrapper.element.tagName).toEqual('DIV');
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('custom attributes', () => {

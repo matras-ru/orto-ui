@@ -13,6 +13,10 @@ describe('CList', () => {
         expect(wrapper.isFunctionalComponent).toBe(true);
         expect(wrapper.element.tagName).toEqual('UL');
         expect(wrapper.classes().sort()).toEqual(`${baaseClass} ${defaultCLass}`.split(' ').sort());
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('html tag equal div when prop tag = div', () => {
@@ -25,6 +29,9 @@ describe('CList', () => {
         });
 
         expect(wrapper.element.tagName).toEqual('DIV');
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('horizontal mode', () => {
@@ -39,6 +46,9 @@ describe('CList', () => {
         expect(wrapper.classes().sort()).toEqual(
             `${baaseClass} ${horizontalClass}`.split(' ').sort()
         );
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('between horizontal align', () => {

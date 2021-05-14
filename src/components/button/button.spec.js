@@ -19,6 +19,9 @@ describe('Button', () => {
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${defaultClass} ${defaultSizeClass}`.split(' ').sort()
         );
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('Applies variant class', () => {
@@ -34,6 +37,9 @@ describe('Button', () => {
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${secondaryClass} ${defaultSizeClass}`.split(' ').sort()
         );
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('Should emit click event when clicked', () => {
@@ -55,6 +61,8 @@ describe('Button', () => {
         wrapper.trigger('click');
         expect(called).toBe(1);
         expect(evt).toBeInstanceOf(MouseEvent);
+
+        wrapper.destroy();
     });
 
     it('The button is disabled', () => {
@@ -70,6 +78,9 @@ describe('Button', () => {
         expect(wrapper.classes().sort()).toEqual(
             `${baseClass} ${defaultClass} ${defaultSizeClass} ${disabledClass}`.split(' ').sort()
         );
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('Should not emit click event when clicked and disabled', () => {
@@ -96,6 +107,8 @@ describe('Button', () => {
         wrapper.trigger('click');
         expect(evt).toEqual(null);
         expect(called).toBe(0);
+
+        wrapper.destroy();
     });
 
     it('Button as link - missing link classes', () => {
@@ -113,5 +126,8 @@ describe('Button', () => {
         expect(wrapper.classes('text-secondary-200')).toBe(false);
         expect(wrapper.classes('hover:text-black-200')).toBe(false);
         expect(wrapper.classes('border-b-2')).toBe(false);
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 });

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CContainer default 1`] = `<div class="container"></div>`;
+
+exports[`CContainer fluid 1`] = `<div class="container max-w-none"></div>`;

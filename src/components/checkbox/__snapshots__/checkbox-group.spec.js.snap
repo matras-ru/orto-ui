@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox group is rendered & not empty 1`] = `
+<div class="mb-2-2">
+  <div>
+    <div>
+      <div class="flex flex-wrap mb-0-4"><label for="chkb1" class="relative pl-1-4 cursor-pointer"><input id="chkb1" name="chkb1" type="checkbox" class="absolute top-0-2 left-0 w-0-8 h-0-8 form-checkbox" value="chkb1">chkb1</label></div>
+      <div class="flex flex-wrap mb-0-4"><label for="chkb2" class="relative pl-1-4 cursor-pointer"><input id="chkb2" name="chkb2" type="checkbox" class="absolute top-0-2 left-0 w-0-8 h-0-8 form-checkbox" value="chkb2">chkb2</label></div>
+    </div>
+  </div>
+</div>
+`;

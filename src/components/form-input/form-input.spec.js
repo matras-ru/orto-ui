@@ -23,6 +23,8 @@ describe('Input basic', () => {
         expect(input.attributes('name')).toBeDefined();
         expect(input.attributes('name')).toBe('foo');
 
+        expect(wrapper.html()).toMatchSnapshot();
+
         wrapper.destroy();
     });
 });
@@ -48,6 +50,8 @@ describe('Input types', () => {
         expect(textarea.attributes('name')).toBe('foo');
         expect(textarea.classes()).toContain('resize-none');
 
+        expect(wrapper.html()).toMatchSnapshot();
+
         wrapper.destroy();
     });
 
@@ -64,6 +68,7 @@ describe('Input types', () => {
 
         expect(input.attributes('type')).toBeDefined();
         expect(input.attributes('type')).toBe('number');
+        expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });
@@ -87,6 +92,8 @@ describe('Input types', () => {
         expect(input.attributes('min')).toBe('0');
         expect(input.attributes('max')).toBeDefined();
         expect(input.attributes('max')).toBe('100');
+
+        expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });
@@ -118,6 +125,10 @@ describe('Input states', () => {
         expect(label.classes()).not.toContain('transform');
         expect(label.classes()).not.toContain('-translate-y-full');
         expect(label.classes()).not.toContain('scale-75');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('empty label (show placeholder)', async () => {
@@ -126,6 +137,9 @@ describe('Input states', () => {
 
         const input = wrapper.find('input');
         expect(input.classes()).toContain('form-input-not-label');
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('not empty', async () => {
@@ -137,6 +151,10 @@ describe('Input states', () => {
         expect(label.classes()).toContain('transform');
         expect(label.classes()).toContain('-translate-y-full');
         expect(label.classes()).toContain('scale-75');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('error', async () => {
@@ -146,6 +164,10 @@ describe('Input states', () => {
 
         expect(innerWrapper.classes('border-danger')).toBe(true);
         expect(label.classes('text-danger')).toBe(true);
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('focus', async () => {
@@ -159,6 +181,8 @@ describe('Input states', () => {
         expect(label.classes()).toContain('transform');
         expect(label.classes()).toContain('-translate-y-full');
         expect(label.classes()).toContain('scale-75');
+
+        wrapper.destroy();
     });
 });
 
