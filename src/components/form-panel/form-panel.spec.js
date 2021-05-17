@@ -7,6 +7,9 @@ describe('Form panel', () => {
         const wrapper = mount(CFormGroup);
 
         expect(wrapper.element.tagName).toEqual('DIV');
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('default slot', () => {

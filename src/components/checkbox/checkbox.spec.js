@@ -34,6 +34,10 @@ describe('Checkbox', () => {
         expect(input.classes().sort()).toEqual(
             'form-checkbox absolute top-0-2 left-0 w-0-8 h-0-8'.split(' ').sort()
         );
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('is disabled', () => {
@@ -55,6 +59,10 @@ describe('Checkbox', () => {
         expect(input.attributes('disabled')).toBe('disabled');
         expect(label.classes()).toContain('cursor-not-allowed');
         expect(label.classes()).toContain('opacity-50');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('is error', () => {
@@ -71,6 +79,10 @@ describe('Checkbox', () => {
 
         const input = wrapper.find('input');
         expect(input.classes()).toContain('form-checkbox-is-error');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('v-model - single value - true/false', () => {

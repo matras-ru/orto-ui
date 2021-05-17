@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio is disabled 1`] = `<div class="flex flex-wrap mb-0-4"><label for="radio1" class="relative pl-1-4 cursor-not-allowed opacity-50"><input id="radio1" name="radio1" type="radio" disabled="disabled" class="absolute top-0-2 left-0 w-0-8 h-0-8 form-radio" value="radio1"></label></div>`;
+
+exports[`Radio is error 1`] = `<div class="flex flex-wrap mb-0-4"><label for="radio1" class="relative pl-1-4 cursor-pointer"><input id="radio1" name="radio1" type="radio" class="absolute top-0-2 left-0 w-0-8 h-0-8 form-radio form-radio-is-error" value="radio1"></label></div>`;
+
+exports[`Radio is rendered 1`] = `<div class="flex flex-wrap mb-0-4"><label for="radio1" class="relative pl-1-4 cursor-pointer"><input id="radio1" name="radio1" type="radio" class="absolute top-0-2 left-0 w-0-8 h-0-8 form-radio" value="radio1">default</label></div>`;

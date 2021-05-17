@@ -36,6 +36,10 @@ describe('Dropdown basic', () => {
                 .split(' ')
                 .sort()
         );
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('placement', () => {
@@ -59,6 +63,10 @@ describe('Dropdown basic', () => {
         expect(dropdown.element.tagName).toEqual('DIV');
         expect(dropdown.classes()).not.toContain('left-0');
         expect(dropdown.classes()).toContain('right-0');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 });
 
@@ -78,6 +86,7 @@ describe('Dropdown slots', () => {
 
         const holder = wrapper.find('div div');
         expect(holder.element.tagName).toEqual('DIV');
+        expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });

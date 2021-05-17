@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link custom attrs: href & target 1`] = `<a href="//google.com" target="_blank" class="no-underline cursor-pointer inline-block text-secondary-200 hover:text-black-200 border-b-2"></a>`;
+
+exports[`Link default 1`] = `<span class="no-underline cursor-pointer inline-block text-secondary-200 hover:text-black-200 border-b-2"></span>`;
+
+exports[`Link disabled 1`] = `<span tabindex="-1" aria-disabled="true" class="no-underline cursor-pointer inline-block opacity-75 cursor-not-allowed text-secondary-200 hover:text-black-200 border-b-2"></span>`;
+
+exports[`Link variant: primary 1`] = `<span class="no-underline cursor-pointer inline-block text-secondary-200 hover:text-black-200 border-b-2"></span>`;

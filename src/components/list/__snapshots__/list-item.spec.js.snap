@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CListItem default empty CListItem is functional component and rendered 1`] = `<li class="inline-block"></li>`;
+
+exports[`CListItem html tag equal div when prop tag = div 1`] = `<div class="inline-block"></div>`;

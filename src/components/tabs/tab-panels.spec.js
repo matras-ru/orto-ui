@@ -9,6 +9,8 @@ describe('CTabPanels', () => {
         const wrapper = mount(CTabPanels);
 
         expect(wrapper.element.tagName).toEqual('DIV');
+
+        wrapper.destroy();
     });
 
     it('with panels', () => {
@@ -18,6 +20,10 @@ describe('CTabPanels', () => {
 
         expect(wrapper).toBeDefined();
         expect(wrapper.findAll('section[role="tabpanel"]').length).toBe(2);
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('panel', () => {
@@ -33,5 +39,7 @@ describe('CTabPanels', () => {
 
         expect(panel.attributes('id')).toBeDefined;
         expect(panel.attributes('aria-labelledby')).toBeDefined;
+
+        wrapper.destroy();
     });
 });

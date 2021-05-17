@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CRow default 1`] = `<div class="flex flex-wrap -mx-0-8"></div>`;
+
+exports[`cols basic 1`] = `
+<div>
+  <div class="flex flex-wrap -mx-0-8">
+    <div class="max-w-full px-0-8 w-full md:w-1/5">Col</div>
+  </div>
+</div>
+`;
+
+exports[`gutters add CCol gutter class 1`] = `
+<section>
+  <div class="flex flex-wrap -mx-0-8">
+    <div class="max-w-full px-0-8">Col</div>
+  </div>
+</section>
+`;

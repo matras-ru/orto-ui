@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form is rendered 1`] = `<form class="mb-1-4"></form>`;

@@ -37,6 +37,8 @@ describe('CPicture', () => {
         expect(img.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
         expect(img.attributes('src')).toEqual('picture1.jpg');
 
+        expect(wrapper.html()).toMatchSnapshot();
+
         wrapper.destroy();
     });
 
@@ -75,5 +77,9 @@ describe('CPicture', () => {
         expect(sources.at(1).attributes('type')).toEqual('image/jpg');
         expect(sources.at(1).attributes('srcset')).toEqual('picture2.jpg');
         expect(sources.at(1).attributes('media')).toEqual('(min-width: 640px)');
+
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 });

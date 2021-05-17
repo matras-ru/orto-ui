@@ -29,6 +29,9 @@ describe('Checkbox group', () => {
         });
 
         expect(wrapper.findAll('input[type="checkbox"]').length).toBe(2);
+        expect(wrapper.html()).toMatchSnapshot();
+
+        wrapper.destroy();
     });
 
     it('v-model', () => {
