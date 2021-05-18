@@ -2660,6 +2660,7 @@ var CFormSelectCustom = {
                             expression: 'modelValue'
                         }
                     ],
+                    attrs: this$1.$attrs,
                     on: {
                         change: function (e) {
                             var target = e.target;
@@ -2701,8 +2702,8 @@ var CFormSelectCustom = {
 
                         return h('div', [
                         h('CFormInput', {
-                            props: Object.assign({}, this$1.$attrs,
-                                {readonly: true,
+                            props: {
+                                readonly: true,
                                 error: error,
                                 label: label,
                                 placeholder: placeholder,
@@ -2711,12 +2712,14 @@ var CFormSelectCustom = {
                                     ? this$1.$scopedSlots.selected
                                         ? this$1.$scopedSlots.selected(selectedOption)[0].text
                                         : selectedOption[optionLabel]
-                                    : null}),
+                                    : null
+                            },
                             ref: 'holder',
                             staticClass: inputBase,
                             scopedSlots: {
                                 append: function () { return h('i', { class: [iconClass, inputIconClass] }); }
                             },
+                            attrs: this$1.$attrs,
                             on: {
                                 click: toggle
                             }
