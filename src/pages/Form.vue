@@ -79,6 +79,8 @@
 
                 <CFormPanel label="Default">
                     <CFormSelectCustom
+                        data-aq-test
+                        labelBgColor="dwwdwd"
                         v-bind="{
                             data: [
                                 {
