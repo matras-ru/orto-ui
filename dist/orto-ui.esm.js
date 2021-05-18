@@ -2802,8 +2802,8 @@ var CFormSelectCustom = {
 
                         return h('div', [
                         h('CFormInput', {
-                            props: {
-                                readonly: true,
+                            props: Object.assign({}, this$1.$attrs,
+                                {readonly: true,
                                 error: error,
                                 label: label,
                                 placeholder: placeholder,
@@ -2812,8 +2812,7 @@ var CFormSelectCustom = {
                                     ? this$1.$scopedSlots.selected
                                         ? this$1.$scopedSlots.selected(selectedOption)[0].text
                                         : selectedOption[optionLabel]
-                                    : null
-                            },
+                                    : null}),
                             ref: 'holder',
                             staticClass: inputBase,
                             scopedSlots: {
