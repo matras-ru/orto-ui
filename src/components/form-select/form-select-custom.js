@@ -160,6 +160,7 @@ export default {
                             expression: 'modelValue'
                         }
                     ],
+                    attrs: this.$attrs,
                     on: {
                         change: e => {
                             const target = e.target;
@@ -199,7 +200,6 @@ export default {
                     h('div', [
                         h('CFormInput', {
                             props: {
-                                ...this.$attrs,
                                 readonly: true,
                                 error,
                                 label,
@@ -216,6 +216,7 @@ export default {
                             scopedSlots: {
                                 append: () => h('i', { class: [iconClass, inputIconClass] })
                             },
+                            attrs: this.$attrs,
                             on: {
                                 click: toggle
                             }
