@@ -1,5 +1,5 @@
 import { getComponentConfig } from '@/config';
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import radioCheckbox from '@/mixins/radio-checkbox';
 
 export const NAME = 'CCheckbox';

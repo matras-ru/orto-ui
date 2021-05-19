@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { hasOwnProperty } from '@/utils';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import DEFAULTS from './default-config';
 
 const PROP_NAME = '$ortoUIConfig';

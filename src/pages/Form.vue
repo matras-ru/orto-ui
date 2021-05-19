@@ -52,6 +52,7 @@
 
                 <CCheckboxGroup
                     label="Group"
+                    name="test-test-test"
                     :data="[
                         {
                             id: 'checkbox3',

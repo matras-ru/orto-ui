@@ -19,7 +19,8 @@ const baseConfig = {
     plugins: {
         preVue: [
             replace({
-                'process.env.NODE_ENV': JSON.stringify('production')
+                'process.env.NODE_ENV': JSON.stringify('production'),
+                preventAssignment: true
             }),
             commonjs(),
             alias({
@@ -50,7 +51,6 @@ const external = [
     'tailwindcss',
     'tailwindcss/resolveConfig',
     'tailwindcss-transitions',
-    '@tailwindcss/custom-forms',
     'v-click-outside-x',
     'vue'
 ];
@@ -60,8 +60,7 @@ const globals = {
     vue: 'Vue',
     'vue-functional-data-merge': 'vueFunctionalDataMerge',
     'lodash.merge': 'merge',
-    'tailwindcss/resolveConfig': 'resolveConfig ',
-    '@tailwindcss/custom-forms': 'customForms '
+    'tailwindcss/resolveConfig': 'resolveConfig '
 };
 
 const buildFormats = [];

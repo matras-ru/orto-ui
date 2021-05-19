@@ -1,6 +1,5 @@
 module.exports = {
     prefix: '',
-    target: 'relaxed',
     important: false,
     separator: ':',
     theme: {

@@ -24,6 +24,10 @@ export default function (type) {
                 default: () => DefaultTheme
             },
 
+            name: {
+                type: String
+            },
+
             data: {
                 type: Array,
                 default: () => []
@@ -37,13 +41,13 @@ export default function (type) {
 
         methods: {
             getControl(h) {
-                const children = this.data.map(({ id, label, name, disabled, value }) => {
+                const children = this.data.map(({ id, label, disabled, value }) => {
                     return h(ChildComponent, {
                         props: {
                             modelValue: this.modelValue,
                             id,
                             label,
-                            name,
+                            name: this.name,
                             disabled,
                             value
                         },
