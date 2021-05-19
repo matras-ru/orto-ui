@@ -52,8 +52,7 @@ export default {
 
     props: {
         modelValue: {
-            type: [String, Number],
-            default: null
+            type: [String, Number]
         },
 
         theme: {
@@ -62,13 +61,19 @@ export default {
         },
 
         label: {
-            type: String,
-            default: null
+            type: String
+        },
+
+        name: {
+            type: String
+        },
+
+        labelBgColor: {
+            type: String
         },
 
         placeholder: {
-            type: String,
-            default: null
+            type: String
         },
 
         data: {
@@ -200,7 +205,8 @@ export default {
                     h('div', [
                         h('CFormInput', {
                             props: {
-                                ...this.$attrs,
+                                name: this.name,
+                                labelBgColor: this.labelBgColor,
                                 readonly: true,
                                 error,
                                 label,

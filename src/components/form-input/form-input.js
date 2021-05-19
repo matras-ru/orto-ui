@@ -36,7 +36,7 @@ export default {
         selfInstall(Vue, theme, this);
     },
 
-    inheritAttrs: false,
+    // inheritAttrs: false,
 
     mixins: [CFormField],
 

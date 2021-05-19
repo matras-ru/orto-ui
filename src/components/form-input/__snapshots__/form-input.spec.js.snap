@@ -58,7 +58,7 @@ exports[`Input types number 1`] = `
   <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
     <div class="flex-auto relative py-0-5">
       <div class="relative"><input name="foo" id="foo" type="number" class="w-full form-input form-input-not-label">
-        <div class="absolute top-0 right-0 flex flex-col h-full"><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none opacity-50 pointer-events-none"></span><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none opacity-50 pointer-events-none"></span></div>
+        <div class="absolute top-0 right-0 flex flex-col h-full"><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none"></span><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none"></span></div>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@ exports[`Input types number min/max 1`] = `
   <div class="flex items-center border-2 rounded-lg -mx-0-4 transition-border duration-150 border-black-200 px-0-8">
     <div class="flex-auto relative py-0-5">
       <div class="relative"><input name="foo" id="foo" type="number" min="0" max="100" class="w-full form-input form-input-not-label">
-        <div class="absolute top-0 right-0 flex flex-col h-full"><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none"></span><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none opacity-50 pointer-events-none"></span></div>
+        <div class="absolute top-0 right-0 flex flex-col h-full"><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none"></span><span class="inline-flex items-center justify-center h-1/2 cursor-pointer select-none"></span></div>
       </div>
     </div>
   </div>

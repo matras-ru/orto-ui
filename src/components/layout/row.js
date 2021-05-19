@@ -120,10 +120,8 @@ const currentClass = props => {
         const breakpoint = getBreakpoint(key, 'gutters');
 
         if (breakpoint) {
-            const {
-                row: rowGuttersBreakpointClass,
-                col: colGuttersBreakpointClass
-            } = getHashMapValue(gutters, props[key]);
+            const { row: rowGuttersBreakpointClass, col: colGuttersBreakpointClass } =
+                getHashMapValue(gutters, props[key]);
 
             if (rowGuttersBreakpointClass && colGuttersBreakpointClass) {
                 rowClasses.push(`${breakpoint}:${rowGuttersBreakpointClass}`);

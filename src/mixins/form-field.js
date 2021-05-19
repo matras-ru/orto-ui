@@ -40,38 +40,31 @@ export default {
 
     props: {
         modelValue: {
-            type: [String, Number],
-            default: null
+            type: [String, Number]
         },
 
         label: {
-            type: String,
-            default: null
+            type: String
         },
 
         inline: {
-            type: Boolean,
-            default: false
+            type: Boolean
         },
 
         name: {
-            type: String,
-            default: null
+            type: String
         },
 
         id: {
-            type: String,
-            default: null
+            type: String
         },
 
         placeholder: {
-            type: String,
-            default: null
+            type: String
         },
 
         hint: {
-            type: String,
-            default: null
+            type: String
         },
 
         error: {
@@ -80,13 +73,11 @@ export default {
         },
 
         errorMessage: {
-            type: String,
-            default: null
+            type: String
         },
 
         labelBgColor: {
-            type: String,
-            default: null
+            type: String
         },
 
         labelStick: {

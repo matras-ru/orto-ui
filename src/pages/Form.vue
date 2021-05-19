@@ -82,6 +82,7 @@
                     <CFormSelectCustom
                         data-aq-test
                         labelBgColor="dwwdwd"
+                        name="wfwfwfwf"
                         v-bind="{
                             data: [
                                 {
@@ -262,7 +263,13 @@
                                                             toggle();
                                                         }
                                                     "
-                                                    class="cursor-pointer py-0-4 px-0-8 bg-white hover:bg-tertiary-100"
+                                                    class="
+                                                        cursor-pointer
+                                                        py-0-4
+                                                        px-0-8
+                                                        bg-white
+                                                        hover:bg-tertiary-100
+                                                    "
                                                     >{{ label }}</CListItem
                                                 >
                                             </CList>

@@ -1815,38 +1815,31 @@ var CFormField$1 = {
 
     props: {
         modelValue: {
-            type: [String, Number],
-            default: null
+            type: [String, Number]
         },
 
         label: {
-            type: String,
-            default: null
+            type: String
         },
 
         inline: {
-            type: Boolean,
-            default: false
+            type: Boolean
         },
 
         name: {
-            type: String,
-            default: null
+            type: String
         },
 
         id: {
-            type: String,
-            default: null
+            type: String
         },
 
         placeholder: {
-            type: String,
-            default: null
+            type: String
         },
 
         hint: {
-            type: String,
-            default: null
+            type: String
         },
 
         error: {
@@ -1855,13 +1848,11 @@ var CFormField$1 = {
         },
 
         errorMessage: {
-            type: String,
-            default: null
+            type: String
         },
 
         labelBgColor: {
-            type: String,
-            default: null
+            type: String
         },
 
         labelStick: {
@@ -2096,7 +2087,7 @@ var CFormInput = {
         selfInstall(Vue, theme, this);
     },
 
-    inheritAttrs: false,
+    // inheritAttrs: false,
 
     mixins: [CFormField$1],
 
@@ -2702,8 +2693,7 @@ var CFormSelectCustom = {
 
     props: {
         modelValue: {
-            type: [String, Number],
-            default: null
+            type: [String, Number]
         },
 
         theme: {
@@ -2712,13 +2702,19 @@ var CFormSelectCustom = {
         },
 
         label: {
-            type: String,
-            default: null
+            type: String
+        },
+
+        name: {
+            type: String
+        },
+
+        labelBgColor: {
+            type: String
         },
 
         placeholder: {
-            type: String,
-            default: null
+            type: String
         },
 
         data: {
@@ -2859,8 +2855,10 @@ var CFormSelectCustom = {
 
                         return h('div', [
                         h('CFormInput', {
-                            props: Object.assign({}, this$1.$attrs,
-                                {readonly: true,
+                            props: {
+                                name: this$1.name,
+                                labelBgColor: this$1.labelBgColor,
+                                readonly: true,
                                 error: error,
                                 label: label,
                                 placeholder: placeholder,
@@ -2869,7 +2867,8 @@ var CFormSelectCustom = {
                                     ? this$1.$scopedSlots.selected
                                         ? this$1.$scopedSlots.selected(selectedOption)[0].text
                                         : selectedOption[optionLabel]
-                                    : null}),
+                                    : null
+                            },
                             ref: 'holder',
                             staticClass: inputBase,
                             scopedSlots: {
@@ -6246,7 +6245,8 @@ var currentClass = function (props) {
         var breakpoint = getBreakpoint(key, 'gutters');
 
         if (breakpoint) {
-            var ref = getHashMapValue(gutters, props[key]);
+            var ref =
+                getHashMapValue(gutters, props[key]);
             var rowGuttersBreakpointClass = ref.row;
             var colGuttersBreakpointClass = ref.col;
 
