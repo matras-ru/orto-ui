@@ -4,14 +4,6 @@ import DefaultTheme from '@/themes/default/CPicture';
 import { stringProp } from '@/utils';
 import { getComponentConfig } from '@/config';
 
-/* TODO: MVP
-
-- type
-- size
-...
-
-*/
-
 const NAME = 'CPicture';
 
 const generateProps = () => {
@@ -29,44 +21,77 @@ const generateProps = () => {
             default: () => DefaultTheme
         },
 
-        // TODO: more types
-        type: {
-            type: String,
-            default: 'jpg'
+        /**
+          [
+             { type: '', lg: null, md: null, sm: null }
+          ]
+         */
+        formats: {
+            type: Array,
+            required: false
         },
+
+        src: stringProp(),
 
         lazy: {
             type: Boolean,
             default: false
         },
 
-        src: stringProp(),
-
         ...breakpointSources
     };
 };
 
 const createSources = (h, screens, props) => {
-    const breakpoints = Object.keys(screens).reverse();
+    const { formats } = props;
+    if (formats == null) return [];
 
-    return breakpoints.map(br => {
-        if (props[br]) {
-            return h('source', {
-                attrs: {
-                    type: `image/${props.type}`,
-                    srcset: props[br],
-                    media: `(min-width: ${screens[br]})`
-                }
-            });
-        }
+    const formatsWithSizes = formats.map(format => {
+        const sizes = mapSizesAndScreens(screens, format);
+
+        return { type: format.type, sizes };
     });
+
+    return formatsWithSizes.reduce((acc, format) => {
+        const { type, sizes } = format;
+
+        acc.push(
+            h('source', {
+                attrs: {
+                    type: `image/${type}`,
+                    srcset: getSrcSet(screens, sizes)
+                }
+            })
+        );
+
+        return acc;
+    }, []);
+};
+
+const mapSizesAndScreens = (screens, sizes) => {
+    const breakpoints = Object.keys(screens);
+
+    return breakpoints
+        .filter(breakpointKey => sizes[breakpointKey])
+        .map(breakpointKey => ({
+            breakpoint: breakpointKey,
+            breakpointWidth: screens[breakpointKey].replace('px', ''),
+            src: sizes[breakpointKey]
+        }));
+};
+
+const getSrcSet = (screens, mappedSizes) => {
+    return mappedSizes.reduce((acc, { breakpointWidth, src }, index) => {
+        const delimiter = index !== mappedSizes.length - 1 ? ', ' : '';
+
+        acc += `${src} ${breakpointWidth}w${delimiter}`;
+
+        return acc;
+    }, '');
 };
 
 const currentClass = ({ theme }) => {
-    const { base } = theme;
-    const classes = [base];
-
-    return classes;
+    return theme.base;
 };
 
 export default {
@@ -81,24 +106,27 @@ export default {
     get props() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
         delete this.props;
-        // eslint-disable-next-line no-return-assign
-        return (this.props = generateProps());
+        this.props = generateProps();
+
+        return this.props;
     },
 
     render(h, { data, props, parent }) {
+        const screens = parent.$ortoUIConfig.getConfigValue('common.screens');
+
+        const mappedSizes = mapSizesAndScreens(screens, props);
+        const srcset = getSrcSet(screens, mappedSizes) || null;
+
         const imgData = {
             class: currentClass(props),
             attrs: {
                 src: props.src,
+                srcset,
                 loading: props.lazy ? 'lazy' : null
             }
         };
 
-        const sources = createSources(
-            h,
-            parent.$ortoUIConfig.getConfigValue('common.screens'),
-            props
-        );
+        const sources = createSources(h, screens, props);
 
         return h('picture', [...sources, h('img', mergeData(data, imgData))]);
     }
