@@ -11,75 +11,82 @@ describe('CPicture', () => {
     };
 
     const localVue = createLocalVue();
-
     localVue.use(plugin);
 
-    it('rendered', () => {
-        const App = localVue.extend({
+    const createWrapper = ({ propsData = null } = {}) => {
+        const app = localVue.extend({
             render(h) {
                 return h(CPicture, {
-                    props: {
-                        src: 'picture1.jpg'
-                    }
+                    props: propsData
                 });
             }
         });
 
-        const wrapper = mount(App, {
-            localVue: localVue
+        return mount(app, { localVue });
+    };
+
+    it('should match to snapshot', function () {
+        const wrapper = createWrapper({
+            propsData: {
+                src: 'picture1.jpg',
+                sm: 'pictureSm.jpg',
+                md: 'pictureMd.jpg',
+                lg: 'pictureLg.jpg',
+                formats: [
+                    {
+                        type: 'webp',
+                        sm: 'pictureSm.webp',
+                        md: 'pictureMd.webp',
+                        lg: 'pictureLg.webp'
+                    }
+                ]
+            }
         });
-
-        const pictureCmp = wrapper.findComponent(CPicture);
-        const img = wrapper.find('img');
-
-        expect(pictureCmp.isFunctionalComponent).toBe(true);
-        expect(wrapper.element.tagName).toEqual('PICTURE');
-        expect(img.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
-        expect(img.attributes('src')).toEqual('picture1.jpg');
 
         expect(wrapper.html()).toMatchSnapshot();
 
         wrapper.destroy();
     });
 
-    it('creating media source', () => {
-        const App = localVue.extend({
-            render(h) {
-                return h(CPicture, {
-                    props: {
-                        src: 'picture1.jpg',
-                        sm: 'picture2.jpg',
-                        lg: 'picture3.jpg'
-                    }
-                });
+    it('basic functionality', () => {
+        const wrapper = createWrapper({
+            propsData: {
+                src: 'picture1.jpg'
             }
         });
 
-        const wrapper = mount(App, {
-            localVue: localVue
-        });
-
+        const component = wrapper.findComponent(CPicture);
         const img = wrapper.find('img');
-        const pictureCmp = wrapper.findComponent(CPicture);
 
-        const sources = wrapper.findAll('source');
-
-        expect(pictureCmp.isFunctionalComponent).toBe(true);
+        expect(component.isFunctionalComponent).toBe(true);
         expect(wrapper.element.tagName).toEqual('PICTURE');
-
         expect(img.classes().sort()).toEqual(`${baseClass}`.split(' ').sort());
         expect(img.attributes('src')).toEqual('picture1.jpg');
 
-        expect(sources.at(0).attributes('type')).toEqual('image/jpg');
-        expect(sources.at(0).attributes('srcset')).toEqual('picture3.jpg');
-        expect(sources.at(0).attributes('media')).toEqual('(min-width: 1024px)');
+        wrapper.destroy();
+    });
 
-        expect(sources.at(1).attributes('type')).toEqual('image/jpg');
-        expect(sources.at(1).attributes('srcset')).toEqual('picture2.jpg');
-        expect(sources.at(1).attributes('media')).toEqual('(min-width: 640px)');
+    it('formats should render properly', () => {
+        const wrapper = createWrapper({
+            propsData: {
+                src: 'picture1.jpg',
+                formats: [
+                    {
+                        type: 'webp',
+                        sm: 'pictureSm.webp',
+                        md: 'pictureMd.webp',
+                        lg: 'pictureLg.webp'
+                    }
+                ]
+            }
+        });
 
-        expect(wrapper.html()).toMatchSnapshot();
+        const sources = wrapper.findAll('source');
 
+        expect(sources.at(0).attributes('type')).toEqual('image/webp');
+        expect(sources.at(0).attributes('srcset')).toEqual(
+            'pictureSm.webp 640w, pictureMd.webp 768w, pictureLg.webp 1024w'
+        );
         wrapper.destroy();
     });
 });

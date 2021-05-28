@@ -1,10 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CPicture creating media source 1`] = `
+exports[`CPicture should match to snapshot 1`] = `
 <picture>
-  <source type="image/jpg" srcset="picture3.jpg" media="(min-width: 1024px)">
-  <source type="image/jpg" srcset="picture2.jpg" media="(min-width: 640px)"><img src="picture1.jpg" class="w-full object-cover">
+  <source type="image/webp" srcset="pictureSm.webp 640w, pictureMd.webp 768w, pictureLg.webp 1024w"><img src="picture1.jpg" srcset="pictureSm.jpg 640w, pictureMd.jpg 768w, pictureLg.jpg 1024w" class="w-full object-cover">
 </picture>
 `;
-
-exports[`CPicture rendered 1`] = `<picture><img src="picture1.jpg" class="w-full object-cover"></picture>`;

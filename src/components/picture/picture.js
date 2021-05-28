@@ -44,7 +44,7 @@ const generateProps = () => {
 
 const createSources = (h, screens, props) => {
     const { formats } = props;
-    if (formats == null) return [];
+    if (formats == null || formats.length == null) return [];
 
     const formatsWithSizes = formats.map(format => {
         const sizes = mapSizesAndScreens(screens, format);
