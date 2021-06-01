@@ -2784,19 +2784,14 @@ var CFormSelectCustom = {
 
         iconClass.push(icon);
 
-        var cumputeOptionClasses = function (isSelected) {
+        var computeOptionClasses = function (isSelected) {
             var optionBase = theme.optionBase;
             var optionStateDefault = theme.optionStateDefault;
             var optionStateActive = theme.optionStateActive;
-            var classes = [optionBase];
 
-            if (isSelected) {
-                classes.push(optionStateActive);
-            } else {
-                classes.push(optionStateDefault);
-            }
+            var classesBasedOnState = isSelected ? optionStateActive : optionStateDefault;
 
-            return classes;
+            return [optionBase, classesBasedOnState];
         };
 
         // for mobile platform
@@ -2918,7 +2913,7 @@ var CFormSelectCustom = {
 
                                     return h(
                                         'CListItem',
-                                        Object.assign({}, {class: cumputeOptionClasses(isSelected)},
+                                        Object.assign({}, {class: computeOptionClasses(isSelected)},
                                             (isSelected && {
                                                 ref: 'selected'
                                             }),
@@ -5814,15 +5809,7 @@ var CBadge = {
 
 var DefaultTheme = {
     base: base
-};/* TODO: MVP
-
-- type
-- size
-...
-
-*/
-
-var NAME$3 = 'CPicture';
+};var NAME$3 = 'CPicture';
 
 var generateProps$2 = function () {
     var screens = getComponentConfig('common', 'screens');
@@ -5838,15 +5825,14 @@ var generateProps$2 = function () {
             default: function () { return DefaultTheme; }
         },
 
-        // TODO: more types
-        type: {
-            type: String,
-            default: 'jpg'
-        },
-
-        lazy: {
-            type: Boolean,
-            default: false
+        /**
+          [
+             { type: '', lg: null, md: null, sm: null }
+          ]
+         */
+        formats: {
+            type: Array,
+            required: false
         },
 
         src: stringProp()},
@@ -5855,28 +5841,54 @@ var generateProps$2 = function () {
 };
 
 var createSources = function (h, screens, props) {
-    var breakpoints = Object.keys(screens).reverse();
+    var formats = props.formats;
+    if (formats == null || formats.length == null) { return []; }
 
-    return breakpoints.map(function (br) {
-        if (props[br]) {
-            return h('source', {
-                attrs: {
-                    type: ("image/" + (props.type)),
-                    srcset: props[br],
-                    media: ("(min-width: " + (screens[br]) + ")")
-                }
-            });
-        }
+    return formats.map(function (format) {
+        var sizes = mapSizesAndScreens(screens, format);
+        var type = format.type;
+
+        return h('source', {
+            attrs: {
+                type: ("image/" + type),
+                srcset: getSrcSet(sizes)
+            }
+        });
     });
+};
+
+var mapSizesAndScreens = function (screens, sizes) {
+    var breakpoints = Object.keys(screens);
+
+    return breakpoints
+        .filter(function (breakpointKey) { return sizes[breakpointKey]; })
+        .map(function (breakpointKey) { return ({
+            breakpoint: breakpointKey,
+            breakpointWidth: screens[breakpointKey].replace('px', ''),
+            src: sizes[breakpointKey]
+        }); });
+};
+
+/**
+ * get srcset attribute
+ * @param mappedSizes: { breakpointWidth, src }
+ * @returns string
+ */
+var getSrcSet = function (mappedSizes) {
+    return mappedSizes
+        .map(function (ref) {
+            var breakpointWidth = ref.breakpointWidth;
+            var src = ref.src;
+
+            return (src + " " + breakpointWidth + "w");
+        })
+        .join(', ');
 };
 
 var currentClass$2 = function (ref) {
     var theme = ref.theme;
 
-    var base = theme.base;
-    var classes = [base];
-
-    return classes;
+    return theme.base;
 };
 
 var CPicture = {
@@ -5891,8 +5903,9 @@ var CPicture = {
     get props() {
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#Smart_self-overwriting_lazy_getters
         delete this.props;
-        // eslint-disable-next-line no-return-assign
-        return (this.props = generateProps$2());
+        this.props = generateProps$2();
+
+        return this.props;
     },
 
     render: function render(h, ref) {
@@ -5900,19 +5913,20 @@ var CPicture = {
         var props = ref.props;
         var parent = ref.parent;
 
+        var screens = parent.$ortoUIConfig.getConfigValue('common.screens');
+
+        var mappedSizes = mapSizesAndScreens(screens, props);
+        var srcset = getSrcSet(mappedSizes) || null;
+
         var imgData = {
             class: currentClass$2(props),
             attrs: {
                 src: props.src,
-                loading: props.lazy ? 'lazy' : null
+                srcset: srcset
             }
         };
 
-        var sources = createSources(
-            h,
-            parent.$ortoUIConfig.getConfigValue('common.screens'),
-            props
-        );
+        var sources = createSources(h, screens, props);
 
         return h('picture', sources.concat( [h('img', vueFunctionalDataMerge.mergeData(data, imgData))]));
     }
