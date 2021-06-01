@@ -4,18 +4,6 @@ export default {
     title: 'Components/Picture/CPicture',
     component: CPicture,
     argTypes: {
-        type: {
-            defaultValue: 'jpg',
-            description: 'Type',
-            table: {
-                type: { summary: 'string' },
-                defaultValue: { summary: 'jpg' },
-                category: 'Props'
-            },
-            control: {
-                type: 'text'
-            }
-        },
         lazy: {
             defaultValue: false,
             description: 'Lazy',
@@ -34,6 +22,18 @@ export default {
             table: {
                 type: { summary: 'string' },
                 defaultValue: { summary: 'null' },
+                category: 'Props'
+            },
+            control: {
+                type: 'text'
+            }
+        },
+        formats: {
+            defaultValue: undefined,
+            description: 'List of Formats with images',
+            table: {
+                type: { summary: 'string' },
+                defaultValue: { summary: 'jpg' },
                 category: 'Props'
             },
             control: {

@@ -137,17 +137,12 @@ export default {
 
         iconClass.push(icon);
 
-        const cumputeOptionClasses = isSelected => {
+        const computeOptionClasses = isSelected => {
             const { optionBase, optionStateDefault, optionStateActive } = theme;
-            const classes = [optionBase];
 
-            if (isSelected) {
-                classes.push(optionStateActive);
-            } else {
-                classes.push(optionStateDefault);
-            }
+            const classesBasedOnState = isSelected ? optionStateActive : optionStateDefault;
 
-            return classes;
+            return [optionBase, classesBasedOnState];
         };
 
         // for mobile platform
@@ -262,7 +257,7 @@ export default {
                                     return h(
                                         'CListItem',
                                         {
-                                            class: cumputeOptionClasses(isSelected),
+                                            class: computeOptionClasses(isSelected),
                                             ...(isSelected && {
                                                 ref: 'selected'
                                             }),
