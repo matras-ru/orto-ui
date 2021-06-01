@@ -33,11 +33,6 @@ const generateProps = () => {
 
         src: stringProp(),
 
-        lazy: {
-            type: Boolean,
-            default: false
-        },
-
         ...breakpointSources
     };
 };
@@ -46,26 +41,17 @@ const createSources = (h, screens, props) => {
     const { formats } = props;
     if (formats == null || formats.length == null) return [];
 
-    const formatsWithSizes = formats.map(format => {
+    return formats.map(format => {
         const sizes = mapSizesAndScreens(screens, format);
+        const type = format.type;
 
-        return { type: format.type, sizes };
+        return h('source', {
+            attrs: {
+                type: `image/${type}`,
+                srcset: getSrcSet(sizes)
+            }
+        });
     });
-
-    return formatsWithSizes.reduce((acc, format) => {
-        const { type, sizes } = format;
-
-        acc.push(
-            h('source', {
-                attrs: {
-                    type: `image/${type}`,
-                    srcset: getSrcSet(screens, sizes)
-                }
-            })
-        );
-
-        return acc;
-    }, []);
 };
 
 const mapSizesAndScreens = (screens, sizes) => {
@@ -80,14 +66,17 @@ const mapSizesAndScreens = (screens, sizes) => {
         }));
 };
 
-const getSrcSet = (screens, mappedSizes) => {
-    return mappedSizes.reduce((acc, { breakpointWidth, src }, index) => {
-        const delimiter = index !== mappedSizes.length - 1 ? ', ' : '';
-
-        acc += `${src} ${breakpointWidth}w${delimiter}`;
-
-        return acc;
-    }, '');
+/**
+ * get srcset attribute
+ * @param mappedSizes: { breakpointWidth, src }
+ * @returns string
+ */
+const getSrcSet = mappedSizes => {
+    return mappedSizes
+        .map(({ breakpointWidth, src }) => {
+            return `${src} ${breakpointWidth}w`;
+        })
+        .join(', ');
 };
 
 const currentClass = ({ theme }) => {
@@ -115,14 +104,13 @@ export default {
         const screens = parent.$ortoUIConfig.getConfigValue('common.screens');
 
         const mappedSizes = mapSizesAndScreens(screens, props);
-        const srcset = getSrcSet(screens, mappedSizes) || null;
+        const srcset = getSrcSet(mappedSizes) || null;
 
         const imgData = {
             class: currentClass(props),
             attrs: {
                 src: props.src,
-                srcset,
-                loading: props.lazy ? 'lazy' : null
+                srcset
             }
         };
 
