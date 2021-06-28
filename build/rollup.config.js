@@ -7,15 +7,27 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
-// import analyze from 'rollup-plugin-analyzer';
-// import visualizer from 'rollup-plugin-visualizer';
+import analyze from 'rollup-plugin-analyzer';
+import visualizer from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
 
 const projectRootDir = path.resolve(__dirname, '..');
 
+const globals = {
+    'v-click-outside-x': 'vClickOutside',
+    vue: 'Vue',
+    'vue-functional-data-merge': 'vueFunctionalDataMerge',
+    'lodash.merge': 'merge',
+    'lodash.get': 'get',
+    'mini-svg-data-uri': 'svgToDataUri'
+};
+
 const baseConfig = {
     input: 'src/index.js',
+
+    external: Object.keys(globals),
+
     plugins: {
         preVue: [
             replace({
@@ -45,30 +57,12 @@ const baseConfig = {
     }
 };
 
-const external = [
-    'vue-functional-data-merge',
-    'lodash.merge',
-    'tailwindcss',
-    'tailwindcss/resolveConfig',
-    'tailwindcss-transitions',
-    'v-click-outside-x',
-    'vue'
-];
-
-const globals = {
-    'v-click-outside-x': 'vClickOutside',
-    vue: 'Vue',
-    'vue-functional-data-merge': 'vueFunctionalDataMerge',
-    'lodash.merge': 'merge',
-    'tailwindcss/resolveConfig': 'resolveConfig '
-};
-
 const buildFormats = [];
 if (!argv.format || argv.format === 'es') {
     const esConfig = {
         ...baseConfig,
-        external,
         output: {
+            sourcemap: true,
             file: 'dist/orto-ui.esm.js',
             format: 'esm',
             exports: 'named',
@@ -86,8 +80,8 @@ if (!argv.format || argv.format === 'es') {
 if (!argv.format || argv.format === 'cjs') {
     const umdConfig = {
         ...baseConfig,
-        external,
         output: {
+            sourcemap: true,
             compact: true,
             file: 'dist/orto-ui.ssr.js',
             format: 'cjs',
@@ -104,9 +98,9 @@ if (!argv.format || argv.format === 'cjs') {
                     optimizeSSR: true
                 }
             }),
-            ...baseConfig.plugins.postVue
-            // analyze({ summaryOnly: true })
-            // visualizer({ open: true })
+            ...baseConfig.plugins.postVue,
+            analyze({ summaryOnly: true }),
+            visualizer({ open: true })
         ]
     };
     buildFormats.push(umdConfig);
@@ -115,8 +109,8 @@ if (!argv.format || argv.format === 'cjs') {
 if (!argv.format || argv.format === 'iife') {
     const unpkgConfig = {
         ...baseConfig,
-        external,
         output: {
+            sourcemap: true,
             compact: true,
             file: 'dist/orto-ui.min.js',
             format: 'iife',
