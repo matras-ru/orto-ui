@@ -1,5 +1,5 @@
 import { getComponentConfig } from '@/config';
-import lodash from 'lodash';
+import merge from 'lodash/merge';
 import radioCheckbox from '@/mixins/radio-checkbox';
 
 export const NAME = 'CCheckbox';
@@ -30,7 +30,7 @@ const props = {
 export default {
     name: NAME,
 
-    ...lodash.merge(radioCheckbox(TYPE), {
+    ...merge(radioCheckbox(TYPE), {
         props
     })
 };
