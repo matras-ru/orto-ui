@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import lodash from 'lodash';
 import radioCheckbox from '@/mixins/radio-checkbox';
 
 export const NAME = 'CRadio';
@@ -19,7 +19,7 @@ const props = {
 export default {
     name: NAME,
 
-    ...merge(radioCheckbox(TYPE), {
+    ...lodash.merge(radioCheckbox(TYPE), {
         props
     })
 };

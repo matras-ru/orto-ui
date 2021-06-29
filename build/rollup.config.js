@@ -7,7 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
-import analyze from 'rollup-plugin-analyzer';
+// import analyze from 'rollup-plugin-analyzer';
 import visualizer from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
@@ -18,8 +18,7 @@ const globals = {
     'v-click-outside-x': 'vClickOutside',
     vue: 'Vue',
     'vue-functional-data-merge': 'vueFunctionalDataMerge',
-    'lodash/merge': 'merge',
-    'lodash/get': 'get',
+    lodash: 'lodash',
     'mini-svg-data-uri': 'svgToDataUri'
 };
 

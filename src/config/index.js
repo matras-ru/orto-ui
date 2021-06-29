@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { hasOwnProperty } from '@/utils';
-import get from 'lodash/get';
+import lodash from 'lodash';
 import DEFAULTS from './default-config';
 
 const PROP_NAME = '$ortoUIConfig';
@@ -55,14 +55,14 @@ class Config {
     }
 
     getConfigValue(key) {
-        return get(this.$_config, key, get(DEFAULTS, key));
+        return lodash.get(this.$_config, key, lodash.get(DEFAULTS, key));
     }
 }
 
 const getConfigValue = key => {
     return Vue.prototype[PROP_NAME]
         ? Vue.prototype[PROP_NAME].getConfigValue(key)
-        : get(DEFAULTS, key);
+        : lodash.get(DEFAULTS, key);
 };
 
 export const ConfigPlugin = (config = {}, Vue) => {

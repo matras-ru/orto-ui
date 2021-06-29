@@ -1,8 +1,7 @@
 import * as vClickOutside from 'v-click-outside-x';
 import Vue from 'vue';
-import get from 'lodash/get';
+import lodash from 'lodash';
 import { mergeData } from 'vue-functional-data-merge';
-import merge from 'lodash/merge';
 
 var base$d =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
@@ -622,7 +621,7 @@ Config.prototype.getConfig = function getConfig () {
 };
 
 Config.prototype.getConfigValue = function getConfigValue (key) {
-    return get(this.$_config, key, get(DEFAULTS, key));
+    return lodash.get(this.$_config, key, lodash.get(DEFAULTS, key));
 };
 
 Object.defineProperties( Config.prototype, prototypeAccessors );
@@ -631,7 +630,7 @@ Object.defineProperties( Config, staticAccessors );
 var getConfigValue = function (key) {
     return Vue.prototype[PROP_NAME]
         ? Vue.prototype[PROP_NAME].getConfigValue(key)
-        : get(DEFAULTS, key);
+        : lodash.get(DEFAULTS, key);
 };
 
 var ConfigPlugin = function (config, Vue) {
@@ -2156,7 +2155,7 @@ var props$5 = {
 
 var CRadio = Object.assign({}, {name: NAME$g},
 
-    merge(radioCheckbox(TYPE$3), {
+    lodash.merge(radioCheckbox(TYPE$3), {
         props: props$5
     }));
 
@@ -2236,7 +2235,7 @@ var TYPE$2 = 'radio';
 
 var CRadioGroup = Object.assign({}, {name: NAME$f},
 
-    merge(radioCheckboxGroup(TYPE$2), {
+    lodash.merge(radioCheckboxGroup(TYPE$2), {
         props: {
             modelValue: {
                 type: [String, Number, Boolean],
@@ -2272,7 +2271,7 @@ var props$4 = {
 
 var CCheckbox = Object.assign({}, {name: NAME$e},
 
-    merge(radioCheckbox(TYPE$1), {
+    lodash.merge(radioCheckbox(TYPE$1), {
         props: props$4
     }));
 
@@ -2281,7 +2280,7 @@ var TYPE = 'checkbox';
 
 var CCheckboxGroup = Object.assign({}, {name: NAME$d},
 
-    merge(radioCheckboxGroup(TYPE), {
+    lodash.merge(radioCheckboxGroup(TYPE), {
         props: {
             modelValue: {
                 type: Array,

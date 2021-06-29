@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),get=require('lodash/get'),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=require('lodash/merge');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule)return e;var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k];}});}});}n['default']=e;return Object.freeze(n);}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var get__default=/*#__PURE__*/_interopDefaultLegacy(get);var merge__default=/*#__PURE__*/_interopDefaultLegacy(merge);var base$d =
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),lodash=require('lodash'),vueFunctionalDataMerge=require('vue-functional-data-merge');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule)return e;var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k];}});}});}n['default']=e;return Object.freeze(n);}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var lodash__default=/*#__PURE__*/_interopDefaultLegacy(lodash);var base$d =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
 var variantPrimary$2 =
@@ -545,7 +545,7 @@ Config.prototype.getConfig = function getConfig () {
 };
 
 Config.prototype.getConfigValue = function getConfigValue (key) {
-    return get__default['default'](this.$_config, key, get__default['default'](DEFAULTS, key));
+    return lodash__default['default'].get(this.$_config, key, lodash__default['default'].get(DEFAULTS, key));
 };
 
 Object.defineProperties( Config.prototype, prototypeAccessors );
@@ -554,7 +554,7 @@ Object.defineProperties( Config, staticAccessors );
 var getConfigValue = function (key) {
     return Vue__default['default'].prototype[PROP_NAME]
         ? Vue__default['default'].prototype[PROP_NAME].getConfigValue(key)
-        : get__default['default'](DEFAULTS, key);
+        : lodash__default['default'].get(DEFAULTS, key);
 };
 
 var ConfigPlugin = function (config, Vue) {
@@ -2055,7 +2055,7 @@ var props$5 = {
 
 var CRadio = Object.assign({}, {name: NAME$g},
 
-    merge__default['default'](radioCheckbox(TYPE$3), {
+    lodash__default['default'].merge(radioCheckbox(TYPE$3), {
         props: props$5
     }));var DefaultTheme$1 = Object.assign({}, CFormPanel$1);// TODO: add limit...
 
@@ -2129,7 +2129,7 @@ var TYPE$2 = 'radio';
 
 var CRadioGroup = Object.assign({}, {name: NAME$f},
 
-    merge__default['default'](radioCheckboxGroup(TYPE$2), {
+    lodash__default['default'].merge(radioCheckboxGroup(TYPE$2), {
         props: {
             modelValue: {
                 type: [String, Number, Boolean],
@@ -2163,14 +2163,14 @@ var props$4 = {
 
 var CCheckbox = Object.assign({}, {name: NAME$e},
 
-    merge__default['default'](radioCheckbox(TYPE$1), {
+    lodash__default['default'].merge(radioCheckbox(TYPE$1), {
         props: props$4
     }));var NAME$d = 'CCheckboxGroup';
 var TYPE = 'checkbox';
 
 var CCheckboxGroup = Object.assign({}, {name: NAME$d},
 
-    merge__default['default'](radioCheckboxGroup(TYPE), {
+    lodash__default['default'].merge(radioCheckboxGroup(TYPE), {
         props: {
             modelValue: {
                 type: Array,
