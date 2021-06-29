@@ -1,4 +1,4 @@
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import radioCheckboxGroup from '@/mixins/radio-checkbox-group';
 
 const NAME = 'CRadioGroup';

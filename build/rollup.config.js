@@ -18,8 +18,8 @@ const globals = {
     'v-click-outside-x': 'vClickOutside',
     vue: 'Vue',
     'vue-functional-data-merge': 'vueFunctionalDataMerge',
-    'lodash.merge': 'merge',
-    'lodash.get': 'get',
+    'lodash/merge': 'merge',
+    'lodash/get': 'get',
     'mini-svg-data-uri': 'svgToDataUri'
 };
 
@@ -99,7 +99,7 @@ if (!argv.format || argv.format === 'cjs') {
                 }
             }),
             ...baseConfig.plugins.postVue,
-            analyze({ summaryOnly: true }),
+            // analyze({ summaryOnly: true }),
             visualizer({ open: true })
         ]
     };

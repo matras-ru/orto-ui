@@ -1,8 +1,8 @@
 import * as vClickOutside from 'v-click-outside-x';
 import Vue from 'vue';
-import get from 'lodash.get';
+import get from 'lodash/get';
 import { mergeData } from 'vue-functional-data-merge';
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 
 var base$d =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
