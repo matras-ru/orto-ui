@@ -1881,7 +1881,10 @@ var CFormSelectCustom = {
                             },
                             attrs: this$1$1.$attrs,
                             on: {
-                                click: toggle
+                                click: function () {
+                                    this$1$1.$emit('beforeOpen');
+                                    this$1$1.$nextTick().then(toggle);
+                                }
                             }
                         }),
                         useNativeList ? fakeNativeSelect() : null
@@ -4177,6 +4180,5 @@ var index = {
     install: install
 };
 
-export default index;
-export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CListToggle, CPicture, CRadio, CRadioGroup, CRating, CRow, CTab, CTabPanel, CTabPanels, CTabs };
+export { CButton, CCheckbox, CCheckboxGroup, CCol, CContainer, CDropdown, CForm, CFormField, CFormInput, CFormPanel, CFormSelectCustom, CLink, CList, CListItem, CListToggle, CPicture, CRadio, CRadioGroup, CRating, CRow, CTab, CTabPanel, CTabPanels, CTabs, index as default };
 //# sourceMappingURL=orto-ui.esm.js.map

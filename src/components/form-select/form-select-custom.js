@@ -220,7 +220,10 @@ export default {
                             },
                             attrs: this.$attrs,
                             on: {
-                                click: toggle
+                                click: () => {
+                                    this.$emit('beforeOpen');
+                                    this.$nextTick().then(toggle);
+                                }
                             }
                         }),
                         useNativeList ? fakeNativeSelect() : null

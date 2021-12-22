@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),get=require('lodash/get'),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=require('lodash/merge');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule)return e;var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k];}});}});}n['default']=e;return Object.freeze(n);}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var get__default=/*#__PURE__*/_interopDefaultLegacy(get);var merge__default=/*#__PURE__*/_interopDefaultLegacy(merge);var base$d =
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});var vClickOutside=require('v-click-outside-x'),Vue=require('vue'),get=require('lodash/get'),vueFunctionalDataMerge=require('vue-functional-data-merge'),merge=require('lodash/merge');function _interopDefaultLegacy(e){return e&&typeof e==='object'&&'default'in e?e:{'default':e}}function _interopNamespace(e){if(e&&e.__esModule)return e;var n=Object.create(null);if(e){Object.keys(e).forEach(function(k){if(k!=='default'){var d=Object.getOwnPropertyDescriptor(e,k);Object.defineProperty(n,k,d.get?d:{enumerable:true,get:function(){return e[k]}});}})}n["default"]=e;return Object.freeze(n)}var vClickOutside__namespace=/*#__PURE__*/_interopNamespace(vClickOutside);var Vue__default=/*#__PURE__*/_interopDefaultLegacy(Vue);var get__default=/*#__PURE__*/_interopDefaultLegacy(get);var merge__default=/*#__PURE__*/_interopDefaultLegacy(merge);var base$d =
     'inline-flex items-center justify-center rounded-lg uppercase font-semibold text-black-100 duration-250 ease-in-out border-3 focus:outline-none';
 
 var variantPrimary$2 =
@@ -351,7 +351,7 @@ var DefaultTheme$4 = {
 
 var DefaultTheme$3 = {
     base: base$1
-};var DefaultTheme$2=/*#__PURE__*/Object.freeze({__proto__:null,CButton: DefaultTheme$l,CLink: DefaultTheme$k,CFormInput: DefaultTheme$i,CForm: DefaultTheme$h,CCheckbox: DefaultTheme$g,CRadio: DefaultTheme$g,CTab: DefaultTheme$f,CTabPanel: DefaultTheme$e,CList: DefaultTheme$d,CListItem: DefaultTheme$c,CContainer: DefaultTheme$b,CRow: DefaultTheme$a,CCol: DefaultTheme$9,CFormField: DefaultTheme$j,CFormPanel: CFormPanel$1,CFormSelectCustom: DefaultTheme$8,CBadge: DefaultTheme$7,CDropdown: DefaultTheme$6,CListToggle: DefaultTheme$5,CRating: DefaultTheme$4,CStar: DefaultTheme$3});var justifyCenter = 'justify-center';
+};var DefaultTheme$2=/*#__PURE__*/Object.freeze({__proto__:null,CButton:DefaultTheme$l,CLink:DefaultTheme$k,CFormInput:DefaultTheme$i,CForm:DefaultTheme$h,CCheckbox:DefaultTheme$g,CRadio:DefaultTheme$g,CTab:DefaultTheme$f,CTabPanel:DefaultTheme$e,CList:DefaultTheme$d,CListItem:DefaultTheme$c,CContainer:DefaultTheme$b,CRow:DefaultTheme$a,CCol:DefaultTheme$9,CFormField:DefaultTheme$j,CFormPanel:CFormPanel$1,CFormSelectCustom:DefaultTheme$8,CBadge:DefaultTheme$7,CDropdown:DefaultTheme$6,CListToggle:DefaultTheme$5,CRating:DefaultTheme$4,CStar:DefaultTheme$3});var justifyCenter = 'justify-center';
 var justifyBetween = 'justify-between';
 var justifyStart = 'justify-start';
 var justifyEnd = 'justify-end';var noop = function () {};
@@ -545,16 +545,16 @@ Config.prototype.getConfig = function getConfig () {
 };
 
 Config.prototype.getConfigValue = function getConfigValue (key) {
-    return get__default['default'](this.$_config, key, get__default['default'](DEFAULTS, key));
+    return get__default["default"](this.$_config, key, get__default["default"](DEFAULTS, key));
 };
 
 Object.defineProperties( Config.prototype, prototypeAccessors );
 Object.defineProperties( Config, staticAccessors );
 
 var getConfigValue = function (key) {
-    return Vue__default['default'].prototype[PROP_NAME]
-        ? Vue__default['default'].prototype[PROP_NAME].getConfigValue(key)
-        : get__default['default'](DEFAULTS, key);
+    return Vue__default["default"].prototype[PROP_NAME]
+        ? Vue__default["default"].prototype[PROP_NAME].getConfigValue(key)
+        : get__default["default"](DEFAULTS, key);
 };
 
 var ConfigPlugin = function (config, Vue) {
@@ -1784,7 +1784,10 @@ var CFormSelectCustom = {
                             },
                             attrs: this$1$1.$attrs,
                             on: {
-                                click: toggle
+                                click: function () {
+                                    this$1$1.$emit('beforeOpen');
+                                    this$1$1.$nextTick().then(toggle);
+                                }
                             }
                         }),
                         useNativeList ? fakeNativeSelect() : null
@@ -2055,7 +2058,7 @@ var props$5 = {
 
 var CRadio = Object.assign({}, {name: NAME$g},
 
-    merge__default['default'](radioCheckbox(TYPE$3), {
+    merge__default["default"](radioCheckbox(TYPE$3), {
         props: props$5
     }));var DefaultTheme$1 = Object.assign({}, CFormPanel$1);// TODO: add limit...
 
@@ -2129,7 +2132,7 @@ var TYPE$2 = 'radio';
 
 var CRadioGroup = Object.assign({}, {name: NAME$f},
 
-    merge__default['default'](radioCheckboxGroup(TYPE$2), {
+    merge__default["default"](radioCheckboxGroup(TYPE$2), {
         props: {
             modelValue: {
                 type: [String, Number, Boolean],
@@ -2163,14 +2166,14 @@ var props$4 = {
 
 var CCheckbox = Object.assign({}, {name: NAME$e},
 
-    merge__default['default'](radioCheckbox(TYPE$1), {
+    merge__default["default"](radioCheckbox(TYPE$1), {
         props: props$4
     }));var NAME$d = 'CCheckboxGroup';
 var TYPE = 'checkbox';
 
 var CCheckboxGroup = Object.assign({}, {name: NAME$d},
 
-    merge__default['default'](radioCheckboxGroup(TYPE), {
+    merge__default["default"](radioCheckboxGroup(TYPE), {
         props: {
             modelValue: {
                 type: Array,
@@ -4032,4 +4035,4 @@ var install = function (Vue, options) {
 
 var index = {
     install: install
-};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CListToggle=CListToggle;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRating=CRating;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports.default=index;//# sourceMappingURL=orto-ui.ssr.js.map
+};exports.CButton=CButton;exports.CCheckbox=CCheckbox;exports.CCheckboxGroup=CCheckboxGroup;exports.CCol=CCol;exports.CContainer=CContainer;exports.CDropdown=CDropdown;exports.CForm=CForm;exports.CFormField=CFormField;exports.CFormInput=CFormInput;exports.CFormPanel=CFormPanel;exports.CFormSelectCustom=CFormSelectCustom;exports.CLink=CLink;exports.CList=CList;exports.CListItem=CListItem;exports.CListToggle=CListToggle;exports.CPicture=CPicture;exports.CRadio=CRadio;exports.CRadioGroup=CRadioGroup;exports.CRating=CRating;exports.CRow=CRow;exports.CTab=CTab;exports.CTabPanel=CTabPanel;exports.CTabPanels=CTabPanels;exports.CTabs=CTabs;exports["default"]=index;//# sourceMappingURL=orto-ui.ssr.js.map
