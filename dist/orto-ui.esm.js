@@ -1030,7 +1030,7 @@ var CFormField$1 = {
                                               class: labelClasses,
                                               ref: 'label'
                                           },
-                                          this.$slots.label ? this.$slots.label : this.label
+                                          this.$slots.label || this.label
                                       )
                                     : null
                             ]
@@ -1361,7 +1361,13 @@ var CFormField = {
 
     methods: {
         getControl: function getControl(h) {
-            return h('div', [this.$slots.default]);
+            return h(
+                'div',
+                {
+                    on: Object.assign({}, this.$listeners)
+                },
+                [this.$slots.default]
+            );
         }
     }
 };
@@ -1694,7 +1700,6 @@ var CFormSelectCustom = {
 
     components: {
         CDropdown: CDropdown,
-        CFormInput: CFormInput,
         CList: CList,
         CListItem: CListItem
     },
@@ -1785,6 +1790,9 @@ var CFormSelectCustom = {
         var listBase = theme.listBase;
         var fakeSelectBase = theme.fakeSelectBase;
         var inputIconClass = theme.inputIconClass;
+        var optionBase = theme.optionBase;
+        var optionStateDefault = theme.optionStateDefault;
+        var optionStateActive = theme.optionStateActive;
         var sizes = createSizeMap(theme);
 
         var iconClass = [inputIconBase];
@@ -1795,12 +1803,7 @@ var CFormSelectCustom = {
         iconClass.push(icon);
 
         var computeOptionClasses = function (isSelected) {
-            var optionBase = theme.optionBase;
-            var optionStateDefault = theme.optionStateDefault;
-            var optionStateActive = theme.optionStateActive;
-
             var classesBasedOnState = isSelected ? optionStateActive : optionStateDefault;
-
             return [optionBase, classesBasedOnState];
         };
 
@@ -1856,40 +1859,42 @@ var CFormSelectCustom = {
             },
 
             scopedSlots: Object.assign({}, {holder: function (ref) {
-                        var toggle = ref.toggle;
+                    var toggle = ref.toggle;
 
-                        return h('div', [
-                        h('CFormInput', {
-                            props: {
-                                name: this$1$1.name,
-                                labelBgColor: this$1$1.labelBgColor,
-                                readonly: true,
-                                error: error,
-                                label: label,
-                                placeholder: placeholder,
-                                size: size,
-                                modelValue: selectedOption
-                                    ? this$1$1.$scopedSlots.selected
-                                        ? this$1$1.$scopedSlots.selected(selectedOption)[0].text
-                                        : selectedOption[optionLabel]
-                                    : null
-                            },
-                            ref: 'holder',
-                            staticClass: inputBase,
-                            scopedSlots: {
-                                append: function () { return h('i', { class: [iconClass, inputIconClass] }); }
-                            },
-                            attrs: this$1$1.$attrs,
-                            on: {
-                                click: function () {
-                                    this$1$1.$emit('beforeOpen');
-                                    this$1$1.$nextTick().then(toggle);
+                    return h('div', [
+                        h(
+                            'CFormField',
+                            {
+                                props: {
+                                    name: this$1$1.name,
+                                    labelBgColor: this$1$1.labelBgColor,
+                                    error: error,
+                                    label: label,
+                                    size: size,
+                                    modelValue: selectedOption && selectedOption[this$1$1.optionValue]
+                                },
+                                staticClass: inputBase,
+                                ref: 'holder',
+                                scopedSlots: {
+                                    append: function () { return h('i', { class: [iconClass, inputIconClass] }); }
+                                },
+                                attrs: this$1$1.$attrs,
+                                on: {
+                                    click: function () {
+                                        this$1$1.$emit('beforeOpen');
+                                        this$1$1.$nextTick().then(toggle);
+                                    }
                                 }
-                            }
-                        }),
+                            },
+                            selectedOption
+                                ? this$1$1.$scopedSlots.selected
+                                    ? this$1$1.$scopedSlots.selected(selectedOption)
+                                    : selectedOption[this$1$1.optionLabel]
+                                : placeholder || label
+                        ),
                         useNativeList ? fakeNativeSelect() : null
                     ]);
-}        },
+                }},
 
                 (!useNativeList && {
                     dropdown: function (ref) {

@@ -4,7 +4,6 @@ import { getComponentConfig } from '@/config';
 import { getHashMapValue } from '@/utils';
 const validSizes = ['sm', 'md'];
 import CDropdown from '../dropdown/dropdown';
-import CFormInput from '../form-input/form-input';
 import CList from '../list/list';
 import CListItem from '../list/list-item';
 
@@ -43,7 +42,6 @@ export default {
 
     components: {
         CDropdown,
-        CFormInput,
         CList,
         CListItem
     },
@@ -128,7 +126,16 @@ export default {
         } = this;
 
         const selectedOption = options.find(item => item[optionValue] === modelValue);
-        const { inputBase, inputIconBase, listBase, fakeSelectBase, inputIconClass } = theme;
+        const {
+            inputBase,
+            inputIconBase,
+            listBase,
+            fakeSelectBase,
+            inputIconClass,
+            optionBase,
+            optionStateDefault,
+            optionStateActive
+        } = theme;
         const sizes = createSizeMap(theme);
 
         const iconClass = [inputIconBase];
@@ -138,10 +145,7 @@ export default {
         iconClass.push(icon);
 
         const computeOptionClasses = isSelected => {
-            const { optionBase, optionStateDefault, optionStateActive } = theme;
-
             const classesBasedOnState = isSelected ? optionStateActive : optionStateDefault;
-
             return [optionBase, classesBasedOnState];
         };
 
@@ -196,38 +200,41 @@ export default {
             },
 
             scopedSlots: {
-                holder: ({ toggle }) =>
-                    h('div', [
-                        h('CFormInput', {
-                            props: {
-                                name: this.name,
-                                labelBgColor: this.labelBgColor,
-                                readonly: true,
-                                error,
-                                label,
-                                placeholder,
-                                size,
-                                modelValue: selectedOption
-                                    ? this.$scopedSlots.selected
-                                        ? this.$scopedSlots.selected(selectedOption)[0].text
-                                        : selectedOption[optionLabel]
-                                    : null
-                            },
-                            ref: 'holder',
-                            staticClass: inputBase,
-                            scopedSlots: {
-                                append: () => h('i', { class: [iconClass, inputIconClass] })
-                            },
-                            attrs: this.$attrs,
-                            on: {
-                                click: () => {
-                                    this.$emit('beforeOpen');
-                                    this.$nextTick().then(toggle);
+                holder: ({ toggle }) => {
+                    return h('div', [
+                        h(
+                            'CFormField',
+                            {
+                                props: {
+                                    name: this.name,
+                                    labelBgColor: this.labelBgColor,
+                                    error,
+                                    label,
+                                    size,
+                                    modelValue: selectedOption && selectedOption[this.optionValue]
+                                },
+                                staticClass: inputBase,
+                                ref: 'holder',
+                                scopedSlots: {
+                                    append: () => h('i', { class: [iconClass, inputIconClass] })
+                                },
+                                attrs: this.$attrs,
+                                on: {
+                                    click: () => {
+                                        this.$emit('beforeOpen');
+                                        this.$nextTick().then(toggle);
+                                    }
                                 }
-                            }
-                        }),
+                            },
+                            selectedOption
+                                ? this.$scopedSlots.selected
+                                    ? this.$scopedSlots.selected(selectedOption)
+                                    : selectedOption[this.optionLabel]
+                                : placeholder || label
+                        ),
                         useNativeList ? fakeNativeSelect() : null
-                    ]),
+                    ]);
+                },
 
                 ...(!useNativeList && {
                     dropdown: ({ close, isShow }) => {

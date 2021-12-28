@@ -18,7 +18,15 @@ export default {
 
     methods: {
         getControl(h) {
-            return h('div', [this.$slots.default]);
+            return h(
+                'div',
+                {
+                    on: {
+                        ...this.$listeners
+                    }
+                },
+                [this.$slots.default]
+            );
         }
     }
 };

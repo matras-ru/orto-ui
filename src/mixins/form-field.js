@@ -252,7 +252,7 @@ export default {
                                               class: labelClasses,
                                               ref: 'label'
                                           },
-                                          this.$slots.label ? this.$slots.label : this.label
+                                          this.$slots.label || this.label
                                       )
                                     : null
                             ]

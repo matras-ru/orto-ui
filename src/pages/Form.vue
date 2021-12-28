@@ -1,5 +1,38 @@
 <template>
     <div>
+        <div style="max-width: 300px">
+            <CFormPanel label="Slot">
+                <CFormSelectCustom
+                    v-bind="{
+                        data: [
+                            {
+                                id: 1,
+                                price: 15080,
+                                width: 200,
+                                height: 250
+                            },
+                            {
+                                id: 2,
+                                price: 5550,
+                                width: 100,
+                                height: 100
+                            }
+                        ],
+                        label: 'Выберите размер',
+                        optionValue: 'id',
+                        error: $v.exampleModel.selectModel.$error
+                    }"
+                    v-model="exampleModel.selectModel"
+                >
+                    <template #selected="selected">
+                        <OptionSize v-bind="selected" />
+                    </template>
+                    <template #default="{ price, width, height }">
+                        <OptionSize v-bind="{ price, width, height }" />
+                    </template>
+                </CFormSelectCustom>
+            </CFormPanel>
+        </div>
         <CForm @submit.prevent="validate">
             <CButton type="submit">Submit</CButton>
             <br />
@@ -520,8 +553,14 @@
 <script>
 import { required, minLength, sameAs } from 'vuelidate/lib/validators';
 
+import OptionSize from './_option_size.vue';
+
 export default {
     name: 'FromExample',
+
+    components: {
+        OptionSize
+    },
 
     data() {
         return {
