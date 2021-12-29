@@ -10,8 +10,6 @@ export const optionStateActive = 'bg-tertiary-100';
 
 export const listBase = 'overscroll-contain overflow-y-auto max-h-18-6';
 
-export const fakeSelectBase = 'absolute w-full h-full left-0 top-0 opacity-0 z-1 cursor-pointer';
-
 export default {
     inputBase,
     inputIconBase,
@@ -23,7 +21,5 @@ export default {
     optionStateDefault,
     optionStateActive,
 
-    listBase,
-
-    fakeSelectBase
+    listBase
 };

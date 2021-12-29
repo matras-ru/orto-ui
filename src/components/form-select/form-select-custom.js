@@ -1,12 +1,11 @@
-import { selfInstall } from '@/utils/index.js';
+import { selfInstall, getHashMapValue } from '@/utils';
 import DefaultTheme from '@/themes/default/CFormSelectCustom';
 import { getComponentConfig } from '@/config';
-import { getHashMapValue } from '@/utils';
-const validSizes = ['sm', 'md'];
 import CDropdown from '../dropdown/dropdown';
 import CList from '../list/list';
 import CListItem from '../list/list-item';
 
+const validSizes = ['sm', 'md'];
 const NAME = 'CFormSelectCustom';
 
 const createSizeMap = ({ inputIconSizeMd, inputIconSizeSm }) => {
@@ -98,17 +97,92 @@ export default {
             type: String,
             default: 'md',
             validator: value => validSizes.includes(value)
-        },
-
-        useNativeList: {
-            type: Boolean,
-            default: false
         }
     },
 
     model: {
         prop: 'modelValue',
         event: 'change'
+    },
+
+    data() {
+        return {
+            shownList: false,
+            focusIndex: -1
+        };
+    },
+
+    computed: {
+        selectedOption() {
+            return this.data.find((item, idx) => item[this.optionValue] === this.modelValue);
+        },
+
+        selectedOption2() {
+            return this.data.find((item, idx) => idx === this.focusIndex);
+        },
+
+        selectIndex() {
+            return this.data.findIndex(option => option[this.optionValue] === this.modelValue);
+        }
+    },
+
+    created() {
+        if (this.modelValue) {
+            this.setFocusIndex(
+                this.data.findIndex(option => option[this.optionValue] === this.modelValue)
+            );
+        }
+    },
+
+    methods: {
+        close() {
+            this.shownList = false;
+
+            this.$refs.button.$el.focus();
+        },
+
+        open() {
+            this.shownList = true;
+
+            setTimeout(() => {
+                console.log(this.$refs.list);
+                this.$refs.list.focus();
+            }, 100);
+        },
+
+        setFocusIndex(idx) {
+            this.focusIndex = idx;
+        },
+
+        scrollToSelected() {
+            if (!this.$refs.list || !this.$refs.selected) return;
+            const { list, selected } = this.$refs;
+            const { offsetTop, clientHeight } = selected;
+
+            const currentVisibleArea = list.scrollTop + list.clientHeight;
+
+            if (offsetTop < list.scrollTop) {
+                list.scrollTop = offsetTop;
+            } else if (offsetTop + clientHeight > currentVisibleArea) {
+                list.scrollTop = offsetTop - list.clientHeight + clientHeight;
+            }
+        }
+    },
+
+    watch: {
+        // shownList: {
+        //     immediate: true,
+        //     handler() {
+        //         this.$nextTick().then(() => {
+        //             this.shownList &&
+        //                 this.$refs.selected &&
+        //                 this.$refs.selected.scrollIntoView({
+        //                     block: 'nearest',
+        //                     inline: 'start'
+        //                 });
+        //         });
+        //     }
+        // }
     },
 
     render(h) {
@@ -121,16 +195,13 @@ export default {
             optionLabel,
             optionValue,
             error,
-            size,
-            useNativeList
+            size
         } = this;
 
-        const selectedOption = options.find(item => item[optionValue] === modelValue);
         const {
             inputBase,
             inputIconBase,
             listBase,
-            fakeSelectBase,
             inputIconClass,
             optionBase,
             optionStateDefault,
@@ -149,144 +220,240 @@ export default {
             return [optionBase, classesBasedOnState];
         };
 
-        // for mobile platform
-        // TODO: unit
-        const fakeNativeSelect = () =>
-            h(
-                'select',
-                {
-                    staticClass: fakeSelectBase,
-                    directives: [
-                        {
-                            name: 'model',
-                            rawName: 'v-model',
-                            value: modelValue,
-                            expression: 'modelValue'
-                        }
-                    ],
-                    attrs: this.$attrs,
-                    on: {
-                        change: e => {
-                            const target = e.target;
-
-                            const selectedVal = Array.from(target.options)
-                                .filter(option => option.selected)
-                                .map(option => ('_value' in option ? option._value : option.value));
-
-                            this.$emit('change', selectedVal[0]);
-                        }
-                    }
-                },
-                options.map(option => {
-                    const { value, label } = mapOption({
-                        option,
-                        optionLabel,
-                        optionValue
-                    });
-
-                    const computedLabel = this.$scopedSlots.default
-                        ? this.$scopedSlots.default(option)[0].text
-                        : label;
-
-                    return h('option', {
-                        domProps: { value, innerHTML: computedLabel }
-                    });
-                })
-            );
-
         return h('CDropdown', {
             props: {
-                variant: getComponentConfig(NAME, 'dropdownVariant')
+                theme: getComponentConfig(NAME, 'dropdownTheme')
+            },
+
+            attrs: {
+                shown: this.shownList,
+                triggers: ['']
+            },
+
+            on: {
+                'auto-hide': this.close
             },
 
             scopedSlots: {
-                holder: ({ toggle }) => {
-                    return h('div', [
-                        h(
-                            'CFormField',
-                            {
-                                props: {
-                                    name: this.name,
-                                    labelBgColor: this.labelBgColor,
-                                    error,
-                                    label,
-                                    size,
-                                    modelValue: selectedOption && selectedOption[this.optionValue]
-                                },
-                                staticClass: inputBase,
-                                ref: 'holder',
-                                scopedSlots: {
-                                    append: () => h('i', { class: [iconClass, inputIconClass] })
-                                },
-                                attrs: this.$attrs,
-                                on: {
-                                    click: () => {
-                                        this.$emit('beforeOpen');
-                                        this.$nextTick().then(toggle);
-                                    }
-                                }
+                popper: () => {
+                    return h(
+                        'CList',
+                        {
+                            staticClass: listBase,
+
+                            ref: 'list',
+
+                            attrs: {
+                                tabindex: '-1',
+                                role: 'listbox'
                             },
-                            selectedOption
-                                ? this.$scopedSlots.selected
-                                    ? this.$scopedSlots.selected(selectedOption)
-                                    : selectedOption[this.optionLabel]
-                                : placeholder || label
-                        ),
-                        useNativeList ? fakeNativeSelect() : null
-                    ]);
+
+                            on: {
+                                keydown: event => {
+                                    console.log(event);
+                                    if ([32, 37, 38, 39, 40, 9].includes(event.keyCode)) {
+                                        event.preventDefault();
+                                    }
+
+                                    // TODO: пропускать при навигации стрелками `dropdown-list-item`
+
+                                    switch (event.keyCode) {
+                                        case 38:
+                                            console.log('UP');
+                                            // up
+                                            if (this.focusIndex === 0) return;
+                                            this.setFocusIndex(this.focusIndex - 1);
+                                            break;
+
+                                        case 40:
+                                            // down
+                                            console.log('DOWN');
+
+                                            if (this.focusIndex === this.data.length - 1) {
+                                                // скроллл в низ списка
+                                                this.$refs.list.scrollTop =
+                                                    this.$refs.list.scrollHeight;
+                                                return;
+                                            }
+
+                                            this.setFocusIndex(this.focusIndex + 1);
+                                            break;
+
+                                        case 36:
+                                            console.log('HOME');
+
+                                            // home
+                                            this.setFocusIndex(0);
+                                            break;
+
+                                        case 35:
+                                            console.log('END');
+
+                                            // end
+                                            this.setFocusIndex(this.data.length - 1);
+                                            break;
+
+                                        case 13:
+                                            console.log('ENTER');
+
+                                            // enter
+
+                                            const { value } = mapOption({
+                                                option: this.selectedOption2,
+                                                optionLabel,
+                                                optionValue
+                                            });
+
+                                            this.$nextTick().then(() => {
+                                                this.$emit('change', value);
+                                                this.close();
+                                            });
+
+                                            break;
+
+                                        case 9:
+                                            // tab
+                                            console.log('TAB');
+
+                                            this.close();
+                                            break;
+                                    }
+
+                                    this.$nextTick().then(() => {
+                                        this.scrollToSelected();
+                                    });
+                                }
+                            }
+                        },
+                        [
+                            options.map((option, idx) => {
+                                const { value, label } = mapOption({
+                                    option,
+                                    optionLabel,
+                                    optionValue
+                                });
+
+                                // const isSelected = value === modelValue;
+                                const isSelected = idx === this.focusIndex;
+
+                                return h(
+                                    'CListItem',
+                                    {
+                                        class: computeOptionClasses(isSelected),
+                                        ...(isSelected && {
+                                            ref: 'selected'
+                                        }),
+                                        on: {
+                                            click: () => {
+                                                this.$emit('change', value);
+                                                this.close();
+                                            }
+                                        }
+                                    },
+                                    this.$scopedSlots.default
+                                        ? this.$scopedSlots.default(option)
+                                        : label
+                                );
+                            })
+                        ]
+                    );
                 },
 
-                ...(!useNativeList && {
-                    dropdown: ({ close, isShow }) => {
-                        // First to selected
-                        // TODO:
-                        this.$nextTick().then(() => {
-                            if (isShow && this.$refs.selected) {
-                                this.$refs.selected.scrollIntoView({
-                                    block: 'nearest',
-                                    inline: 'start'
-                                });
+                default: () => {
+                    return h(
+                        'div',
+                        {
+                            on: {
+                                click: () => {
+                                    this.$emit('beforeOpen');
+                                    this.$nextTick().then(this.open);
+                                }
                             }
-                        });
+                        },
+                        [
+                            h(
+                                'CFormField',
+                                {
+                                    props: {
+                                        name: this.name,
+                                        labelBgColor: this.labelBgColor,
+                                        error,
+                                        label,
+                                        size,
+                                        modelValue:
+                                            this.selectedOption &&
+                                            this.selectedOption[this.optionValue]
+                                    },
+                                    staticClass: inputBase,
+                                    ref: 'button',
+                                    scopedSlots: {
+                                        append: () => h('i', { class: [iconClass, inputIconClass] })
+                                    },
+                                    attrs: {
+                                        'aria-expanded': this.shownList ? 'true' : 'false',
+                                        'aria-haspopup': 'listbox',
+                                        tabindex: '0',
+                                        ...this.$attrs
+                                    },
+                                    on: {
+                                        keydown: event => {
+                                            switch (event.keyCode) {
+                                                case 13:
+                                                    console.log('ENTER');
 
-                        return h(
-                            'CList',
-                            {
-                                staticClass: listBase
-                            },
-                            [
-                                options.map(option => {
-                                    const { value, label } = mapOption({
-                                        option,
-                                        optionLabel,
-                                        optionValue
-                                    });
+                                                    this.open();
+                                                    // enter
 
-                                    const isSelected = value === modelValue;
+                                                    break;
 
-                                    return h(
-                                        'CListItem',
-                                        {
-                                            class: computeOptionClasses(isSelected),
-                                            ...(isSelected && {
-                                                ref: 'selected'
-                                            }),
-                                            on: {
-                                                click: () => {
-                                                    this.$emit('change', value);
-                                                    close();
-                                                }
+                                                case 9:
+                                                    // tab
+                                                    console.log('TAB');
+
+                                                    this.close();
+                                                    break;
+
+                                                case 38:
+                                                    // up
+                                                    if (this.selectIndex === 0) return;
+
+                                                    this.$emit(
+                                                        'change',
+                                                        mapOption({
+                                                            option: this.data[this.selectIndex - 1],
+                                                            optionLabel,
+                                                            optionValue
+                                                        }).value
+                                                    );
+                                                    break;
+                                                case 40:
+                                                    // down
+                                                    if (this.selectIndex === this.data.length - 1)
+                                                        return;
+
+                                                    console.log(this.data[this.selectIndex + 1]);
+                                                    this.$emit(
+                                                        'change',
+                                                        mapOption({
+                                                            option: this.data[this.selectIndex + 1],
+                                                            optionLabel,
+                                                            optionValue
+                                                        }).value
+                                                    );
+                                                    break;
                                             }
-                                        },
-                                        this.$scopedSlots.default
-                                            ? this.$scopedSlots.default(option)
-                                            : label
-                                    );
-                                })
-                            ]
-                        );
-                    }
-                })
+                                        }
+                                    }
+                                },
+                                this.selectedOption
+                                    ? this.$scopedSlots.selected
+                                        ? this.$scopedSlots.selected(this.selectedOption)
+                                        : this.selectedOption[this.optionLabel]
+                                    : placeholder || label
+                            )
+                        ]
+                    );
+                }
             }
         });
     }

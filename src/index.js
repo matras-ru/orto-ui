@@ -1,4 +1,4 @@
-import * as vClickOutside from 'v-click-outside-x';
+import VTooltip from 'v-tooltip';
 import * as DefaultTheme from '@/themes/default';
 import { ConfigPlugin } from '@/config';
 /* COMPONENTS */
@@ -62,15 +62,18 @@ const extendComponent = (Vue, CurrentTheme, componentName) => {
     // TODO: if props is undefined
     const { props = {} } = components[componentName];
 
-    const themeDefaultSettings = props.theme ? props.theme.default() : {};
-    const themeSettings = CurrentTheme[componentName];
+    // conflict with v-tooltip https://v-tooltip.netlify.app/guide/custom-component.html#full-example
+    if (componentName !== 'CDropdown') {
+        const themeDefaultSettings = props.theme ? props.theme.default() : null;
+        const themeSettings = CurrentTheme[componentName];
 
-    props.theme = {
-        type: Object,
-        default: () => {
-            return { ...themeDefaultSettings, ...themeSettings };
-        }
-    };
+        props.theme = {
+            type: Object,
+            default: () => {
+                return { ...themeDefaultSettings, ...themeSettings };
+            }
+        };
+    }
 
     return Vue.extend({
         ...components[componentName],
@@ -96,7 +99,7 @@ const install = function (Vue, options = {}) {
         Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
     });
 
-    Vue.use(vClickOutside);
+    Vue.use(VTooltip, config.VTooltip || {});
 };
 
 export { CForm };

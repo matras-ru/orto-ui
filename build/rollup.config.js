@@ -7,7 +7,6 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
-import analyze from 'rollup-plugin-analyzer';
 import visualizer from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
@@ -51,7 +50,11 @@ const baseConfig = {
         },
         postVue: [
             buble({
-                objectAssign: 'Object.assign'
+                objectAssign: 'Object.assign',
+
+                transforms: {
+                    generator: false
+                }
             })
         ]
     }
@@ -99,7 +102,6 @@ if (!argv.format || argv.format === 'cjs') {
                 }
             }),
             ...baseConfig.plugins.postVue,
-            // analyze({ summaryOnly: true }),
             visualizer({ open: true })
         ]
     };

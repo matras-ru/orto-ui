@@ -9,3 +9,13 @@ svg {
 .exmpl-panel {
     @apply bg-layout-section border border-layout-container p-0-8 rounded;
 }
+
+.v-popper--theme-orto-ui .v-popper__inner {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+}
+
+.v-popper--theme-orto-ui .v-popper__arrow {
+    border-color: #fff;
+}

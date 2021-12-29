@@ -223,7 +223,11 @@ export default {
         return h(
             'label', // outer wrap
             {
-                class: outerWrapClasses
+                class: outerWrapClasses,
+                attrs: {
+                    ...this.$attrs
+                },
+                on: this.$listeners
             },
             [
                 h(

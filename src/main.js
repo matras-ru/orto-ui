@@ -6,6 +6,7 @@ import App from './App.vue';
 import OrtoUi from './index';
 
 import '@/assets/css/tailwind.css';
+import 'v-tooltip/dist/v-tooltip.css';
 // import * as CustomTheme from '@/themes/custom/index';
 
 // import { CButton } from './index';
@@ -27,6 +28,18 @@ const customConfig = {
         optionValue: 'value',
         optionLabel: 'label',
         dropdownVariant: 'secondary'
+    },
+    VTooltip: {
+        themes: {
+            'orto-ui': {
+                placement: 'bottom',
+                handleResize: true,
+                delay: 0,
+                triggers: ['click'],
+                autoHide: true,
+                $resetCss: true
+            }
+        }
     }
 };
 

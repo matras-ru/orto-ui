@@ -1,133 +1,101 @@
+import { Popper, ThemeClass, PopperContent, PopperMethods } from 'v-tooltip';
 import { selfInstall } from '@/utils/index.js';
-import DefaultTheme from '@/themes/default/CDropdown';
-import { getComponentConfig } from '@/config';
 
-const validVariants = ['primary', 'secondary'];
-const validPlacements = ['left', 'right'];
+import { getComponentConfig } from '@/config';
 
 const NAME = 'CDropdown';
 
 export default {
     name: NAME,
 
+    install(Vue) {
+        selfInstall(Vue, this);
+    },
+
+    inheritAttrs: false,
+
+    vPopperTheme: 'orto-ui',
+
+    components: {
+        Popper: Popper(),
+        PopperContent
+    },
+
+    mixins: [PopperMethods, ThemeClass],
+
     props: {
         theme: {
-            type: Object,
-            default: () => DefaultTheme
-        },
-
-        variant: {
             type: String,
-            default: () => getComponentConfig(NAME, 'variant'),
-            validator: value => validVariants.includes(value)
-        },
-
-        placement: {
-            type: String,
-            default: () => getComponentConfig(NAME, 'placement'),
-            validator: value => validPlacements.includes(value)
-        }
-    },
-
-    install(Vue, theme) {
-        selfInstall(Vue, theme, this);
-    },
-
-    data() {
-        return {
-            isShow: false
-        };
-    },
-
-    methods: {
-        toggle() {
-            this.isShow = !this.isShow;
-        },
-
-        close() {
-            this.isShow = false;
-        },
-
-        open() {
-            this.isShow = true;
+            default() {
+                return getComponentConfig(NAME, 'theme');
+            }
         }
     },
 
     render(h) {
-        const { wrapperClasses, dropdownClasses } = (() => {
-            const {
-                wrapperBase,
-                dropdownBase,
-                dropdownVariantPrimary,
-                dropdownVariantSecondary,
-                dropdownPlacementLeft,
-                dropdownPlacementRight
-            } = this.theme;
-
-            const wrapperClasses = [wrapperBase];
-            const dropdownClasses = [dropdownBase];
-
-            const themeMap = {
-                variants: {
-                    primary: dropdownVariantPrimary,
-                    secondary: dropdownVariantSecondary
-                },
-                placement: {
-                    left: dropdownPlacementLeft,
-                    right: dropdownPlacementRight
-                }
-            };
-
-            dropdownClasses.push(themeMap.variants[this.variant]);
-            dropdownClasses.push(themeMap.placement[this.placement]);
-
-            return {
-                wrapperClasses,
-                dropdownClasses
-            };
-        })();
-
-        return h(
-            'div', // wrapper
-            {
-                class: wrapperClasses,
-                directives: [
-                    {
-                        name: 'click-outside',
-                        value: this.close
-                    }
-                ]
+        return h('Popper', {
+            ref: 'popper',
+            props: {
+                theme: this.theme,
+                targetNodes: () => [this.$refs.reference],
+                popperNode: () => this.$refs.popperContent.$el,
+                arrowNode: () => this.$refs.popperContent.$refs.arrow,
+                referenceNode: () => this.$refs.reference,
+                ...this.$attrs
             },
-            [
-                this.$scopedSlots.holder
-                    ? this.$scopedSlots.holder({
-                          // holder
-                          // TODO: спорное решение передавать функцию в качестве props, не совсем vue way, скорее реакт. Пока оставим так
-                          toggle: this.toggle,
-                          open: this.open,
-                          close: this.close,
-                          isShow: this.isShow
-                      })
-                    : null,
-
-                this.isShow
-                    ? h(
-                          'div', // dropdown
-                          {
-                              class: dropdownClasses,
-                              ref: 'dropdown'
-                          },
-                          this.$scopedSlots.dropdown
-                              ? this.$scopedSlots.dropdown({
-                                    toggle: this.toggle,
-                                    open: this.open,
-                                    close: this.close,
-                                    isShow: this.isShow
-                                })
-                              : null
-                      )
-                    : null
-            ]
-        );
+            on: this.$listeners,
+            scopedSlots: {
+                default: ({
+                    popperId,
+                    isShown,
+                    shouldMountContent,
+                    skipTransition,
+                    autoHide,
+                    hide,
+                    handleResize,
+                    onResize,
+                    classes
+                }) =>
+                    h(
+                        'div',
+                        {
+                            ref: 'reference',
+                            class: [
+                                'v-popper',
+                                {
+                                    'v-popper--shown': isShown
+                                },
+                                this.themeClass
+                            ]
+                        },
+                        [
+                            this.$scopedSlots.default({ shown: isShown }),
+                            h(
+                                'PopperContent',
+                                {
+                                    ref: 'popperContent',
+                                    props: {
+                                        popperId,
+                                        theme: this.theme,
+                                        shown: isShown,
+                                        mounted: shouldMountContent,
+                                        skipTransition,
+                                        autoHide,
+                                        handleResize,
+                                        classes
+                                    },
+                                    on: {
+                                        hide,
+                                        resize: onResize
+                                    }
+                                },
+                                this.$scopedSlots.popper
+                                    ? this.$scopedSlots.popper({ shown: isShown })
+                                    : null
+                            )
+                        ]
+                    )
+            }
+        });
     }
 };

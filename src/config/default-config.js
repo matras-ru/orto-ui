@@ -66,8 +66,20 @@ export default {
     },
 
     CDropdown: {
-        variant: 'primary',
-        placement: 'left'
+        theme: 'orto-ui'
+    },
+
+    VTooltip: {
+        themes: {
+            'orto-ui': {
+                placement: 'bottom',
+                handleResize: true,
+                delay: 0,
+                triggers: ['click'],
+                autoHide: true,
+                $resetCss: true
+            }
+        }
     },
 
     CFormInput: {
@@ -77,7 +89,7 @@ export default {
     CFormSelectCustom: {
         optionValue: 'value',
         optionLabel: 'label',
-        dropdownVariant: 'secondary'
+        dropdownTheme: 'orto-ui'
     },
 
     CRating: {}

@@ -1,31 +1,10 @@
 # Dropdown
 
 ## Props
-
-| Name      | Type     | Default   | Description                    |
-| --------- | -------- | --------- | ------------------------------ |
-| `variant` | `String` | `primary` | Possible: `primary, secondary` |
-
+https://v-tooltip.netlify.app/api/#component-props
 ## Events
-
-| Name     | Description |
-| -------- | ----------- |
-| `open`   |             |
-| `close`  |             |
-| `toggle` |             |
+https://v-tooltip.netlify.app/api/#component-events
 
 ## Slots
+https://v-tooltip.netlify.app/api/#component-props
 
-| Name       | Description |
-| ---------- | ----------- |
-| `holder`   |             |
-| `dropdown` |             |
-
-## Classes
-
-| Name | Default |
-| --- | --- |
-| `wrapperBase` | `relative` |
-| `dropdownBase` | `absolute z-10 top-full right-0 left-0 mt-0-4 bg-white overflow-hidden` |
-| `dropdownVariantPrimary` | `shadow-example rounded` |
-| `dropdownVariantSecondary` | `shadow-example rounded-lg` |

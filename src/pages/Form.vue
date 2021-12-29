@@ -1,6 +1,39 @@
 <template>
     <div>
         <div style="max-width: 300px">
+            <CDropdown>
+                <template #popper>
+                    <CList>
+                        <CListItem
+                            v-for="(item, idx) in ['Серия Премиум', 'Серия Eco']"
+                            :key="idx"
+                            class="cursor-pointer py-0-4 px-0-8 bg-white hover:bg-tertiary-100"
+                            >{{ item }}</CListItem
+                        >
+                    </CList>
+                </template>
+                <CLink slot-scope="{ shown }" variant="primary">Серия Эконом {{ shown }} </CLink>
+            </CDropdown>
+
+            <br /><br /><br />
+
+            <CDropdown>
+                <template #popper>
+                    <CList>
+                        <CListItem
+                            v-for="(item, idx) in ['Серия Премиум', 'Серия Eco']"
+                            :key="idx"
+                            class="cursor-pointer py-0-4 px-0-8 bg-white hover:bg-tertiary-100"
+                            >{{ item }}</CListItem
+                        >
+                    </CList>
+                </template>
+                <CLink slot-scope="{ shown }" variant="primary">Серия Эконом {{ shown }} </CLink>
+            </CDropdown>
+
+            <br /><br /><br />
+
+            <a href="#dd">ddd</a>
             <CFormPanel label="Slot">
                 <CFormSelectCustom
                     v-bind="{
@@ -13,6 +46,54 @@
                             },
                             {
                                 id: 2,
+                                price: 5550,
+                                width: 100,
+                                height: 100
+                            },
+                            {
+                                id: 3,
+                                price: 15080,
+                                width: 200,
+                                height: 250
+                            },
+                            {
+                                id: 4,
+                                price: 5550,
+                                width: 100,
+                                height: 100
+                            },
+                            {
+                                id: 5,
+                                price: 15080,
+                                width: 200,
+                                height: 250
+                            },
+                            {
+                                id: 6,
+                                price: 5550,
+                                width: 100,
+                                height: 100
+                            },
+                            {
+                                id: 7,
+                                price: 15080,
+                                width: 200,
+                                height: 250
+                            },
+                            {
+                                id: 8,
+                                price: 5550,
+                                width: 100,
+                                height: 100
+                            },
+                            {
+                                id: 9,
+                                price: 15080,
+                                width: 200,
+                                height: 250
+                            },
+                            {
+                                id: 10,
                                 price: 5550,
                                 width: 100,
                                 height: 100
@@ -32,8 +113,10 @@
                     </template>
                 </CFormSelectCustom>
             </CFormPanel>
+
+            <a href="#dd">ddd</a>
         </div>
-        <CForm @submit.prevent="validate">
+        <!-- <CForm @submit.prevent="validate">
             <CButton type="submit">Submit</CButton>
             <br />
             <br />
@@ -542,7 +625,7 @@
                     :increment="0.5"
                 />
             </CFormPanel>
-        </CForm>
+        </CForm> -->
 
         <div class="fixed top-0 right-0 p-2-5 bg-white shadow">
             <pre>{{ exampleModel }}</pre>
@@ -564,6 +647,7 @@ export default {
 
     data() {
         return {
+            showDropdown: false,
             widths: [
                 {
                     id: 1,

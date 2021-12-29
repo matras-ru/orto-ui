@@ -14,7 +14,6 @@ export { default as CFormField } from './CFormField';
 export { default as CFormPanel } from './CFormPanel';
 export { default as CFormSelectCustom } from './CFormSelectCustom';
 export { default as CBadge } from './CBadge';
-export { default as CDropdown } from './CDropdown';
 export { default as CListToggle } from './CListToggle';
 export { default as CRating } from './CRating';
 export { default as CStar } from './CStar';
