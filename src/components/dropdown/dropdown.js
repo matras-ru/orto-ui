@@ -55,6 +55,7 @@ export default {
                     shouldMountContent,
                     skipTransition,
                     autoHide,
+                    show,
                     hide,
                     handleResize,
                     onResize,
@@ -74,7 +75,7 @@ export default {
                             ]
                         },
                         [
-                            this.$scopedSlots.default({ shown: isShown }),
+                            this.$scopedSlots.default({ shown: isShown, show, hide }),
                             h(
                                 'PopperContent',
                                 {
@@ -96,7 +97,7 @@ export default {
                                     }
                                 },
                                 this.$scopedSlots.popper
-                                    ? this.$scopedSlots.popper({ shown: isShown })
+                                    ? this.$scopedSlots.popper({ shown: isShown, show, hide })
                                     : null
                             )
                         ]
