@@ -1,4 +1,4 @@
-import VTooltip from 'v-tooltip';
+import FloatingVue from 'floating-vue';
 import * as DefaultTheme from '@/themes/default';
 import { ConfigPlugin } from '@/config';
 /* COMPONENTS */
@@ -99,7 +99,7 @@ const install = function (Vue, options = {}) {
         Vue.component(componentName, extendComponent(Vue, CurrentTheme, componentName));
     });
 
-    Vue.use(VTooltip, config.VTooltip || {});
+    Vue.use(FloatingVue, config.FloatingVue || {});
 };
 
 export { CForm };

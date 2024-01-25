@@ -16,6 +16,7 @@ svg {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
 }
 
-.v-popper--theme-orto-ui .v-popper__arrow {
+.v-popper--theme-orto-ui .v-popper__arrow-outer,
+.v-popper--theme-orto-ui .v-popper__arrow-inner {
     border-color: #fff;
 }

@@ -1,4 +1,4 @@
-import { Popper, ThemeClass, PopperContent, PopperMethods } from 'v-tooltip';
+import { Popper, PopperContent, PopperMethods, ThemeClass } from 'floating-vue';
 import { selfInstall } from '@/utils/index.js';
 
 import { getComponentConfig } from '@/config';
@@ -12,16 +12,14 @@ export default {
         selfInstall(Vue, this);
     },
 
-    inheritAttrs: false,
-
-    vPopperTheme: 'orto-ui',
-
     components: {
         Popper: Popper(),
         PopperContent
     },
 
     mixins: [PopperMethods, ThemeClass],
+
+    inheritAttrs: false,
 
     props: {
         theme: {
@@ -32,15 +30,21 @@ export default {
         }
     },
 
+    methods: {
+        getTargetNodes() {
+            return Array.from(this.$refs.reference.children);
+        }
+    },
+
     render(h) {
         return h('Popper', {
             ref: 'popper',
             props: {
                 theme: this.theme,
-                targetNodes: () => [this.$refs.reference],
-                popperNode: () => this.$refs.popperContent.$el,
-                arrowNode: () => this.$refs.popperContent.$refs.arrow,
+                targetNodes: this.getTargetNodes,
                 referenceNode: () => this.$refs.reference,
+                popperNode: () => this.$refs.popperContent.$el,
+                // arrowNode: () => this.$refs.popperContent.$refs.arrow,
                 ...this.$attrs
             },
             on: this.$listeners,
@@ -54,18 +58,19 @@ export default {
                     hide,
                     handleResize,
                     onResize,
-                    classes
+                    classes,
+                    result
                 }) =>
                     h(
                         'div',
                         {
                             ref: 'reference',
                             class: [
+                                this.themeClass,
                                 'v-popper',
                                 {
                                     'v-popper--shown': isShown
-                                },
-                                this.themeClass
+                                }
                             ]
                         },
                         [
@@ -82,7 +87,8 @@ export default {
                                         skipTransition,
                                         autoHide,
                                         handleResize,
-                                        classes
+                                        classes,
+                                        result
                                     },
                                     on: {
                                         hide,

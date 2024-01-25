@@ -6,7 +6,7 @@ import App from './App.vue';
 import OrtoUi from './index';
 
 import '@/assets/css/tailwind.css';
-import 'v-tooltip/dist/v-tooltip.css';
+import 'floating-vue/dist/style.css';
 // import * as CustomTheme from '@/themes/custom/index';
 
 // import { CButton } from './index';
@@ -29,7 +29,7 @@ const customConfig = {
         optionLabel: 'label',
         dropdownVariant: 'secondary'
     },
-    VTooltip: {
+    FloatingVue: {
         themes: {
             'orto-ui': {
                 placement: 'bottom',

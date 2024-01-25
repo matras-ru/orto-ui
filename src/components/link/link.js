@@ -17,8 +17,8 @@ const computeTag = ({ to, disabled, href }, instance) => {
             ? 'nuxt-link'
             : 'router-link'
         : href
-        ? LINK_TAG
-        : SPAN_TAG;
+          ? LINK_TAG
+          : SPAN_TAG;
 };
 
 const computeRel = ({ target, rel } = {}) => {

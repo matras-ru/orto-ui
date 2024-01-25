@@ -69,7 +69,7 @@ export default {
         theme: 'orto-ui'
     },
 
-    VTooltip: {
+    FloatingVue: {
         themes: {
             'orto-ui': {
                 placement: 'bottom',
