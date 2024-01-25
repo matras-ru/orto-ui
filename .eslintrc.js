@@ -18,7 +18,13 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['**/*.spec.(js|jsx|ts|tsx)'], // not working
+            files: ['**/*.spec.(js|jsx|ts|tsx)'],
+            env: {
+                jest: true
+            }
+        },
+        {
+            files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
             env: {
                 jest: true
             }

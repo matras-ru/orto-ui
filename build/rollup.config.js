@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import vue from 'rollup-plugin-vue';
 import alias from '@rollup/plugin-alias';
 import resolve from '@rollup/plugin-node-resolve';
@@ -7,7 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import terser from '@rollup/plugin-terser';
 import minimist from 'minimist';
-import visualizer from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const argv = minimist(process.argv.slice(2));
 
@@ -53,6 +53,8 @@ const baseConfig = {
                 objectAssign: 'Object.assign',
 
                 transforms: {
+                    asyncAwait: false,
+                    forOf: false,
                     generator: false
                 }
             })
