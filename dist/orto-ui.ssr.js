@@ -4469,6 +4469,7 @@ var CDropdown = {
                         var shouldMountContent = ref.shouldMountContent;
                         var skipTransition = ref.skipTransition;
                         var autoHide = ref.autoHide;
+                        var show = ref.show;
                         var hide = ref.hide;
                         var handleResize = ref.handleResize;
                         var onResize = ref.onResize;
@@ -4488,7 +4489,7 @@ var CDropdown = {
                             ]
                         },
                         [
-                            this$1$1.$scopedSlots.default({ shown: isShown }),
+                            this$1$1.$scopedSlots.default({ shown: isShown, show: show, hide: hide }),
                             h(
                                 'PopperContent',
                                 {
@@ -4510,7 +4511,7 @@ var CDropdown = {
                                     }
                                 },
                                 this$1$1.$scopedSlots.popper
-                                    ? this$1$1.$scopedSlots.popper({ shown: isShown })
+                                    ? this$1$1.$scopedSlots.popper({ shown: isShown, show: show, hide: hide })
                                     : null
                             )
                         ]
